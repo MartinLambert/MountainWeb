@@ -1,0 +1,51 @@
+:host {
+	display: grid;
+	grid-template-rows: 0 repeat(14, 1fr) 0;
+	grid-template-columns: 0 repeat(14, 1fr) 0;
+	grid-gap: 1px;
+	background-color: silver;
+	width: 90vmin;
+	height: 90vmin;
+	border: 3px ridge beige;
+	grid-area: board;
+
+	&>div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		background-color: #EDC;
+		&.level1 { background-color: #EFE; }
+		&.level2 { background-color: #FFE; }
+		&.level3 { background-color: #FEE; }
+		&:not(.tile) p {
+			display: none;
+		}
+	}
+}
+div.tile {
+	position: relative;
+	box-sizing: border-box;
+	background-color: transparent;
+	transform: scale(1.025);
+	.bg {
+		position: absolute;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		transition: transform 0.8s ease-in-out;
+	}
+	p {
+		margin: 0;
+		font: 2em/0.9 Consolas;
+		background: rgba(252,252,252,0.25);
+		border-radius: 0.5em;
+		text-shadow: -0.5px -0.5px 0.5px white, -0.5px 0.5px 0.5px white, 0.5px -0.5px 0.5px white, 0.5px 0.5px 0.5px white;
+		cursor: default;
+	}
+}
+div.valid {
+	border: 6px solid orange;
+}
