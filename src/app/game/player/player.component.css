@@ -1,3 +1,57 @@
+:host {
+  margin: 1em; }
+  :host#player0 {
+    grid-area: player0;
+    align-self: end; }
+  :host#player1 {
+    grid-area: player1; }
+  :host#player2 {
+    grid-area: player2;
+    align-self: end; }
+  :host#player3 {
+    grid-area: player3; }
 
+.charSheet {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  background-color: #EEE;
+  border: 1px solid black; }
+  .charSheet h3 {
+    padding-left: 0.5em; }
+  .charSheet .wounds, .charSheet .items {
+    display: flex;
+    justify-content: space-around;
+    grid-column: 1 / 4; }
+    .charSheet .wounds p, .charSheet .items p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      width: 25%;
+      border: 1px solid black;
+      border-radius: 0 0 10px 10px; }
+  .charSheet .items {
+    justify-content: center; }
+    .charSheet .items p {
+      width: 23%;
+      border-radius: 10px 10px 0 0; }
+  .charSheet .attributes {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .charSheet .attributes dl {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      width: 80%;
+      height: min-content;
+      border: 1px solid #333; }
+      .charSheet .attributes dl dt, .charSheet .attributes dl dd {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        border: 1px solid #333;
+        line-height: 1.5em; }
 
 /*# sourceMappingURL=player.component.css.map */

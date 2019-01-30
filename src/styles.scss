@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'Luminari';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Luminari'), url('assets/fonts/Luminari-Regular.woff') format('woff');
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+}

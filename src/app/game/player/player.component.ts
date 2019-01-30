@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { GameService } from '../game.service';
+import { Player      } from './player';
 
 @Component({
 	selector: 'hotm-player',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerComponent implements OnInit {
 
-	constructor() {
+	@Input() player: Player;
+
+	constructor(private gameService: GameService) {
 	}
 
 	ngOnInit() {

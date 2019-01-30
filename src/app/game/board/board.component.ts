@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService       } from '../game.service';
-import { Tile              } from './tile';
+import { GameService } from '../game.service';
+import { Tile        } from './tile';
 
 @Component({
 	selector: 'hotm-board',

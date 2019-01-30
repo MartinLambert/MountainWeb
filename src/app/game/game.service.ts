@@ -1,10 +1,12 @@
 import { Injectable     } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Tile           } from './board/tile';
-import { SPACES         } from './board/spaces';
-import { TILES          } from './board/tiles';
-import { Card           } from './cards/card';
-import { CARDS          } from './cards/cards';
+import { Tile       } from './board/tile';
+import { SPACES     } from './board/spaces';
+import { TILES      } from './board/tiles';
+import { Card       } from './cards/card';
+import { CARDS      } from './cards/cards';
+import { Player     } from './player/player';
+import { CHARACTERS } from './player/characters';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,9 +16,9 @@ export class GameService {
 	private _numPlayers = 4;
 	private _currPlayer = 0;
 	private _turnStep = 0;
+	private _round = 0;
 
-	constructor() {
-	}
+	constructor() {}
 
 	get numPlayers(): number {
 		return this._numPlayers;
@@ -42,6 +44,14 @@ export class GameService {
 		this._turnStep = value;
 	}
 
+	get round(): number {
+		return this._round;
+	}
+
+	set round(value: number) {
+		this._round = value;
+	}
+
 	getBoard(): Observable<Tile[]> {
 		return of(SPACES);
 	}
@@ -52,5 +62,9 @@ export class GameService {
 
 	getCards(): Observable<Card[][]> {
 		return of(CARDS);
+	}
+
+	getCharacters(): Observable<Player[]> {
+		return of(CHARACTERS);
 	}
 }

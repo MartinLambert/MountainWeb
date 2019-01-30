@@ -1,3 +1,28 @@
-<p>
-  player works!
-</p>
+<div class="charSheet" *ngIf="player">
+	<div class="wounds">
+		<p>Wound</p>
+		<p>Wound</p>
+		<p>Wound</p>
+	</div>
+	<div class="avatar">
+		<h3>{{ player.name }}</h3>
+	</div>
+	<div>
+		<p>{{ player.description }}</p>
+		<p><strong>{{ player.powerName }}</strong><br>
+		{{ player.powerDescription }}</p>
+	</div>
+	<div class="attributes">
+		<dl>
+			<dt>{{ player.stats.Brains }}</dt><dd>Brains</dd>
+			<dt>{{ player.stats.Brawn }}</dt><dd>Brawn</dd>
+			<dt>{{ player.stats.Bravado }}</dt><dd>Bravado</dd>
+		</dl>
+	</div>
+	<div class="items">
+		<p>Item</p>
+		<p>Item</p>
+		<p>Item</p>
+		<p>Item</p>
+	</div>
+</div>

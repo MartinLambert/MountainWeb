@@ -1,22 +1,23 @@
 import { Stats } from '../stats';
 
+// each card has a maximum of one CardType and one ItemType.
 export enum CardType {
-	starter = 0,
-	enemy   = 1,
-	trap    = 2,
-	event   = 3,
-	heart   = 4
+	starter = 'starter',
+	enemy   = 'enemy',
+	trap    = 'trap',
+	event   = 'event',
+	heart   = 'heart'
 }
-
 export enum ItemType {
-	none      = 0,
-	usable    = 1,
-	useOnce   = 2,
-	useNow    = 3,
-	useNext   = 4,
-	permanent = 5
+	none      = 'none',
+	usable    = 'usable',
+	useOnce   = 'useOnce',
+	useNow    = 'useNow',
+	useNext   = 'useNext',
+	permanent = 'permanent'
 }
 
+// One card may have multiple GemTypes (except 'none'). The values are all prime numbers and are multiplied to determine the final GemType value.
 export enum GemType {
 	none      = 0,
 	Brains    = 2,

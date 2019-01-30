@@ -1,17 +1,14 @@
 :host {
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
 	display: grid;
 	grid-template:
-		'player2 board player4' max-content
-		'null board decks' 1fr
-		'player3 board player1' max-content
-		/1fr minmax(800px, 90vmin) 1fr;
-	grid-gap: 0.25em;
-	padding: 0.5em;
+		'player1 player1 player3 player3' max-content
+		'current  board   board   decks'  1fr
+		'player2 player2 player0 player0' max-content
+		/  1fr    auto    auto     1fr;
 	background-color: #897;
-	width: 100%;
-	height: 100%;
-	font: 10px Luminari, fantasy;
 }
-hotm-player {
-	min-width: 300px;
+#currentCard, #currentTile {
+	grid-area: current;
 }

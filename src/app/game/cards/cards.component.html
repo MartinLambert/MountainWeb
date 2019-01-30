@@ -1,1 +1,3 @@
-<div *ngFor="let deck of decks; let num = index" class="deck deck{{ num }}" title="{{ deck.length }} cards">{{ num }}</div>
+<div *ngFor="let deck of decks; let num = index" id="deck{{ num }}" title="{{ deck.length }} card{{ deck.length === 1 ? '' : 's' }}">
+	<div class="deck hi" hotmCardRatio (click)="drawCard(deck[0])">{{ num }}</div>
+</div>
