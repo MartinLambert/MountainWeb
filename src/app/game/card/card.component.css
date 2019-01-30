@@ -1,6 +1,23 @@
 :host {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.card {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   border-radius: 12px;
-  border: 2px solid brown;
+  border: 2px solid darkblue;
   background: ghostwhite; }
+
+.event {
+  text-align: center;
+  box-shadow: inset 0 0 0 6px ghostwhite, inset 0 0 0 8px darkblue; }
+
+section {
+  padding: 0 1em; }
+
+section + section {
+  border-top: 1px solid darkblue; }
 
 /*# sourceMappingURL=card.component.css.map */

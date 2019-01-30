@@ -1,12 +1,9 @@
 :host {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   display: grid;
-  grid-template: 'player1 player1 player3 player3' max-content 'current  board   board   decks'  1fr 'player2 player2 player0 player0' max-content /  1fr    auto    auto     1fr;
-  background-color: #897; }
+  grid-template: 'player1 player1 player3 player3' 15vh 'current  board   board   decks'  70vh 'player2 player2 player0 player0' 15vh /  1fr    auto    auto     1fr;
+  background-color: #897;
+  width: 100%;
+  height: 100%; }
 
 #currentCard, #currentTile {
   grid-area: current; }

@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Card} from '../cards/card';
+import { Component, Input, OnInit } from '@angular/core';
+import { Card, CardType } from '../cards/card';
 
 @Component({
 	selector: 'hotm-card',
@@ -9,6 +9,7 @@ import {Card} from '../cards/card';
 export class CardComponent implements OnInit {
 
 	@Input() card: Card;
+	cardType = CardType;
 
 	constructor() {
 	}

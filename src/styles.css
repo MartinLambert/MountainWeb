@@ -3,10 +3,36 @@
   font-style: normal;
   font-weight: normal;
   src: local("Luminari"), url("assets/fonts/Luminari-Regular.woff") format("woff"); }
+@font-face {
+  font-family: 'Averia';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Averia Serif Libre Light"), url("assets/fonts/Averia-Serif-Libre-Light.ttf.woff") format("woff"); }
 html, body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+  font: 16px 'Averia', Garamond, serif; }
+
+.attributes {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .attributes dl {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 80%;
+    height: min-content;
+    border: 1px solid #333; }
+    .attributes dl dt, .attributes dl dd {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      border: 1px solid #333;
+      line-height: 1.5em; }
+    .attributes dl dt {
+      font-family: Luminari, fantasy; }
 
 /*# sourceMappingURL=styles.css.map */

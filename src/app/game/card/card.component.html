@@ -1,1 +1,11 @@
-<div class="{{ card.cardType }}" hotmCardRatio>{{ card.cardName }}</div>
+<div class="card {{ card.cardType }}" hotmCardRatio>
+	<section class="cardTop">
+		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
+		<h2 *ngIf="card.cardType === cardType.event">All Players:</h2>
+		<h2 class="cardText" [innerHTML]="card.cardText"></h2>
+	</section>
+	<section class="cardBottom" *ngIf="card.itemName">
+		<h1 class="itemName" [innerHTML]="card.itemName"></h1>
+		<h2 class="itemText" [innerHTML]="card.itemText"></h2>
+	</section>
+</div>

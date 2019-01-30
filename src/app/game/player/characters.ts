@@ -3,7 +3,7 @@ import { Player } from './player';
 export const CHARACTERS: Player[] = [
 	{
 		id: 0,
-		name: 'Eva Reast',
+		name: 'Eva Rast',
 		description: '',
 		powerName: '',
 		powerDescription: '',

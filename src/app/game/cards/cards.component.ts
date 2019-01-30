@@ -34,5 +34,3 @@ export class CardsComponent implements OnInit {
 		this.changeCard.emit(this.currentCard);
 	}
 }
-
-// TODO: create directive to maintain aspect ratio of decks
