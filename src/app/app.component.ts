@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.gameService.getCharacters().subscribe(players => this.characters = players);
+		this.gameService.currentCard.subscribe(card => this.currentCard = card);
 	}
 
 	newCard(card: Card): void {

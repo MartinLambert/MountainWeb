@@ -1,4 +1,5 @@
-import { Player } from './player';
+import { Player    } from './player';
+import { blankCard } from '../cards/blankCard';
 
 export const CHARACTERS: Player[] = [
 	{
@@ -14,8 +15,8 @@ export const CHARACTERS: Player[] = [
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [],
-		items: []
+		wounds: [blankCard, blankCard, blankCard],
+		items: [blankCard, blankCard, blankCard, blankCard]
 	},
 	{
 		id: 0,
@@ -30,8 +31,8 @@ export const CHARACTERS: Player[] = [
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [],
-		items: []
+		wounds: [blankCard, blankCard, blankCard],
+		items: [blankCard, blankCard, blankCard, blankCard]
 	},
 	{
 		id: 0,
@@ -46,8 +47,8 @@ export const CHARACTERS: Player[] = [
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [],
-		items: []
+		wounds: [blankCard, blankCard, blankCard],
+		items: [blankCard, blankCard, blankCard, blankCard]
 	},
 	{
 		id: 0,
@@ -62,7 +63,7 @@ export const CHARACTERS: Player[] = [
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [],
-		items: []
+		wounds: [blankCard, blankCard, blankCard],
+		items: [blankCard, blankCard, blankCard, blankCard]
 	}
 ];

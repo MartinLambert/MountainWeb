@@ -1,6 +1,5 @@
 <hotm-board></hotm-board>
 <hotm-cards (changeCard)="newCard($event)"></hotm-cards>
-<!--<div *ngIf="currentCard" id="currentCard">{{ currentCard.cardName }}</div>-->
 <hotm-card *ngIf="currentCard" [card]="currentCard"></hotm-card>
 <div *ngIf="currentTile" id="currentTile">{{ currentTile.img }}</div>
-<hotm-player *ngFor="let player of characters; let num = index" [player]="player" id="player{{ num }}"></hotm-player>
+<hotm-player *ngFor="let player of characters; let num = index" [player]="player" [card]="currentCard" id="player{{ num }}"></hotm-player>

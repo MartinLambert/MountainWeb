@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Card        } from './card';
 
@@ -9,9 +9,8 @@ import { Card        } from './card';
 })
 export class CardsComponent implements OnInit {
 
-	@Output() changeCard = new EventEmitter<Card>();
 	decks: Card[][];
-	currentCard: Card;
+	discards: Card[][] = [new Array<Card>(), new Array<Card>(), new Array<Card>(), new Array<Card>()];
 
 	constructor(private gameService: GameService) {
 	}
@@ -30,7 +29,8 @@ export class CardsComponent implements OnInit {
 	}
 
 	drawCard(card: Card): void {
-		this.currentCard = card;
-		this.changeCard.emit(this.currentCard);
+		this.gameService.drawCard(card);
+		this.decks[card.level].shift();
+		this.discards[card.level].unshift(card);
 	}
 }

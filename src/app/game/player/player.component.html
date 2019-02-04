@@ -1,8 +1,8 @@
 <div class="charSheet" *ngIf="player">
 	<div class="wounds">
-		<p>Wound</p>
-		<p>Wound</p>
-		<p>Wound</p>
+		<p (click)="gainWound(card)">{{ player.wounds[0] === blank ? 'Wound' : player.wounds[0].cardName }}</p>
+		<p (click)="gainWound(card)">{{ player.wounds[1] === blank ? 'Wound' : player.wounds[1].cardName }}</p>
+		<p (click)="gainWound(card)">{{ player.wounds[2] === blank ? 'Wound' : player.wounds[2].cardName }}</p>
 	</div>
 	<div class="avatar">
 		<h3>{{ player.name }}</h3>

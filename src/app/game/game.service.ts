@@ -1,5 +1,5 @@
 import { Injectable     } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Tile       } from './board/tile';
 import { SPACES     } from './board/spaces';
 import { TILES      } from './board/tiles';
@@ -17,6 +17,8 @@ export class GameService {
 	private _currPlayer = 0;
 	private _turnStep = 0;
 	private _round = 0;
+	private currentCardSource = new Subject<Card>();
+	currentCard = this.currentCardSource.asObservable();
 
 	constructor() {}
 
@@ -66,5 +68,9 @@ export class GameService {
 
 	getCharacters(): Observable<Player[]> {
 		return of(CHARACTERS);
+	}
+
+	drawCard(newCard: Card) {
+		this.currentCardSource.next(newCard);
 	}
 }

@@ -14,6 +14,6 @@ export class Player {
 	stats:            Stats;
 	location:         number;
 	campLocation:     number;
-	items:            Card[];
-	wounds:           Card[];
+	wounds:           [Card, Card, Card];
+	items:            [Card, Card, Card, Card];
 }
