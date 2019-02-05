@@ -27,4 +27,13 @@
 #deck0 {
   display: none; }
 
+#deck1 > div {
+  background-color: #DFD; }
+
+#deck2 > div {
+  background-color: #FFD; }
+
+#deck3 > div {
+  background-color: #FDD; }
+
 /*# sourceMappingURL=cards.component.css.map */

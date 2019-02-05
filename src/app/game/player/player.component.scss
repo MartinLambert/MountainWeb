@@ -1,5 +1,5 @@
 :host {
-	margin: 1em;
+	margin: 1.5em;
 	&#player0 {
 		grid-area: player0;
 		align-self: end;
@@ -30,23 +30,46 @@
 		display: flex;
 		justify-content: space-around;
 		grid-column: 1 / 4;
-
-		p {
-			display: flex;
-			align-items: center;
-			justify-content: center;
+		&>div {
 			margin: 0;
 			width: 25%;
+		}
+		p {
+			margin: 0;
+			text-align: center;
 			border: 1px solid black;
 			border-radius: 0 0 10px 10px;
 			background-color: #E3E3E9;
 		}
 	}
+	.wounds {
+		margin-top: calc(-1.3em - 1px);
+		.nocard>p:first-child { visibility: hidden }
+		.card>p:first-child {
+			background-color: ghostwhite;
+			border-radius: 10px 10px 0 0;
+		}
+		.card>p+p {
+			color: ghostwhite;
+			background-color: darkred;
+		}
+	}
 	.items {
 		justify-content: center;
-		p {
+		&>div {
+			position: relative;
 			width: 23%;
-			border-radius: 10px 10px 0 0;
+		}
+		p:first-child { border-radius: 10px 10px 0 0 }
+		.card>p:first-child {
+			color: ghostwhite;
+			background-color: darkgreen;
+		}
+		.nocard>p+p { visibility: hidden }
+		p+p {
+			position: absolute;
+			left: 0; right: 0;
+			background-color: ghostwhite;
 		}
 	}
 

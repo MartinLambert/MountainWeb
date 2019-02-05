@@ -18,11 +18,11 @@
     height: 100%;
     background-color: #EDC; }
     :host > div.level1 {
-      background-color: #EFE; }
+      background-color: #E0FFE0; }
     :host > div.level2 {
-      background-color: #FFE; }
+      background-color: #FFFFE0; }
     :host > div.level3 {
-      background-color: #FEE; }
+      background-color: #FFE0E0; }
     :host > div:not(.tile) p {
       display: none; }
 

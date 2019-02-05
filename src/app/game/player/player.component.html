@@ -1,8 +1,8 @@
 <div class="charSheet" *ngIf="player">
 	<div class="wounds">
-		<p (click)="gainWound(card)">{{ player.wounds[0] === blank ? 'Wound' : player.wounds[0].cardName }}</p>
-		<p (click)="gainWound(card)">{{ player.wounds[1] === blank ? 'Wound' : player.wounds[1].cardName }}</p>
-		<p (click)="gainWound(card)">{{ player.wounds[2] === blank ? 'Wound' : player.wounds[2].cardName }}</p>
+		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}" (click)="gainWound(card)">
+			<p>{{ wound.cardName }}</p><p>Wound</p>
+		</div>
 	</div>
 	<div class="avatar">
 		<h3>{{ player.name }}</h3>
@@ -14,15 +14,14 @@
 	</div>
 	<div class="attributes">
 		<dl>
-			<dt>{{ player.stats.Brains }}</dt><dd>Brains</dd>
-			<dt>{{ player.stats.Brawn }}</dt><dd>Brawn</dd>
-			<dt>{{ player.stats.Bravado }}</dt><dd>Bravado</dd>
+			<dt>{{ player.displayStats.Brains  }}</dt><dd>Brains</dd>
+			<dt>{{ player.displayStats.Brawn   }}</dt><dd>Brawn</dd>
+			<dt>{{ player.displayStats.Bravado }}</dt><dd>Bravado</dd>
 		</dl>
 	</div>
 	<div class="items">
-		<p>Item</p>
-		<p>Item</p>
-		<p>Item</p>
-		<p>Item</p>
+		<div *ngFor="let item of player.items; let num = index" class="{{ item === blank ? 'nocard' : 'card' }}" (click)="gainItem(card, num)">
+			<p>Item</p><p>{{ item.itemName }}</p>
+		</div>
 	</div>
 </div>

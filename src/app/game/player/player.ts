@@ -12,8 +12,9 @@ export class Player {
 	avatar:           string;
 	avatarStyle:      { top: number, left: number };
 	stats:            Stats;
+	displayStats:     Stats;
 	location:         number;
 	campLocation:     number;
-	wounds:           [Card, Card, Card];
-	items:            [Card, Card, Card, Card];
+	wounds:           Card[];
+	items:            Card[];
 }

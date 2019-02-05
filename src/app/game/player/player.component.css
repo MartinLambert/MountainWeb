@@ -1,5 +1,5 @@
 :host {
-  margin: 1em; }
+  margin: 1.5em; }
   :host#player0 {
     grid-area: player0;
     align-self: end; }
@@ -23,19 +23,41 @@
     display: flex;
     justify-content: space-around;
     grid-column: 1 / 4; }
-    .charSheet .wounds p, .charSheet .items p {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .charSheet .wounds > div, .charSheet .items > div {
       margin: 0;
-      width: 25%;
+      width: 25%; }
+    .charSheet .wounds p, .charSheet .items p {
+      margin: 0;
+      text-align: center;
       border: 1px solid black;
       border-radius: 0 0 10px 10px;
       background-color: #E3E3E9; }
+  .charSheet .wounds {
+    margin-top: calc(-1.3em - 1px); }
+    .charSheet .wounds .nocard > p:first-child {
+      visibility: hidden; }
+    .charSheet .wounds .card > p:first-child {
+      background-color: ghostwhite;
+      border-radius: 10px 10px 0 0; }
+    .charSheet .wounds .card > p + p {
+      color: ghostwhite;
+      background-color: darkred; }
   .charSheet .items {
     justify-content: center; }
-    .charSheet .items p {
-      width: 23%;
+    .charSheet .items > div {
+      position: relative;
+      width: 23%; }
+    .charSheet .items p:first-child {
       border-radius: 10px 10px 0 0; }
+    .charSheet .items .card > p:first-child {
+      color: ghostwhite;
+      background-color: darkgreen; }
+    .charSheet .items .nocard > p + p {
+      visibility: hidden; }
+    .charSheet .items p + p {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: ghostwhite; }
 
 /*# sourceMappingURL=player.component.css.map */

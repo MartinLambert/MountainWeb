@@ -1,5 +1,4 @@
-import { Player    } from './player';
-import { blankCard } from '../cards/blankCard';
+import { Player } from './player';
 
 export const CHARACTERS: Player[] = [
 	{
@@ -13,10 +12,11 @@ export const CHARACTERS: Player[] = [
 		avatar: '',
 		avatarStyle: { top: 0, left: 0 },
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
+		displayStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [blankCard, blankCard, blankCard],
-		items: [blankCard, blankCard, blankCard, blankCard]
+		wounds: [],
+		items: []
 	},
 	{
 		id: 0,
@@ -29,10 +29,11 @@ export const CHARACTERS: Player[] = [
 		avatar: '',
 		avatarStyle: { top: 0, left: 0 },
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
+		displayStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [blankCard, blankCard, blankCard],
-		items: [blankCard, blankCard, blankCard, blankCard]
+		wounds: [],
+		items: []
 	},
 	{
 		id: 0,
@@ -45,10 +46,11 @@ export const CHARACTERS: Player[] = [
 		avatar: '',
 		avatarStyle: { top: 0, left: 0 },
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
+		displayStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [blankCard, blankCard, blankCard],
-		items: [blankCard, blankCard, blankCard, blankCard]
+		wounds: [],
+		items: []
 	},
 	{
 		id: 0,
@@ -61,9 +63,10 @@ export const CHARACTERS: Player[] = [
 		avatar: '',
 		avatarStyle: { top: 0, left: 0 },
 		stats: { Brains: 1, Brawn: 1, Bravado: 1 },
+		displayStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		location: 0,
 		campLocation: 0,
-		wounds: [blankCard, blankCard, blankCard],
-		items: [blankCard, blankCard, blankCard, blankCard]
+		wounds: [],
+		items: []
 	}
 ];
