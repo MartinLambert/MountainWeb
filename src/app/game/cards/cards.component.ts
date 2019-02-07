@@ -29,6 +29,7 @@ export class CardsComponent implements OnInit {
 	}
 
 	drawCard(card: Card): void {
+		if (!card) return;
 		this.gameService.drawCard(card);
 		this.decks[card.level].shift();
 		this.discards[card.level].unshift(card);

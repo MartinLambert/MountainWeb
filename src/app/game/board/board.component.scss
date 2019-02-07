@@ -3,7 +3,7 @@
 	grid-template-rows: 0 repeat(14, 1fr) 0;
 	grid-template-columns: 0 repeat(14, 1fr) 0;
 	grid-gap: 1px;
-	background-color: silver;
+	background-color: darkolivegreen;
 	width: 70vmin;
 	height: 70vmin;
 	border: 3px ridge beige;
@@ -19,8 +19,8 @@
 		height: 100%;
 		background-color: #EDC;
 		&.level1 { background-color: #E0FFE0; }
-		&.level2 { background-color: #FFFFE0; }
-		&.level3 { background-color: #FFE0E0; }
+		&.level2 { background-color: #C0DDC0; }
+		&.level3 { background-color: #A0BBA0; }
 		&:not(.tile) p {
 			display: none;
 		}

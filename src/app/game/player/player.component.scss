@@ -22,8 +22,18 @@
 	background-color: #EEE;
 	border: 1px solid black;
 
-	h3 {
-		padding-left: 0.5em;
+	.avatar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		img {
+			width: 3em;
+			height: 3em;
+			border: 1px solid darkblue;
+		}
+		h3 {
+			padding-left: 0.5em;
+		}
 	}
 
 	.wounds, .items {

@@ -19,6 +19,8 @@
 			<p *ngIf="card.itemType === itemType.useOnce">Discard after use</p>
 			<p *ngIf="card.itemType === itemType.useNow">Use immediately or not at all</p>
 			<p *ngIf="card.itemType === itemType.useNext">Use next turn or not at all</p>
+			<p *ngIf="card.itemType === itemType.discAny">Discard any item after use</p>
+			<p *ngIf="card.itemType === itemType.discTwo">Discard two items after use</p>
 			<h3 *ngIf="card.itemStats.Brains "><span *ngIf="card.itemStats.Brains  > 0">+</span>{{ card.itemStats.Brains  }} Brains</h3>
 			<h3 *ngIf="card.itemStats.Brawn  "><span *ngIf="card.itemStats.Brawn   > 0">+</span>{{ card.itemStats.Brawn   }} Brawn</h3>
 			<h3 *ngIf="card.itemStats.Bravado"><span *ngIf="card.itemStats.Bravado > 0">+</span>{{ card.itemStats.Bravado }} Bravado</h3>
@@ -35,6 +37,8 @@
 			<div *ngIf="card.leftGem % gemType.enBrains === 0">Enemy Brains</div>
 			<div *ngIf="card.leftGem % gemType.enBrawn === 0">Enemy Brawn</div>
 			<div *ngIf="card.leftGem % gemType.enBravado === 0">Enemy Bravado</div>
+			<div *ngIf="card.leftGem % gemType.enemyRoll === 0">Enemy Rolls vs You</div>
+			<div *ngIf="card.leftGem % gemType.trapRoll === 0">Trap Rolls vs You</div>
 		</div></div>
 		<div *ngIf="card.rightGem != null" class="rightGem"><div>
 			<h1><span *ngIf="card.rightGem > 0">+</span>{{ card.rightGem }}</h1>

@@ -1,4 +1,4 @@
-import {Stats} from '../stats';
+import { Stats } from '../stats';
 
 // each card has a maximum of one CardType and one ItemType.
 export enum CardType {
@@ -14,6 +14,8 @@ export enum ItemType {
 	useOnce   = 'Use Once',
 	useNow    = 'Use Now',
 	useNext   = 'Use Next',
+	discAny   = 'Discard Any',
+	discTwo   = 'Discard Two',
 	permanent = 'Permanent'
 }
 
@@ -41,11 +43,13 @@ export class Card {
 	cardImg:   string;
 	cardText:  string;
 	cardStats: Stats;
+	cardPower: number;
 	itemType:  ItemType;
 	itemName:  string;
 	itemImg:   string;
 	itemText:  string;
 	itemStats: Stats;
+	itemPower: number;
 	leftGem:   number;
 	rightGem:  number;
 }

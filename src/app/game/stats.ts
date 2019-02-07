@@ -3,3 +3,9 @@ export class Stats {
 	Brawn:   number;
 	Bravado: number;
 }
+
+export class DisplayStats {
+	Brains:  string;
+	Brawn:   string;
+	Bravado: string;
+}

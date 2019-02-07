@@ -39,12 +39,12 @@ section {
     border-top: 1px solid #333; }
     section.cardBottom > div {
       align-self: end;
-      padding-bottom: 1em; }
+      padding-bottom: 0.5em; }
       section.cardBottom > div > p {
-        margin: 0;
+        margin: 0.25em 0 0;
         text-align: center; }
     section.cardBottom h2 {
-      margin: 0;
+      margin: 0 0.5em;
       font-size: 1.25em; }
     section.cardBottom .leftGem, section.cardBottom .rightGem {
       position: absolute;

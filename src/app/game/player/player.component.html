@@ -5,6 +5,7 @@
 		</div>
 	</div>
 	<div class="avatar">
+		<img src="assets/characters/{{ player.headshot }}">
 		<h3>{{ player.name }}</h3>
 	</div>
 	<div>
@@ -14,9 +15,9 @@
 	</div>
 	<div class="attributes">
 		<dl>
-			<dt>{{ player.displayStats.Brains  }}</dt><dd>Brains</dd>
-			<dt>{{ player.displayStats.Brawn   }}</dt><dd>Brawn</dd>
-			<dt>{{ player.displayStats.Bravado }}</dt><dd>Bravado</dd>
+			<dt [innerHTML]="player.displayStats.Brains" ></dt><dd>Brains</dd>
+			<dt [innerHTML]="player.displayStats.Brawn"  ></dt><dd>Brawn</dd>
+			<dt [innerHTML]="player.displayStats.Bravado"></dt><dd>Bravado</dd>
 		</dl>
 	</div>
 	<div class="items">

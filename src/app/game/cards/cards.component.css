@@ -17,7 +17,7 @@
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  border: 1px solid brown;
+  border: 1px solid darkolivegreen;
   background: ghostwhite;
   display: flex;
   align-items: center;
@@ -31,9 +31,9 @@
   background-color: #DFD; }
 
 #deck2 > div {
-  background-color: #FFD; }
+  background-color: #BDB; }
 
 #deck3 > div {
-  background-color: #FDD; }
+  background-color: #9B9; }
 
 /*# sourceMappingURL=cards.component.css.map */

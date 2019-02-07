@@ -17,8 +17,16 @@
   width: 100%;
   background-color: #EEE;
   border: 1px solid black; }
-  .charSheet h3 {
-    padding-left: 0.5em; }
+  .charSheet .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .charSheet .avatar img {
+      width: 3em;
+      height: 3em;
+      border: 1px solid darkblue; }
+    .charSheet .avatar h3 {
+      padding-left: 0.5em; }
   .charSheet .wounds, .charSheet .items {
     display: flex;
     justify-content: space-around;
