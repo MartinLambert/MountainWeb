@@ -5,7 +5,27 @@
   width: 100%;
   height: 100%; }
 
-#currentCard, #currentTile {
-  grid-area: current; }
+#current {
+  grid-area: current;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  #current > * {
+    width: 100%;
+    height: 45%; }
+
+#currentTile {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center; }
+  #currentTile span {
+    width: 70%;
+    height: 0;
+    padding-bottom: 70%;
+    background-size: cover;
+    border: 1px solid darkolivegreen;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    transition: transform 0.8s ease-in-out; }
 
 /*# sourceMappingURL=app.component.css.map */

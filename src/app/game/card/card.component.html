@@ -27,8 +27,8 @@
 		</div>
 		<div *ngIf="card.leftGem != null" class="leftGem"><div>
 			<div class="leftGemAttr" *ngIf="(card.leftGem % gemType.Brains === 0) || (card.leftGem % gemType.Brawn === 0) || (card.leftGem % gemType.Bravado === 0)">
-				<div [ngClass]="{'leftGemBrains': card.leftGem % gemType.Brains === 0}"></div>
-				<div [ngClass]="{'leftGemBrawn': card.leftGem % gemType.Brawn === 0}"></div>
+				<div [ngClass]="{'leftGemBrains' : card.leftGem % gemType.Brains  === 0}"></div>
+				<div [ngClass]="{'leftGemBrawn'  : card.leftGem % gemType.Brawn   === 0}"></div>
 				<div [ngClass]="{'leftGemBravado': card.leftGem % gemType.Bravado === 0}"></div>
 			</div>
 			<div *ngIf="card.leftGem % gemType.vsEnemies === 0">vs Enemies</div>
@@ -37,8 +37,8 @@
 			<div *ngIf="card.leftGem % gemType.enBrains === 0">Enemy Brains</div>
 			<div *ngIf="card.leftGem % gemType.enBrawn === 0">Enemy Brawn</div>
 			<div *ngIf="card.leftGem % gemType.enBravado === 0">Enemy Bravado</div>
-			<div *ngIf="card.leftGem % gemType.enemyRoll === 0">Enemy Rolls vs You</div>
-			<div *ngIf="card.leftGem % gemType.trapRoll === 0">Trap Rolls vs You</div>
+			<div *ngIf="card.leftGem % gemType.enemyRoll === 0">Enemy Rolls Against You</div>
+			<div *ngIf="card.leftGem % gemType.trapRoll === 0">Trap Rolls Against You</div>
 		</div></div>
 		<div *ngIf="card.rightGem != null" class="rightGem"><div>
 			<h1><span *ngIf="card.rightGem > 0">+</span>{{ card.rightGem }}</h1>

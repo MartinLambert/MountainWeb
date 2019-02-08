@@ -19,6 +19,8 @@ export class GameService {
 	private _round = 0;
 	private currentCardSource = new Subject<Card>();
 	currentCard = this.currentCardSource.asObservable();
+	private currentTileSource = new Subject<Tile>();
+	currentTile = this.currentTileSource.asObservable();
 
 	constructor() {}
 
@@ -72,5 +74,8 @@ export class GameService {
 
 	drawCard(newCard: Card) {
 		this.currentCardSource.next(newCard);
+	}
+	drawTile(newTile: Tile) {
+		this.currentTileSource.next(newTile);
 	}
 }

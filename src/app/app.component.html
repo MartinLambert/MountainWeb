@@ -1,5 +1,7 @@
 <hotm-board></hotm-board>
-<hotm-cards (changeCard)="newCard($event)"></hotm-cards>
-<hotm-card *ngIf="currentCard" [card]="currentCard"></hotm-card>
-<div *ngIf="currentTile" id="currentTile">{{ currentTile.img }}</div>
+<hotm-cards></hotm-cards>
+<div id="current">
+	<hotm-card *ngIf="currentCard" id="currentCard" [card]="currentCard"></hotm-card>
+	<div *ngIf="currentTile" id="currentTile"><span [ngStyle]="{'backgroundImage': currentTile.img, 'transform': 'rotate(' + currentTile.rotation + 'turn)'}" (click)="rotateTile(currentTile)"></span></div>
+</div>
 <hotm-player *ngFor="let player of characters; let num = index" [player]="player" [card]="currentCard" id="player{{ num }}"></hotm-player>

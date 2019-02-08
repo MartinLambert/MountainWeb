@@ -21,6 +21,7 @@
 	width: 100%;
 	background-color: #EEE;
 	border: 1px solid black;
+	box-shadow: 0 0 3px rgba(0,0,0,0.5);
 
 	.avatar {
 		display: flex;
@@ -58,6 +59,7 @@
 		.card>p:first-child {
 			background-color: ghostwhite;
 			border-radius: 10px 10px 0 0;
+			box-shadow: 0 0 3px rgba(0,0,0,0.5);
 		}
 		.card>p+p {
 			color: ghostwhite;
@@ -80,6 +82,7 @@
 			position: absolute;
 			left: 0; right: 0;
 			background-color: ghostwhite;
+			box-shadow: 0 0 3px rgba(0,0,0,0.5);
 		}
 	}
 

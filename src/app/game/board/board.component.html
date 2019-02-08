@@ -1,3 +1,4 @@
+<button (click)="drawTile(tiles[0])">Draw a Tile</button>
 <div *ngFor="let space of spaces; let num = index" id="s{{ ('000' + num).slice(-3) }}" class="level{{ space.level }}" [ngClass]="{'tile': space.visible, 'valid': space.valid}">
 	<div class="bg" [ngStyle]="{'background-image': space.img, 'transform': 'rotate(' + space.rotation + 'turn)'}"></div>
 	<p>{{ (space.level > 0 && space.level < 4) ? space.level : '' }}</p>
