@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { Tile        } from './game/board/tile';
-import { Card        } from './game/cards/card';
-import { Player      } from './game/player/player';
-import { GameService } from './game/game.service';
-import {BoardComponent} from './game/board/board.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Tile           } from './game/board/tile';
+import { Card           } from './game/cards/card';
+import { Player         } from './game/player/player';
+import { GameService    } from './game/game.service';
+import { BoardComponent } from './game/board/board.component';
 
 @Component({
 	selector: 'hotm-root',
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 		this.gameService.getCharacters().subscribe(players => this.characters = players);
 		this.gameService.currentCard.subscribe(card => this.currentCard = card);
 		this.gameService.currentTile.subscribe(tile => this.currentTile = tile);
+		// this.currentTile = this.board.currentTile;
 	}
 
 	rotateTile(tile): void {

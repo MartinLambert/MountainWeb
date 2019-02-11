@@ -9,15 +9,17 @@ import { Tile        } from './tile';
 })
 export class BoardComponent implements OnInit {
 
-	spaces:  Tile[];
-	tiles:   Tile[];
-	discard: Tile[] = [];
+	spaces:      Tile[];
+	tiles:       Tile[];
+	currentTile: Tile;
+	discard:     Tile[] = [];
 
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
 		this.gameService.getBoard().subscribe(board => this.spaces = board);
 		this.gameService.getTiles().subscribe(tiles => this.tiles = tiles);
+		this.gameService.currentTile.subscribe(tile => this.currentTile = tile);
 		this.tiles = this.shuffle(this.tiles);
 	}
 
@@ -30,7 +32,8 @@ export class BoardComponent implements OnInit {
 
 	drawTile(tile: Tile): void {
 		if (!tile) return;
-		this.gameService.drawTile(tile);
+		this.gameService.newTile(tile);
+		// this.currentTile = tile;
 		this.tiles.shift();
 		this.discard.unshift(tile);
 		this.validateSpaces(tile);
@@ -59,6 +62,16 @@ export class BoardComponent implements OnInit {
 				else if (this.spaces[i - 1].visible) continue;
 			} else if (this.spaces[i - 1].doors.east) continue;
 			this.spaces[i].valid = hasDoor;
+		}
+	}
+
+	selectSpace(space: Tile, currIndex: number): void {
+		if (this.currentTile && space.valid) {
+			this.spaces[currIndex] = this.currentTile;
+			this.gameService.newTile(null);
+			for (let i = 17; i < this.spaces.length - 17; i++) {
+				this.spaces[i].valid = false;
+			}
 		}
 	}
 }

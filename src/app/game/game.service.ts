@@ -75,7 +75,7 @@ export class GameService {
 	drawCard(newCard: Card) {
 		this.currentCardSource.next(newCard);
 	}
-	drawTile(newTile: Tile) {
+	newTile(newTile: Tile) {
 		this.currentTileSource.next(newTile);
 	}
 }
