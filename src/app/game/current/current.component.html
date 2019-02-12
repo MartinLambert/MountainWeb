@@ -1,0 +1,3 @@
+<h1>{{ player.shortName }}’s Turn</h1>
+<hotm-card *ngIf="card" [card]="card"></hotm-card>
+<div *ngIf="tile" id="currentTile"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="rotateTile(tile)"></span></div>

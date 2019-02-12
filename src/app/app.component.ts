@@ -17,28 +17,15 @@ export class AppComponent implements OnInit {
 	currentCard: Card;
 	characters:  Player[];
 
-	constructor(private gameService: GameService) {}
+	constructor(public gameService: GameService) {}
 
 	ngOnInit(): void {
 		this.gameService.getCharacters().subscribe(players => this.characters = players);
 		this.gameService.currentCard.subscribe(card => this.currentCard = card);
 		this.gameService.currentTile.subscribe(tile => this.currentTile = tile);
-		// this.currentTile = this.board.currentTile;
 	}
 
-	rotateTile(tile): void {
-		const newDoors = {
-			north: false,
-			east:  false,
-			south: false,
-			west:  false
-		};
-		if (tile.doors.north) newDoors.east  = true;
-		if (tile.doors.east)  newDoors.south = true;
-		if (tile.doors.south) newDoors.west  = true;
-		if (tile.doors.west)  newDoors.north = true;
-		tile.doors = newDoors;
-		tile.rotation += 0.25;
+	validateTile(tile): void {
 		this.board.validateSpaces(tile);
 	}
 }

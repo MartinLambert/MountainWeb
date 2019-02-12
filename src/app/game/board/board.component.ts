@@ -67,7 +67,9 @@ export class BoardComponent implements OnInit {
 
 	selectSpace(space: Tile, currIndex: number): void {
 		if (this.currentTile && space.valid) {
+			const currLevel = space.level;
 			this.spaces[currIndex] = this.currentTile;
+			this.spaces[currIndex].level = currLevel;
 			this.gameService.newTile(null);
 			for (let i = 17; i < this.spaces.length - 17; i++) {
 				this.spaces[i].valid = false;

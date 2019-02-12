@@ -42,8 +42,9 @@
 		justify-content: space-around;
 		grid-column: 1 / 4;
 		&>div {
+			position: relative;
 			margin: 0;
-			width: 25%;
+			width: 23%;
 		}
 		p {
 			margin: 0;
@@ -68,10 +69,6 @@
 	}
 	.items {
 		justify-content: center;
-		&>div {
-			position: relative;
-			width: 23%;
-		}
 		p:first-child { border-radius: 10px 10px 0 0 }
 		.card>p:first-child {
 			color: ghostwhite;

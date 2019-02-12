@@ -23,17 +23,20 @@ export class PlayerComponent implements OnInit {
 		this.player.items = [blankCard, blankCard, blankCard, blankCard];
 
 		if (this.player.playerPower === 1) this.player.items.push(blankCard); // playerPower 1 grants an extra item slot
+		if (this.player.playerPower === 2) this.player.wounds.push(blankCard); // playerPower 2 grants an extra wound slot
 	}
 
 	gainWound(card: Card): void {
+		if (!card || card === this.blank) return;
+		let numWounds = 0;
 		for (let i = 0; i < this.player.wounds.length; i++) {
 			if (this.player.wounds[i] === this.blank) {
 				this.player.wounds[i] = card;
 				break;
-			}
+			} else numWounds++;
 		}
-		if (this.player.wounds[2] !== this.blank) {
-			console.log('You dead');
+		if (numWounds === this.player.wounds.length - 1) {
+			console.log(`${this.player.name} is dead`);
 		}
 	}
 

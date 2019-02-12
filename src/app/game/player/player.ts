@@ -4,6 +4,7 @@ import { Card  } from '../cards/card';
 export class Player {
 	id:               number;
 	name:             string;
+	shortName:        string;
 	description:      string;
 	playerPower:      number;
 	powerName:        string;

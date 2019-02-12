@@ -1,0 +1,20 @@
+:host {
+	grid-area: current;
+}
+h1 {
+	text-align: center;
+}
+#currentTile {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	span {
+		width: 70%;
+		height: 0;
+		padding-bottom: 70%;
+		background-size: cover;
+		border: 1px solid darkolivegreen;
+		box-shadow: 0 0 3px rgba(0,0,0,0.5);
+		transition: transform 0.8s ease-in-out;
+	}
+}

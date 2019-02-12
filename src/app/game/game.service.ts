@@ -37,7 +37,7 @@ export class GameService {
 	}
 
 	set currPlayer(value: number) {
-		this._currPlayer = value;
+		this._currPlayer = (value >= this._numPlayers ? 0 : value);
 	}
 
 	get turnStep(): number {
