@@ -13,6 +13,7 @@ export class CurrentComponent implements OnInit {
 	@Input() player: Player;
 	@Input() card: Card;
 	@Input() tile: Tile;
+	@Output() drawTile = new EventEmitter<boolean>();
 	@Output() checkTile = new EventEmitter<Tile>();
 
 	constructor() {

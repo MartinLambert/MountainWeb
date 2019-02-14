@@ -3,3 +3,4 @@
 	<div class="bg" [ngStyle]="{'background-image': space.img, 'transform': 'rotate(' + space.rotation + 'turn)'}"></div>
 	<p>{{ (space.level > 0 && space.level < 4) ? space.level : '' }}</p>
 </div>
+<p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [ngClass]="{'pulse': num === gameService.currPlayer}"></p>

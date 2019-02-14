@@ -52,4 +52,27 @@ button {
   top: 85vh;
   font: 16px Averia; }
 
+.avatar {
+  position: absolute;
+  z-index: 10;
+  width: 2em;
+  height: 2em;
+  margin: 0;
+  border: 1px solid dimgrey;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 3px rgba(255, 255, 255, 0.5);
+  transition: all 0.8s ease-in-out; }
+  .avatar:nth-of-type(1) {
+    background-color: rebeccapurple; }
+  .avatar:nth-of-type(2) {
+    background-color: steelblue; }
+  .avatar:nth-of-type(3) {
+    background-color: darkgoldenrod; }
+  .avatar:nth-of-type(4) {
+    background-color: salmon; }
+  .avatar.pulse {
+    animation-name: pulse_animation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; }
+
 /*# sourceMappingURL=board.component.css.map */

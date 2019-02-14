@@ -1,4 +1,4 @@
-<hotm-board></hotm-board>
+<hotm-board [players]="characters"></hotm-board>
 <hotm-cards></hotm-cards>
 <hotm-current [player]="characters[gameService.currPlayer]" [card]="currentCard" [tile]="currentTile" (checkTile)="validateTile($event)"></hotm-current>
 <hotm-player *ngFor="let player of characters; let num = index" [player]="player" [card]="currentCard" id="player{{ num }}"></hotm-player>

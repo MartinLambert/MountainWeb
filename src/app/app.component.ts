@@ -25,6 +25,9 @@ export class AppComponent implements OnInit {
 		this.gameService.currentTile.subscribe(tile => this.currentTile = tile);
 	}
 
+	drawTile(now: Boolean): void {
+		this.board.drawTile();
+	}
 	validateTile(tile): void {
 		this.board.validateSpaces(tile);
 	}

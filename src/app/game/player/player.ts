@@ -12,7 +12,7 @@ export class Player {
 	portrait:         string;
 	headshot:         string;
 	avatar:           string;
-	avatarStyle:      { top: number, left: number };
+	avatarStyle:      { top: string, left: string };
 	stats:            Stats;
 	displayStats:     DisplayStats;
 	location:         number;
