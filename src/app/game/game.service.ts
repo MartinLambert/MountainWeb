@@ -12,15 +12,13 @@ import { CHARACTERS } from './player/characters';
 	providedIn: 'root'
 })
 export class GameService {
-
 	private _numPlayers = 4;
 	private _currPlayer = 0;
 	private _turnStep = 0;
 	private _round = 0;
+	private _currentTile: Tile;
 	private currentCardSource = new Subject<Card>();
 	currentCard = this.currentCardSource.asObservable();
-	private currentTileSource = new Subject<Tile>();
-	currentTile = this.currentTileSource.asObservable();
 
 	constructor() {}
 
@@ -37,7 +35,11 @@ export class GameService {
 	}
 
 	set currPlayer(value: number) {
-		this._currPlayer = (value >= this._numPlayers ? 0 : value);
+		if (value >= this.numPlayers) {
+			this.round++;
+			value = 0;
+		}
+		this._currPlayer = value;
 	}
 
 	get turnStep(): number {
@@ -54,6 +56,14 @@ export class GameService {
 
 	set round(value: number) {
 		this._round = value;
+	}
+
+	get currentTile(): Tile {
+		return this._currentTile;
+	}
+
+	set currentTile(value: Tile) {
+		this._currentTile = value;
 	}
 
 	getBoard(): Observable<Tile[]> {
@@ -74,8 +84,5 @@ export class GameService {
 
 	drawCard(newCard: Card) {
 		this.currentCardSource.next(newCard);
-	}
-	newTile(newTile: Tile) {
-		this.currentTileSource.next(newTile);
 	}
 }

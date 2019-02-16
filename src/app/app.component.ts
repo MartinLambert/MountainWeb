@@ -4,6 +4,7 @@ import { Card           } from './game/cards/card';
 import { Player         } from './game/player/player';
 import { GameService    } from './game/game.service';
 import { BoardComponent } from './game/board/board.component';
+import { CardsComponent } from './game/cards/cards.component';
 
 @Component({
 	selector: 'hotm-root',
@@ -13,22 +14,61 @@ import { BoardComponent } from './game/board/board.component';
 export class AppComponent implements OnInit {
 
 	@ViewChild(BoardComponent) board;
-	currentTile: Tile;
-	currentCard: Card;
-	characters:  Player[];
+	@ViewChild(CardsComponent) cards;
+	currentTiles: Tile[] = [];
+	newestCard:   Card;
+	currentCards: Card[] = [];
+	characters:   Player[];
 
 	constructor(public gameService: GameService) {}
 
 	ngOnInit(): void {
 		this.gameService.getCharacters().subscribe(players => this.characters = players);
-		this.gameService.currentCard.subscribe(card => this.currentCard = card);
-		this.gameService.currentTile.subscribe(tile => this.currentTile = tile);
+		this.gameService.currentCard.subscribe(card => { this.newestCard = card; this.currentCards.push(card); });
 	}
 
-	drawTile(now: Boolean): void {
-		this.board.drawTile();
+	drawTile(numTiles: number): void {
+		for (let i = 0; i < numTiles; i++) {
+			this.board.drawTile();
+			this.currentTiles.push(this.gameService.currentTile);
+		}
+		if (numTiles === 1) this.validateTile(this.gameService.currentTile);
 	}
 	validateTile(tile): void {
-		this.board.validateSpaces(tile);
+		this.board.validateTilePlacement(tile);
+		this.gameService.currentTile = tile;
+	}
+	clearBoard(): void {
+		this.board.clearValidity();
+	}
+	drawCard(newCard: boolean): void {
+		if (newCard) {
+			this.cards.drawCard(this.board.spaces[this.characters[this.gameService.currPlayer].location].level);
+		}
+	}
+	useCard(card: Card): void {
+		const index = this.currentCards.indexOf(card);
+		if (index >= 0)
+			this.currentCards.splice(index, 1);
+	}
+
+	tilePlaced(): void {
+		if (!this.gameService.currentTile) return;
+		const index = this.currentTiles.indexOf(this.gameService.currentTile);
+		if (index >= 0) {
+			this.currentTiles.splice(index, 1);
+			this.gameService.currentTile = null;
+			if (this.currentTiles.length === 0)
+				if (this.gameService.round === 0)
+					this.endTurn();
+				else {
+					this.gameService.turnStep = 1;
+					this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
+				}
+		}
+	}
+	endTurn(): void {
+		this.gameService.turnStep = 0;
+		this.gameService.currPlayer++;
 	}
 }

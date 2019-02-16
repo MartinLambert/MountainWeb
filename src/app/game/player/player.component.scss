@@ -1,26 +1,28 @@
+@import "../../../variables";
+
 :host {
 	margin: 1.5em;
-	&#player0 {
-		grid-area: player0;
-		align-self: end;
-	}
-	&#player1 {
-		grid-area: player1;
-	}
-	&#player2 {
-		grid-area: player2;
-		align-self: end;
-	}
-	&#player3 {
-		grid-area: player3;
+	@for $playerNum from 1 through length($players) {
+		&#player#{$playerNum - 1} {
+			grid-area: player#{$playerNum - 1};
+			.charSheet {
+				border: 1px solid nth($players, $playerNum);
+				background-color: lighten(nth($players, $playerNum), 50%);
+				.avatar img { border: 1px solid nth($players, $playerNum) }
+				.wounds p, .items p {
+					border: 1px solid nth($players, $playerNum);
+					background-color: lighten(nth($players, $playerNum), 42%);
+				}
+				.wounds .card>p+p, .items .card>p:first-child { background-color: nth($players, $playerNum) }
+				.wounds .card>p:first-child, .items .card>p+p { background-color: ghostwhite }
+			}
+		}
 	}
 }
 .charSheet {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	width: 100%;
-	background-color: #EEE;
-	border: 1px solid black;
 	box-shadow: 0 0 3px rgba(0,0,0,0.5);
 
 	.avatar {
@@ -30,7 +32,6 @@
 		img {
 			width: 3em;
 			height: 3em;
-			border: 1px solid darkblue;
 		}
 		h3 {
 			padding-left: 0.5em;
@@ -49,9 +50,7 @@
 		p {
 			margin: 0;
 			text-align: center;
-			border: 1px solid black;
 			border-radius: 0 0 10px 10px;
-			background-color: #E3E3E9;
 		}
 	}
 	.wounds {
@@ -62,18 +61,12 @@
 			border-radius: 10px 10px 0 0;
 			box-shadow: 0 -1px 1px rgba(0,0,0,0.5), inset 0 -1px 1px rgba(0,0,0,0.3);
 		}
-		.card>p+p {
-			color: ghostwhite;
-			background-color: darkred;
-		}
+		.card>p+p { color: ghostwhite }
 	}
 	.items {
 		justify-content: center;
 		p:first-child { border-radius: 10px 10px 0 0 }
-		.card>p:first-child {
-			color: ghostwhite;
-			background-color: darkgreen;
-		}
+		.card>p:first-child { color: ghostwhite }
 		.nocard>p+p { visibility: hidden }
 		p+p {
 			position: absolute;

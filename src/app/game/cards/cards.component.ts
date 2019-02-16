@@ -28,10 +28,11 @@ export class CardsComponent implements OnInit {
 		return newDeck;
 	}
 
-	drawCard(card: Card): void {
-		if (!card) return;
+	drawCard(deckNum: number): void {
+		if ((deckNum < 0 || deckNum > 4) || !this.decks[deckNum] || !this.decks[deckNum].length) return;
+		const card = this.decks[deckNum][0];
 		this.gameService.drawCard(card);
-		this.decks[card.level].shift();
-		this.discards[card.level].unshift(card);
+		this.decks[deckNum].shift();
+		this.discards[deckNum].unshift(card);
 	}
 }

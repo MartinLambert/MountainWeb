@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { Player } from './player';
 import { Card, GemType, ItemType } from '../cards/card';
@@ -13,6 +13,9 @@ export class PlayerComponent implements OnInit {
 
 	@Input() player: Player;
 	@Input() card: Card;
+	@Input() playerNum: number;
+	@Output() useCard = new EventEmitter<Card>();
+	@Output() endTurn = new EventEmitter();
 	blank = blankCard;
 
 	constructor(private gameService: GameService) {
@@ -27,17 +30,19 @@ export class PlayerComponent implements OnInit {
 	}
 
 	gainWound(card: Card): void {
-		if (!card || card === this.blank) return;
+		if (!card || card === this.blank || this.playerNum !== this.gameService.currPlayer) return;
 		let numWounds = 0;
 		for (let i = 0; i < this.player.wounds.length; i++) {
 			if (this.player.wounds[i] === this.blank) {
 				this.player.wounds[i] = card;
+				this.useCard.emit(card);
 				break;
 			} else numWounds++;
 		}
 		if (numWounds === this.player.wounds.length - 1) {
 			console.log(`${this.player.name} is dead`);
 		}
+		this.endTurn.emit();
 	}
 
 	healWound(): void {
@@ -50,9 +55,11 @@ export class PlayerComponent implements OnInit {
 	}
 
 	gainItem(card: Card, slot: number): void {
-		if (card.itemType === ItemType.none) return;
+		if (!card || card.itemType === ItemType.none || this.playerNum !== this.gameService.currPlayer) return;
 		this.player.items[slot] = card;
+		this.useCard.emit(card);
 		this.calculateDisplayStats();
+		this.endTurn.emit();
 	}
 
 	calculateDisplayStats(): void {
@@ -66,9 +73,6 @@ export class PlayerComponent implements OnInit {
 			bravado += (item.itemStats ? item.itemStats.Bravado : 0) + (item.leftGem % GemType.Bravado ? 0 : previousGem);
 			previousGem = item.rightGem;
 		}
-		// this.player.displayStats.Brains  = (this.player.stats.Brains  + brains  < 0) ? '0' : this.player.stats.Brains  + (brains  === 0 ? '' : (brains  > 0 ? ' + ' : ' − ') + Math.abs(brains));
-		// this.player.displayStats.Brawn   = (this.player.stats.Brawn   + brawn   < 0) ? '0' : this.player.stats.Brawn   + (brawn   === 0 ? '' : (brawn   > 0 ? ' + ' : ' − ') + Math.abs(brawn));
-		// this.player.displayStats.Bravado = (this.player.stats.Bravado + bravado < 0) ? '0' : this.player.stats.Bravado + (bravado === 0 ? '' : (bravado > 0 ? ' + ' : ' − ') + Math.abs(bravado));
 		this.player.displayStats.Brains  = (brains  === this.player.stats.Brains  ? '' : '<i>') + (brains  > 0 ? brains  : 0)  + (brains  === this.player.stats.Brains  ? '' : '</i>');
 		this.player.displayStats.Brawn   = (brawn   === this.player.stats.Brawn   ? '' : '<i>') + (brawn   > 0 ? brawn   : 0)  + (brawn   === this.player.stats.Brawn   ? '' : '</i>');
 		this.player.displayStats.Bravado = (bravado === this.player.stats.Bravado ? '' : '<i>') + (bravado > 0 ? bravado : 0)  + (bravado === this.player.stats.Bravado ? '' : '</i>');

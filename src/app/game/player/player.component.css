@@ -1,22 +1,66 @@
 :host {
   margin: 1.5em; }
   :host#player0 {
-    grid-area: player0;
-    align-self: end; }
+    grid-area: player0; }
+    :host#player0 .charSheet {
+      border: 1px solid darkviolet;
+      background-color: #f2d3ff; }
+      :host#player0 .charSheet .avatar img {
+        border: 1px solid darkviolet; }
+      :host#player0 .charSheet .wounds p, :host#player0 .charSheet .items p {
+        border: 1px solid darkviolet;
+        background-color: #e6aaff; }
+      :host#player0 .charSheet .wounds .card > p + p, :host#player0 .charSheet .items .card > p:first-child {
+        background-color: darkviolet; }
+      :host#player0 .charSheet .wounds .card > p:first-child, :host#player0 .charSheet .items .card > p + p {
+        background-color: ghostwhite; }
   :host#player1 {
     grid-area: player1; }
+    :host#player1 .charSheet {
+      border: 1px solid #15C;
+      background-color: #e0eafc; }
+      :host#player1 .charSheet .avatar img {
+        border: 1px solid #15C; }
+      :host#player1 .charSheet .wounds p, :host#player1 .charSheet .items p {
+        border: 1px solid #15C;
+        background-color: #bad1f9; }
+      :host#player1 .charSheet .wounds .card > p + p, :host#player1 .charSheet .items .card > p:first-child {
+        background-color: #15C; }
+      :host#player1 .charSheet .wounds .card > p:first-child, :host#player1 .charSheet .items .card > p + p {
+        background-color: ghostwhite; }
   :host#player2 {
-    grid-area: player2;
-    align-self: end; }
+    grid-area: player2; }
+    :host#player2 .charSheet {
+      border: 1px solid darkgoldenrod;
+      background-color: #fcecc6; }
+      :host#player2 .charSheet .avatar img {
+        border: 1px solid darkgoldenrod; }
+      :host#player2 .charSheet .wounds p, :host#player2 .charSheet .items p {
+        border: 1px solid darkgoldenrod;
+        background-color: #f9dfa0; }
+      :host#player2 .charSheet .wounds .card > p + p, :host#player2 .charSheet .items .card > p:first-child {
+        background-color: darkgoldenrod; }
+      :host#player2 .charSheet .wounds .card > p:first-child, :host#player2 .charSheet .items .card > p + p {
+        background-color: ghostwhite; }
   :host#player3 {
     grid-area: player3; }
+    :host#player3 .charSheet {
+      border: 1px solid firebrick;
+      background-color: #f8dbdb; }
+      :host#player3 .charSheet .avatar img {
+        border: 1px solid firebrick; }
+      :host#player3 .charSheet .wounds p, :host#player3 .charSheet .items p {
+        border: 1px solid firebrick;
+        background-color: #f2b9b9; }
+      :host#player3 .charSheet .wounds .card > p + p, :host#player3 .charSheet .items .card > p:first-child {
+        background-color: firebrick; }
+      :host#player3 .charSheet .wounds .card > p:first-child, :host#player3 .charSheet .items .card > p + p {
+        background-color: ghostwhite; }
 
 .charSheet {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
-  background-color: #EEE;
-  border: 1px solid black;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); }
   .charSheet .avatar {
     display: flex;
@@ -24,8 +68,7 @@
     justify-content: center; }
     .charSheet .avatar img {
       width: 3em;
-      height: 3em;
-      border: 1px solid darkblue; }
+      height: 3em; }
     .charSheet .avatar h3 {
       padding-left: 0.5em; }
   .charSheet .wounds, .charSheet .items {
@@ -39,9 +82,7 @@
     .charSheet .wounds p, .charSheet .items p {
       margin: 0;
       text-align: center;
-      border: 1px solid black;
-      border-radius: 0 0 10px 10px;
-      background-color: #E3E3E9; }
+      border-radius: 0 0 10px 10px; }
   .charSheet .wounds {
     margin-top: calc(-1.3em - 1px); }
     .charSheet .wounds .nocard > p:first-child {
@@ -51,15 +92,13 @@
       border-radius: 10px 10px 0 0;
       box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3); }
     .charSheet .wounds .card > p + p {
-      color: ghostwhite;
-      background-color: darkred; }
+      color: ghostwhite; }
   .charSheet .items {
     justify-content: center; }
     .charSheet .items p:first-child {
       border-radius: 10px 10px 0 0; }
     .charSheet .items .card > p:first-child {
-      color: ghostwhite;
-      background-color: darkgreen; }
+      color: ghostwhite; }
     .charSheet .items .nocard > p + p {
       visibility: hidden; }
     .charSheet .items p + p {

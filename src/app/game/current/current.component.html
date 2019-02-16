@@ -1,3 +1,21 @@
-<h1>{{ player.shortName }}’s Turn</h1>
-<hotm-card *ngIf="card" [card]="card"></hotm-card>
-<div *ngIf="tile" id="currentTile"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="rotateTile(tile)"></span></div>
+<div *ngIf="gameService.round === 0">
+	<h1>{{ player.shortName }}’s Turn</h1>
+	<div *ngIf="gameService.turnStep === 0">
+		<button *ngIf="!tiles.length" (click)="drawTile.emit(3)">Draw 3 Tiles</button>
+		<div *ngFor="let tile of tiles" class="currentTile"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="rotateTile(tile)" (mouseenter)="checkTile.emit(tile)"></span></div>
+	</div>
+</div>
+<div *ngIf="gameService.round > 0">
+	<h1>Round {{ gameService.round }}: {{ player.shortName }}’s Turn</h1>
+	<div *ngIf="gameService.turnStep === 0">
+		<button *ngIf="!tiles.length" (click)="drawTile.emit(1)">Draw a Tile</button>
+		<div *ngIf="tiles.length" class="currentTile"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
+	</div>
+	<div *ngIf="gameService.turnStep === 1">
+		<h3>Move</h3>
+	</div>
+	<div *ngIf="gameService.turnStep === 2">
+		<button *ngIf="!card" (click)="drawCard.emit(true)">Draw a Card</button>
+		<hotm-card *ngIf="card" [card]="card"></hotm-card>
+	</div>
+</div>

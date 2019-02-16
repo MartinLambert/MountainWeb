@@ -15,6 +15,7 @@ export class Player {
 	avatarStyle:      { top: string, left: string };
 	stats:            Stats;
 	displayStats:     DisplayStats;
+	movement:         number;
 	location:         number;
 	campLocation:     number;
 	wounds:           Card[];

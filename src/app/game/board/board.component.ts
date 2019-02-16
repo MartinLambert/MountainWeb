@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { Tile        } from './tile';
 import { Player      } from '../player/player';
@@ -16,13 +16,13 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	discard: Tile[] = [];
 	startLocations = [238, 17, 225, 30];
 	@Input() players: Player[];
+	@Output() tilePlaced = new EventEmitter();
 
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
 		this.gameService.getBoard().subscribe(board => this.spaces = board);
 		this.gameService.getTiles().subscribe(tiles => this.tiles = tiles);
-		this.gameService.currentTile.subscribe(tile => this.currentTile = tile);
 		this.tiles = this.shuffle(this.tiles);
 		for (let i = 0; i < this.players.length; i++)
 			this.players[i].location = this.startLocations[i];
@@ -39,14 +39,15 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		return newPile;
 	}
 
-	drawTile(tile: Tile = this.tiles[0]): void {
-		this.gameService.newTile(tile);
+	drawTile(): void {
+		if (!this.tiles.length) return;
+		const tile = this.tiles[0];
+		this.gameService.currentTile = tile;
 		this.tiles.shift();
 		this.discard.unshift(tile);
-		this.validateSpaces(tile);
 	}
 
-	validateSpaces(tile: Tile): void {
+	validateTilePlacement(tile: Tile): void {
 		if (!tile.visible) return;
 		for (let i = 17; i < this.spaces.length - 17; i++) {
 			this.spaces[i].valid = false;
@@ -72,15 +73,38 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	validatePlayerMovement(distance: number, location: number): void {
+		if (location < 17 || location > 238) return;
+		if (distance && this.gameService.turnStep === 1 && this.spaces[location].visible) {
+			this.spaces[location - 16].valid = this.spaces[location].doors.north && this.spaces[location - 16].doors.south;
+			this.spaces[location +  1].valid = this.spaces[location].doors.east  && this.spaces[location +  1].doors.west;
+			this.spaces[location + 16].valid = this.spaces[location].doors.south && this.spaces[location + 16].doors.north;
+			this.spaces[location -  1].valid = this.spaces[location].doors.west  && this.spaces[location -  1].doors.east;
+			this.validatePlayerMovement(distance - 1, location - 16);
+			this.validatePlayerMovement(distance - 1, location +  1);
+			this.validatePlayerMovement(distance - 1, location + 16);
+			this.validatePlayerMovement(distance - 1, location -  1);
+		}
+		this.spaces[this.players[this.gameService.currPlayer].location].valid = false;
+	}
+
+	clearValidity(): void {
+		for (let i = 17; i < this.spaces.length - 17; i++)
+			this.spaces[i].valid = false;
+	}
+
 	selectSpace(space: Tile, currIndex: number): void {
-		if (this.currentTile && space.valid) {
+		if (this.gameService.turnStep === 0 && this.gameService.currentTile && space.valid) {
 			const currLevel = space.level;
-			this.spaces[currIndex] = this.currentTile;
+			this.spaces[currIndex] = this.gameService.currentTile;
 			this.spaces[currIndex].level = currLevel;
-			this.gameService.newTile(null);
-			for (let i = 17; i < this.spaces.length - 17; i++) {
-				this.spaces[i].valid = false;
-			}
+			this.clearValidity();
+			this.tilePlaced.emit();
+		} else if (this.gameService.turnStep === 1 && space.valid) {
+			this.players[this.gameService.currPlayer].location = currIndex;
+			this.players[this.gameService.currPlayer].avatarStyle = this.avatarLocation(this.players[this.gameService.currPlayer]);
+			this.clearValidity();
+			this.gameService.turnStep = 2;
 		}
 	}
 

@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 :host {
 	display: grid;
 	grid-template-rows: 0 repeat(14, 1fr) 0;
@@ -19,6 +21,9 @@
 		&:not(.tile) p {
 			display: none;
 		}
+	}
+	@for $playerNum from 1 through length($players) {
+		&.player#{$playerNum - 1}>div.valid { border: 6px solid #{nth($players, $playerNum)}; }
 	}
 }
 div.tile {
@@ -46,9 +51,6 @@ div.tile {
 		cursor: default;
 	}
 }
-div.valid {
-	border: 6px solid orange;
-}
 button {
 	position: fixed;
 	left: 1rem;
@@ -64,10 +66,9 @@ button {
 	border: 1px solid dimgrey;
 	box-shadow: 0 0 3px rgba(0,0,0,0.5), inset 0 0 3px rgba(255,255,255,0.5);
 	transition: all 0.8s ease-in-out;
-	&:nth-of-type(1) { background-color: rebeccapurple; }
-	&:nth-of-type(2) { background-color: steelblue; }
-	&:nth-of-type(3) { background-color: darkgoldenrod; }
-	&:nth-of-type(4) { background-color: salmon; }
+	@for $playerNum from 1 through length($players) {
+		&:nth-of-type(#{$playerNum}) { background-color: #{nth($players, $playerNum)}; }
+	}
 	&.pulse {
 		animation-name: pulse_animation;
 		animation-duration: 1s;
