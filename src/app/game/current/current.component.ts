@@ -17,7 +17,7 @@ export class CurrentComponent implements OnInit {
 	@Input() tiles: Tile[];
 	@Output() drawTile  = new EventEmitter<number>();
 	@Output() checkTile = new EventEmitter<Tile>();
-	@Output() drawCard  = new EventEmitter<boolean>();
+	@Output() drawCard  = new EventEmitter<number>();
 
 	constructor(public gameService: GameService) {
 	}

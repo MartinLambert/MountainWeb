@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { GameService } from '../game.service';
 import { Player } from './player';
 import { Card, GemType, ItemType } from '../cards/card';
@@ -12,11 +13,13 @@ import { blankCard } from '../cards/blankCard';
 export class PlayerComponent implements OnInit {
 
 	@Input() player: Player;
-	@Input() card: Card;
 	@Input() playerNum: number;
+	@Input() zoomed: boolean;
 	@Output() useCard = new EventEmitter<Card>();
 	@Output() endTurn = new EventEmitter();
 	blank = blankCard;
+	gemType = GemType;
+	itemType = ItemType;
 
 	constructor(private gameService: GameService) {
 	}
@@ -29,7 +32,8 @@ export class PlayerComponent implements OnInit {
 		if (this.player.playerPower === 2) this.player.wounds.push(blankCard); // playerPower 2 grants an extra wound slot
 	}
 
-	gainWound(card: Card): void {
+	gainWound(): void {
+		const card = this.gameService.currentCard;
 		if (!card || card === this.blank || this.playerNum !== this.gameService.currPlayer) return;
 		let numWounds = 0;
 		for (let i = 0; i < this.player.wounds.length; i++) {
@@ -54,7 +58,8 @@ export class PlayerComponent implements OnInit {
 		}
 	}
 
-	gainItem(card: Card, slot: number): void {
+	gainItem(slot: number): void {
+		const card = this.gameService.currentCard;
 		if (!card || card.itemType === ItemType.none || this.playerNum !== this.gameService.currPlayer) return;
 		this.player.items[slot] = card;
 		this.useCard.emit(card);

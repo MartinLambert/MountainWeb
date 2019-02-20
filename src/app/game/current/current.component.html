@@ -15,7 +15,7 @@
 		<h3>Move</h3>
 	</div>
 	<div *ngIf="gameService.turnStep === 2">
-		<button *ngIf="!card" (click)="drawCard.emit(true)">Draw a Card</button>
+		<button *ngIf="!card" (click)="drawCard.emit(1)">Draw a Card</button>
 		<hotm-card *ngIf="card" [card]="card"></hotm-card>
 	</div>
 </div>

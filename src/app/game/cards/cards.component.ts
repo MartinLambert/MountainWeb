@@ -12,7 +12,7 @@ export class CardsComponent implements OnInit {
 	decks: Card[][];
 	discards: Card[][] = [new Array<Card>(), new Array<Card>(), new Array<Card>(), new Array<Card>()];
 
-	constructor(private gameService: GameService) {
+	constructor(public gameService: GameService) {
 	}
 
 	ngOnInit() {
@@ -31,7 +31,7 @@ export class CardsComponent implements OnInit {
 	drawCard(deckNum: number): void {
 		if ((deckNum < 0 || deckNum > 4) || !this.decks[deckNum] || !this.decks[deckNum].length) return;
 		const card = this.decks[deckNum][0];
-		this.gameService.drawCard(card);
+		this.gameService.currentCard = card;
 		this.decks[deckNum].shift();
 		this.discards[deckNum].unshift(card);
 	}

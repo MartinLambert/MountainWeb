@@ -12,13 +12,13 @@ import { CHARACTERS } from './player/characters';
 	providedIn: 'root'
 })
 export class GameService {
+
 	private _numPlayers = 4;
 	private _currPlayer = 0;
 	private _turnStep = 0;
-	private _round = 0;
+	private _round = -1;
 	private _currentTile: Tile;
-	private currentCardSource = new Subject<Card>();
-	currentCard = this.currentCardSource.asObservable();
+	private _currentCard: Card;
 
 	constructor() {}
 
@@ -66,6 +66,14 @@ export class GameService {
 		this._currentTile = value;
 	}
 
+	get currentCard(): Card {
+		return this._currentCard;
+	}
+
+	set currentCard(value: Card) {
+		this._currentCard = value;
+	}
+
 	getBoard(): Observable<Tile[]> {
 		return of(SPACES);
 	}
@@ -83,6 +91,6 @@ export class GameService {
 	}
 
 	drawCard(newCard: Card) {
-		this.currentCardSource.next(newCard);
+		// this.currentCardSource.next(newCard);
 	}
 }

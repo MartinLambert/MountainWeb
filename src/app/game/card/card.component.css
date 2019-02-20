@@ -18,25 +18,43 @@
   box-shadow: inset 0 0 0 6px ghostwhite, inset 0 0 0 8px #333;
   grid-template-rows: 1fr; }
 
+.Starter {
+  opacity: 0.6;
+  transform: scale(0.9);
+  transition: 0.6s ease; }
+  .Starter.selected {
+    opacity: 1;
+    transform: scale(1); }
+  .Starter.rotated {
+    transform: rotate(180deg); }
+  .Starter.rotated:not(.selected) {
+    transform: scale(0.9) rotate(180deg); }
+  .Starter .cardTop {
+    transform: rotate(180deg); }
+    .Starter .cardTop h3 {
+      align-self: end; }
+
 section {
   display: grid;
   line-height: 0; }
   section > * {
     line-height: normal; }
-  section.cardTop p.cardText {
-    margin: 0;
-    padding: 0 0.5em;
-    width: 35%;
-    text-align: right;
-    align-self: center;
-    justify-self: end; }
-  section.cardTop .attributes {
-    align-self: flex-end;
-    justify-self: end; }
-    section.cardTop .attributes p, section.cardTop .attributes dl {
+  section.cardTop {
+    position: relative; }
+    section.cardTop p.cardText {
       margin: 0;
-      border-right-width: 0;
-      border-bottom-width: 0; }
+      padding: 0 0.5em;
+      width: 35%;
+      text-align: right;
+      align-self: center;
+      justify-self: end; }
+    section.cardTop .attributes {
+      align-self: flex-end;
+      justify-self: end; }
+      section.cardTop .attributes p, section.cardTop .attributes dl {
+        margin: 0;
+        border-right-width: 0;
+        border-bottom-width: 0; }
   section.cardBottom {
     position: relative;
     border-top: 1px solid #333; }
@@ -49,57 +67,57 @@ section {
     section.cardBottom h2 {
       margin: 0 0.5em;
       font-size: 1.25em; }
-    section.cardBottom .leftGem, section.cardBottom .rightGem {
-      position: absolute;
-      left: 0;
-      top: 32.5%;
-      width: 20%;
-      height: 35%;
-      filter: drop-shadow(1px 0 0 #333); }
-      section.cardBottom .leftGem > div, section.cardBottom .rightGem > div {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        background-color: #E3E3E9;
-        border: 1px solid #333;
-        border-width: 1px 0;
-        clip-path: polygon(0 0, 50% 0, 90% 50%, 50% 100%, 0 100%); }
-        section.cardBottom .leftGem > div > div:not(.leftGemAttr), section.cardBottom .rightGem > div > div:not(.leftGemAttr) {
-          width: 85%;
-          padding-left: 2px;
-          font-size: 14px; }
-    section.cardBottom .leftGemAttr {
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      grid-gap: 1px;
+  section .leftGem, section .rightGem {
+    position: absolute;
+    left: 0;
+    top: 32.5%;
+    width: 20%;
+    height: 35%;
+    filter: drop-shadow(1px 0 0 #333); }
+    section .leftGem > div, section .rightGem > div {
+      display: flex;
+      align-items: center;
       width: 100%;
       height: 100%;
-      background-color: #999; }
-      section.cardBottom .leftGemAttr > div {
-        width: 100%;
-        height: 100%;
-        background-color: ghostwhite; }
-      section.cardBottom .leftGemAttr .leftGemBrains {
-        background-color: lightblue; }
-      section.cardBottom .leftGemAttr .leftGemBrawn {
-        background-color: yellow; }
-      section.cardBottom .leftGemAttr .leftGemBravado {
-        background-color: lightpink; }
-    section.cardBottom .rightGem {
-      left: auto;
-      right: 0;
-      filter: drop-shadow(-1px 0 0 #333); }
-      section.cardBottom .rightGem > div {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        clip-path: polygon(100% 0, 50% 0, 10% 50%, 50% 100%, 100% 100%); }
-        section.cardBottom .rightGem > div h1 {
-          margin: 0;
-          padding: 0 0.15em;
-          font-size: 2.75em;
-          font-family: Luminari, fantasy; }
+      background-color: #E3E3E9;
+      border: 1px solid #333;
+      border-width: 1px 0;
+      clip-path: polygon(0 0, 50% 0, 90% 50%, 50% 100%, 0 100%); }
+      section .leftGem > div > div:not(.leftGemAttr), section .rightGem > div > div:not(.leftGemAttr) {
+        width: 85%;
+        padding-left: 2px;
+        font-size: 14px; }
+  section .leftGemAttr {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1px;
+    width: 100%;
+    height: 100%;
+    background-color: #999; }
+    section .leftGemAttr > div {
+      width: 100%;
+      height: 100%;
+      background-color: ghostwhite; }
+    section .leftGemAttr .leftGemBrains {
+      background-color: lightblue; }
+    section .leftGemAttr .leftGemBrawn {
+      background-color: yellow; }
+    section .leftGemAttr .leftGemBravado {
+      background-color: lightpink; }
+  section .rightGem {
+    left: auto;
+    right: 0;
+    filter: drop-shadow(-1px 0 0 #333); }
+    section .rightGem > div {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      clip-path: polygon(100% 0, 50% 0, 10% 50%, 50% 100%, 100% 100%); }
+      section .rightGem > div h1 {
+        margin: 0;
+        padding: 0 0.15em;
+        font-size: 2.75em;
+        font-family: Luminari, fantasy; }
   section h1, section h2, section h3 {
     text-align: center; }
   section h3 {

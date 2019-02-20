@@ -3,7 +3,7 @@ import { Card, CardType, GemType, ItemType } from './card';
 export const blankCard: Card = {
 	id: 0,
 	level: 0,
-	cardType:  CardType.starter,
+	cardType:  CardType.blank,
 	cardName:  'Blank Card',
 	cardImg:   '',
 	cardText:  '',

@@ -1,0 +1,5 @@
+<hotm-player [player]="player" [playerNum]="gameService.currPlayer" [zoomed]="true" (useCard)="useCard($event)" class="player{{ gameService.currPlayer }}"></hotm-player>
+<button *ngIf="gameService.turnStep === 0" (click)="draw3Cards()">Draw 3 Cards</button>
+<h2 *ngIf="gameService.turnStep === 1">Click a card to select it. Click it again to rotate it. Click an item slot to assign the selected item to it.</h2>
+<button *ngIf="gameService.turnStep === 2" (click)="endTurn.emit()">End Turn</button>
+<hotm-card *ngFor="let card of cards; let num = index" [ngClass]="{'hidden': card === blankCard}" [card]="card" [cardNum]="num" [selected]="selectedCards[num]" (selectMe)="selectCard($event)"></hotm-card>

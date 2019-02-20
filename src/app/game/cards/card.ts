@@ -2,6 +2,7 @@ import { Stats } from '../stats';
 
 // each card has a maximum of one CardType and one ItemType.
 export enum CardType {
+	blank   = 'Blank',
 	starter = 'Starter',
 	enemy   = 'Enemy',
 	trap    = 'Trap',

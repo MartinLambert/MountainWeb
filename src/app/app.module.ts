@@ -9,6 +9,7 @@ import { CardsComponent     } from './game/cards/cards.component';
 import { CardComponent      } from './game/card/card.component';
 import { CardRatioDirective } from './game/card-ratio.directive';
 import { CurrentComponent } from './game/current/current.component';
+import { StartupComponent } from './game/startup/startup.component';
 
 @NgModule({
 	declarations: [
@@ -18,7 +19,8 @@ import { CurrentComponent } from './game/current/current.component';
 		CardsComponent,
 		CardComponent,
 		CardRatioDirective,
-		CurrentComponent
+		CurrentComponent,
+		StartupComponent
 	],
 	imports: [
 		BrowserModule,

@@ -1,6 +1,6 @@
-<div class="charSheet" *ngIf="player">
+<div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed}">
 	<div class="wounds">
-		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}" (click)="gainWound(card)">
+		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}" (click)="gainWound()">
 			<p>{{ wound.cardName }}</p><p>Wound</p>
 		</div>
 	</div>
@@ -21,8 +21,40 @@
 		</dl>
 	</div>
 	<div class="items">
-		<div *ngFor="let item of player.items; let num = index" class="{{ item === blank ? 'nocard' : 'card' }}" (click)="gainItem(card, num)">
-			<p>Item</p><p>{{ item.itemName }}</p>
+		<div *ngFor="let item of player.items; let num = index" class="{{ item === blank ? 'nocard' : 'card' }}" (click)="gainItem(num)">
+			<p>Item</p>
+			<div *ngIf="item !== blank" class="itemCard">
+				<h1 [innerHTML]="item.itemName"></h1>
+				<div>
+					<h2 class="itemText" [innerHTML]="item.itemText"></h2>
+					<p *ngIf="item.itemType === itemType.useOnce">Discard after use</p>
+					<p *ngIf="item.itemType === itemType.useNow">Use immediately or not at all</p>
+					<p *ngIf="item.itemType === itemType.useNext">Use next turn or not at all</p>
+					<p *ngIf="item.itemType === itemType.discAny">Discard any item after use</p>
+					<p *ngIf="item.itemType === itemType.discTwo">Discard two items after use</p>
+					<h3 *ngIf="item.itemStats && item.itemStats.Brains "><span *ngIf="item.itemStats.Brains  > 0">+</span>{{ item.itemStats.Brains  }} Brains</h3>
+					<h3 *ngIf="item.itemStats && item.itemStats.Brawn  "><span *ngIf="item.itemStats.Brawn   > 0">+</span>{{ item.itemStats.Brawn   }} Brawn</h3>
+					<h3 *ngIf="item.itemStats && item.itemStats.Bravado"><span *ngIf="item.itemStats.Bravado > 0">+</span>{{ item.itemStats.Bravado }} Bravado</h3>
+				</div>
+				<div *ngIf="item.leftGem != null" class="leftGem"><div>
+					<div class="leftGemAttr" *ngIf="(item.leftGem % gemType.Brains === 0) || (item.leftGem % gemType.Brawn === 0) || (item.leftGem % gemType.Bravado === 0)">
+						<div [ngClass]="{'leftGemBrains' : item.leftGem % gemType.Brains  === 0}"></div>
+						<div [ngClass]="{'leftGemBrawn'  : item.leftGem % gemType.Brawn   === 0}"></div>
+						<div [ngClass]="{'leftGemBravado': item.leftGem % gemType.Bravado === 0}"></div>
+					</div>
+					<div *ngIf="item.leftGem % gemType.vsEnemies === 0">vs Enemies</div>
+					<div *ngIf="item.leftGem % gemType.vsTraps === 0">vs Traps</div>
+					<div *ngIf="item.leftGem % gemType.allRolls === 0">All Rolls</div>
+					<div *ngIf="item.leftGem % gemType.enBrains === 0">Enemy Brains</div>
+					<div *ngIf="item.leftGem % gemType.enBrawn === 0">Enemy Brawn</div>
+					<div *ngIf="item.leftGem % gemType.enBravado === 0">Enemy Bravado</div>
+					<div *ngIf="item.leftGem % gemType.enemyRoll === 0">Enemy Rolls Against You</div>
+					<div *ngIf="item.leftGem % gemType.trapRoll === 0">Trap Rolls Against You</div>
+				</div></div>
+				<div *ngIf="item.rightGem != null" class="rightGem"><div>
+					<h1><span *ngIf="item.rightGem > 0">+</span>{{ item.rightGem }}</h1>
+				</div></div>
+			</div>
 		</div>
 	</div>
 </div>

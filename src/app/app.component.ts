@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 	@ViewChild(BoardComponent) board;
 	@ViewChild(CardsComponent) cards;
 	currentTiles: Tile[] = [];
-	newestCard:   Card;
 	currentCards: Card[] = [];
 	characters:   Player[];
 
@@ -24,7 +23,6 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.gameService.getCharacters().subscribe(players => this.characters = players);
-		this.gameService.currentCard.subscribe(card => { this.newestCard = card; this.currentCards.push(card); });
 	}
 
 	drawTile(numTiles: number): void {
@@ -41,9 +39,10 @@ export class AppComponent implements OnInit {
 	clearBoard(): void {
 		this.board.clearValidity();
 	}
-	drawCard(newCard: boolean): void {
-		if (newCard) {
+	drawCard(numCards: number): void {
+		for (let i = 0; i < numCards; i++) {
 			this.cards.drawCard(this.board.spaces[this.characters[this.gameService.currPlayer].location].level);
+			this.currentCards.push(this.gameService.currentCard);
 		}
 	}
 	useCard(card: Card): void {
@@ -59,7 +58,7 @@ export class AppComponent implements OnInit {
 			this.currentTiles.splice(index, 1);
 			this.gameService.currentTile = null;
 			if (this.currentTiles.length === 0)
-				if (this.gameService.round === 0)
+				if (this.gameService.round === 0) // TODO: starter cards
 					this.endTurn();
 				else {
 					this.gameService.turnStep = 1;

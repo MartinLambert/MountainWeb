@@ -1,0 +1,36 @@
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template: 'player player player' 30vh 'text   text   text  '  5vh 'card1  card2  card3 ' 65vh / 1fr    1fr    1fr;
+  background-color: grey;
+  z-index: 20; }
+
+hotm-player {
+  grid-area: player !important; }
+
+button, h2 {
+  grid-area: text;
+  margin: auto;
+  text-align: center;
+  width: max-content; }
+
+h2 {
+  height: 2em;
+  align-self: start; }
+
+button {
+  display: block;
+  font-size: 1.25rem;
+  border-radius: 0.25em;
+  background-color: #E3E3E9;
+  border: 1px solid black;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); }
+
+.hidden {
+  visibility: hidden; }
+
+/*# sourceMappingURL=startup.component.css.map */

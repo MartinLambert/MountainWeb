@@ -1,9 +1,12 @@
-<div class="card {{ card.cardType }}" hotmCardRatio>
-	<section class="cardTop">
+<div *ngIf="card.cardType !== cardType.blank" class="card {{ card.cardType }}" [ngClass]="{'selected': selected, 'rotated': rotated}" (click)="clickCard()" hotmCardRatio>
+	<section class="cardTop" *ngIf="card.cardType === cardType.event">
 		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
 		<h2 *ngIf="card.cardType === cardType.event" [innerHTML]="'All Players:<br>' + card.cardText"></h2>
-		<p class="cardText" *ngIf="card.cardType != cardType.event" [innerHTML]="card.cardText"></p>
-		<div class="attributes" *ngIf="card.cardType != cardType.event">
+	</section>
+	<section class="cardTop" *ngIf="card.cardType !== cardType.event && card.cardType !== cardType.starter">
+		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
+		<p class="cardText" [innerHTML]="card.cardText"></p>
+		<div class="attributes">
 			<p>{{ card.cardType }}</p>
 			<dl>
 				<dt [ngClass]="{'unused': card.cardStats.Brains  === null}">{{ card.cardStats.Brains  }}</dt><dd [ngClass]="{'unused': card.cardStats.Brains  === null}">Brains</dd>
@@ -12,7 +15,15 @@
 			</dl>
 		</div>
 	</section>
-	<section class="cardBottom" *ngIf="card.itemName">
+	<section class="cardTop" *ngIf="card.cardType === cardType.starter">
+		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
+		<h3 *ngIf="card.cardStats.Brains ">+1 Brains</h3>
+		<h3 *ngIf="card.cardStats.Brawn  ">+1 Brawn</h3>
+		<h3 *ngIf="card.cardStats.Bravado">+1 Bravado</h3>
+		<div class="leftGem"><div></div></div>
+		<div class="rightGem"><div><h1>0</h1></div></div>
+	</section>
+	<section class="cardBottom" *ngIf="card.itemType !== itemType.none">
 		<h1 class="itemName" [innerHTML]="card.itemName"></h1>
 		<div>
 			<h2 class="itemText" [innerHTML]="card.itemText"></h2>
