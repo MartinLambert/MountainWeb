@@ -34,7 +34,7 @@ export class PlayerComponent implements OnInit {
 
 	gainWound(): void {
 		const card = this.gameService.currentCard;
-		if (!card || card === this.blank || this.playerNum !== this.gameService.currPlayer) return;
+		if (!card || card === this.blank || this.playerNum !== this.gameService.currPlayer || this.gameService.turnStep !== (this.gameService.round ? 2 : 1)) return;
 		let numWounds = 0;
 		for (let i = 0; i < this.player.wounds.length; i++) {
 			if (this.player.wounds[i] === this.blank) {
@@ -60,7 +60,7 @@ export class PlayerComponent implements OnInit {
 
 	gainItem(slot: number): void {
 		const card = this.gameService.currentCard;
-		if (!card || card.itemType === ItemType.none || this.playerNum !== this.gameService.currPlayer) return;
+		if (!card || card.itemType === ItemType.none || this.playerNum !== this.gameService.currPlayer || this.gameService.turnStep !== (this.gameService.round > 0 ? 2 : 1)) return;
 		this.player.items[slot] = card;
 		this.useCard.emit(card);
 		this.calculateDisplayStats();

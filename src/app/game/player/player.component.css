@@ -1,5 +1,8 @@
 :host {
-  margin: 1.5em; }
+  margin: 1.5em;
+  opacity: 0.6;
+  transform: scale(0.9);
+  transition: all 0.65s ease-in-out; }
   :host.player0 {
     grid-area: player0; }
     :host.player0 .charSheet {
@@ -56,6 +59,9 @@
         background-color: firebrick; }
       :host.player3 .charSheet .wounds .card > p:first-child {
         background-color: ghostwhite; }
+  :host.myTurn {
+    opacity: 1;
+    transform: scale(1); }
   :host .charSheet.zoomed .itemCard h1 {
     font-size: 1.25em; }
   :host .charSheet.zoomed .itemCard h2 {
@@ -127,6 +133,8 @@
       white-space: nowrap; }
     .charSheet .itemCard h2, .charSheet .itemCard p {
       font-size: 0.8em; }
+    .charSheet .itemCard h2 span {
+      display: none; }
   .charSheet .leftGem, .charSheet .rightGem {
     position: absolute;
     left: 0;

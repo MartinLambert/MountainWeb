@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Card        } from './card';
 
@@ -7,7 +7,7 @@ import { Card        } from './card';
 	templateUrl: './cards.component.html',
 	styleUrls: ['./cards.component.css']
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent implements OnInit, AfterViewInit {
 
 	decks: Card[][];
 	discards: Card[][] = [new Array<Card>(), new Array<Card>(), new Array<Card>(), new Array<Card>()];
@@ -19,6 +19,17 @@ export class CardsComponent implements OnInit {
 		this.gameService.getCards().subscribe(cards => this.decks = cards);
 		for (let i = 0; i < this.decks.length; i++)
 			this.decks[i] = this.shuffle(this.decks[i]);
+	}
+
+	ngAfterViewInit(): void {
+		const cardRef = document.getElementById('cardRef');
+		const discardPiles = document.getElementsByClassName('discard');
+		for (let i = 0; i < discardPiles.length; i++) {
+			// @ts-ignore
+			discardPiles[i].style.width = cardRef.clientWidth + 'px';
+			// @ts-ignore
+			discardPiles[i].style.height = cardRef.clientHeight + 'px';
+		}
 	}
 
 	private shuffle(deck: Card[]): Card[] {

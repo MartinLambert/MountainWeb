@@ -15,6 +15,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	currentTile: Tile;
 	discard: Tile[] = [];
 	startLocations = [238, 17, 225, 30];
+	tileStyle = {width: '0', height: '0'};
 	@Input() players: Player[];
 	@Output() tilePlaced = new EventEmitter();
 
@@ -30,6 +31,8 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.players.forEach(player => player.avatarStyle = this.avatarLocation(player));
+		this.tileStyle.width = document.getElementsByTagName('hotm-cards')[0].clientWidth + 'px';
+		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight + 'px';
 	}
 
 	private shuffle(pile: Tile[]): Tile[] {

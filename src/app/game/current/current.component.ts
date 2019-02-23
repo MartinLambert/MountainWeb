@@ -18,11 +18,29 @@ export class CurrentComponent implements OnInit {
 	@Output() drawTile  = new EventEmitter<number>();
 	@Output() checkTile = new EventEmitter<Tile>();
 	@Output() drawCard  = new EventEmitter<number>();
+	// selected = [true, false, false];
 
 	constructor(public gameService: GameService) {
 	}
 
 	ngOnInit() {
+	}
+
+	draw3Tiles(): void {
+		this.drawTile.emit(3);
+		this.checkTile.emit(this.tiles[0]);
+	}
+
+	clickTile(tileNum: number): void {
+		if (this.tiles[tileNum] === this.gameService.currentTile) {
+			this.rotateTile(this.tiles[tileNum]);
+		} else {
+			// this.selected = [];
+			// this.tiles.forEach(() => this.selected.push(false));
+			// this.selected[tileNum] = true;
+			this.gameService.currentTile = this.tiles[tileNum];
+		}
+		this.checkTile.emit(this.tiles[tileNum]);
 	}
 
 	rotateTile(tile): void {

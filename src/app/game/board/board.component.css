@@ -51,12 +51,6 @@ div.tile {
     text-shadow: -0.5px -0.5px 0.5px white, -0.5px 0.5px 0.5px white, 0.5px -0.5px 0.5px white, 0.5px 0.5px 0.5px white;
     cursor: default; }
 
-button {
-  position: fixed;
-  left: 1rem;
-  top: 85vh;
-  font: 16px Averia; }
-
 .avatar {
   position: absolute;
   z-index: 10;
@@ -79,5 +73,64 @@ button {
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear; }
+
+.tilePiles {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .tilePiles .emptyTiles {
+    width: 35%;
+    height: 0;
+    margin-left: 1em;
+    padding-bottom: 35%;
+    border: 2px dashed #333;
+    background-color: rgba(248, 248, 255, 0.4); }
+  .tilePiles .tiles {
+    position: relative;
+    top: -3px;
+    left: -3px;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    background-color: ghostwhite;
+    display: flex;
+    justify-content: center;
+    box-shadow: 6px 6px 0 #666, 0 0 3px rgba(0, 0, 0, 0.5), 6px 6px 3px rgba(0, 0, 0, 0.5); }
+    .tilePiles .tiles:before {
+      content: '';
+      display: block;
+      position: absolute;
+      right: -8px;
+      top: -2px;
+      width: 0;
+      height: 0;
+      border: 4px solid #666;
+      border-color: transparent transparent #666 #666; }
+    .tilePiles .tiles:after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: -8px;
+      left: -2px;
+      width: 0;
+      height: 0;
+      border: 4px solid #666;
+      border-color: #666 #666 transparent transparent; }
+    .tilePiles .tiles h6 {
+      font-size: 4vh;
+      margin: 25%; }
+  .tilePiles .discard {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; }
+    .tilePiles .discard span {
+      display: block;
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
+      background-size: contain; }
 
 /*# sourceMappingURL=board.component.css.map */

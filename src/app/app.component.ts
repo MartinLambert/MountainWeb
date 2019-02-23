@@ -56,14 +56,18 @@ export class AppComponent implements OnInit {
 		const index = this.currentTiles.indexOf(this.gameService.currentTile);
 		if (index >= 0) {
 			this.currentTiles.splice(index, 1);
-			this.gameService.currentTile = null;
-			if (this.currentTiles.length === 0)
-				if (this.gameService.round === 0) // TODO: starter cards
+			this.gameService.currentTile = (this.currentTiles.length ? this.currentTiles[0] : null);
+			if (this.currentTiles.length === 0) {
+				this.gameService.currentTile = null;
+				if (this.gameService.round === 0)
 					this.endTurn();
 				else {
 					this.gameService.turnStep = 1;
 					this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
 				}
+			} else {
+				this.validateTile(this.currentTiles[0]);
+			}
 		}
 	}
 	endTurn(): void {
