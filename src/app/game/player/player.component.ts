@@ -25,8 +25,10 @@ export class PlayerComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.player.wounds = [blankCard, blankCard, blankCard];
-		this.player.items = [blankCard, blankCard, blankCard, blankCard];
+		if (!this.player.wounds.length)
+			this.player.wounds = [blankCard, blankCard, blankCard];
+		if (!this.player.items.length)
+			this.player.items = [blankCard, blankCard, blankCard, blankCard];
 
 		if (this.player.playerPower === 1) this.player.items.push(blankCard); // playerPower 1 grants an extra item slot
 		if (this.player.playerPower === 2) this.player.wounds.push(blankCard); // playerPower 2 grants an extra wound slot
@@ -69,17 +71,20 @@ export class PlayerComponent implements OnInit {
 
 	calculateDisplayStats(): void {
 		let previousGem = 0;
-		let brains  = this.player.stats.Brains;
-		let brawn   = this.player.stats.Brawn;
-		let bravado = this.player.stats.Bravado;
+		let brains  = this.player.nativeStats.Brains;
+		let brawn   = this.player.nativeStats.Brawn;
+		let bravado = this.player.nativeStats.Bravado;
 		for (const item of this.player.items) {
 			brains  += (item.itemStats ? item.itemStats.Brains  : 0) + (item.leftGem % GemType.Brains  ? 0 : previousGem);
 			brawn   += (item.itemStats ? item.itemStats.Brawn   : 0) + (item.leftGem % GemType.Brawn   ? 0 : previousGem);
 			bravado += (item.itemStats ? item.itemStats.Bravado : 0) + (item.leftGem % GemType.Bravado ? 0 : previousGem);
 			previousGem = item.rightGem;
 		}
-		this.player.displayStats.Brains  = (brains  === this.player.stats.Brains  ? '' : '<i>') + (brains  > 0 ? brains  : 0)  + (brains  === this.player.stats.Brains  ? '' : '</i>');
-		this.player.displayStats.Brawn   = (brawn   === this.player.stats.Brawn   ? '' : '<i>') + (brawn   > 0 ? brawn   : 0)  + (brawn   === this.player.stats.Brawn   ? '' : '</i>');
-		this.player.displayStats.Bravado = (bravado === this.player.stats.Bravado ? '' : '<i>') + (bravado > 0 ? bravado : 0)  + (bravado === this.player.stats.Bravado ? '' : '</i>');
+		this.player.displayStats.Brains  = (brains  === this.player.nativeStats.Brains  ? '' : '<i>') + (brains  > 0 ? brains  : 0)  + (brains  === this.player.nativeStats.Brains  ? '' : '</i>');
+		this.player.displayStats.Brawn   = (brawn   === this.player.nativeStats.Brawn   ? '' : '<i>') + (brawn   > 0 ? brawn   : 0)  + (brawn   === this.player.nativeStats.Brawn   ? '' : '</i>');
+		this.player.displayStats.Bravado = (bravado === this.player.nativeStats.Bravado ? '' : '<i>') + (bravado > 0 ? bravado : 0)  + (bravado === this.player.nativeStats.Bravado ? '' : '</i>');
+		this.player.calculatedStats.Brains  = brains;
+		this.player.calculatedStats.Brawn   = brawn;
+		this.player.calculatedStats.Bravado = bravado;
 	}
 }

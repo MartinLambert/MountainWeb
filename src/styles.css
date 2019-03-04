@@ -19,6 +19,86 @@
     transform: scale(1); }
   100% {
     transform: scale(1); } }
+@keyframes player0_animation {
+  0% {
+    background-color: darkviolet;
+    color: ghostwhite; }
+  50% {
+    background-color: #e6aaff;
+    color: black; }
+  100% {
+    background-color: darkviolet;
+    color: ghostwhite; } }
+@keyframes player0_nocard_animation {
+  0% {
+    background-color: #e6aaff;
+    color: black; }
+  50% {
+    background-color: darkviolet;
+    color: ghostwhite; }
+  100% {
+    background-color: #e6aaff;
+    color: black; } }
+@keyframes player1_animation {
+  0% {
+    background-color: #15C;
+    color: ghostwhite; }
+  50% {
+    background-color: #bad1f9;
+    color: black; }
+  100% {
+    background-color: #15C;
+    color: ghostwhite; } }
+@keyframes player1_nocard_animation {
+  0% {
+    background-color: #bad1f9;
+    color: black; }
+  50% {
+    background-color: #15C;
+    color: ghostwhite; }
+  100% {
+    background-color: #bad1f9;
+    color: black; } }
+@keyframes player2_animation {
+  0% {
+    background-color: darkgoldenrod;
+    color: ghostwhite; }
+  50% {
+    background-color: #f9dfa0;
+    color: black; }
+  100% {
+    background-color: darkgoldenrod;
+    color: ghostwhite; } }
+@keyframes player2_nocard_animation {
+  0% {
+    background-color: #f9dfa0;
+    color: black; }
+  50% {
+    background-color: darkgoldenrod;
+    color: ghostwhite; }
+  100% {
+    background-color: #f9dfa0;
+    color: black; } }
+@keyframes player3_animation {
+  0% {
+    background-color: firebrick;
+    color: ghostwhite; }
+  50% {
+    background-color: #f2b9b9;
+    color: black; }
+  100% {
+    background-color: firebrick;
+    color: ghostwhite; } }
+@keyframes player3_nocard_animation {
+  0% {
+    background-color: #f2b9b9;
+    color: black; }
+  50% {
+    background-color: firebrick;
+    color: ghostwhite; }
+  100% {
+    background-color: #f2b9b9;
+    color: black; } }
 html, body {
   margin: 0;
   padding: 0;
@@ -59,5 +139,17 @@ html, body {
     .attributes dl .unused {
       background-color: ghostwhite;
       color: #666; }
+
+.pulse {
+  animation-name: pulse_animation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+.visible {
+  visibility: visible; }
+
+.invisible {
+  visibility: hidden; }
 
 /*# sourceMappingURL=styles.css.map */

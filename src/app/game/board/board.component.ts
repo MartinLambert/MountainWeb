@@ -47,7 +47,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		const tile = this.tiles[0];
 		this.gameService.currentTile = tile;
 		this.tiles.shift();
-		this.discard.unshift(tile);
+		// this.discard.unshift(tile);
 	}
 
 	validateTilePlacement(tile: Tile): void {

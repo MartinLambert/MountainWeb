@@ -6,7 +6,7 @@
     height: 100%; }
     :host > div > div {
       height: calc(100% - 4em); }
-      :host > div > div > div {
+      :host > div > div > .currentCard {
         height: 100%; }
 
 h1, h3 {

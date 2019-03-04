@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { Tile           } from './game/board/tile';
 import { Card           } from './game/cards/card';
 import { Player         } from './game/player/player';
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
 	@ViewChild(CardsComponent) cards;
 	currentTiles: Tile[] = [];
 	currentCards: Card[] = [];
+	activeCard: Card;
 	characters:   Player[];
 
 	constructor(public gameService: GameService) {}
@@ -39,16 +41,23 @@ export class AppComponent implements OnInit {
 	clearBoard(): void {
 		this.board.clearValidity();
 	}
+
 	drawCard(numCards: number): void {
 		for (let i = 0; i < numCards; i++) {
 			this.cards.drawCard(this.board.spaces[this.characters[this.gameService.currPlayer].location].level);
 			this.currentCards.push(this.gameService.currentCard);
 		}
+		if (this.gameService.round > 0)
+			this.activeCard = this.currentCards[0];
 	}
 	useCard(card: Card): void {
 		const index = this.currentCards.indexOf(card);
 		if (index >= 0)
 			this.currentCards.splice(index, 1);
+		if (this.currentCards.length)
+			this.activeCard = this.currentCards[0];
+		else
+			this.activeCard = null;
 	}
 
 	tilePlaced(): void {
@@ -60,7 +69,7 @@ export class AppComponent implements OnInit {
 			if (this.currentTiles.length === 0) {
 				this.gameService.currentTile = null;
 				if (this.gameService.round === 0)
-					this.endTurn();
+					this.endTurn(); // Round 0 is just setting up the board
 				else {
 					this.gameService.turnStep = 1;
 					this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
@@ -70,6 +79,7 @@ export class AppComponent implements OnInit {
 			}
 		}
 	}
+
 	endTurn(): void {
 		this.gameService.turnStep = 0;
 		this.gameService.currPlayer++;

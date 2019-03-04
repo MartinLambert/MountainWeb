@@ -35,9 +35,6 @@ export class CurrentComponent implements OnInit {
 		if (this.tiles[tileNum] === this.gameService.currentTile) {
 			this.rotateTile(this.tiles[tileNum]);
 		} else {
-			// this.selected = [];
-			// this.tiles.forEach(() => this.selected.push(false));
-			// this.selected[tileNum] = true;
 			this.gameService.currentTile = this.tiles[tileNum];
 		}
 		this.checkTile.emit(this.tiles[tileNum]);

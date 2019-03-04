@@ -44,6 +44,6 @@ export class CardsComponent implements OnInit, AfterViewInit {
 		const card = this.decks[deckNum][0];
 		this.gameService.currentCard = card;
 		this.decks[deckNum].shift();
-		this.discards[deckNum].unshift(card);
+		// this.discards[deckNum].unshift(card);
 	}
 }

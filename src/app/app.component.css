@@ -28,4 +28,16 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     transition: transform 0.8s ease-in-out; }
 
+hotm-player.player0 {
+  grid-area: player0; }
+
+hotm-player.player1 {
+  grid-area: player1; }
+
+hotm-player.player2 {
+  grid-area: player2; }
+
+hotm-player.player3 {
+  grid-area: player3; }
+
 /*# sourceMappingURL=app.component.css.map */

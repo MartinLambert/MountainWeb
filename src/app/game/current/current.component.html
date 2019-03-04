@@ -20,7 +20,7 @@
 	</div>
 	<div *ngIf="gameService.turnStep === 2">
 		<button *ngIf="!card" (click)="drawCard.emit(1)">Draw a Card</button>
-		<div *ngIf="card">
+		<div *ngIf="card" class="currentCard">
 			<hotm-card [card]="card"></hotm-card>
 		</div>
 	</div>

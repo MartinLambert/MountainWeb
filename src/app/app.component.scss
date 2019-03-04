@@ -1,3 +1,5 @@
+@import "../variables";
+
 :host {
 	display: grid;
 	grid-template:
@@ -32,5 +34,10 @@
 		border: 1px solid darkolivegreen;
 		box-shadow: 0 0 3px rgba(0,0,0,0.5);
 		transition: transform 0.8s ease-in-out;
+	}
+}
+@for $playerNum from 1 through length($players) {
+	hotm-player.player#{$playerNum - 1} {
+		grid-area: player#{$playerNum - 1};
 	}
 }

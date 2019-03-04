@@ -63,12 +63,6 @@ div.tile {
 	@for $playerNum from 1 through length($players) {
 		&:nth-of-type(#{$playerNum}) { background-color: #{nth($players, $playerNum)}; }
 	}
-	&.pulse {
-		animation-name: pulse_animation;
-		animation-duration: 1s;
-		animation-iteration-count: infinite;
-		animation-timing-function: linear;
-	}
 }
 .tilePiles {
 	position: absolute;
@@ -100,22 +94,22 @@ div.tile {
 			content: '';
 			display: block;
 			position: absolute;
-			right: -8px;
-			top: -2px;
+			right: -6px;
+			top: 0;
 			width: 0;
 			height: 0;
-			border: 4px solid #666;
+			border: 3px solid #666;
 			border-color: transparent transparent #666 #666;
 		}
 		&:after {
 			content: '';
 			display: block;
 			position: absolute;
-			bottom: -8px;
-			left: -2px;
+			bottom: -6px;
+			left: 0;
 			width: 0;
 			height: 0;
-			border: 4px solid #666;
+			border: 3px solid #666;
 			border-color: #666 #666 transparent transparent;
 		}
 		h6 {

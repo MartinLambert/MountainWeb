@@ -41,7 +41,7 @@ export const CARDS: Card[][] = [[
 		id: 2,
 		level: 0,
 		cardType:  CardType.starter,
-		cardName: 'Vest... with Pockets!',
+		cardName: 'Fashionable Vest',
 		cardImg:  '',
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },

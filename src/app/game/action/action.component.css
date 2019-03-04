@@ -1,0 +1,25 @@
+:host {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  bottom: 1em;
+  left: 1em;
+  display: grid;
+  grid-template-rows: 3fr 1fr 2fr;
+  background-color: lightslategrey;
+  border: 1px solid darkslategrey;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  z-index: 10; }
+  :host .actions {
+    display: grid;
+    justify-items: center; }
+    :host .actions h1 {
+      margin: 0; }
+    :host .actions p {
+      text-align: center; }
+      :host .actions p button {
+        font-size: 2em; }
+  :host hotm-player {
+    align-self: center; }
+
+/*# sourceMappingURL=action.component.css.map */

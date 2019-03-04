@@ -6,7 +6,7 @@
 		height: 100%;
 		&>div {
 			height: calc(100% - 4em);
-			&>div { height: 100% }
+			&>.currentCard { height: 100% }
 		}
 	}
 }

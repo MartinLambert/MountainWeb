@@ -13,7 +13,8 @@ export class Player {
 	headshot:         string;
 	avatar:           string;
 	avatarStyle:      { top: string, left: string };
-	stats:            Stats;
+	nativeStats:      Stats;
+	calculatedStats:  Stats;
 	displayStats:     DisplayStats;
 	movement:         number;
 	location:         number;
