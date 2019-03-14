@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Card, CardType, GemType} from '../cards/card';
 import {Player} from '../player/player';
+import {PlayerComponent} from '../player/player.component';
 
 @Component({
 	selector: 'hotm-action',
@@ -13,11 +14,12 @@ export class ActionComponent implements OnInit {
 	@Input() player: Player;
 	@Input() playerNum: number;
 	@Output() useCard = new EventEmitter<Card>();
+	@ViewChild(PlayerComponent) playerComp;
 	cardType = CardType;
-	gemType = GemType;
+	// gemType = GemType;
 	cardStatsString: string;
 	playerStatsString = 'Your ';
-	cardRollString: string;
+	cardRollString = '​';
 	playerRollString = 'Your Roll: ';
 	cardTotal = 0;
 	playerTotal = 0;
@@ -26,6 +28,7 @@ export class ActionComponent implements OnInit {
 	cardRollModifier = 0;
 	playerRollModifier = 0;
 	newItem = false;
+	playerWin = false;
 
 	constructor() {
 	}
@@ -39,7 +42,7 @@ export class ActionComponent implements OnInit {
 		const modifiers = {
 			vsEnemies: 0,
 			vsTraps:   0,
-			allRolls:  0,
+			allRolls:  3,
 			enBrains:  0,
 			enBrawn:   0,
 			enBravado: 0,
@@ -120,9 +123,23 @@ export class ActionComponent implements OnInit {
 		this.playerRollString += this.playerRoll;
 		if (this.playerRollModifier > 0) this.playerRollString += ' + ' + this.playerRollModifier;
 		else if (this.playerRollModifier < 0) this.playerRollString += ' − ' + Math.abs(this.playerRollModifier);
+		this.playerWin = (this.playerTotal + this.playerRoll + this.playerRollModifier) >= (this.cardTotal + this.cardRoll + this.cardRollModifier);
 	}
 
 	dieRoll(): number {
 		return Math.floor(Math.random() * 6) + 1;
+	}
+
+	lostFight(): void {
+		this.playerComp.gainWound();
+		this.useCard.emit(this.card);
+	}
+
+	takeItem(): void {
+		this.newItem = true;
+	}
+	saveForXP(): void {
+		this.playerComp.gainXP();
+		this.useCard.emit(this.card);
 	}
 }

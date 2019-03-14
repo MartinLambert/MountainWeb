@@ -46,4 +46,8 @@ export class CardsComponent implements OnInit, AfterViewInit {
 		this.decks[deckNum].shift();
 		// this.discards[deckNum].unshift(card);
 	}
+
+	discardCard(card: Card): void {
+		this.discards[card.level].push(card);
+	}
 }

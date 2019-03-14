@@ -54,8 +54,8 @@ div.tile {
 .avatar {
   position: absolute;
   z-index: 10;
-  width: 1.75em;
-  height: 1.75em;
+  width: 1.75rem;
+  height: 1.75rem;
   margin: 0;
   border: 1px solid dimgrey;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 3px rgba(255, 255, 255, 0.5);
@@ -71,29 +71,29 @@ div.tile {
 
 .tilePiles {
   position: absolute;
-  top: 50%;
+  top: 60%;
   right: 0;
   display: flex;
   align-items: center;
   justify-content: center; }
   .tilePiles .emptyTiles {
-    width: 35%;
+    width: 25%;
     height: 0;
     margin-left: 1em;
-    padding-bottom: 35%;
+    padding-bottom: 25%;
     border: 2px dashed #333;
     background-color: rgba(248, 248, 255, 0.4); }
   .tilePiles .tiles {
     position: relative;
-    top: -3px;
-    left: -3px;
+    top: -5px;
+    left: -5px;
     width: 100%;
     height: 0;
     padding-bottom: 100%;
     background-color: ghostwhite;
     display: flex;
     justify-content: center;
-    box-shadow: 6px 6px 0 #666, 0 0 3px rgba(0, 0, 0, 0.5), 6px 6px 3px rgba(0, 0, 0, 0.5); }
+    box-shadow: 6px 6px 0 #475927, 0 0 3px rgba(0, 0, 0, 0.5), 6px 6px 3px rgba(0, 0, 0, 0.5); }
     .tilePiles .tiles:before {
       content: '';
       display: block;
@@ -102,8 +102,8 @@ div.tile {
       top: 0;
       width: 0;
       height: 0;
-      border: 3px solid #666;
-      border-color: transparent transparent #666 #666; }
+      border: 3px solid;
+      border-color: transparent transparent #475927 #475927; }
     .tilePiles .tiles:after {
       content: '';
       display: block;
@@ -112,11 +112,11 @@ div.tile {
       left: 0;
       width: 0;
       height: 0;
-      border: 3px solid #666;
-      border-color: #666 #666 transparent transparent; }
+      border: 3px solid;
+      border-color: #475927 #475927 transparent transparent; }
     .tilePiles .tiles h6 {
-      font-size: 4vh;
-      margin: 25%; }
+      font-size: 2rem;
+      margin: 30%; }
   .tilePiles .discard {
     width: 100%;
     height: 0;

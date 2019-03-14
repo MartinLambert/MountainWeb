@@ -1,6 +1,6 @@
 <div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed}">
 	<div class="wounds">
-		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}" (click)="gainWound()">
+		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}">
 			<p>{{ wound.cardName }}</p><p>Wound</p>
 		</div>
 	</div>
@@ -8,7 +8,7 @@
 		<img src="assets/characters/{{ player.headshot }}">
 		<h3>{{ player.name }}</h3>
 	</div>
-	<div>
+	<div class="charText">
 		<p>{{ player.description }}</p>
 		<p><strong>{{ player.powerName }}</strong><br>
 		{{ player.powerDescription }}</p>
@@ -19,6 +19,7 @@
 			<dt [innerHTML]="player.displayStats.Brawn"  ></dt><dd>Brawn</dd>
 			<dt [innerHTML]="player.displayStats.Bravado"></dt><dd>Bravado</dd>
 		</dl>
+		<div *ngIf="player.XP.length" class="XP" hotmCardRatio>XP</div>
 	</div>
 	<div class="items">
 		<div *ngFor="let item of player.items; let num = index" class="{{ item === blank ? 'nocard' : 'card' }}" (click)="gainItem(num)">

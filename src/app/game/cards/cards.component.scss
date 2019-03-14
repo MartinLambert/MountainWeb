@@ -5,7 +5,7 @@
 	align-items: center;
 	justify-items: center;
 	width: 100%;
-	height: 50%;
+	height: 60%;
 	&>div {
 		display: flex;
 		width: 100%;
@@ -15,10 +15,12 @@
 	}
 }
 .deck {
-	margin: -2px;
+	position: relative;
+	top: -7px;
+	left: -7px;
 	width: 100%;
 	height: 100%;
-	border-radius: 5px;
+	border-radius: 4.5%/3.25%;
 	border: 1px solid darkolivegreen;
 	background: ghostwhite;
 	box-shadow: 6px 6px 0 darken(darkolivegreen, 5%), 0 0 3px rgba(0,0,0,0.5), 6px 6px 3px rgba(0,0,0,0.5);
@@ -26,13 +28,35 @@
 	align-items: center;
 	justify-content: center;
 	font: 6vh 'Luminari', fantasy;
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		right: -6px;
+		top: 0;
+		width: 0;
+		height: 0;
+		border: 3px solid;
+		border-color: transparent transparent darken(darkolivegreen, 5%) darken(darkolivegreen, 5%);
+	}
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		bottom: -6px;
+		left: 0;
+		width: 0;
+		height: 0;
+		border: 3px solid;
+		border-color: darken(darkolivegreen, 5%) darken(darkolivegreen, 5%) transparent transparent;
+	}
 }
 .emptyCards {
 	position: relative;
 	margin-left: 1em;
 	width: 100%;
 	height: 100%;
-	border-radius: 10px;
+	border-radius: 4.5%/3.25%;
 	border: 2px dashed darken(darkolivegreen, 10%);
 	background: ghostwhite;
 }

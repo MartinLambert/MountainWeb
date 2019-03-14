@@ -11,13 +11,18 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   z-index: 10; }
   :host .actions {
-    display: grid;
-    justify-items: center; }
-    :host .actions h1 {
-      margin: 0; }
-    :host .actions p {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
+    :host .actions strong {
+      display: block;
+      margin: 0;
+      font-size: 2em;
+      text-align: right; }
+    :host .actions p, :host .actions div:nth-child(2) strong {
       text-align: center; }
-      :host .actions p button {
+      :host .actions p button, :host .actions div:nth-child(2) strong button {
+        margin: 0.25em;
         font-size: 2em; }
   :host hotm-player {
     align-self: center; }

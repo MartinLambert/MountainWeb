@@ -12,16 +12,20 @@
 <div *ngIf="gameService.round > 0">
 	<h1>Round {{ gameService.round }}: {{ player.shortName }}’s Turn</h1>
 	<div *ngIf="gameService.turnStep === 0">
-		<button *ngIf="!tiles.length" (click)="drawTile.emit(1)">Draw a Tile</button>
+		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(1)">Draw a Tile</button></p>
 		<div *ngIf="tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
 	</div>
 	<div *ngIf="gameService.turnStep === 1">
 		<h3>Move</h3>
 	</div>
 	<div *ngIf="gameService.turnStep === 2">
-		<button *ngIf="!card" (click)="drawCard.emit(1)">Draw a Card</button>
+		<p><button *ngIf="!card" (click)="drawCard.emit(1)">Draw a Card</button></p>
 		<div *ngIf="card" class="currentCard">
 			<hotm-card [card]="card"></hotm-card>
 		</div>
+	</div>
+	<div *ngIf="gameService.turnStep === 3">
+		<p *ngIf="player.XP.length"><button (click)="">Use XP</button></p>
+		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>
 </div>

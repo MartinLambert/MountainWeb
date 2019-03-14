@@ -1,9 +1,12 @@
 :host {
+  position: relative;
   display: grid;
   grid-template: 'player1 player1 player3 player3' 20vh 'current  board   board   decks'  60vh 'player2 player2 player0 player0' 20vh /  1fr    auto    auto     1fr;
-  background-color: #897;
   width: 100%;
-  height: 100%; }
+  min-width: 1200px;
+  max-width: 1800px;
+  height: 100%;
+  margin: 0 auto; }
 
 #current {
   grid-area: current;

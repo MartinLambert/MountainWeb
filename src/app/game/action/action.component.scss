@@ -12,12 +12,21 @@
 	z-index: 10;
 
 	.actions {
-		display: grid;
-		justify-items: center;
-		h1 { margin: 0 }
-		p {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		strong {
+			display: block;
+			margin: 0;
+			font-size: 2em;
+			text-align: right;
+		}
+		p, div:nth-child(2) strong {
 			text-align: center;
-			button { font-size: 2em }
+			button {
+				margin: 0.25em;
+				font-size: 2em;
+			}
 		}
 	}
 

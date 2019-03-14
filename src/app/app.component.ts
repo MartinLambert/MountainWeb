@@ -56,8 +56,10 @@ export class AppComponent implements OnInit {
 			this.currentCards.splice(index, 1);
 		if (this.currentCards.length)
 			this.activeCard = this.currentCards[0];
-		else
+		else {
 			this.activeCard = null;
+			this.gameService.turnStep = 3;
+		}
 	}
 
 	tilePlaced(): void {

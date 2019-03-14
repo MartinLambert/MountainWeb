@@ -20,7 +20,8 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		campLocation: 0,
 		wounds: [],
-		items: []
+		items: [],
+		XP: []
 	},
 	{
 		id: 0,
@@ -41,7 +42,8 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		campLocation: 0,
 		wounds: [],
-		items: []
+		items: [],
+		XP: []
 	},
 	{
 		id: 0,
@@ -62,7 +64,8 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		campLocation: 0,
 		wounds: [],
-		items: []
+		items: [],
+		XP: []
 	},
 	{
 		id: 0,
@@ -83,6 +86,7 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		campLocation: 0,
 		wounds: [],
-		items: []
+		items: [],
+		XP: []
 	}
 ];

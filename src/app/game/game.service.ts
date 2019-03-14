@@ -47,6 +47,7 @@ export class GameService {
 	}
 
 	set turnStep(value: number) {
+		console.log(`setting turnStep to ${value}`);
 		this._turnStep = value;
 	}
 

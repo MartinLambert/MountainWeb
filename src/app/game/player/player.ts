@@ -21,4 +21,5 @@ export class Player {
 	campLocation:     number;
 	wounds:           Card[];
 	items:            Card[];
+	XP:               Card[];
 }

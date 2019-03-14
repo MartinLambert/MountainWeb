@@ -32,7 +32,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 		this.players.forEach(player => player.avatarStyle = this.avatarLocation(player));
 		this.tileStyle.width = document.getElementsByTagName('hotm-cards')[0].clientWidth + 'px';
-		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight + 'px';
+		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight / 2 + 'px';
 	}
 
 	private shuffle(pile: Tile[]): Tile[] {

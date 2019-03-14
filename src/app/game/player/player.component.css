@@ -6,7 +6,7 @@
   :host.player0 .charSheet {
     border: 1px solid darkviolet;
     background-color: #f2d3ff; }
-    :host.player0 .charSheet .avatar img {
+    :host.player0 .charSheet .avatar img, :host.player0 .charSheet .XP {
       border: 1px solid darkviolet; }
     :host.player0 .charSheet .wounds p, :host.player0 .charSheet .items > div > p {
       border: 1px solid darkviolet;
@@ -25,7 +25,7 @@
   :host.player1 .charSheet {
     border: 1px solid #15C;
     background-color: #e0eafc; }
-    :host.player1 .charSheet .avatar img {
+    :host.player1 .charSheet .avatar img, :host.player1 .charSheet .XP {
       border: 1px solid #15C; }
     :host.player1 .charSheet .wounds p, :host.player1 .charSheet .items > div > p {
       border: 1px solid #15C;
@@ -44,7 +44,7 @@
   :host.player2 .charSheet {
     border: 1px solid darkgoldenrod;
     background-color: #fcecc6; }
-    :host.player2 .charSheet .avatar img {
+    :host.player2 .charSheet .avatar img, :host.player2 .charSheet .XP {
       border: 1px solid darkgoldenrod; }
     :host.player2 .charSheet .wounds p, :host.player2 .charSheet .items > div > p {
       border: 1px solid darkgoldenrod;
@@ -63,7 +63,7 @@
   :host.player3 .charSheet {
     border: 1px solid firebrick;
     background-color: #f8dbdb; }
-    :host.player3 .charSheet .avatar img {
+    :host.player3 .charSheet .avatar img, :host.player3 .charSheet .XP {
       border: 1px solid firebrick; }
     :host.player3 .charSheet .wounds p, :host.player3 .charSheet .items > div > p {
       border: 1px solid firebrick;
@@ -103,6 +103,14 @@
       height: 3em; }
     .charSheet .avatar h3 {
       padding-left: 0.5em; }
+  .charSheet .XP {
+    display: grid;
+    place-content: center;
+    font-size: 2rem;
+    border-radius: 4.5%/3.25%;
+    background-color: ghostwhite;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8); }
   .charSheet .wounds, .charSheet .items {
     display: flex;
     justify-content: space-around;

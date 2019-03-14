@@ -1,15 +1,31 @@
 <hotm-card [card]="card"></hotm-card>
 <div class="actions" *ngIf="card.cardType !== cardType.event">
-	<h1>{{ cardStatsString }} {{ cardTotal }}</h1>
-	<h1 [ngClass]="{'invisible': !cardRoll}">{{ cardRollString }}</h1>
-	<p *ngIf="!playerRoll"><button *ngIf="card.cardType === cardType.enemy" (click)="fightCard()">Fight Enemy</button><button *ngIf="card.cardType === cardType.trap" (click)="fightCard()">Disarm Trap</button></p>
-	<p *ngIf="(playerTotal + playerRoll + playerRollModifier) < (cardTotal + cardRoll + cardRollModifier)"><button (click)="useCard.emit(card)">You Lose!</button></p>
-	<p *ngIf="(playerTotal + playerRoll + playerRollModifier) >= (cardTotal + cardRoll + cardRollModifier)"><button (click)="useCard.emit(card)">You Win!</button></p>
-	<h1>{{ playerStatsString }} {{ playerTotal }}</h1>
-	<h1 [ngClass]="{'invisible': !playerRoll}">{{ playerRollString }}</h1>
+	<div>
+		<strong>{{ cardStatsString }} {{ cardTotal }}</strong>
+		<strong [ngClass]="{'hidden': !cardRoll}">{{ cardRollString }}</strong>
+	</div>
+	<div>
+		<p *ngIf="!playerRoll">
+			<button *ngIf="card.cardType === cardType.enemy" (click)="fightCard()">Fight Enemy</button>
+			<button *ngIf="card.cardType === cardType.trap" (click)="fightCard()">Disarm Trap</button>
+		</p>
+		<p *ngIf="playerRoll && !playerWin">
+			<button (click)="lostFight()">You Lose!</button>
+		</p>
+		<p *ngIf="playerRoll && playerWin">
+			<!--<button (click)=" wonFight()">You Win!</button>-->
+			<strong>You Win!</strong>
+			<button (click)="takeItem()">Take Item</button>
+			<button (click)="saveForXP()">Save for XP</button>
+		</p>
+	</div>
+	<div>
+		<strong>{{ playerStatsString }} {{ playerTotal }}</strong>
+		<strong [ngClass]="{'hidden': !playerRoll}">{{ playerRollString }}</strong>
+	</div>
 </div>
 <div class="actions" *ngIf="card.cardType === cardType.event">
-	<h1>Events are coming soon...</h1>
+	<strong>Events are coming soon...</strong>
 	<button (click)="useCard.emit(card)">Close</button>
 </div>
-<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [ngClass]="{'newItem': newItem}"></hotm-player>
+<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [ngClass]="{'newItem': newItem}" [gainingItem]="newItem"></hotm-player>
