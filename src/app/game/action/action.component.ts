@@ -42,7 +42,7 @@ export class ActionComponent implements OnInit {
 		const modifiers = {
 			vsEnemies: 0,
 			vsTraps:   0,
-			allRolls:  3,
+			allRolls:  10,
 			enBrains:  0,
 			enBrawn:   0,
 			enBravado: 0,

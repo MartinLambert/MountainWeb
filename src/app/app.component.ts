@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 
-import { Tile           } from './game/board/tile';
-import { Card           } from './game/cards/card';
-import { Player         } from './game/player/player';
-import { GameService    } from './game/game.service';
-import { BoardComponent } from './game/board/board.component';
-import { CardsComponent } from './game/cards/cards.component';
+import { Tile            } from './game/board/tile';
+import { Card            } from './game/cards/card';
+import { Player          } from './game/player/player';
+import { GameService     } from './game/game.service';
+import { BoardComponent  } from './game/board/board.component';
+import { CardsComponent  } from './game/cards/cards.component';
+import { PlayerComponent } from './game/player/player.component';
 
 @Component({
 	selector: 'hotm-root',
@@ -16,10 +17,12 @@ export class AppComponent implements OnInit {
 
 	@ViewChild(BoardComponent) board;
 	@ViewChild(CardsComponent) cards;
+	@ViewChildren(PlayerComponent) players: QueryList<PlayerComponent>;
 	currentTiles: Tile[] = [];
 	currentCards: Card[] = [];
-	activeCard: Card;
+	activeCard:   Card;
 	characters:   Player[];
+	usingXP = false;
 
 	constructor(public gameService: GameService) {}
 
@@ -61,6 +64,9 @@ export class AppComponent implements OnInit {
 			this.gameService.turnStep = 3;
 		}
 	}
+	discardCard(card: Card): void {
+		this.cards.discardCard(card);
+	}
 
 	tilePlaced(): void {
 		if (!this.gameService.currentTile) return;
@@ -82,7 +88,13 @@ export class AppComponent implements OnInit {
 		}
 	}
 
+	usedXP(): void {
+		this.players.find(el => el.playerNum === this.gameService.currPlayer).calculateDisplayStats();
+		this.usingXP = false;
+	}
+
 	endTurn(): void {
+		this.usingXP = false;
 		this.gameService.turnStep = 0;
 		this.gameService.currPlayer++;
 	}

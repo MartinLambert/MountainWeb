@@ -49,6 +49,7 @@ section {
       align-self: center;
       justify-self: end; }
     section.cardTop .attributes {
+      flex-direction: column;
       align-self: flex-end;
       justify-self: end; }
       section.cardTop .attributes p, section.cardTop .attributes dl {

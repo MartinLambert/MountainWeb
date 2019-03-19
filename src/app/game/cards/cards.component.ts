@@ -41,13 +41,11 @@ export class CardsComponent implements OnInit, AfterViewInit {
 
 	drawCard(deckNum: number): void {
 		if ((deckNum < 0 || deckNum > 4) || !this.decks[deckNum] || !this.decks[deckNum].length) return;
-		const card = this.decks[deckNum][0];
-		this.gameService.currentCard = card;
+		this.gameService.currentCard = this.decks[deckNum][0];
 		this.decks[deckNum].shift();
-		// this.discards[deckNum].unshift(card);
 	}
 
 	discardCard(card: Card): void {
-		this.discards[card.level].push(card);
+		this.discards[card.level].unshift(card);
 	}
 }

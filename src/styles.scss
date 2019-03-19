@@ -70,8 +70,8 @@ html, body {
 			font-family: Luminari, fantasy;
 		}
 		dt, dt + dd { background-color: lightblue; }
-		dt + dd + dt, dt + dd + dt + dd { background-color: yellow; }
-		dt + dd + dt + dd + dt, dt + dd + dt + dd + dt + dd { background-color: lightpink; }
+		dt:nth-of-type(2), dt:nth-of-type(2) + dd { background-color: yellow; }
+		dt:nth-of-type(3), dt:nth-of-type(3) + dd { background-color: lightpink; }
 		.unused { background-color: ghostwhite; color: #666 }
 	}
 }

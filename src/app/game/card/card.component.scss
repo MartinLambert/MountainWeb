@@ -56,6 +56,7 @@ section {
 			justify-self: end;
 		}
 		.attributes {
+			flex-direction: column;
 			align-self: flex-end;
 			justify-self: end;
 			p, dl {

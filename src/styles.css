@@ -132,9 +132,9 @@ html, body {
       font-family: Luminari, fantasy; }
     .attributes dl dt, .attributes dl dt + dd {
       background-color: lightblue; }
-    .attributes dl dt + dd + dt, .attributes dl dt + dd + dt + dd {
+    .attributes dl dt:nth-of-type(2), .attributes dl dt:nth-of-type(2) + dd {
       background-color: yellow; }
-    .attributes dl dt + dd + dt + dd + dt, .attributes dl dt + dd + dt + dd + dt + dd {
+    .attributes dl dt:nth-of-type(3), .attributes dl dt:nth-of-type(3) + dd {
       background-color: lightpink; }
     .attributes dl .unused {
       background-color: ghostwhite;

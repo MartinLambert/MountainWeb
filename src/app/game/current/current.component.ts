@@ -18,8 +18,8 @@ export class CurrentComponent implements OnInit {
 	@Output() drawTile  = new EventEmitter<number>();
 	@Output() checkTile = new EventEmitter<Tile>();
 	@Output() drawCard  = new EventEmitter<number>();
+	@Output() useXP     = new EventEmitter();
 	@Output() endTurn   = new EventEmitter();
-	// selected = [true, false, false];
 
 	constructor(public gameService: GameService) {
 	}

@@ -1,3 +1,61 @@
-
+:host {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  bottom: 1em;
+  left: 1em;
+  display: grid;
+  grid-template-rows: 2fr 1fr 2fr;
+  background-color: lightslategrey;
+  border: 1px solid darkslategrey;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  z-index: 10; }
+  :host .cards {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly; }
+    :host .cards div {
+      display: grid;
+      place-content: center;
+      border-radius: 4.5%/3.25%;
+      border: 2px solid #333;
+      background: #EEE;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      font: 6vh 'Luminari', fantasy; }
+      :host .cards div.selected {
+        border-color: orange;
+        box-shadow: inset 0 0 0 4px orange; }
+  :host .actions {
+    display: grid;
+    place-content: center; }
+    :host .actions p {
+      display: flex;
+      justify-content: space-around; }
+      :host .actions p button {
+        font-size: 1.5rem; }
+  :host .attributes dl {
+    grid-template-columns: 1fr 2fr auto;
+    grid-gap: 0;
+    background-color: transparent;
+    border-width: 0; }
+    :host .attributes dl dt, :host .attributes dl dd {
+      font-size: 2.5rem;
+      border: 1px solid #333; }
+    :host .attributes dl dt {
+      padding: 0;
+      border-width: 1px 0 0 1px; }
+      :host .attributes dl dt button {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 0.5em; }
+    :host .attributes dl dt + dd {
+      border-width: 1px 1px 0 1px; }
+    :host .attributes dl dt:last-of-type, :host .attributes dl dt:last-of-type + dd {
+      border-bottom-width: 1px; }
+    :host .attributes dl dd + dd {
+      background-color: transparent;
+      border-width: 0;
+      font-size: 2rem;
+      font-style: italic; }
 
 /*# sourceMappingURL=xp.component.css.map */

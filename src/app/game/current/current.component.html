@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div *ngIf="gameService.turnStep === 3">
-		<p *ngIf="player.XP.length"><button (click)="">Use XP</button></p>
+		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>
 </div>

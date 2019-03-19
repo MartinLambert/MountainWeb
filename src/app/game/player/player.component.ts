@@ -61,7 +61,7 @@ export class PlayerComponent implements OnInit {
 	}
 
 	gainItem(slot: number): void {
-		if (!this.gainingItem) return;
+		if (this.gameService.round > 0 && !this.gainingItem) return;
 		const card = this.gameService.currentCard;
 		this.player.items[slot] = card;
 		this.useCard.emit(card);
