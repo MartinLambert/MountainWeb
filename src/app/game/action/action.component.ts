@@ -14,6 +14,7 @@ export class ActionComponent implements OnInit {
 	@Input() player: Player;
 	@Input() playerNum: number;
 	@Output() useCard = new EventEmitter<Card>();
+	@Output() doEvent = new EventEmitter();
 	@ViewChild(PlayerComponent) playerComp;
 	cardType = CardType;
 	// gemType = GemType;
@@ -42,7 +43,7 @@ export class ActionComponent implements OnInit {
 		const modifiers = {
 			vsEnemies: 0,
 			vsTraps:   0,
-			allRolls:  10,
+			allRolls:  0,
 			enBrains:  0,
 			enBrawn:   0,
 			enBravado: 0,
@@ -135,9 +136,6 @@ export class ActionComponent implements OnInit {
 		this.useCard.emit(this.card);
 	}
 
-	takeItem(): void {
-		this.newItem = true;
-	}
 	saveForXP(): void {
 		this.playerComp.gainXP();
 		this.useCard.emit(this.card);

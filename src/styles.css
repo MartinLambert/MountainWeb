@@ -41,16 +41,36 @@
     color: black; } }
 @keyframes player1_animation {
   0% {
-    background-color: #15C;
+    background-color: darkgoldenrod;
     color: ghostwhite; }
   50% {
-    background-color: #bad1f9;
+    background-color: #f9dfa0;
     color: black; }
   100% {
-    background-color: #15C;
+    background-color: darkgoldenrod;
     color: ghostwhite; } }
 @keyframes player1_nocard_animation {
   0% {
+    background-color: #f9dfa0;
+    color: black; }
+  50% {
+    background-color: darkgoldenrod;
+    color: ghostwhite; }
+  100% {
+    background-color: #f9dfa0;
+    color: black; } }
+@keyframes player2_animation {
+  0% {
+    background-color: #15C;
+    color: ghostwhite; }
+  50% {
+    background-color: #bad1f9;
+    color: black; }
+  100% {
+    background-color: #15C;
+    color: ghostwhite; } }
+@keyframes player2_nocard_animation {
+  0% {
     background-color: #bad1f9;
     color: black; }
   50% {
@@ -58,26 +78,6 @@
     color: ghostwhite; }
   100% {
     background-color: #bad1f9;
-    color: black; } }
-@keyframes player2_animation {
-  0% {
-    background-color: darkgoldenrod;
-    color: ghostwhite; }
-  50% {
-    background-color: #f9dfa0;
-    color: black; }
-  100% {
-    background-color: darkgoldenrod;
-    color: ghostwhite; } }
-@keyframes player2_nocard_animation {
-  0% {
-    background-color: #f9dfa0;
-    color: black; }
-  50% {
-    background-color: darkgoldenrod;
-    color: ghostwhite; }
-  100% {
-    background-color: #f9dfa0;
     color: black; } }
 @keyframes player3_animation {
   0% {

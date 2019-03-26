@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { GameService } from '../game.service';
 import { Tile        } from './tile';
 import { Player      } from '../player/player';
+import { blankTile   } from './blankTile';
 
 @Component({
 	selector: 'hotm-board',
@@ -14,10 +16,11 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	tiles: Tile[];
 	currentTile: Tile;
 	discard: Tile[] = [];
-	startLocations = [238, 17, 225, 30];
+	startLocations = [238, 225, 17, 30];
 	tileStyle = {width: '0', height: '0'};
 	@Input() players: Player[];
 	@Output() tilePlaced = new EventEmitter();
+	@Output() tileRemoved = new EventEmitter();
 
 	constructor(private gameService: GameService) {}
 
@@ -25,8 +28,10 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		this.gameService.getBoard().subscribe(board => this.spaces = board);
 		this.gameService.getTiles().subscribe(tiles => this.tiles = tiles);
 		this.tiles = this.shuffle(this.tiles);
-		for (let i = 0; i < this.players.length; i++)
+		for (let i = 0; i < this.players.length; i++) {
+			this.players[i].startLocation = this.startLocations[i];
 			this.players[i].location = this.startLocations[i];
+		}
 	}
 
 	ngAfterViewInit(): void {
@@ -47,7 +52,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		const tile = this.tiles[0];
 		this.gameService.currentTile = tile;
 		this.tiles.shift();
-		// this.discard.unshift(tile);
+		// TODO: when there are no tiles left to draw
 	}
 
 	validateTilePlacement(tile: Tile): void {
@@ -74,6 +79,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			} else if (this.spaces[i - 1].doors.east) continue;
 			this.spaces[i].valid = hasDoor;
 		}
+		// TODO: when there are no valid places to put this tile
 	}
 
 	validatePlayerMovement(distance: number, location: number): void {
@@ -89,25 +95,42 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.validatePlayerMovement(distance - 1, location -  1);
 		}
 		this.spaces[this.players[this.gameService.currPlayer].location].valid = false;
+		// TODO: when there are no valid moves to make
+	}
+
+	validateTileRemoval(): void {
+		for (let i = 17; i < this.spaces.length - 17; i++) {
+			if (this.spaces[i].locked) continue;
+			if (this.players.filter(player => player.location === i).length) continue;
+			if (this.spaces[i].visible) this.spaces[i].valid = true;
+		}
+		// TODO: when there are no valid tiles to remove
 	}
 
 	clearValidity(): void {
-		for (let i = 17; i < this.spaces.length - 17; i++)
-			this.spaces[i].valid = false;
+		this.spaces.forEach(space => space.valid = false);
 	}
 
 	selectSpace(space: Tile, currIndex: number): void {
-		if (this.gameService.turnStep === 0 && this.gameService.currentTile && space.valid) {
+		if (!space.valid) return;
+		if (this.gameService.currentTile) {
 			const currLevel = space.level;
 			this.spaces[currIndex] = this.gameService.currentTile;
 			this.spaces[currIndex].level = currLevel;
 			this.clearValidity();
 			this.tilePlaced.emit();
-		} else if (this.gameService.turnStep === 1 && space.valid) {
+		} else if (this.gameService.turnStep === 1) {
 			this.players[this.gameService.currPlayer].location = currIndex;
 			this.players[this.gameService.currPlayer].avatarStyle = this.avatarLocation(this.players[this.gameService.currPlayer]);
 			this.clearValidity();
 			this.gameService.turnStep = 2;
+		} else if (this.gameService.turnStep === 2) {
+			this.clearValidity();
+			this.discard.unshift(space);
+			const level = this.spaces[currIndex].level;
+			this.spaces[currIndex] = blankTile;
+			this.spaces[currIndex].level = level;
+			this.tileRemoved.emit();
 		}
 	}
 

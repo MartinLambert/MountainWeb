@@ -1,4 +1,4 @@
-<div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed}">
+<div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed, 'newItem': gainingItem}">
 	<div class="wounds">
 		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}">
 			<p>{{ wound.cardName }}</p><p>Wound</p>

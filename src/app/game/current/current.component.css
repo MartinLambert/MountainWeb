@@ -5,11 +5,13 @@
     width: 100%;
     height: 100%; }
     :host > div > div {
+      display: flex;
+      flex-direction: column;
       height: calc(100% - 4em); }
       :host > div > div > .currentCard {
-        height: 100%; }
+        height: 60%; }
 
-h1, h3 {
+h1, h2, h3 {
   margin: 0;
   text-align: center; }
 

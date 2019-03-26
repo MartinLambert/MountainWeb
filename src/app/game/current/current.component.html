@@ -19,12 +19,21 @@
 		<h3>Move</h3>
 	</div>
 	<div *ngIf="gameService.turnStep === 2">
-		<p><button *ngIf="!card" (click)="drawCard.emit(1)">Draw a Card</button></p>
+		<div *ngIf="gameService.midTurn && tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
+		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="dieValue = dieRoll()">Roll a Die</button></p>
+		<div *ngIf="gameService.midTurn && needToRoll && dieValue">
+			<h1>{{ dieValue }}</h1>
+			<h2 *ngIf="dieValue === 1 || dieValue === 2">Gain a Wound</h2>
+			<h2 *ngIf="dieValue === 3 || dieValue === 4">Nothing Happens</h2>
+			<h2 *ngIf="dieValue === 5 || dieValue === 6">Heal a Wound</h2>
+			<p><button (click)="rolledDie.emit(dieValue); dieValue = 0">Continue</button></p>
+		</div>
+		<p *ngIf="!card"><button (click)="drawCard.emit(1)">Draw a Card</button></p>
 		<div *ngIf="card" class="currentCard">
 			<hotm-card [card]="card"></hotm-card>
 		</div>
 	</div>
-	<div *ngIf="gameService.turnStep === 3">
+	<div *ngIf="gameService.turnStep === 3 && !gameService.midTurn">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>

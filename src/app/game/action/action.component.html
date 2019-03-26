@@ -14,8 +14,8 @@
 		</p>
 		<p *ngIf="playerRoll && playerWin">
 			<strong>You Win!</strong>
-			<button (click)="takeItem()">Take Item</button>
-			<button (click)="saveForXP()">Save for XP</button>
+			<button *ngIf="!newItem" (click)="newItem = true">Take Item</button>
+			<button *ngIf="!newItem" (click)="saveForXP()">Save for XP</button>
 		</p>
 	</div>
 	<div>
@@ -24,7 +24,6 @@
 	</div>
 </div>
 <div class="actions" *ngIf="card.cardType === cardType.event">
-	<strong>Events are coming soon...</strong>
-	<button (click)="useCard.emit(card)">Close</button>
+	<p><button (click)="doEvent.emit()">Close</button></p>
 </div>
-<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [ngClass]="{'newItem': newItem}" [gainingItem]="newItem"></hotm-player>
+<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [gainingItem]="newItem" (endTurn)="useCard.emit(card)"></hotm-player>

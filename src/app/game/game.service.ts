@@ -19,6 +19,7 @@ export class GameService {
 	private _round = 1; // should start at -1
 	private _currentTile: Tile;
 	private _currentCard: Card;
+	private _midTurn = false; // rotating through characters during a turn instead of between turns, e.g. with an event
 
 	constructor() {}
 
@@ -36,7 +37,7 @@ export class GameService {
 
 	set currPlayer(value: number) {
 		if (value >= this.numPlayers) {
-			this.round++;
+			if (!this.midTurn) this.round++;
 			value = 0;
 		}
 		this._currPlayer = value;
@@ -74,6 +75,14 @@ export class GameService {
 		this._currentCard = value;
 	}
 
+	get midTurn(): boolean {
+		return this._midTurn;
+	}
+
+	set midTurn(value: boolean) {
+		this._midTurn = value;
+	}
+
 	getBoard(): Observable<Tile[]> {
 		return of(SPACES);
 	}
@@ -88,9 +97,5 @@ export class GameService {
 
 	getCharacters(): Observable<Player[]> {
 		return of(CHARACTERS);
-	}
-
-	drawCard(newCard: Card) {
-		// this.currentCardSource.next(newCard);
 	}
 }

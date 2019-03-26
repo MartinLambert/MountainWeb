@@ -16,7 +16,7 @@ export class PlayerComponent implements OnInit {
 	@Input() playerNum: number;
 	@Input() zoomed: boolean;
 	@Input() gainingItem: boolean;
-	@Output() useCard = new EventEmitter<Card>();
+	// @Output() useCard = new EventEmitter<Card>();
 	@Output() endTurn = new EventEmitter();
 	blank = blankCard;
 	gemType = GemType;
@@ -31,8 +31,8 @@ export class PlayerComponent implements OnInit {
 		if (!this.player.items.length)
 			this.player.items = [blankCard, blankCard, blankCard, blankCard];
 
-		if (this.player.playerPower === 1) this.player.items.push(blankCard); // playerPower 1 grants an extra item slot
-		if (this.player.playerPower === 2) this.player.wounds.push(blankCard); // playerPower 2 grants an extra wound slot
+		if (this.player.playerPower === 1 && this.player.items.length < 5) this.player.items.push(blankCard); // playerPower 1 grants an extra item slot
+		if (this.player.playerPower === 2 && this.player.wounds.length < 4) this.player.wounds.push(blankCard); // playerPower 2 grants an extra wound slot
 	}
 
 	gainWound(): void {
@@ -41,7 +41,6 @@ export class PlayerComponent implements OnInit {
 		for (let i = 0; i < this.player.wounds.length; i++) {
 			if (this.player.wounds[i] === this.blank) {
 				this.player.wounds[i] = card;
-				this.useCard.emit(card);
 				break;
 			} else numWounds++;
 		}
@@ -64,7 +63,6 @@ export class PlayerComponent implements OnInit {
 		if (this.gameService.round > 0 && !this.gainingItem) return;
 		const card = this.gameService.currentCard;
 		this.player.items[slot] = card;
-		this.useCard.emit(card);
 		this.calculateDisplayStats();
 		this.endTurn.emit();
 	}

@@ -8,6 +8,6 @@
 		<div *ngIf="tiles.length" class="tiles" title="{{ tiles.length }} tile{{ tiles.length === 1 ? '' : 's' }}"><h6>Tiles</h6></div>
 	</div>
 	<div class="emptyTiles">
-		<div *ngIf="discard.length" class="discard"><span [ngStyle]="{'backgroundImage': discard[0].img, 'transform': 'rotate(' + discard[0].rotation + 'turn)'}"></span></div>
+		<div *ngIf="discard.length" class="discard" [ngClass]="{'one': discard.length === 1, 'some': (discard.length > 1 && discard.length < 5), 'many': discard.length > 4}"><span [ngStyle]="{'backgroundImage': discard[0].img}"></span></div>
 	</div>
 </div>

@@ -15,51 +15,51 @@
       background-color: darkviolet; }
     :host.player0 .charSheet .wounds .card > p:first-child {
       background-color: ghostwhite; }
-  :host.player0.newItem .charSheet .items > div > p:first-child {
-    animation-name: player0_animation;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; }
-  :host.player0.newItem .charSheet .items > div.nocard > p:first-child {
-    animation-name: player0_nocard_animation; }
+    :host.player0 .charSheet.newItem .items > div > p:first-child {
+      animation-name: player0_animation;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear; }
+    :host.player0 .charSheet.newItem .items > div.nocard > p:first-child {
+      animation-name: player0_nocard_animation; }
   :host.player1 .charSheet {
-    border: 1px solid #15C;
-    background-color: #e0eafc; }
-    :host.player1 .charSheet .avatar img, :host.player1 .charSheet .XP {
-      border: 1px solid #15C; }
-    :host.player1 .charSheet .wounds p, :host.player1 .charSheet .items > div > p {
-      border: 1px solid #15C;
-      background-color: #bad1f9; }
-    :host.player1 .charSheet .wounds .card > p + p, :host.player1 .charSheet .items .card > p:first-child {
-      background-color: #15C; }
-    :host.player1 .charSheet .wounds .card > p:first-child {
-      background-color: ghostwhite; }
-  :host.player1.newItem .charSheet .items > div > p:first-child {
-    animation-name: player1_animation;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; }
-  :host.player1.newItem .charSheet .items > div.nocard > p:first-child {
-    animation-name: player1_nocard_animation; }
-  :host.player2 .charSheet {
     border: 1px solid darkgoldenrod;
     background-color: #fcecc6; }
-    :host.player2 .charSheet .avatar img, :host.player2 .charSheet .XP {
+    :host.player1 .charSheet .avatar img, :host.player1 .charSheet .XP {
       border: 1px solid darkgoldenrod; }
-    :host.player2 .charSheet .wounds p, :host.player2 .charSheet .items > div > p {
+    :host.player1 .charSheet .wounds p, :host.player1 .charSheet .items > div > p {
       border: 1px solid darkgoldenrod;
       background-color: #f9dfa0; }
-    :host.player2 .charSheet .wounds .card > p + p, :host.player2 .charSheet .items .card > p:first-child {
+    :host.player1 .charSheet .wounds .card > p + p, :host.player1 .charSheet .items .card > p:first-child {
       background-color: darkgoldenrod; }
+    :host.player1 .charSheet .wounds .card > p:first-child {
+      background-color: ghostwhite; }
+    :host.player1 .charSheet.newItem .items > div > p:first-child {
+      animation-name: player1_animation;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear; }
+    :host.player1 .charSheet.newItem .items > div.nocard > p:first-child {
+      animation-name: player1_nocard_animation; }
+  :host.player2 .charSheet {
+    border: 1px solid #15C;
+    background-color: #e0eafc; }
+    :host.player2 .charSheet .avatar img, :host.player2 .charSheet .XP {
+      border: 1px solid #15C; }
+    :host.player2 .charSheet .wounds p, :host.player2 .charSheet .items > div > p {
+      border: 1px solid #15C;
+      background-color: #bad1f9; }
+    :host.player2 .charSheet .wounds .card > p + p, :host.player2 .charSheet .items .card > p:first-child {
+      background-color: #15C; }
     :host.player2 .charSheet .wounds .card > p:first-child {
       background-color: ghostwhite; }
-  :host.player2.newItem .charSheet .items > div > p:first-child {
-    animation-name: player2_animation;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; }
-  :host.player2.newItem .charSheet .items > div.nocard > p:first-child {
-    animation-name: player2_nocard_animation; }
+    :host.player2 .charSheet.newItem .items > div > p:first-child {
+      animation-name: player2_animation;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear; }
+    :host.player2 .charSheet.newItem .items > div.nocard > p:first-child {
+      animation-name: player2_nocard_animation; }
   :host.player3 .charSheet {
     border: 1px solid firebrick;
     background-color: #f8dbdb; }
@@ -72,13 +72,13 @@
       background-color: firebrick; }
     :host.player3 .charSheet .wounds .card > p:first-child {
       background-color: ghostwhite; }
-  :host.player3.newItem .charSheet .items > div > p:first-child {
-    animation-name: player3_animation;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; }
-  :host.player3.newItem .charSheet .items > div.nocard > p:first-child {
-    animation-name: player3_nocard_animation; }
+    :host.player3 .charSheet.newItem .items > div > p:first-child {
+      animation-name: player3_animation;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear; }
+    :host.player3 .charSheet.newItem .items > div.nocard > p:first-child {
+      animation-name: player3_nocard_animation; }
   :host.myTurn {
     opacity: 1;
     transform: scale(1); }

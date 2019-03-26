@@ -17,15 +17,15 @@
 				}
 				.wounds .card>p+p, .items .card>p:first-child { background-color: nth($players, $playerNum) }
 				.wounds .card>p:first-child { background-color: ghostwhite }
-			}
-			&.newItem .charSheet .items>div>p:first-child {
-				animation-name: player#{$playerNum - 1}_animation;
-				animation-duration: 1s;
-				animation-iteration-count: infinite;
-				animation-timing-function: linear;
-			}
-			&.newItem .charSheet .items>div.nocard>p:first-child {
-				animation-name: player#{$playerNum - 1}_nocard_animation;
+				&.newItem .items>div>p:first-child {
+					animation-name: player#{$playerNum - 1}_animation;
+					animation-duration: 1s;
+					animation-iteration-count: infinite;
+					animation-timing-function: linear;
+				}
+				&.newItem .items>div.nocard>p:first-child {
+					animation-name: player#{$playerNum - 1}_nocard_animation;
+				}
 			}
 		}
 	}

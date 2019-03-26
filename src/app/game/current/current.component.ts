@@ -15,11 +15,14 @@ export class CurrentComponent implements OnInit {
 	@Input() player: Player;
 	@Input() card: Card;
 	@Input() tiles: Tile[];
+	@Input() needToRoll: boolean;
 	@Output() drawTile  = new EventEmitter<number>();
 	@Output() checkTile = new EventEmitter<Tile>();
 	@Output() drawCard  = new EventEmitter<number>();
 	@Output() useXP     = new EventEmitter();
+	@Output() rolledDie = new EventEmitter<number>();
 	@Output() endTurn   = new EventEmitter();
+	dieValue: number;
 
 	constructor(public gameService: GameService) {
 	}
@@ -50,5 +53,9 @@ export class CurrentComponent implements OnInit {
 		tile.doors = newDoors;
 		tile.rotation += 0.25;
 		this.checkTile.emit(tile);
+	}
+
+	dieRoll(): number {
+		return Math.floor(Math.random() * 6) + 1;
 	}
 }

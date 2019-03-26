@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Player } from '../game/player/player';
-import { Stats  } from '../game/stats';
-import { Card   } from '../game/cards/card';
+import { Player } from '../player/player';
+import { Stats  } from '../stats';
+import { Card   } from '../cards/card';
 
 @Component({
 	selector: 'hotm-xp',

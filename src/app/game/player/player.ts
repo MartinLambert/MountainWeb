@@ -18,6 +18,7 @@ export class Player {
 	displayStats:     DisplayStats;
 	movement:         number;
 	location:         number;
+	startLocation:    number;
 	campLocation:     number;
 	wounds:           Card[];
 	items:            Card[];
