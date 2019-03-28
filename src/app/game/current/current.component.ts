@@ -16,11 +16,14 @@ export class CurrentComponent implements OnInit {
 	@Input() card: Card;
 	@Input() tiles: Tile[];
 	@Input() needToRoll: boolean;
+	@Input() needToHeal: boolean;
 	@Output() drawTile  = new EventEmitter<number>();
 	@Output() checkTile = new EventEmitter<Tile>();
 	@Output() drawCard  = new EventEmitter<number>();
 	@Output() useXP     = new EventEmitter();
 	@Output() rolledDie = new EventEmitter<number>();
+	@Output() healing   = new EventEmitter();
+	@Output() moveCamp  = new EventEmitter();
 	@Output() endTurn   = new EventEmitter();
 	dieValue: number;
 

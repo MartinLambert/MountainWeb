@@ -15,6 +15,7 @@ export class ActionComponent implements OnInit {
 	@Input() playerNum: number;
 	@Output() useCard = new EventEmitter<Card>();
 	@Output() doEvent = new EventEmitter();
+	@Output() wounded = new EventEmitter();
 	@ViewChild(PlayerComponent) playerComp;
 	cardType = CardType;
 	// gemType = GemType;

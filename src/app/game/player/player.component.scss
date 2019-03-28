@@ -3,7 +3,7 @@
 :host {
 	margin: 1.5em;
 	opacity: 0.6;
-	transform: scale(0.9);
+	//transform: scale(0.9);
 	transition: all 0.65s ease-in-out;
 	@for $playerNum from 1 through length($players) {
 		&.player#{$playerNum - 1} {

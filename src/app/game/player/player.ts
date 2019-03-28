@@ -13,6 +13,8 @@ export class Player {
 	headshot:         string;
 	avatar:           string;
 	avatarStyle:      { top: string, left: string };
+	forwardCamp:      string;
+	campStyle:        { top: string, left: string };
 	nativeStats:      Stats;
 	calculatedStats:  Stats;
 	displayStats:     DisplayStats;

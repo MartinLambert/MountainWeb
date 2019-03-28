@@ -1,7 +1,6 @@
 :host {
   margin: 1.5em;
   opacity: 0.6;
-  transform: scale(0.9);
   transition: all 0.65s ease-in-out; }
   :host.player0 .charSheet {
     border: 1px solid darkviolet;

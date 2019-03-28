@@ -16,7 +16,7 @@ export class PlayerComponent implements OnInit {
 	@Input() playerNum: number;
 	@Input() zoomed: boolean;
 	@Input() gainingItem: boolean;
-	// @Output() useCard = new EventEmitter<Card>();
+	@Output() wounded = new EventEmitter();
 	@Output() endTurn = new EventEmitter();
 	blank = blankCard;
 	gemType = GemType;
@@ -44,10 +44,10 @@ export class PlayerComponent implements OnInit {
 				break;
 			} else numWounds++;
 		}
-		if (numWounds === this.player.wounds.length - 1) {
-			console.log(`${this.player.name} is dead`);
-		}
-		this.endTurn.emit();
+		if (numWounds === this.player.wounds.length - 1)
+			this.wounded.emit();
+		else
+			this.endTurn.emit();
 	}
 
 	healWound(): void {
@@ -61,8 +61,7 @@ export class PlayerComponent implements OnInit {
 
 	gainItem(slot: number): void {
 		if (this.gameService.round > 0 && !this.gainingItem) return;
-		const card = this.gameService.currentCard;
-		this.player.items[slot] = card;
+		this.player.items[slot] = this.gameService.currentCard;
 		this.calculateDisplayStats();
 		this.endTurn.emit();
 	}

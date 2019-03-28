@@ -1,12 +1,13 @@
-import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
-import {Tile} from './game/board/tile';
-import {Card, CardType} from './game/cards/card';
-import {Player} from './game/player/player';
-import {GameService} from './game/game.service';
-import {BoardComponent} from './game/board/board.component';
-import {CardsComponent} from './game/cards/cards.component';
-import {PlayerComponent} from './game/player/player.component';
+import { Tile            } from './game/board/tile';
+import { Card, CardType  } from './game/cards/card';
+import { Player          } from './game/player/player';
+import { GameService     } from './game/game.service';
+import { BoardComponent  } from './game/board/board.component';
+import { CardsComponent  } from './game/cards/cards.component';
+import { PlayerComponent } from './game/player/player.component';
+import { blankCard       } from './game/cards/blankCard';
 
 @Component({
 	selector: 'hotm-root',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
 	characters: Player[];
 	usingXP = false;
 	needToRoll = false;
+	needToHeal = false;
 
 	constructor(public gameService: GameService) {}
 
@@ -96,7 +98,10 @@ export class AppComponent implements OnInit {
 	}
 	tileRemoved(): void {
 		if (!this.gameService.midTurn) return;
-		this.gameService.currPlayer++;
+		if (!document.getElementsByClassName('valid').length)
+			this.gameService.currPlayer = this.currentPlayer;
+		else
+			this.gameService.currPlayer++;
 		if (this.currentPlayer === this.gameService.currPlayer) {
 			this.gameService.midTurn = false;
 			this.discardCard(this.activeCard);
@@ -107,8 +112,22 @@ export class AppComponent implements OnInit {
 	}
 
 	usedXP(): void {
-		this.players.find(el => el.playerNum === this.gameService.currPlayer).calculateDisplayStats();
+		this.players.find(player => player.playerNum === this.gameService.currPlayer).calculateDisplayStats();
 		this.usingXP = false;
+	}
+
+	moveCamp(): void {
+		this.board.moveCamp();
+	}
+	returnToCamp(): void {
+		const player = this.characters[this.gameService.currPlayer];
+		this.needToHeal = false;
+		for (let i = 0; i < player.wounds.length; i++) {
+			this.discardCard(player.wounds[i]);
+			player.wounds[i] = blankCard;
+		}
+		player.location = player.campLocation ? player.campLocation : player.startLocation;
+		this.board.moveAvatar();
 	}
 
 	powerSurge(value: number): void {

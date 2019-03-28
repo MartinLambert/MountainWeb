@@ -13,7 +13,7 @@
 	}
 }
 h1, h2, h3 {
-	margin: 0;
+	margin: 0 0 2em;
 	text-align: center;
 }
 .currentTile {
@@ -39,7 +39,7 @@ h1, h2, h3 {
 }
 button {
 	display: block;
-	margin: 4em auto;
+	margin: 2em auto;
 	font-size: 1.25rem;
 	border-radius: 0.25em;
 	background-color: #E3E3E9;

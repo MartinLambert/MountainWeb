@@ -26,4 +26,4 @@
 <div class="actions" *ngIf="card.cardType === cardType.event">
 	<p><button (click)="doEvent.emit()">Close</button></p>
 </div>
-<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [gainingItem]="newItem" (endTurn)="useCard.emit(card)"></hotm-player>
+<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [gainingItem]="newItem" (wounded)="wounded.emit()" (endTurn)="useCard.emit(card)"></hotm-player>

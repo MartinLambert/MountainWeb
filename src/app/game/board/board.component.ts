@@ -17,6 +17,12 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	currentTile: Tile;
 	discard: Tile[] = [];
 	startLocations = [238, 225, 17, 30];
+	campStarts = [
+		{ top: '86%', left: '53%' },
+		{ top: '86%', left: '2.25%' },
+		{ top: '6%', left: '2.5%' },
+		{ top: '6%', left: '52.25%' }
+	];
 	tileStyle = {width: '0', height: '0'};
 	@Input() players: Player[];
 	@Output() tilePlaced = new EventEmitter();
@@ -121,7 +127,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.tilePlaced.emit();
 		} else if (this.gameService.turnStep === 1) {
 			this.players[this.gameService.currPlayer].location = currIndex;
-			this.players[this.gameService.currPlayer].avatarStyle = this.avatarLocation(this.players[this.gameService.currPlayer]);
+			this.moveAvatar();
 			this.clearValidity();
 			this.gameService.turnStep = 2;
 		} else if (this.gameService.turnStep === 2) {
@@ -130,16 +136,39 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			const level = this.spaces[currIndex].level;
 			this.spaces[currIndex] = blankTile;
 			this.spaces[currIndex].level = level;
+			for (let i = 0; i < this.players.length; i++) {
+				if (this.players[i].campLocation === currIndex) {
+					this.players[i].campLocation = 0;
+					this.players[i].campStyle = this.campStarts[i];
+				}
+			}
 			this.tileRemoved.emit();
 		}
 	}
 
+	moveAvatar(): void {
+		this.players[this.gameService.currPlayer].avatarStyle = this.avatarLocation(this.players[this.gameService.currPlayer]);
+	}
 	avatarLocation(player: Player) {
 		const space = document.getElementById('s' + ('000' + player.location).slice(-3));
 		const avatar = document.getElementsByClassName('avatar')[0];
 		return {
 			top:  (space.offsetTop  + Math.floor(Math.random() * (space.clientHeight - avatar.clientHeight))) + 'px',
 			left: (space.offsetLeft + Math.floor(Math.random() * (space.clientWidth  - avatar.clientWidth ))) + 'px'
+		};
+	}
+
+	moveCamp(): void {
+		const currPlayer = this.players[this.gameService.currPlayer];
+		currPlayer.campLocation = currPlayer.location;
+		currPlayer.campStyle = this.campLocation(currPlayer);
+	}
+	campLocation(player: Player) {
+		const space = document.getElementById('s' + ('000' + player.campLocation).slice(-3));
+		const camp = document.getElementsByClassName('forwardCamp')[0];
+		return {
+			top:  (space.offsetTop  + (space.clientHeight - camp.clientHeight - 1)) + 'px',
+			left: (space.offsetLeft + (space.clientWidth  - camp.clientWidth  - 1)) + 'px'
 		};
 	}
 }

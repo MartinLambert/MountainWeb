@@ -11,12 +11,16 @@
 </div>
 <div *ngIf="gameService.round > 0">
 	<h1>Round {{ gameService.round }}: {{ player.shortName }}’s Turn</h1>
+	<div *ngIf="needToHeal">
+		<h3>{{ player.shortName }} is wounded and must return to camp.</h3>
+		<p><button (click)="healing.emit()">Continue</button></p>
+	</div>
 	<div *ngIf="gameService.turnStep === 0">
 		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(1)">Draw a Tile</button></p>
 		<div *ngIf="tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
 	</div>
 	<div *ngIf="gameService.turnStep === 1">
-		<h3>Move</h3>
+		<h2>Move</h2>
 	</div>
 	<div *ngIf="gameService.turnStep === 2">
 		<div *ngIf="gameService.midTurn && tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
@@ -35,6 +39,7 @@
 	</div>
 	<div *ngIf="gameService.turnStep === 3 && !gameService.midTurn">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
+		<p *ngIf="!player.campLocation"><button (click)="moveCamp.emit()">Place Forward Camp</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>
 </div>
