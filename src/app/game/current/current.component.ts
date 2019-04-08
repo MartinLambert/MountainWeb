@@ -15,6 +15,7 @@ export class CurrentComponent implements OnInit {
 	@Input() player: Player;
 	@Input() card: Card;
 	@Input() tiles: Tile[];
+	@Input() numToDraw: number;
 	@Input() needToRoll: boolean;
 	@Input() needToHeal: boolean;
 	@Output() drawTile  = new EventEmitter<number>();

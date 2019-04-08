@@ -26,6 +26,7 @@
 				&.newItem .items>div.nocard>p:first-child {
 					animation-name: player#{$playerNum - 1}_nocard_animation;
 				}
+				.clickable { border: 6px solid nth($players, $playerNum); border-top: none }
 			}
 		}
 	}

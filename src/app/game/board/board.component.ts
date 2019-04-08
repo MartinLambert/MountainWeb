@@ -130,7 +130,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.moveAvatar();
 			this.clearValidity();
 			this.gameService.turnStep = 2;
-		} else if (this.gameService.turnStep === 2) {
+		} else if (this.gameService.turnStep === 3) {
 			this.clearValidity();
 			this.discard.unshift(space);
 			const level = this.spaces[currIndex].level;

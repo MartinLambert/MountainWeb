@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import { GameService } from '../game.service';
-import { Player } from './player';
-import { Card, GemType, ItemType } from '../cards/card';
-import { blankCard } from '../cards/blankCard';
+import {GameService} from '../game.service';
+import {Player} from './player';
+import {Card, GemType, ItemType} from '../cards/card';
+import {blankCard} from '../cards/blankCard';
 
 @Component({
 	selector: 'hotm-player',
@@ -16,8 +16,10 @@ export class PlayerComponent implements OnInit {
 	@Input() playerNum: number;
 	@Input() zoomed: boolean;
 	@Input() gainingItem: boolean;
+	@Output() discardCard = new EventEmitter<Card>();
+	@Output() cardPower = new EventEmitter<{power: number, value: number}>();
 	@Output() wounded = new EventEmitter();
-	@Output() endTurn = new EventEmitter();
+	@Output() useCard = new EventEmitter();
 	blank = blankCard;
 	gemType = GemType;
 	itemType = ItemType;
@@ -47,27 +49,57 @@ export class PlayerComponent implements OnInit {
 		if (numWounds === this.player.wounds.length - 1)
 			this.wounded.emit();
 		else
-			this.endTurn.emit();
+			this.useCard.emit();
 	}
 
 	healWound(): void {
 		for (let i = this.player.wounds.length - 1; i >= 0; i--) {
 			if (this.player.wounds[i] !== this.blank) {
+				this.discardCard.emit(this.player.wounds[i]);
 				this.player.wounds[i] = this.blank;
 				break;
 			}
 		}
 	}
 
-	gainItem(slot: number): void {
-		if (this.gameService.round > 0 && !this.gainingItem) return;
-		this.player.items[slot] = this.gameService.currentCard;
-		this.calculateDisplayStats();
-		this.endTurn.emit();
+	clickItem(slot: number): void {
+		const item = this.player.items[slot];
+		let itemUsed = false;
+		if (this.gameService.round < 0 && item !== this.blank) return;
+		if (this.gameService.round < 0 || this.gainingItem) {
+			if (item !== this.blank) this.discardCard.emit(item);
+			this.player.items[slot] = this.gameService.currentCard;
+			this.calculateDisplayStats();
+			this.useCard.emit();
+		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) {
+			if ((item.itemType % ItemType.anytime === 0 && this.player.wounds.length) || (item.itemType % ItemType.tile === 0 && this.gameService.turnStep === 0) || (item.itemType % ItemType.move === 0 && this.gameService.turnStep === 1) || (item.itemType % ItemType.draw === 0 && this.gameService.turnStep === 2) || (item.itemType % ItemType.beforeFight === 0 && this.gameService.turnStep === 3) || (item.itemType % ItemType.afterFight === 0 && this.gameService.turnStep === 4) || (item.itemType % ItemType.xp === 0 && this.gameService.turnStep === 5)) {
+				this.cardPower.emit({power: item.itemPower, value: 1});
+				itemUsed = true;
+			}
+			if (itemUsed)
+				if (item.itemType % ItemType.useOnce === 0) {
+					this.discardCard.emit(item);
+					this.player.items[slot] = this.blank;
+					this.calculateDisplayStats();
+					this.useCard.emit();
+				} else
+					item.itemUsed = true;
+		}
 	}
 
 	gainXP(): void {
 		this.player.XP.push(this.gameService.currentCard);
+	}
+
+	expireThisTurnItems(): void {
+		for (const item of this.player.items)
+			if (item.itemType === ItemType.useNow)
+				item.itemUsed = true;
+	}
+	expireNextTurnItems(): void {
+		for (const item of this.player.items)
+			if (item.itemType === ItemType.useNext)
+				item.itemUsed = true;
 	}
 
 	calculateDisplayStats(): void {

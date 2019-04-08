@@ -21,10 +21,14 @@
       border: 2px solid #333;
       background: #EEE;
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      text-align: center;
       font: 6vh 'Luminari', fantasy; }
       :host .cards div.selected {
         border-color: orange;
         box-shadow: inset 0 0 0 4px orange; }
+      :host .cards div span {
+        display: block;
+        font-size: 3vh; }
   :host .actions {
     display: grid;
     place-content: center; }

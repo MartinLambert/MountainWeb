@@ -38,7 +38,7 @@ export class StartupComponent implements OnInit {
 		this.selectedCards[whichCard] = true;
 	}
 
-	useCard(card: Card): void {
+	useCard(): void {
 		for (let i = 0; i < this.cards.length; i++) {
 			if (this.selectedCards[i]) {
 				this.cards.splice(i, 1);

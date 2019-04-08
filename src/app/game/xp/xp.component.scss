@@ -22,10 +22,15 @@
 			border: 2px solid #333;
 			background: #EEE;
 			box-shadow: 0 0 3px rgba(0,0,0,0.5);
+			text-align: center;
 			font: 6vh 'Luminari', fantasy;
 			&.selected {
 				border-color: orange;
 				box-shadow: inset 0 0 0 4px orange;
+			}
+			span {
+				display: block;
+				font-size: 3vh;
 			}
 		}
 	}

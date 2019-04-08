@@ -23,33 +23,33 @@
 		<div class="leftGem"><div></div></div>
 		<div class="rightGem"><div><h1>0</h1></div></div>
 	</section>
-	<section class="cardBottom" *ngIf="card.itemType !== itemType.none">
+	<section class="cardBottom" *ngIf="card.itemType">
 		<h1 class="itemName" [innerHTML]="card.itemName"></h1>
 		<div>
 			<h2 class="itemText" [innerHTML]="card.itemText"></h2>
-			<p *ngIf="card.itemType === itemType.useOnce">Discard after use</p>
-			<p *ngIf="card.itemType === itemType.useNow">Use immediately or not at all</p>
-			<p *ngIf="card.itemType === itemType.useNext">Use next turn or not at all</p>
-			<p *ngIf="card.itemType === itemType.discAny">Discard any item after use</p>
-			<p *ngIf="card.itemType === itemType.discTwo">Discard two items after use</p>
+			<p *ngIf="card.itemType % itemType.useOnce === 0">Discard after use</p>
+			<p *ngIf="card.itemType % itemType.useNow  === 0">Use immediately or not at all</p>
+			<p *ngIf="card.itemType % itemType.useNext === 0">Use next turn or not at all</p>
+			<p *ngIf="card.itemType % itemType.discAny === 0">Discard any item after use</p>
+			<p *ngIf="card.itemType % itemType.discTwo === 0">Discard two items after use</p>
 			<h3 *ngIf="card.itemStats.Brains "><span *ngIf="card.itemStats.Brains  > 0">+</span>{{ card.itemStats.Brains  }} Brains</h3>
 			<h3 *ngIf="card.itemStats.Brawn  "><span *ngIf="card.itemStats.Brawn   > 0">+</span>{{ card.itemStats.Brawn   }} Brawn</h3>
 			<h3 *ngIf="card.itemStats.Bravado"><span *ngIf="card.itemStats.Bravado > 0">+</span>{{ card.itemStats.Bravado }} Bravado</h3>
 		</div>
 		<div *ngIf="card.leftGem != null" class="leftGem"><div>
 			<div class="leftGemAttr" *ngIf="(card.leftGem % gemType.Brains === 0) || (card.leftGem % gemType.Brawn === 0) || (card.leftGem % gemType.Bravado === 0)">
-				<div [ngClass]="{'leftGemBrains' : card.leftGem % gemType.Brains  === 0}"></div>
-				<div [ngClass]="{'leftGemBrawn'  : card.leftGem % gemType.Brawn   === 0}"></div>
-				<div [ngClass]="{'leftGemBravado': card.leftGem % gemType.Bravado === 0}"></div>
+				<div [class.leftGemBrains]="card.leftGem % gemType.Brains  === 0"></div>
+				<div [class.leftGemBrawn]="card.leftGem % gemType.Brawn   === 0"></div>
+				<div [class.leftGemBravado]="card.leftGem % gemType.Bravado === 0"></div>
 			</div>
 			<div *ngIf="card.leftGem % gemType.vsEnemies === 0">vs Enemies</div>
-			<div *ngIf="card.leftGem % gemType.vsTraps === 0">vs Traps</div>
-			<div *ngIf="card.leftGem % gemType.allRolls === 0">All Rolls</div>
-			<div *ngIf="card.leftGem % gemType.enBrains === 0">Enemy Brains</div>
-			<div *ngIf="card.leftGem % gemType.enBrawn === 0">Enemy Brawn</div>
+			<div *ngIf="card.leftGem % gemType.vsTraps   === 0">vs Traps</div>
+			<div *ngIf="card.leftGem % gemType.allRolls  === 0">All Rolls</div>
+			<div *ngIf="card.leftGem % gemType.enBrains  === 0">Enemy Brains</div>
+			<div *ngIf="card.leftGem % gemType.enBrawn   === 0">Enemy Brawn</div>
 			<div *ngIf="card.leftGem % gemType.enBravado === 0">Enemy Bravado</div>
 			<div *ngIf="card.leftGem % gemType.enemyRoll === 0">Enemy Rolls Against You</div>
-			<div *ngIf="card.leftGem % gemType.trapRoll === 0">Trap Rolls Against You</div>
+			<div *ngIf="card.leftGem % gemType.trapRoll  === 0">Trap Rolls Against You</div>
 		</div></div>
 		<div *ngIf="card.rightGem != null" class="rightGem"><div>
 			<h1><span *ngIf="card.rightGem > 0">+</span>{{ card.rightGem }}</h1>

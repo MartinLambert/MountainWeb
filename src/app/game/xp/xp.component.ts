@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import { Player } from '../player/player';
-import { Stats  } from '../stats';
-import { Card   } from '../cards/card';
+import {Player} from '../player/player';
+import {Stats} from '../stats';
+import {Card, CardType} from '../cards/card';
 
 @Component({
 	selector: 'hotm-xp',
@@ -14,6 +14,7 @@ export class XPComponent implements OnInit {
 	@Input() player: Player;
 	@Output() doneXP = new EventEmitter();
 	@Output() discard = new EventEmitter<Card>();
+	cardType = CardType;
 	itemDisplay = {
 		Brains:  '',
 		Brawn:   '',
@@ -71,8 +72,10 @@ export class XPComponent implements OnInit {
 	confirm(): void {
 		const newXP = new Array<Card>();
 		for (let i = 0; i < this.selected.length; i++)
-			if (this.selected[i]) this.discard.emit(this.player.XP[i]);
-			else newXP.push(this.player.XP[i]);
+			if (this.selected[i]) {
+				if (this.player.XP[i].cardType !== CardType.blank)
+					this.discard.emit(this.player.XP[i]);
+			} else newXP.push(this.player.XP[i]);
 		this.player.XP = newXP;
 		this.player.nativeStats = JSON.parse(JSON.stringify(this.tempAttributes));
 		this.doneXP.emit();

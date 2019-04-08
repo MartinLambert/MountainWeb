@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {Card, CardType, GemType} from '../cards/card';
 import {Player} from '../player/player';
 import {PlayerComponent} from '../player/player.component';
+import {GameService} from '../game.service';
 
 @Component({
 	selector: 'hotm-action',
@@ -10,15 +11,17 @@ import {PlayerComponent} from '../player/player.component';
 })
 export class ActionComponent implements OnInit {
 
-	@Input() card: Card;
+	@Input() cards: Card[];
 	@Input() player: Player;
 	@Input() playerNum: number;
+	@Output() drawCard = new EventEmitter<number>();
 	@Output() useCard = new EventEmitter<Card>();
+	@Output() discardCard = new EventEmitter<Card>();
 	@Output() doEvent = new EventEmitter();
 	@Output() wounded = new EventEmitter();
 	@ViewChild(PlayerComponent) playerComp;
 	cardType = CardType;
-	// gemType = GemType;
+	selectedCard: number;
 	cardStatsString: string;
 	playerStatsString = 'Your ';
 	cardRollString = '​';
@@ -32,19 +35,23 @@ export class ActionComponent implements OnInit {
 	newItem = false;
 	playerWin = false;
 
-	constructor() {
+	constructor(public gameService: GameService) {
 	}
 
 	ngOnInit() {
-		this.calcStats();
+		console.log(this.cards);
+		if (this.cards.length === 1) {
+			this.selectedCard = 0;
+			this.calcStats(this.cards[0]);
+		}
 	}
 
-	calcStats(): void {
+	calcStats(card: Card): void {
 		let previousGem = 0;
 		const modifiers = {
 			vsEnemies: 0,
 			vsTraps:   0,
-			allRolls:  0,
+			allRolls:  10,
 			enBrains:  0,
 			enBrawn:   0,
 			enBravado: 0,
@@ -63,60 +70,96 @@ export class ActionComponent implements OnInit {
 			previousGem = item.rightGem;
 		});
 		this.playerRollModifier += modifiers.allRolls;
-		if (this.card.cardType === CardType.enemy) {
+		if (card.cardType === CardType.enemy) {
 			this.cardStatsString = 'Enemy’s ';
 			this.cardRollModifier += modifiers.enemyRoll;
 			this.playerRollModifier += modifiers.vsEnemies;
-		} else if (this.card.cardType === CardType.trap) {
+		} else if (card.cardType === CardType.trap) {
 			this.cardStatsString = 'Trap’s ';
 			this.cardRollModifier += modifiers.trapRoll;
 			this.playerRollModifier += modifiers.vsTraps;
 		}
-		if (this.card.cardStats.Brains !== null) {
+		if (card.cardStats.Brains !== null) {
 			if (modifiers.enBrains !== 0) {
 				this.cardStatsString += 'Modified ';
 				this.cardTotal += modifiers.enBrains;
 			}
 			this.cardStatsString += 'Brains';
 			this.playerStatsString += 'Brains';
-			this.cardTotal += this.card.cardStats.Brains;
+			this.cardTotal += card.cardStats.Brains;
 			this.playerTotal += this.player.calculatedStats.Brains;
-			if (!(this.card.cardStats.Brawn === null && this.card.cardStats.Bravado === null)) {
+			if (!(card.cardStats.Brawn === null && card.cardStats.Bravado === null)) {
 				this.cardStatsString += ' + ';
 				this.playerStatsString += ' + ';
 			}
 		}
-		if (this.card.cardStats.Brawn !== null) {
+		if (card.cardStats.Brawn !== null) {
 			if (modifiers.enBrawn !== 0) {
 				this.cardStatsString += 'Modified ';
 				this.cardTotal += modifiers.enBrawn;
 			}
 			this.cardStatsString += 'Brawn';
 			this.playerStatsString += 'Brawn';
-			this.cardTotal += this.card.cardStats.Brawn;
+			this.cardTotal += card.cardStats.Brawn;
 			this.playerTotal += this.player.calculatedStats.Brawn;
-			if (this.card.cardStats.Bravado !== null) {
+			if (card.cardStats.Bravado !== null) {
 				this.cardStatsString += ' + ';
 				this.playerStatsString += ' + ';
 			}
 		}
-		if (this.card.cardStats.Bravado !== null) {
+		if (card.cardStats.Bravado !== null) {
 			if (modifiers.enBravado !== 0) {
 				this.cardStatsString += 'Modified ';
 				this.cardTotal += modifiers.enBravado;
 			}
 			this.cardStatsString += 'Bravado';
 			this.playerStatsString += 'Bravado';
-			this.cardTotal += this.card.cardStats.Bravado;
+			this.cardTotal += card.cardStats.Bravado;
 			this.playerTotal += this.player.calculatedStats.Bravado;
 		}
 		this.cardStatsString += ':';
 		this.playerStatsString += ':';
 	}
 
+	useItemPower(itemPower: {power: number, value: number}): void {
+		if (this.gameService.turnStep === 2 && itemPower.power === 2) {
+			this.drawCard.emit(itemPower.value);
+		}
+	}
+
+	selectCard(which: number): void {
+		if (this.selectedCard === which)
+			this.selectedCard = null;
+		else {
+			this.selectedCard = which;
+			this.cardStatsString = '';
+			this.playerStatsString = 'Your ';
+			this.cardRollString = '​';
+			this.playerRollString = 'Your Roll: ';
+			this.cardTotal = 0;
+			this.playerTotal = 0;
+			this.cardRollModifier = 0;
+			this.playerRollModifier = 0;
+			this.calcStats(this.cards[this.selectedCard]);
+		}
+	}
+	proceedWithCard(): void {
+		const chosenCard = this.cards[this.selectedCard];
+		const originalLength = this.cards.length;
+		let deletePosition = 0;
+		for (let i = 0; i < originalLength; i++)
+			if (this.cards[0] === chosenCard)
+				deletePosition = 1;
+			else {
+				this.discardCard.emit(this.cards[deletePosition]);
+				this.useCard.emit(this.cards[deletePosition]);
+			}
+		this.selectedCard = 0;
+	}
+
 	fightCard(): void {
 		this.cardRoll = this.dieRoll();
-		this.cardRollString = (this.card.cardType === CardType.enemy) ? 'Enemy’s Roll: ' : 'Trap’s Roll: ';
+		this.cardRollString = (this.cards[0].cardType === CardType.enemy) ? 'Enemy’s Roll: ' : 'Trap’s Roll: ';
 		this.cardRollString += this.cardRoll;
 		if (this.cardRollModifier > 0) this.cardRollString += ' + ' + this.cardRollModifier;
 		else if (this.cardRollModifier < 0) this.cardRollString += ' − ' + Math.abs(this.cardRollModifier);
@@ -126,6 +169,7 @@ export class ActionComponent implements OnInit {
 		if (this.playerRollModifier > 0) this.playerRollString += ' + ' + this.playerRollModifier;
 		else if (this.playerRollModifier < 0) this.playerRollString += ' − ' + Math.abs(this.playerRollModifier);
 		this.playerWin = (this.playerTotal + this.playerRoll + this.playerRollModifier) >= (this.cardTotal + this.cardRoll + this.cardRollModifier);
+		this.gameService.turnStep = 4;
 	}
 
 	dieRoll(): number {
@@ -134,11 +178,11 @@ export class ActionComponent implements OnInit {
 
 	lostFight(): void {
 		this.playerComp.gainWound();
-		this.useCard.emit(this.card);
+		this.useCard.emit(this.cards[0]);
 	}
 
 	saveForXP(): void {
 		this.playerComp.gainXP();
-		this.useCard.emit(this.card);
+		this.useCard.emit(this.cards[0]);
 	}
 }

@@ -16,7 +16,7 @@ export class GameService {
 	private _numPlayers = 4;
 	private _currPlayer = 0;
 	private _turnStep = 0;
-	private _round = 1; // should start at -1
+	private _round = -1; // should start at -1
 	private _currentTile: Tile;
 	private _currentCard: Card;
 	private _midTurn = false; // rotating through characters during a turn instead of between turns, e.g. with an event

@@ -27,7 +27,7 @@ export class CardComponent implements OnInit {
 		this.starterCard = {
 			id: 0,
 			level: 0,
-			cardType: CardType.starter,
+			cardType:  CardType.starter,
 			cardName:  '',
 			cardImg:   '',
 			cardText:  '',
@@ -39,6 +39,7 @@ export class CardComponent implements OnInit {
 			itemText:  '',
 			itemStats: null,
 			itemPower: 0,
+			itemUsed:  false,
 			leftGem:   GemType.none,
 			rightGem:  0
 		};

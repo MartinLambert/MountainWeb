@@ -21,6 +21,9 @@
       animation-timing-function: linear; }
     :host.player0 .charSheet.newItem .items > div.nocard > p:first-child {
       animation-name: player0_nocard_animation; }
+    :host.player0 .charSheet .clickable {
+      border: 6px solid darkviolet;
+      border-top: none; }
   :host.player1 .charSheet {
     border: 1px solid darkgoldenrod;
     background-color: #fcecc6; }
@@ -40,6 +43,9 @@
       animation-timing-function: linear; }
     :host.player1 .charSheet.newItem .items > div.nocard > p:first-child {
       animation-name: player1_nocard_animation; }
+    :host.player1 .charSheet .clickable {
+      border: 6px solid darkgoldenrod;
+      border-top: none; }
   :host.player2 .charSheet {
     border: 1px solid #15C;
     background-color: #e0eafc; }
@@ -59,6 +65,9 @@
       animation-timing-function: linear; }
     :host.player2 .charSheet.newItem .items > div.nocard > p:first-child {
       animation-name: player2_nocard_animation; }
+    :host.player2 .charSheet .clickable {
+      border: 6px solid #15C;
+      border-top: none; }
   :host.player3 .charSheet {
     border: 1px solid firebrick;
     background-color: #f8dbdb; }
@@ -78,6 +87,9 @@
       animation-timing-function: linear; }
     :host.player3 .charSheet.newItem .items > div.nocard > p:first-child {
       animation-name: player3_nocard_animation; }
+    :host.player3 .charSheet .clickable {
+      border: 6px solid firebrick;
+      border-top: none; }
   :host.myTurn {
     opacity: 1;
     transform: scale(1); }

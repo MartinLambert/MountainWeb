@@ -1,13 +1,13 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 
-import { Tile            } from './game/board/tile';
-import { Card, CardType  } from './game/cards/card';
-import { Player          } from './game/player/player';
-import { GameService     } from './game/game.service';
-import { BoardComponent  } from './game/board/board.component';
-import { CardsComponent  } from './game/cards/cards.component';
-import { PlayerComponent } from './game/player/player.component';
-import { blankCard       } from './game/cards/blankCard';
+import {Tile} from './game/board/tile';
+import {Card, CardType, ItemType} from './game/cards/card';
+import {Player} from './game/player/player';
+import {GameService} from './game/game.service';
+import {BoardComponent} from './game/board/board.component';
+import {CardsComponent} from './game/cards/cards.component';
+import {PlayerComponent} from './game/player/player.component';
+import {blankCard} from './game/cards/blankCard';
 
 @Component({
 	selector: 'hotm-root',
@@ -27,6 +27,9 @@ export class AppComponent implements OnInit {
 	usingXP = false;
 	needToRoll = false;
 	needToHeal = false;
+	tempMoveBonus = 0;
+	tempXPBonus = 0;
+	numToDraw = 1;
 
 	constructor(public gameService: GameService) {}
 
@@ -47,12 +50,16 @@ export class AppComponent implements OnInit {
 	}
 
 	drawCard(numCards: number): void {
+		this.tempMoveBonus = 0;
 		for (let i = 0; i < numCards; i++) {
 			this.cards.drawCard(this.board.spaces[this.characters[this.gameService.currPlayer].location].level);
 			this.currentCards.push(this.gameService.currentCard);
 		}
-		if (this.gameService.round > 0)
+		if (this.gameService.round > 0) {
 			this.activeCard = this.currentCards[0];
+			this.players.find(player => player.playerNum === this.gameService.currPlayer).expireNextTurnItems();
+			this.gameService.turnStep = 3;
+		}
 	}
 	useCard(card: Card): void {
 		const index = this.currentCards.indexOf(card);
@@ -62,7 +69,7 @@ export class AppComponent implements OnInit {
 			this.activeCard = this.currentCards[0];
 		else {
 			this.activeCard = null;
-			this.gameService.turnStep = 3;
+			this.gameService.turnStep = 5;
 		}
 	}
 	discardCard(card: Card): void {
@@ -111,9 +118,37 @@ export class AppComponent implements OnInit {
 		}
 	}
 
+	gainXPBonus(amount: number): void {
+		const player = this.characters[this.gameService.currPlayer];
+		if (!player.XP.length) return;
+		player.XP.push(new Card);
+		player.XP[player.XP.length - 1].cardType = CardType.blank;
+		player.XP[player.XP.length - 1].level = amount;
+	}
 	usedXP(): void {
 		this.players.find(player => player.playerNum === this.gameService.currPlayer).calculateDisplayStats();
 		this.usingXP = false;
+		this.tempXPBonus = 0;
+	}
+
+	useCardPower(cardPower: {power: number, value: number}): void {
+		switch (cardPower.power) {
+			case 2:
+				this.numToDraw += cardPower.value;
+				break;
+			case 3:
+				this.drawTile(cardPower.value);
+				break;
+			case 4:
+				this.tempMoveBonus += cardPower.value;
+				this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
+				break;
+			case 5:
+				this.gainXPBonus(cardPower.value);
+				break;
+			default:
+				console.warn(`cardPower ${cardPower.power} not implemented`);
+		}
 	}
 
 	moveCamp(): void {
@@ -175,6 +210,8 @@ export class AppComponent implements OnInit {
 
 	endTurn(): void {
 		this.usingXP = false;
+		this.numToDraw = 1;
+		this.players.find(player => player.playerNum === this.gameService.currPlayer).expireThisTurnItems();
 		this.gameService.turnStep = 0;
 		this.gameService.currPlayer++;
 	}

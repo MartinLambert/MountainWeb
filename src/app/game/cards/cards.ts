@@ -10,12 +10,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: null, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.tile,
 		itemName: 'Crystal Ball',
 		itemImg:  '',
 		itemText: 'Add another tile',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -28,12 +29,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 1, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.tile,
 		itemName: 'Tarot Deck',
 		itemImg:  '',
 		itemText: 'Add another tile',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -46,12 +48,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.tile,
 		itemName: 'Obsidian Mirror',
 		itemImg:  '',
 		itemText: 'Add another tile',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -64,12 +67,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: null, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Expensive Sneakers',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -82,12 +86,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 1, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Déjà Vu',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -100,12 +105,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Compass',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -118,12 +124,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: null, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.draw,
 		itemName: 'Canary',
 		itemImg:  '',
 		itemText: 'Draw an extra card<span>, then discard one</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 2,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -136,12 +143,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 1, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.draw,
 		itemName: 'Trained Gecko',
 		itemImg:  '',
 		itemText: 'Draw an extra card<span>, then discard one</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 2,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -154,12 +162,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.draw,
 		itemName: 'Motion Detector',
 		itemImg:  '',
 		itemText: 'Draw an extra card<span>, then discard one</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 2,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -172,12 +181,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: null, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.xp,
 		itemName: 'TBD',
 		itemImg:  '',
 		itemText: '+1 Experience<span> when trading in cards</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 5,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -190,12 +200,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 1, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.xp,
 		itemName: 'TBD',
 		itemImg:  '',
 		itemText: '+1 Experience<span> when trading in cards</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 5,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -208,12 +219,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.xp,
 		itemName: 'TBD',
 		itemImg:  '',
 		itemText: '+1 Experience<span> when trading in cards</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 5,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -226,12 +238,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: null, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Band-Aid',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -244,12 +257,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 1, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Gauze',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -262,12 +276,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Tree Bark',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -280,12 +295,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: null, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Rollerblades',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -298,12 +314,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 1, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Toboggan',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -316,12 +333,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: null, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Energy Drink',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -340,6 +358,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -358,6 +377,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -376,6 +396,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -394,6 +415,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -412,6 +434,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -430,6 +453,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -448,6 +472,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  0
 	},
@@ -466,6 +491,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  0
 	},
@@ -484,6 +510,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  0
 	},
@@ -502,6 +529,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  0
 	},
@@ -520,6 +548,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  0
 	},
@@ -538,6 +567,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  0
 	}
@@ -557,6 +587,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -575,6 +606,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -593,6 +625,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -611,6 +644,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -623,12 +657,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 3, Brawn: 1, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Fast Food',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -647,6 +682,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBravado,
 		rightGem:  1
 	},
@@ -665,6 +701,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -677,12 +714,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Cheese!',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -701,6 +739,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -719,6 +758,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -731,12 +771,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 5 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.tile,
 		itemName: 'That creepy crawly feeling all over…',
 		itemImg:  '',
-		itemText: 'Draw an extra tile, then discard one',
+		itemText: 'Add an extra tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -749,12 +790,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'Owl monster of the Bahamas',
 		cardStats: { Brains: 4, Brawn: 1, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Magic Feather',
 		itemImg:  '',
-		itemText: 'Move one extra space',
+		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -773,6 +815,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBrawn,
 		rightGem:  1
 	},
@@ -785,12 +828,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 2, Brawn: null, Bravado: 3 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'Open Passage',
 		itemImg:  '',
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -809,6 +853,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsTraps,
 		rightGem:  2
 	},
@@ -821,12 +866,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 5, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Tough Hide',
 		itemImg:  '',
 		itemText: 'Discard an enemy before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -839,12 +885,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Carrots!',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -857,12 +904,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 4, Brawn: 1, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Poison Dart',
 		itemImg:  '',
 		itemText: 'Reduce an Enemy’s Brawn by 3',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -881,6 +929,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -899,6 +948,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -911,12 +961,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.tile,
 		itemName: 'Guttering Torch',
 		itemImg:  '',
-		itemText: 'Draw an extra tile, then discard one',
+		itemText: 'Add an extra tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -929,12 +980,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 3, Brawn: 3, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'Where did that come from?',
 		itemImg:  '',
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -953,6 +1005,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -971,6 +1024,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -989,6 +1043,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1025,6 +1080,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1043,6 +1099,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1061,6 +1118,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsEnemies,
 		rightGem:  2
 	},
@@ -1073,12 +1131,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 4, Brawn: 1, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Brimstone',
 		itemImg:  '',
 		itemText: 'Shuffle a trap back into its deck<br>Draw a new card',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1097,6 +1156,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1109,12 +1169,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 3, Brawn: 3, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'TBD',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1133,6 +1194,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1145,12 +1207,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 4, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.afterFight,
 		itemName: 'Scale Armor',
 		itemImg:  '',
 		itemText: 'Force an enemy to reroll a die',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1163,12 +1226,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'Legendary African ape',
 		cardStats: { Brains: 1, Brawn: 4, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Surprisingly detailed schematics',
 		itemImg:  '',
 		itemText: '+3 vs one trap',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1181,12 +1245,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'Giant tree lizard of New Zealand',
 		cardStats: { Brains: 2, Brawn: 1, Bravado: 4 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Forked Tongue',
 		itemImg:  '',
 		itemText: 'Reduce an Enemy’s Bravado by 3',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1199,12 +1264,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 3, Brawn: 2, Bravado: null },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Sand in your shoes',
 		itemImg:  '',
-		itemText: 'Move one extra space',
+		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1217,12 +1283,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'Tiny builders and tricksters of Hawaii',
 		cardStats: { Brains: 5, Brawn: 1, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Enchanted Hammer',
 		itemImg:  '',
 		itemText: 'Discard a trap before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1235,12 +1302,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 2, Brawn: 2, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'A convenient hole',
 		itemImg:  '',
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -1259,6 +1327,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBrains,
 		rightGem:  1
 	},
@@ -1271,12 +1340,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'Bird-man of West Virginia',
 		cardStats: { Brains: 2, Brawn: 4, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.move,
 		itemName: 'Tattered Wings',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1295,6 +1365,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1307,12 +1378,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 2, Brawn: 3, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'Impossible Passage',
 		itemImg:  '',
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1331,6 +1403,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  0
 	},
@@ -1343,12 +1416,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'Legendary South American jaguar',
 		cardStats: { Brains: 1, Brawn: 3, Bravado: 3 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'TBD',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1367,6 +1441,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1379,12 +1454,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 3, Bravado: 3 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Black Fur',
 		itemImg:  '',
 		itemText: 'Shuffle an enemy back into its pile<br>Draw a new card',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  -1
 	},
@@ -1403,6 +1479,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -1421,6 +1498,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1439,6 +1517,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  -2
 	},
@@ -1457,6 +1536,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1469,12 +1549,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 2, Bravado: 4 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.afterFight,
 		itemName: 'Rattle',
 		itemImg:  '',
 		itemText: 'Reduce an Enemy’s die roll by 2',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1492,7 +1573,8 @@ export const CARDS: Card[][] = [[
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -1511,6 +1593,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  1
 	},
@@ -1528,7 +1611,8 @@ export const CARDS: Card[][] = [[
 		itemImg:  '',
 		itemText: 'Add a tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1547,6 +1631,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1565,6 +1650,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  0
 	},
@@ -1577,12 +1663,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 2, Brawn: 1, Bravado: 3 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.anytime,
 		itemName: 'Anti-Venom',
 		itemImg:  '',
 		itemText: 'Heal one wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 1,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1595,12 +1682,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 4 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Scent Gland',
 		itemImg:  '',
 		itemText: 'Shuffle an enemy back into its deck<br>Draw a new card',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1619,6 +1707,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1637,6 +1726,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1655,6 +1745,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1673,6 +1764,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1691,6 +1783,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Rotate one tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1709,6 +1802,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1721,12 +1815,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 2, Brawn: 1, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Lariat',
 		itemImg:  '',
 		itemText: 'Shuffle an enemy back into its deck<br>Draw a new card',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsTraps,
 		rightGem:  -1
 	},
@@ -1745,6 +1840,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -1757,12 +1853,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 4 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.tile,
 		itemName: 'Teeny Tiny Wings',
 		itemImg:  '',
-		itemText: 'Draw an extra tile, then put one back',
+		itemText: 'Add an extra tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 3,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1775,12 +1872,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 1, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Clear Lens',
 		itemImg:  '',
 		itemText: 'Shuffle a trap back into its deck<br>Draw a new card',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsEnemies,
 		rightGem:  -1
 	},
@@ -1793,12 +1891,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: null, Brawn: 3, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.draw,
 		itemName: 'Glittering Sickle',
 		itemImg:  '',
-		itemText: 'Draw an extra card, then discard one',
+		itemText: 'Draw an extra card<span>, then discard one</span>',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 2,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1817,6 +1916,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1829,12 +1929,13 @@ export const CARDS: Card[][] = [[
 		cardText: 'German chimera',
 		cardStats: { Brains: 1, Brawn: 3, Bravado: 2 },
 		cardPower: 0,
-		itemType:  ItemType.useNext,
+		itemType:  ItemType.useNext * ItemType.move,
 		itemName: 'TBD',
 		itemImg:  '',
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 4,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -1847,12 +1948,13 @@ export const CARDS: Card[][] = [[
 		cardText: '',
 		cardStats: { Brains: 1, Brawn: 4, Bravado: 1 },
 		cardPower: 0,
-		itemType:  ItemType.useOnce,
+		itemType:  ItemType.useOnce * ItemType.beforeFight,
 		itemName: 'Bear Claw',
 		itemImg:  '',
 		itemText: '+3 vs one Enemy',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1871,6 +1973,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	}
@@ -1890,6 +1993,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -1908,6 +2012,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -1926,6 +2031,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -1944,6 +2050,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  0
 	},
@@ -1962,6 +2069,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -1980,6 +2088,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  0
 	},
@@ -1998,6 +2107,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Increase your <b>Brawn</b> by 1',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  3
 	},
@@ -2016,6 +2126,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -2034,6 +2145,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  3
 	},
@@ -2052,6 +2164,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Force an Enemy to reroll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2070,6 +2183,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -2088,6 +2202,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  -1
 	},
@@ -2106,6 +2221,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2124,6 +2240,7 @@ export const CARDS: Card[][] = [[
 		itemText: '-2 to Enemy Bravado',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  3
 	},
@@ -2142,6 +2259,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2160,6 +2278,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -2175,9 +2294,10 @@ export const CARDS: Card[][] = [[
 		itemType:  ItemType.useNext,
 		itemName: 'Alarum',
 		itemImg:  '',
-		itemText: 'Draw an extra card, then shuffle a card back into its deck',
+		itemText: 'Draw an extra card<span>, then discard one</span>',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
-		itemPower: 0,
+		itemPower: 2,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -2196,6 +2316,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Draw an extra tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  1
 	},
@@ -2214,6 +2335,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2232,6 +2354,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  2
 	},
@@ -2250,6 +2373,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsTraps,
 		rightGem:  1
 	},
@@ -2268,6 +2392,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  2
 	},
@@ -2286,6 +2411,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Increase your <b>Bravado</b> by 1',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  3
 	},
@@ -2304,6 +2430,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  -2
 	},
@@ -2322,6 +2449,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2340,6 +2468,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: -2, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2358,6 +2487,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move 2 extra spaces',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -2376,6 +2506,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -2394,6 +2525,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -2412,6 +2544,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  3
 	},
@@ -2430,6 +2563,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2448,6 +2582,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 3 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2466,6 +2601,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  2
 	},
@@ -2484,6 +2620,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -2502,6 +2639,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -2520,6 +2658,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -2538,6 +2677,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 3 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2556,6 +2696,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: null, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -2574,6 +2715,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move to any adjacent or diagonal tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -2592,6 +2734,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Discard an Enemy and draw a new card',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -2610,6 +2753,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -2628,6 +2772,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.allRolls,
 		rightGem:  -1
 	},
@@ -2646,6 +2791,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enemyRoll,
 		rightGem:  -2
 	},
@@ -2664,6 +2810,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -2682,6 +2829,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: -1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsEnemies,
 		rightGem:  2
 	},
@@ -2700,6 +2848,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2718,6 +2867,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn * GemType.Bravado,
 		rightGem:  1
 	},
@@ -2736,6 +2886,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -2754,6 +2905,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -2772,6 +2924,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -2790,6 +2943,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2808,6 +2962,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2826,6 +2981,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -2844,6 +3000,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Heal a wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  1
 	},
@@ -2862,6 +3019,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsTraps,
 		rightGem:  2
 	},
@@ -2880,6 +3038,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Heal two wounds',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.allRolls,
 		rightGem:  1
 	},
@@ -2898,6 +3057,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Heal a wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsEnemies,
 		rightGem:  2
 	},
@@ -2916,6 +3076,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Add 2 tiles',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  1
 	},
@@ -2934,6 +3095,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -2952,6 +3114,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  2
 	},
@@ -2970,6 +3133,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Increase your <b>Brains</b> by 1',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsEnemies,
 		rightGem:  3
 	},
@@ -2988,6 +3152,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 1, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	}
@@ -3004,9 +3169,10 @@ export const CARDS: Card[][] = [[
 		itemType:  ItemType.useNext,
 		itemName: 'TBD',
 		itemImg:  '',
-		itemText: 'Draw 2 cards and discard 1 of them',
+		itemText: 'Draw an extra card<span>, then discard one</span>',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
-		itemPower: 0,
+		itemPower: 2,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3025,6 +3191,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  3
 	},
@@ -3043,6 +3210,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBravado,
 		rightGem:  1
 	},
@@ -3061,6 +3229,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Discard an Enemy before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  1
 	},
@@ -3079,6 +3248,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3097,6 +3267,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Add a tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3115,6 +3286,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -3133,6 +3305,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   null,
 		rightGem:  null
 	},
@@ -3151,6 +3324,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 2, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  -2
 	},
@@ -3169,6 +3343,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  3
 	},
@@ -3187,6 +3362,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Increase <b>Bravado</b> by 1',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBrains,
 		rightGem:  -1
 	},
@@ -3205,6 +3381,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.vsEnemies,
 		rightGem:  2
 	},
@@ -3241,6 +3418,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Remove a tile<br>Draw a tile',
 		itemStats: { Brains: null, Brawn: null, Bravado: null },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3259,6 +3437,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Discard a Trap before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  3
 	},
@@ -3277,6 +3456,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 3 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  3
 	},
@@ -3313,6 +3493,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Prevent an Enemy from rolling a die',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3331,6 +3512,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3349,6 +3531,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -3367,6 +3550,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 2, Brawn: 2, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  -2
 	},
@@ -3385,6 +3569,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3403,6 +3588,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 3 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  2
 	},
@@ -3421,6 +3607,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  -1
 	},
@@ -3439,6 +3626,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Increase your lowest attribute by 1',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.allRolls,
 		rightGem:  2
 	},
@@ -3457,6 +3645,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Discard an Enemy after you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  -2
 	},
@@ -3475,6 +3664,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Discard a Trap after you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBravado,
 		rightGem:  -1
 	},
@@ -3493,6 +3683,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Defeat a Trap before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  -1
 	},
@@ -3511,6 +3702,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Defeat a Trap before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3529,6 +3721,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Heal a wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -3547,6 +3740,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  3
 	},
@@ -3565,6 +3759,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Increase your lowest attribute by 1',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enemyRoll,
 		rightGem:  2
 	},
@@ -3583,6 +3778,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Draw two tiles<br>Place one and discard the other',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3601,6 +3797,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 2, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  2
 	},
@@ -3619,6 +3816,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  3
 	},
@@ -3637,6 +3835,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 1, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -3655,6 +3854,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 3 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  3
 	},
@@ -3673,6 +3873,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  3
 	},
@@ -3691,6 +3892,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 3 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  3
 	},
@@ -3709,6 +3911,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  3
 	},
@@ -3727,6 +3930,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Defeat an Enemy before you roll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.none,
 		rightGem:  0
 	},
@@ -3745,6 +3949,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  3
 	},
@@ -3763,6 +3968,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  3
 	},
@@ -3781,6 +3987,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 2 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  3
 	},
@@ -3799,6 +4006,7 @@ export const CARDS: Card[][] = [[
 		itemText: '+1 to all rolls',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn,
 		rightGem:  1
 	},
@@ -3817,6 +4025,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.allRolls,
 		rightGem:  3
 	},
@@ -3835,6 +4044,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move to any adjacent tile',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3853,6 +4063,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 1, Brawn: 1, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  2
 	},
@@ -3871,6 +4082,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains,
 		rightGem:  3
 	},
@@ -3889,6 +4101,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 1 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn * GemType.Bravado,
 		rightGem:  1
 	},
@@ -3907,6 +4120,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.allRolls,
 		rightGem:  1
 	},
@@ -3925,6 +4139,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3943,6 +4158,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brawn * GemType.Bravado,
 		rightGem:  2
 	},
@@ -3961,6 +4177,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.allRolls,
 		rightGem:  3
 	},
@@ -3979,6 +4196,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn * GemType.Bravado,
 		rightGem:  1
 	},
@@ -3997,6 +4215,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Heal a wound',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn,
 		rightGem:  2
 	},
@@ -4015,6 +4234,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 3, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBrains,
 		rightGem:  3
 	},
@@ -4033,6 +4253,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Force an Enemy to reroll',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Bravado,
 		rightGem:  2
 	},
@@ -4051,6 +4272,7 @@ export const CARDS: Card[][] = [[
 		itemText: 'Move an extra space',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.trapRoll,
 		rightGem:  3
 	},
@@ -4069,6 +4291,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn * GemType.Bravado,
 		rightGem:  3
 	},
@@ -4087,6 +4310,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.Brains * GemType.Brawn * GemType.Bravado,
 		rightGem:  3
 	},
@@ -4105,6 +4329,7 @@ export const CARDS: Card[][] = [[
 		itemText: '',
 		itemStats: { Brains: 3, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBrawn,
 		rightGem:  3
 	},
@@ -4123,6 +4348,7 @@ export const CARDS: Card[][] = [[
 		itemText: '+2 to all rolls vs Traps',
 		itemStats: { Brains: 0, Brawn: 0, Bravado: 0 },
 		itemPower: 0,
+		itemUsed:  false,
 		leftGem:   GemType.enBrawn,
 		rightGem:  1
 	}

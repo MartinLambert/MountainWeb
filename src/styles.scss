@@ -40,6 +40,8 @@ html, body {
 	height: 100vh;
 	background-color: #897;
 	font: 16px/1.3 'Averia', Garamond, serif;
+	hyphens: auto;
+	hyphenate-limit-last: always;
 }
 
 .attributes {

@@ -17,12 +17,15 @@
 	</div>
 	<div *ngIf="gameService.turnStep === 0">
 		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(1)">Draw a Tile</button></p>
-		<div *ngIf="tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
+		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
 	</div>
 	<div *ngIf="gameService.turnStep === 1">
 		<h2>Move</h2>
 	</div>
 	<div *ngIf="gameService.turnStep === 2">
+		<p *ngIf="!card"><button (click)="drawCard.emit(numToDraw)">Draw {{ numToDraw > 1 ? numToDraw + ' Cards' : 'a Card' }}</button></p>
+	</div>
+	<div *ngIf="gameService.turnStep === 4">
 		<div *ngIf="gameService.midTurn && tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
 		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="dieValue = dieRoll()">Roll a Die</button></p>
 		<div *ngIf="gameService.midTurn && needToRoll && dieValue">
@@ -32,12 +35,11 @@
 			<h2 *ngIf="dieValue === 5 || dieValue === 6">Heal a Wound</h2>
 			<p><button (click)="rolledDie.emit(dieValue); dieValue = 0">Continue</button></p>
 		</div>
-		<p *ngIf="!card"><button (click)="drawCard.emit(1)">Draw a Card</button></p>
 		<div *ngIf="card" class="currentCard">
 			<hotm-card [card]="card"></hotm-card>
 		</div>
 	</div>
-	<div *ngIf="gameService.turnStep === 3 && !gameService.midTurn">
+	<div *ngIf="gameService.turnStep === 5">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
 		<p *ngIf="!player.campLocation"><button (click)="moveCamp.emit()">Place Forward Camp</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>

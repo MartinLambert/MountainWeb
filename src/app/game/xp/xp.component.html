@@ -1,5 +1,5 @@
 <div class="cards">
-	<div *ngFor="let card of player.XP; let num = index" (click)="selectCard(num)" [ngClass]="{'selected': selected[num]}" hotmCardRatio>{{ card.level }}</div>
+	<div *ngFor="let card of player.XP; let num = index" (click)="selectCard(num)" [ngClass]="{'selected': selected[num]}" hotmCardRatio>{{ card.level }}<span *ngIf="card.cardType === cardType.blank">(bonus)</span></div>
 </div>
 <div class="actions">
 	<h1>Select card(s) to trade in for XP</h1>

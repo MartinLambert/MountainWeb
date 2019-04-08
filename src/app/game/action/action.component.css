@@ -10,10 +10,16 @@
   border: 1px solid darkslategrey;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   z-index: 10; }
+  :host .multicard {
+    display: flex; }
   :host .actions {
     display: flex;
     align-items: center;
     justify-content: space-around; }
+    :host .actions > div {
+      margin: 0.5rem; }
+      :host .actions > div:first-child strong, :host .actions > div:nth-child(3) strong {
+        white-space: nowrap; }
     :host .actions strong {
       display: block;
       margin: 0;
