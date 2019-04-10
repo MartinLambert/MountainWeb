@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {GameService} from '../game.service';
 import {Player} from './player';
-import {Card, GemType, ItemType} from '../cards/card';
+import {Card, CardType, GemType, ItemType} from '../cards/card';
 import {blankCard} from '../cards/blankCard';
 
 @Component({
@@ -16,6 +16,7 @@ export class PlayerComponent implements OnInit {
 	@Input() playerNum: number;
 	@Input() zoomed: boolean;
 	@Input() gainingItem: boolean;
+	@Input() opposingCard: string;
 	@Output() discardCard = new EventEmitter<Card>();
 	@Output() cardPower = new EventEmitter<{power: number, value: number}>();
 	@Output() wounded = new EventEmitter();
@@ -62,18 +63,42 @@ export class PlayerComponent implements OnInit {
 		}
 	}
 
+	itemClickable(item: Card): boolean {
+		if (this.playerNum !== this.gameService.currPlayer) return false;
+		if (item.itemType % ItemType.permanent === 0) return false;
+		if (item.itemUsed) return false;
+		if (this.gameService.round <= 0) return false;
+
+		let clickable = true;
+		if (item.itemType % ItemType.tile       === 0 && this.gameService.turnStep !== 0) clickable = false;
+		if (item.itemType % ItemType.move       === 0 && this.gameService.turnStep !== 1) clickable = false;
+		if (item.itemType % ItemType.draw       === 0 && this.gameService.turnStep !== 2) clickable = false;
+		if (item.itemType % ItemType.beforeRoll === 0 && this.gameService.turnStep !== 3) clickable = false;
+		if (item.itemType % ItemType.afterRoll  === 0 && this.gameService.turnStep !== 4) clickable = false;
+		if (item.itemType % ItemType.xp         === 0 && this.gameService.turnStep !== 5) clickable = false;
+		if (item.itemPower === 1 && this.player.wounds[0] !== this.blank) clickable = true;
+		if (item.itemPower > 7 && item.itemPower < 12) clickable = true;
+		if (item.itemPower === 13 && this.opposingCard !== CardType.enemy) clickable = false;
+		if (item.itemPower === 14 && this.opposingCard !== CardType.trap)  clickable = false;
+
+		return clickable;
+	}
 	clickItem(slot: number): void {
 		const item = this.player.items[slot];
 		let itemUsed = false;
 		if (this.gameService.round < 0 && item !== this.blank) return;
 		if (this.gameService.round < 0 || this.gainingItem) {
-			if (item !== this.blank) this.discardCard.emit(item);
+			if (item !== this.blank) {
+				if (item.itemType % ItemType.permanent === 0 && item.itemPower === 4) this.player.movement -= item.itemValue;
+				this.discardCard.emit(item);
+			}
 			this.player.items[slot] = this.gameService.currentCard;
+			if (this.gameService.currentCard.itemType % ItemType.permanent === 0 && this.gameService.currentCard.itemPower === 4) this.player.movement += this.gameService.currentCard.itemValue;
 			this.calculateDisplayStats();
 			this.useCard.emit();
 		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) {
-			if ((item.itemType % ItemType.anytime === 0 && this.player.wounds.length) || (item.itemType % ItemType.tile === 0 && this.gameService.turnStep === 0) || (item.itemType % ItemType.move === 0 && this.gameService.turnStep === 1) || (item.itemType % ItemType.draw === 0 && this.gameService.turnStep === 2) || (item.itemType % ItemType.beforeFight === 0 && this.gameService.turnStep === 3) || (item.itemType % ItemType.afterFight === 0 && this.gameService.turnStep === 4) || (item.itemType % ItemType.xp === 0 && this.gameService.turnStep === 5)) {
-				this.cardPower.emit({power: item.itemPower, value: 1});
+			if (this.itemClickable(item)) {
+				this.cardPower.emit({power: item.itemPower, value: item.itemValue});
 				itemUsed = true;
 			}
 			if (itemUsed)

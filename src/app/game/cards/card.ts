@@ -12,20 +12,20 @@ export enum CardType {
 
 // One card may have multiple ItemTypes and GemTypes (except 'none'). The values are all prime numbers and are multiplied to determine the final GemType value.
 export enum ItemType {
-	none        =  0,
-	permanent   =  2,
-	useOnce     =  3,
-	useNow      =  5,
-	useNext     =  7,
-	discAny     = 11,
-	discTwo     = 13,
-	tile        = 17,
-	move        = 19,
-	draw        = 23,
-	beforeFight = 29,
-	afterFight  = 31,
-	xp          = 37,
-	anytime     = 41
+	none       =  0,
+	permanent  =  2,
+	useOnce    =  3,
+	useNow     =  5,
+	useNext    =  7,
+	discAny    = 11,
+	discTwo    = 13,
+	tile       = 17,
+	move       = 19,
+	draw       = 23,
+	beforeRoll = 29,
+	afterRoll  = 31,
+	xp         = 37,
+	anytime    = 41
 }
 export enum GemType {
 	none      =  2,
@@ -57,6 +57,7 @@ export class Card {
 	itemText:  string;
 	itemStats: Stats;
 	itemPower: number;
+	itemValue: number;
 	itemUsed:  boolean;
 	leftGem:   number;
 	rightGem:  number;

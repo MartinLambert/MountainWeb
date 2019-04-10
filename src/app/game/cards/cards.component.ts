@@ -10,7 +10,7 @@ import { Card        } from './card';
 export class CardsComponent implements OnInit, AfterViewInit {
 
 	decks: Card[][];
-	discards: Card[][] = [new Array<Card>(), new Array<Card>(), new Array<Card>(), new Array<Card>()];
+	discards: Card[][] = [new Array<Card>(), new Array<Card>(), new Array<Card>(), new Array<Card>(), new Array<Card>()];
 
 	constructor(public gameService: GameService) {
 	}

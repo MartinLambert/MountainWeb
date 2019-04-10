@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Card, CardType, GemType} from '../cards/card';
+import {Card, CardType, GemType, ItemType} from '../cards/card';
 import {Player} from '../player/player';
 import {PlayerComponent} from '../player/player.component';
 import {GameService} from '../game.service';
@@ -34,12 +34,21 @@ export class ActionComponent implements OnInit {
 	playerRollModifier = 0;
 	newItem = false;
 	playerWin = false;
+	modifiers = {
+		vsEnemies: 0,
+		vsTraps:   0,
+		allRolls:  10,
+		enBrains:  0,
+		enBrawn:   0,
+		enBravado: 0,
+		enemyRoll: 0,
+		trapRoll:  0
+	};
 
 	constructor(public gameService: GameService) {
 	}
 
 	ngOnInit() {
-		console.log(this.cards);
 		if (this.cards.length === 1) {
 			this.selectedCard = 0;
 			this.calcStats(this.cards[0]);
@@ -48,41 +57,39 @@ export class ActionComponent implements OnInit {
 
 	calcStats(card: Card): void {
 		let previousGem = 0;
-		const modifiers = {
-			vsEnemies: 0,
-			vsTraps:   0,
-			allRolls:  10,
-			enBrains:  0,
-			enBrawn:   0,
-			enBravado: 0,
-			enemyRoll: 0,
-			trapRoll:  0
-		};
 		this.player.items.forEach(item => {
-			if (item.leftGem % GemType.vsEnemies === 0) modifiers.vsEnemies += previousGem;
-			if (item.leftGem % GemType.vsTraps   === 0) modifiers.vsTraps   += previousGem;
-			if (item.leftGem % GemType.allRolls  === 0) modifiers.allRolls  += previousGem;
-			if (item.leftGem % GemType.enBrains  === 0) modifiers.enBrains  += previousGem;
-			if (item.leftGem % GemType.enBrawn   === 0) modifiers.enBrawn   += previousGem;
-			if (item.leftGem % GemType.enBravado === 0) modifiers.enBravado += previousGem;
-			if (item.leftGem % GemType.enemyRoll === 0) modifiers.enemyRoll += previousGem;
-			if (item.leftGem % GemType.trapRoll  === 0) modifiers.trapRoll  += previousGem;
+			if (item.leftGem % GemType.vsEnemies === 0) this.modifiers.vsEnemies += previousGem;
+			if (item.leftGem % GemType.vsTraps   === 0) this.modifiers.vsTraps   += previousGem;
+			if (item.leftGem % GemType.allRolls  === 0) this.modifiers.allRolls  += previousGem;
+			if (item.leftGem % GemType.enBrains  === 0) this.modifiers.enBrains  += previousGem;
+			if (item.leftGem % GemType.enBrawn   === 0) this.modifiers.enBrawn   += previousGem;
+			if (item.leftGem % GemType.enBravado === 0) this.modifiers.enBravado += previousGem;
+			if (item.leftGem % GemType.enemyRoll === 0) this.modifiers.enemyRoll += previousGem;
+			if (item.leftGem % GemType.trapRoll  === 0) this.modifiers.trapRoll  += previousGem;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 17) this.modifiers.vsEnemies += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 18) this.modifiers.vsTraps   += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 19) this.modifiers.allRolls  += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 20) this.modifiers.enBrains  += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 21) this.modifiers.enBrawn   += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 22) this.modifiers.enBravado += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 23) this.modifiers.enemyRoll += item.itemValue;
+			if (item.itemType % ItemType.permanent === 0 && item.itemPower === 24) this.modifiers.trapRoll  += item.itemValue;
 			previousGem = item.rightGem;
 		});
-		this.playerRollModifier += modifiers.allRolls;
+		this.playerRollModifier += this.modifiers.allRolls;
 		if (card.cardType === CardType.enemy) {
 			this.cardStatsString = 'Enemy’s ';
-			this.cardRollModifier += modifiers.enemyRoll;
-			this.playerRollModifier += modifiers.vsEnemies;
+			this.cardRollModifier += this.modifiers.enemyRoll;
+			this.playerRollModifier += this.modifiers.vsEnemies;
 		} else if (card.cardType === CardType.trap) {
 			this.cardStatsString = 'Trap’s ';
-			this.cardRollModifier += modifiers.trapRoll;
-			this.playerRollModifier += modifiers.vsTraps;
+			this.cardRollModifier += this.modifiers.trapRoll;
+			this.playerRollModifier += this.modifiers.vsTraps;
 		}
 		if (card.cardStats.Brains !== null) {
-			if (modifiers.enBrains !== 0) {
+			if (this.modifiers.enBrains !== 0) {
 				this.cardStatsString += 'Modified ';
-				this.cardTotal += modifiers.enBrains;
+				this.cardTotal += this.modifiers.enBrains;
 			}
 			this.cardStatsString += 'Brains';
 			this.playerStatsString += 'Brains';
@@ -94,9 +101,9 @@ export class ActionComponent implements OnInit {
 			}
 		}
 		if (card.cardStats.Brawn !== null) {
-			if (modifiers.enBrawn !== 0) {
+			if (this.modifiers.enBrawn !== 0) {
 				this.cardStatsString += 'Modified ';
-				this.cardTotal += modifiers.enBrawn;
+				this.cardTotal += this.modifiers.enBrawn;
 			}
 			this.cardStatsString += 'Brawn';
 			this.playerStatsString += 'Brawn';
@@ -108,9 +115,9 @@ export class ActionComponent implements OnInit {
 			}
 		}
 		if (card.cardStats.Bravado !== null) {
-			if (modifiers.enBravado !== 0) {
+			if (this.modifiers.enBravado !== 0) {
 				this.cardStatsString += 'Modified ';
-				this.cardTotal += modifiers.enBravado;
+				this.cardTotal += this.modifiers.enBravado;
 			}
 			this.cardStatsString += 'Bravado';
 			this.playerStatsString += 'Bravado';

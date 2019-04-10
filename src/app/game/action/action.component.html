@@ -24,7 +24,7 @@
 			<p *ngIf="playerRoll && !playerWin">
 				<button (click)="lostFight()">You Lose!</button>
 			</p>
-			<p *ngIf="playerRoll && playerWin">
+			<p *ngIf="playerWin">
 				<strong>You Win!</strong>
 				<button *ngIf="!newItem" (click)="newItem = true">Take Item</button>
 				<button *ngIf="!newItem" (click)="saveForXP()">Save for XP</button>

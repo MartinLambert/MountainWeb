@@ -39,6 +39,7 @@ export class CardComponent implements OnInit {
 			itemText:  '',
 			itemStats: null,
 			itemPower: 0,
+			itemValue: 0,
 			itemUsed:  false,
 			leftGem:   GemType.none,
 			rightGem:  0
@@ -57,6 +58,7 @@ export class CardComponent implements OnInit {
 				this.starterCard.itemText  = '';
 				this.starterCard.itemStats = this.card.cardStats;
 				this.starterCard.itemPower = this.card.cardPower;
+				this.starterCard.itemValue = 0;
 				this.starterCard.leftGem   = GemType.none;
 				this.starterCard.rightGem  = 0;
 			} else {
@@ -67,6 +69,7 @@ export class CardComponent implements OnInit {
 				this.starterCard.itemText  = this.card.itemText;
 				this.starterCard.itemStats = this.card.itemStats;
 				this.starterCard.itemPower = this.card.itemPower;
+				this.starterCard.itemValue = this.card.itemValue;
 				this.starterCard.leftGem   = this.card.leftGem;
 				this.starterCard.rightGem  = this.card.rightGem;
 			}

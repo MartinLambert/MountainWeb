@@ -12,19 +12,19 @@
 		<dt>
 			<button [disabled]="tempAttributes.Brains === player.nativeStats.Brains" (click)="decrement('Brains')">−</button>
 			{{ tempAttributes.Brains }}
-			<button [disabled]="currTotal < tempAttributes.Brains" (click)="increment('Brains')">+</button>
+			<button [disabled]="(currTotal < tempAttributes.Brains) && (minOnly ? player.nativeStats.Brains <= player.nativeStats.Brawn && player.nativeStats.Brains <= player.nativeStats.Bravado : true)" (click)="increment('Brains')">+</button>
 		</dt>
 		<dd>Brains</dd><dd>{{ itemDisplay.Brains }}</dd>
 		<dt>
 			<button [disabled]="tempAttributes.Brawn === player.nativeStats.Brawn" (click)="decrement('Brawn')">−</button>
 			{{ tempAttributes.Brawn }}
-			<button [disabled]="currTotal < tempAttributes.Brawn" (click)="increment('Brawn')">+</button>
+			<button [disabled]="(currTotal < tempAttributes.Brawn) && (minOnly ? player.nativeStats.Brawn <= player.nativeStats.Brains && player.nativeStats.Brawn <= player.nativeStats.Bravado : true)" (click)="increment('Brawn')">+</button>
 		</dt>
 		<dd>Brawn</dd><dd>{{ itemDisplay.Brawn }}</dd>
 		<dt>
 			<button [disabled]="tempAttributes.Bravado === player.nativeStats.Bravado" (click)="decrement('Bravado')">−</button>
 			{{ tempAttributes.Bravado }}
-			<button [disabled]="currTotal < tempAttributes.Bravado" (click)="increment('Bravado')">+</button>
+			<button [disabled]="(currTotal < tempAttributes.Bravado) && (minOnly ? player.nativeStats.Bravado <= player.nativeStats.Brains && player.nativeStats.Bravado <= player.nativeStats.Brawn : true)" (click)="increment('Bravado')">+</button>
 		</dt>
 		<dd>Bravado</dd><dd>{{ itemDisplay.Bravado }}</dd>
 	</dl>

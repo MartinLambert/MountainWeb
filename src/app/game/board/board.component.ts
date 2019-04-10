@@ -16,6 +16,12 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	tiles: Tile[];
 	currentTile: Tile;
 	discard: Tile[] = [];
+	boardConstants = {
+		minSpace:  17,
+		maxSpace:  238,
+		rowWidth:  16,
+		colHeight: 16
+	};
 	startLocations = [238, 225, 17, 30];
 	campStarts = [
 		{ top: '86%', left: '53%' },
@@ -63,22 +69,22 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
 	validateTilePlacement(tile: Tile): void {
 		if (!tile.visible) return;
-		for (let i = 17; i < this.spaces.length - 17; i++) {
+		for (let i = this.boardConstants.minSpace; i < this.boardConstants.maxSpace; i++) {
 			this.spaces[i].valid = false;
 			if (this.spaces[i].visible || this.spaces[i].locked) continue;
 			let hasDoor = false;
 			if (tile.doors.north) {
-				if (this.spaces[i - 16].doors.south) hasDoor = true;
-				else if (this.spaces[i - 16].visible) continue;
-			} else if (this.spaces[i - 16].doors.south) continue;
+				if (this.spaces[i - this.boardConstants.rowWidth].doors.south) hasDoor = true;
+				else if (this.spaces[i - this.boardConstants.rowWidth].visible) continue;
+			} else if (this.spaces[i - this.boardConstants.rowWidth].doors.south) continue;
 			if (tile.doors.east) {
 				if (this.spaces[i + 1].doors.west) hasDoor = true;
 				else if (this.spaces[i + 1].visible) continue;
 			} else if (this.spaces[i + 1].doors.west) continue;
 			if (tile.doors.south) {
-				if (this.spaces[i + 16].doors.north) hasDoor = true;
-				else if (this.spaces[i + 16].visible) continue;
-			} else if (this.spaces[i + 16].doors.north) continue;
+				if (this.spaces[i + this.boardConstants.rowWidth].doors.north) hasDoor = true;
+				else if (this.spaces[i + this.boardConstants.rowWidth].visible) continue;
+			} else if (this.spaces[i + this.boardConstants.rowWidth].doors.north) continue;
 			if (tile.doors.west) {
 				if (this.spaces[i - 1].doors.east) hasDoor = true;
 				else if (this.spaces[i - 1].visible) continue;
@@ -89,23 +95,36 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	}
 
 	validatePlayerMovement(distance: number, location: number): void {
-		if (location < 17 || location > 238) return;
-		if (distance && this.gameService.turnStep === 1 && this.spaces[location].visible) {
-			this.spaces[location - 16].valid = this.spaces[location].doors.north && this.spaces[location - 16].doors.south;
-			this.spaces[location +  1].valid = this.spaces[location].doors.east  && this.spaces[location +  1].doors.west;
-			this.spaces[location + 16].valid = this.spaces[location].doors.south && this.spaces[location + 16].doors.north;
-			this.spaces[location -  1].valid = this.spaces[location].doors.west  && this.spaces[location -  1].doors.east;
-			this.validatePlayerMovement(distance - 1, location - 16);
+		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
+		if (distance && this.spaces[location].visible) {
+			this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location].doors.north && this.spaces[location - this.boardConstants.rowWidth].doors.south;
+			this.spaces[location + 1].valid = this.spaces[location].doors.east  && this.spaces[location + 1].doors.west;
+			this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location].doors.south && this.spaces[location + this.boardConstants.rowWidth].doors.north;
+			this.spaces[location - 1].valid = this.spaces[location].doors.west  && this.spaces[location - 1].doors.east;
+			this.validatePlayerMovement(distance - 1, location - this.boardConstants.rowWidth);
 			this.validatePlayerMovement(distance - 1, location +  1);
-			this.validatePlayerMovement(distance - 1, location + 16);
+			this.validatePlayerMovement(distance - 1, location + this.boardConstants.rowWidth);
 			this.validatePlayerMovement(distance - 1, location -  1);
 		}
 		this.spaces[this.players[this.gameService.currPlayer].location].valid = false;
 		// TODO: when there are no valid moves to make
 	}
+	validateAdjacentMovement(location: number, diagonal: boolean): void {
+		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
+		this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location - this.boardConstants.rowWidth].visible;
+		this.spaces[location + 1].valid = this.spaces[location + 1].visible;
+		this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location + this.boardConstants.rowWidth].visible;
+		this.spaces[location - 1].valid = this.spaces[location - 1].visible;
+		if (diagonal) {
+			this.spaces[location - this.boardConstants.rowWidth - 1].valid = this.spaces[location - this.boardConstants.rowWidth - 1].visible;
+			this.spaces[location - this.boardConstants.rowWidth + 1].valid = this.spaces[location - this.boardConstants.rowWidth + 1].visible;
+			this.spaces[location + this.boardConstants.rowWidth - 1].valid = this.spaces[location + this.boardConstants.rowWidth - 1].visible;
+			this.spaces[location + this.boardConstants.rowWidth + 1].valid = this.spaces[location + this.boardConstants.rowWidth + 1].visible;
+		}
+	}
 
 	validateTileRemoval(): void {
-		for (let i = 17; i < this.spaces.length - 17; i++) {
+		for (let i = this.boardConstants.minSpace; i < this.boardConstants.maxSpace; i++) {
 			if (this.spaces[i].locked) continue;
 			if (this.players.filter(player => player.location === i).length) continue;
 			if (this.spaces[i].visible) this.spaces[i].valid = true;
@@ -129,7 +148,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.players[this.gameService.currPlayer].location = currIndex;
 			this.moveAvatar();
 			this.clearValidity();
-			this.gameService.turnStep = 2;
+			this.gameService.turnStep = (space.level === 0 ? 5 : 2);
 		} else if (this.gameService.turnStep === 3) {
 			this.clearValidity();
 			this.discard.unshift(space);

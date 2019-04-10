@@ -8,6 +8,7 @@ import {BoardComponent} from './game/board/board.component';
 import {CardsComponent} from './game/cards/cards.component';
 import {PlayerComponent} from './game/player/player.component';
 import {blankCard} from './game/cards/blankCard';
+import {ActionComponent} from './game/action/action.component';
 
 @Component({
 	selector: 'hotm-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
 	@ViewChild(BoardComponent) board: BoardComponent;
 	@ViewChild(CardsComponent) cards: CardsComponent;
 	@ViewChildren(PlayerComponent) players: QueryList<PlayerComponent>;
+	@ViewChild(ActionComponent) action: ActionComponent;
 	currentTiles: Tile[] = [];
 	currentCards: Card[] = [];
 	currentPlayer: number;
@@ -29,6 +31,7 @@ export class AppComponent implements OnInit {
 	needToHeal = false;
 	tempMoveBonus = 0;
 	tempXPBonus = 0;
+	xpMinOnly = false;
 	numToDraw = 1;
 
 	constructor(public gameService: GameService) {}
@@ -132,19 +135,102 @@ export class AppComponent implements OnInit {
 	}
 
 	useCardPower(cardPower: {power: number, value: number}): void {
+		const playerComp = this.players.find(player => player.playerNum === this.gameService.currPlayer);
+		const playerObj = this.characters[this.gameService.currPlayer];
 		switch (cardPower.power) {
-			case 2:
+			case 1: // heal a Wound
+				for (let i = 0; i < cardPower.value; i++)
+					playerComp.healWound();
+				break;
+			case 2: // draw an extra card
 				this.numToDraw += cardPower.value;
 				break;
-			case 3:
+			case 3: // add an extra tile
 				this.drawTile(cardPower.value);
 				break;
-			case 4:
+			case 4: // move an extra space
 				this.tempMoveBonus += cardPower.value;
 				this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
 				break;
-			case 5:
+			case 5: // gain extra XP
 				this.gainXPBonus(cardPower.value);
+				break;
+			case 6: // move to any adjacent or diagonal tile
+				this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
+				this.board.validateAdjacentMovement(this.characters[this.gameService.currPlayer].location, cardPower.value > 0);
+				break;
+			case 7: // unassigned
+				break;
+			case 8: // increase Brains
+				playerObj.nativeStats.Brains += cardPower.value;
+				playerComp.calculateDisplayStats();
+				break;
+			case 9: // increase Brawn
+				playerObj.nativeStats.Brawn += cardPower.value;
+				playerComp.calculateDisplayStats();
+				break;
+			case 10: // increase Bravado
+				playerObj.nativeStats.Bravado += cardPower.value;
+				playerComp.calculateDisplayStats();
+				break;
+			case 11: // increase lowest stat
+				if (playerObj.nativeStats.Brains < playerObj.nativeStats.Brawn && playerObj.nativeStats.Brains < playerObj.nativeStats.Bravado)
+					playerObj.nativeStats.Brains += cardPower.value;
+				else if (playerObj.nativeStats.Brawn < playerObj.nativeStats.Brains && playerObj.nativeStats.Brawn < playerObj.nativeStats.Bravado)
+					playerObj.nativeStats.Brawn += cardPower.value;
+				if (playerObj.nativeStats.Bravado < playerObj.nativeStats.Brains && playerObj.nativeStats.Bravado < playerObj.nativeStats.Brawn)
+					playerObj.nativeStats.Bravado += cardPower.value;
+				else {
+					this.gainXPBonus(Math.min(playerObj.nativeStats.Brains, playerObj.nativeStats.Brawn) * cardPower.value);
+					this.xpMinOnly = true;
+					this.usingXP = true;
+				}
+				playerComp.calculateDisplayStats();
+				break;
+			case 12: // force Enemy to reroll
+				this.action.cardRoll = this.action.dieRoll();
+				this.action.calcStats(this.activeCard);
+				break;
+			case 13: // discard an Enemy without fighting it
+			case 14: // discard a Trap without fighting it
+				this.discardCard(this.activeCard);
+				this.useCard(this.activeCard);
+				break;
+			case 15: // defeat an Enemy before you roll
+			case 16: // defeat a Trap before you roll
+				this.action.playerWin = true;
+				break;
+			case 17: // increase your attack vs Enemies
+				this.action.modifiers.vsEnemies += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 18: // increase your attack vs Traps
+				this.action.modifiers.vsTraps += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 19: // increase your attack roll
+				this.action.modifiers.allRolls += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 20: // reduce an Enemy's Brains
+				this.action.modifiers.enBrains += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 21: // reduce an Enemy's Brawn
+				this.action.modifiers.enBrawn += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 22: // reduce an Enemy's Bravado
+				this.action.modifiers.enBravado += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 23: // reduce an Enemy's die roll
+				this.action.modifiers.enemyRoll += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				break;
+			case 24: // reduce a Trap's die roll
+				this.action.modifiers.trapRoll += cardPower.value;
+				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
 				break;
 			default:
 				console.warn(`cardPower ${cardPower.power} not implemented`);
@@ -210,6 +296,7 @@ export class AppComponent implements OnInit {
 
 	endTurn(): void {
 		this.usingXP = false;
+		this.xpMinOnly = false;
 		this.numToDraw = 1;
 		this.players.find(player => player.playerNum === this.gameService.currPlayer).expireThisTurnItems();
 		this.gameService.turnStep = 0;

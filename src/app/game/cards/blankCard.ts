@@ -15,6 +15,7 @@ export const blankCard: Card = {
 	itemText:  'Placeholder',
 	itemStats: null,
 	itemPower: 0,
+	itemValue: 0,
 	itemUsed:  false,
 	leftGem:   GemType.none,
 	rightGem:  0

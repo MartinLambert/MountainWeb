@@ -12,6 +12,7 @@ import {Card, CardType} from '../cards/card';
 export class XPComponent implements OnInit {
 
 	@Input() player: Player;
+	@Input() minOnly: boolean;
 	@Output() doneXP = new EventEmitter();
 	@Output() discard = new EventEmitter<Card>();
 	cardType = CardType;
