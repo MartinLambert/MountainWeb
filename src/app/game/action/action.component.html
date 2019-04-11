@@ -20,14 +20,16 @@
 			<p *ngIf="!playerRoll">
 				<button *ngIf="cards[0].cardType === cardType.enemy" (click)="fightCard()">Fight Enemy</button>
 				<button *ngIf="cards[0].cardType === cardType.trap" (click)="fightCard()">Disarm Trap</button>
+				<button *ngIf="cards[0].cardType === cardType.heart" (click)="fightCard()">Battle Dragon</button>
 			</p>
 			<p *ngIf="playerRoll && !playerWin">
 				<button (click)="lostFight()">You Lose!</button>
 			</p>
 			<p *ngIf="playerWin">
 				<strong>You Win!</strong>
-				<button *ngIf="!newItem" (click)="newItem = true">Take Item</button>
-				<button *ngIf="!newItem" (click)="saveForXP()">Save for XP</button>
+				<button *ngIf="!newItem && cards[0].cardType !== cardType.heart" (click)="newItem = true">Take Item</button>
+				<button *ngIf="!newItem && cards[0].cardType !== cardType.heart" (click)="saveForXP()">Save for XP</button>
+				<button *ngIf="cards[0].cardType === cardType.heart" (click)="gameService.round = 10">Close</button>
 			</p>
 		</div>
 	</div>
@@ -36,4 +38,4 @@
 		<strong [ngClass]="{'hidden': !playerRoll}">{{ playerRollString }}</strong>
 	</div>
 </div>
-<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [gainingItem]="newItem" (wounded)="wounded.emit()" (discardCard)="discardCard.emit($event)" (useCard)="useCard.emit(cards[0])" (cardPower)="useItemPower($event)"></hotm-player>
+<hotm-player [player]="player" [playerNum]="playerNum" [zoomed]="true" class="player{{ playerNum }} myTurn" [gainingItem]="newItem" (wounded)="wounded.emit()" (discardCard)="discardCard.emit($event)" (useCard)="useCard.emit($event)" (cardPower)="useItemPower($event)"></hotm-player>

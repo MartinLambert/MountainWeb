@@ -34,6 +34,26 @@
     .Starter .cardTop h3 {
       align-self: end; }
 
+.Heart {
+  grid-template-rows: 1fr;
+  text-align: center; }
+  .Heart section.cardTop h1 {
+    font-size: 2.5rem; }
+  .Heart section.cardTop p.cardText {
+    width: 80%;
+    text-align: center;
+    font-size: 1.25rem;
+    justify-self: center; }
+  .Heart section.cardTop .attributes {
+    align-self: center;
+    justify-self: center;
+    border: 1px solid #333;
+    border-width: 0 1px 1px 0; }
+    .Heart section.cardTop .attributes p {
+      display: none; }
+    .Heart section.cardTop .attributes dl dt, .Heart section.cardTop .attributes dl dd {
+      font-size: 1.5rem; }
+
 section {
   display: grid;
   line-height: 0; }

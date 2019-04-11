@@ -37,7 +37,7 @@ export class ActionComponent implements OnInit {
 	modifiers = {
 		vsEnemies: 0,
 		vsTraps:   0,
-		allRolls:  10,
+		allRolls:  0,
 		enBrains:  0,
 		enBrawn:   0,
 		enBravado: 0,
@@ -85,6 +85,10 @@ export class ActionComponent implements OnInit {
 			this.cardStatsString = 'Trap’s ';
 			this.cardRollModifier += this.modifiers.trapRoll;
 			this.playerRollModifier += this.modifiers.vsTraps;
+		} else if (card.cardType === CardType.heart) {
+			this.cardStatsString = 'Dragon’s ';
+			this.cardRollModifier += this.modifiers.enemyRoll + this.modifiers.trapRoll;
+			this.playerRollModifier += this.modifiers.vsEnemies + this.modifiers.vsTraps;
 		}
 		if (card.cardStats.Brains !== null) {
 			if (this.modifiers.enBrains !== 0) {

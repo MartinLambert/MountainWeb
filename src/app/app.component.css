@@ -43,4 +43,18 @@ hotm-player.player2 {
 hotm-player.player3 {
   grid-area: player3; }
 
+.gameOver {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #CCC;
+  z-index: 20; }
+  .gameOver h1 {
+    font-size: 4rem; }
+
 /*# sourceMappingURL=app.component.css.map */

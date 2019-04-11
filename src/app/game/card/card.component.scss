@@ -39,6 +39,27 @@
 		}
 	}
 }
+.Heart {
+	grid-template-rows: 1fr;
+	text-align: center;
+	section.cardTop {
+		h1 { font-size: 2.5rem }
+		p.cardText {
+			width: 80%;
+			text-align: center;
+			font-size: 1.25rem;
+			justify-self: center;
+		}
+		.attributes {
+			align-self: center;
+			justify-self: center;
+			border: 1px solid #333;
+			border-width: 0 1px 1px 0;
+			p { display: none }
+			dl dt, dl dd { font-size: 1.5rem }
+		}
+	}
+}
 section {
 	display: grid;
 	line-height: 0;

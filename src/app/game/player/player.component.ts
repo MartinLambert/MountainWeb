@@ -20,7 +20,7 @@ export class PlayerComponent implements OnInit {
 	@Output() discardCard = new EventEmitter<Card>();
 	@Output() cardPower = new EventEmitter<{power: number, value: number}>();
 	@Output() wounded = new EventEmitter();
-	@Output() useCard = new EventEmitter();
+	@Output() useCard = new EventEmitter<Card>();
 	blank = blankCard;
 	gemType = GemType;
 	itemType = ItemType;
@@ -76,10 +76,12 @@ export class PlayerComponent implements OnInit {
 		if (item.itemType % ItemType.beforeRoll === 0 && this.gameService.turnStep !== 3) clickable = false;
 		if (item.itemType % ItemType.afterRoll  === 0 && this.gameService.turnStep !== 4) clickable = false;
 		if (item.itemType % ItemType.xp         === 0 && this.gameService.turnStep !== 5) clickable = false;
-		if (item.itemPower === 1 && this.player.wounds[0] !== this.blank) clickable = true;
+		if (item.itemPower === 1 && this.player.wounds[0] === this.blank) clickable = false;
+		if (item.itemPower === 5 && this.player.XP.length === 0) clickable = false;
 		if (item.itemPower > 7 && item.itemPower < 12) clickable = true;
-		if (item.itemPower === 13 && this.opposingCard !== CardType.enemy) clickable = false;
-		if (item.itemPower === 14 && this.opposingCard !== CardType.trap)  clickable = false;
+		if ([12, 13, 15, 17, 20, 21, 22, 23].includes(item.itemPower) && this.opposingCard !== CardType.enemy) clickable = false;
+		if ([14, 16, 18, 24].includes(item.itemPower) && this.opposingCard !== CardType.trap) clickable = false;
+		if (item.itemPower === 19 && (this.opposingCard !== CardType.enemy && this.opposingCard !== CardType.trap)) clickable = false;
 
 		return clickable;
 	}
@@ -95,7 +97,7 @@ export class PlayerComponent implements OnInit {
 			this.player.items[slot] = this.gameService.currentCard;
 			if (this.gameService.currentCard.itemType % ItemType.permanent === 0 && this.gameService.currentCard.itemPower === 4) this.player.movement += this.gameService.currentCard.itemValue;
 			this.calculateDisplayStats();
-			this.useCard.emit();
+			this.useCard.emit(this.gameService.currentCard);
 		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) {
 			if (this.itemClickable(item)) {
 				this.cardPower.emit({power: item.itemPower, value: item.itemValue});
@@ -120,11 +122,15 @@ export class PlayerComponent implements OnInit {
 		for (const item of this.player.items)
 			if (item.itemType === ItemType.useNow)
 				item.itemUsed = true;
+		console.log('Expired UseNow items');
+		console.log(this.player.items);
 	}
 	expireNextTurnItems(): void {
 		for (const item of this.player.items)
 			if (item.itemType === ItemType.useNext)
 				item.itemUsed = true;
+		console.log('Expired UseNext items');
+		console.log(this.player.items);
 	}
 
 	calculateDisplayStats(): void {

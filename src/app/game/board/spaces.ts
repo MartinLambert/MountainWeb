@@ -236,7 +236,7 @@ export const SPACES: Tile[] = [
 	{ visible: false, doors: { north: false, east: false, south: false, west: false }, locked: false, valid: false, level: 1, img: '', rotation: 0 },
 	{ visible: false, doors: { north: false, east: false, south: false, west: false }, locked: false, valid: false, level: 1, img: '', rotation: 0 },
 	{ visible: false, doors: { north: false, east: false, south: false, west: false }, locked: false, valid: false, level: 1, img: '', rotation: 0 },
-	{ visible: false, doors: { north: false, east: false, south: false, west: false }, locked: false, valid: false, level: 1, img: '', rotation: 0 },
+	{ visible: false, doors: { north: false, east: false, south: false, west: false }, locked: false, valid: false, level: 4, img: '', rotation: 0 },
 	{ visible: true,  doors: { north: false, east: false, south: false, west: false }, locked: true,  valid: false, level: 0, img: '', rotation: 0 },
 
 	{ visible: true,  doors: { north: false, east: false, south: false, west: false }, locked: true,  valid: false, level: 0, img: '', rotation: 0 },
