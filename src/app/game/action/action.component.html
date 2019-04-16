@@ -29,7 +29,7 @@
 				<strong>You Win!</strong>
 				<button *ngIf="!newItem && cards[0].cardType !== cardType.heart" (click)="newItem = true">Take Item</button>
 				<button *ngIf="!newItem && cards[0].cardType !== cardType.heart" (click)="saveForXP()">Save for XP</button>
-				<button *ngIf="cards[0].cardType === cardType.heart" (click)="gameService.round = 10">Close</button>
+				<button *ngIf="cards[0].cardType === cardType.heart" (click)="gameService.turnStep = 10">Close</button>
 			</p>
 		</div>
 	</div>

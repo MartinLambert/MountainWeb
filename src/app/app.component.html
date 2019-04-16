@@ -5,4 +5,4 @@
 <hotm-startup *ngIf="gameService.round === -1" [player]="characters[gameService.currPlayer]" [cards]="currentCards" (drawCards)="drawCard($event)" (endTurn)="endTurn()"></hotm-startup>
 <hotm-action *ngIf="activeCard && !gameService.midTurn" [cards]="currentCards" [player]="characters[gameService.currPlayer]" [playerNum]="gameService.currPlayer" (drawCard)="drawCard($event)" (discardCard)="discardCard($event)" (useCard)="useCard($event)" (doEvent)="doEvent()" (wounded)="needToHeal = true" class="player{{ gameService.currPlayer }}"></hotm-action>
 <hotm-xp *ngIf="usingXP" [player]="characters[gameService.currPlayer]" [minOnly]="xpMinOnly" (discard)="discardCard($event)" (doneXP)="usedXP()"></hotm-xp>
-<div *ngIf="gameService.round === 10" class="gameOver"><h1>Game Over</h1></div>
+<div *ngIf="gameService.turnStep === 10" class="gameOver"><h1>Game Over</h1></div>

@@ -156,15 +156,12 @@ export class ActionComponent implements OnInit {
 	}
 	proceedWithCard(): void {
 		const chosenCard = this.cards[this.selectedCard];
-		const originalLength = this.cards.length;
-		let deletePosition = 0;
-		for (let i = 0; i < originalLength; i++)
-			if (this.cards[0] === chosenCard)
-				deletePosition = 1;
-			else {
-				this.discardCard.emit(this.cards[deletePosition]);
-				this.useCard.emit(this.cards[deletePosition]);
-			}
+		const unchosenCards = this.cards.filter(card => card !== chosenCard);
+		while (unchosenCards.length) {
+			this.discardCard.emit(unchosenCards[0]);
+			this.useCard.emit(unchosenCards[0]);
+			unchosenCards.shift();
+		}
 		this.selectedCard = 0;
 	}
 

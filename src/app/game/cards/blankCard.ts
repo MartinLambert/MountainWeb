@@ -20,3 +20,4 @@ export const blankCard: Card = {
 	leftGem:   GemType.none,
 	rightGem:  0
 };
+// TODO: use constructor in card class to eliminate the need for this

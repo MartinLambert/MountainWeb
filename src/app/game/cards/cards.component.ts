@@ -42,7 +42,8 @@ export class CardsComponent implements OnInit, AfterViewInit {
 	drawCard(deckNum: number): void {
 		if ((deckNum < 0 || deckNum > 4) || !this.decks[deckNum] || !this.decks[deckNum].length) return;
 		this.gameService.currentCard = this.decks[deckNum][0];
-		this.decks[deckNum].shift();
+		if (deckNum < 4) // only ever use the top Heart card
+			this.decks[deckNum].shift();
 	}
 
 	discardCard(card: Card): void {

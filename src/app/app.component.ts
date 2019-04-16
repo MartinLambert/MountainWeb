@@ -1,7 +1,7 @@
 import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 
 import {Tile} from './game/board/tile';
-import {Card, CardType, ItemType} from './game/cards/card';
+import {Card, CardType} from './game/cards/card';
 import {Player} from './game/player/player';
 import {GameService} from './game/game.service';
 import {BoardComponent} from './game/board/board.component';
@@ -68,10 +68,12 @@ export class AppComponent implements OnInit {
 		const index = this.currentCards.indexOf(card);
 		if (index >= 0)
 			this.currentCards.splice(index, 1);
-		if (this.currentCards.length)
+		if (this.currentCards.length) {
 			this.activeCard = this.currentCards[0];
-		else {
+			this.gameService.currentCard = this.activeCard;
+		} else {
 			this.activeCard = null;
+			this.gameService.currentCard = null;
 			this.gameService.turnStep = 5;
 		}
 	}

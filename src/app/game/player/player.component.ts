@@ -87,18 +87,19 @@ export class PlayerComponent implements OnInit {
 	}
 	clickItem(slot: number): void {
 		const item = this.player.items[slot];
-		let itemUsed = false;
 		if (this.gameService.round < 0 && item !== this.blank) return;
 		if (this.gameService.round < 0 || this.gainingItem) {
 			if (item !== this.blank) {
 				if (item.itemType % ItemType.permanent === 0 && item.itemPower === 4) this.player.movement -= item.itemValue;
-				this.discardCard.emit(item);
+				if (item.cardType !== CardType.starter)
+					this.discardCard.emit(item);
 			}
 			this.player.items[slot] = this.gameService.currentCard;
 			if (this.gameService.currentCard.itemType % ItemType.permanent === 0 && this.gameService.currentCard.itemPower === 4) this.player.movement += this.gameService.currentCard.itemValue;
 			this.calculateDisplayStats();
 			this.useCard.emit(this.gameService.currentCard);
 		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) {
+			let itemUsed = false;
 			if (this.itemClickable(item)) {
 				this.cardPower.emit({power: item.itemPower, value: item.itemValue});
 				itemUsed = true;
@@ -122,15 +123,11 @@ export class PlayerComponent implements OnInit {
 		for (const item of this.player.items)
 			if (item.itemType === ItemType.useNow)
 				item.itemUsed = true;
-		console.log('Expired UseNow items');
-		console.log(this.player.items);
 	}
 	expireNextTurnItems(): void {
 		for (const item of this.player.items)
 			if (item.itemType === ItemType.useNext)
 				item.itemUsed = true;
-		console.log('Expired UseNext items');
-		console.log(this.player.items);
 	}
 
 	calculateDisplayStats(): void {
