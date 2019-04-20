@@ -88,7 +88,8 @@ export class PlayerComponent implements OnInit {
 	clickItem(slot: number): void {
 		const item = this.player.items[slot];
 		if (this.gameService.round < 0 && item !== this.blank) return;
-		if (this.gameService.round < 0 || this.gainingItem) {
+		if (this.gameService.round < 0 || this.gainingItem) { // Clicking to add an item to inventory
+			if (this.gameService.currentCard === null) return;
 			if (item !== this.blank) {
 				if (item.itemType % ItemType.permanent === 0 && item.itemPower === 4) this.player.movement -= item.itemValue;
 				if (item.cardType !== CardType.starter)
@@ -98,7 +99,7 @@ export class PlayerComponent implements OnInit {
 			if (this.gameService.currentCard.itemType % ItemType.permanent === 0 && this.gameService.currentCard.itemPower === 4) this.player.movement += this.gameService.currentCard.itemValue;
 			this.calculateDisplayStats();
 			this.useCard.emit(this.gameService.currentCard);
-		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) {
+		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) { // Clicking to use an item in inventory
 			let itemUsed = false;
 			if (this.itemClickable(item)) {
 				this.cardPower.emit({power: item.itemPower, value: item.itemValue});

@@ -35,6 +35,7 @@ export class CurrentComponent implements OnInit {
 	}
 
 	draw3Tiles(): void {
+		this.player.location = this.player.startLocation;
 		this.drawTile.emit(3);
 		this.checkTile.emit(this.tiles[0]);
 	}

@@ -23,12 +23,13 @@ export class StartupComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.gameService.currentCard = this.cards[0];
+		// this.gameService.currentCard = this.cards[0];
 	}
 
 	draw3Cards(): void {
 		this.drawCards.emit(3);
-		this.selectedCards = [false, false, true];
+		this.selectedCards = [true, false, false];
+		this.gameService.currentCard = this.cards[0];
 		this.gameService.turnStep = 1;
 	}
 
@@ -46,7 +47,7 @@ export class StartupComponent implements OnInit {
 				if (this.selectedCards.length) {
 					this.gameService.currentCard = this.cards[0];
 					this.selectedCards[0] = true;
-				}
+				} else this.gameService.currentCard = null;
 				break;
 			}
 		}

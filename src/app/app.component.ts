@@ -40,18 +40,6 @@ export class AppComponent implements OnInit {
 		this.gameService.getCharacters().subscribe(players => this.characters = players);
 	}
 
-	drawTile(numTiles: number): void {
-		for (let i = 0; i < numTiles; i++) {
-			this.board.drawTile();
-			this.currentTiles.push(this.gameService.currentTile);
-		}
-		if (numTiles === 1) this.validateTile(this.gameService.currentTile);
-	}
-	validateTile(tile): void {
-		this.board.validateTilePlacement(tile);
-		this.gameService.currentTile = tile;
-	}
-
 	drawCard(numCards: number): void {
 		this.tempMoveBonus = 0;
 		for (let i = 0; i < numCards; i++) {
@@ -81,6 +69,18 @@ export class AppComponent implements OnInit {
 		this.cards.discardCard(card);
 	}
 
+	drawTile(numTiles: number): void {
+		if (numTiles === 3 && this.gameService.round === 0) this.characters[this.gameService.currPlayer].avatarStyle = this.board.avatarLocation(this.characters[this.gameService.currPlayer]);
+		for (let i = 0; i < numTiles; i++) {
+			this.board.drawTile();
+			this.currentTiles.push(this.gameService.currentTile);
+		}
+		if (numTiles === 1) this.validateTile(this.gameService.currentTile);
+	}
+	validateTile(tile): void {
+		this.board.validateTilePlacement(tile);
+		this.gameService.currentTile = tile;
+	}
 	tilePlaced(): void {
 		if (!this.gameService.currentTile) return;
 		const index = this.currentTiles.indexOf(this.gameService.currentTile);

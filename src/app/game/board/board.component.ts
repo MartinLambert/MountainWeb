@@ -42,12 +42,12 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		this.tiles = this.shuffle(this.tiles);
 		for (let i = 0; i < this.players.length; i++) {
 			this.players[i].startLocation = this.startLocations[i];
-			this.players[i].location = this.startLocations[i];
+			// this.players[i].location = this.startLocations[i];
 		}
 	}
 
 	ngAfterViewInit(): void {
-		this.players.forEach(player => player.avatarStyle = this.avatarLocation(player));
+		// this.players.forEach(player => player.avatarStyle = this.avatarLocation(player));
 		this.tileStyle.width = document.getElementsByTagName('hotm-cards')[0].clientWidth + 'px';
 		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight / 2 + 'px';
 	}
@@ -169,6 +169,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		this.players[this.gameService.currPlayer].avatarStyle = this.avatarLocation(this.players[this.gameService.currPlayer]);
 	}
 	avatarLocation(player: Player) {
+		// if (player.location === 0) return { top: '-100px', left: '50%' };
 		const space = document.getElementById('s' + ('000' + player.location).slice(-3));
 		const avatar = document.getElementsByClassName('avatar')[0];
 		return {
