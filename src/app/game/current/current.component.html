@@ -4,8 +4,10 @@
 </div>
 <div *ngIf="gameService.round === 0">
 	<h1>Board Setup: {{ player.shortName }}’s Turn</h1>
-	<div *ngIf="gameService.turnStep === 0">
+	<div *ngIf="gameService.turnStep === turnStepType.drawTile">
 		<button *ngIf="!tiles.length" (click)="draw3Tiles()">Draw 3 Tiles</button>
+	</div>
+	<div *ngIf="gameService.turnStep === turnStepType.placeTile">
 		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
 	</div>
 </div>
@@ -15,18 +17,20 @@
 		<h3>{{ player.shortName }} is wounded and must return to camp.</h3>
 		<p><button (click)="healing.emit()">Continue</button></p>
 	</div>
-	<div *ngIf="gameService.turnStep === 0">
-		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(1)">Draw a Tile</button></p>
+	<div *ngIf="gameService.turnStep === turnStepType.drawTile">
+		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(tilesToDraw)">Draw {{ tilesToDraw > 1 ? tilesToDraw + ' Tiles' : 'a Tile' }}</button></p>
+	</div>
+	<div *ngIf="gameService.turnStep === turnStepType.placeTile">
 		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
 	</div>
-	<div *ngIf="gameService.turnStep === 1">
+	<div *ngIf="gameService.turnStep === turnStepType.move">
 		<h2>Move</h2>
 	</div>
-	<div *ngIf="gameService.turnStep === 2">
-		<p *ngIf="!card"><button (click)="drawCard.emit(numToDraw)">Draw {{ numToDraw > 1 ? numToDraw + ' Cards' : 'a Card' }}</button></p>
+	<div *ngIf="gameService.turnStep === turnStepType.drawCard">
+		<p *ngIf="!card"><button (click)="drawCard.emit(cardsToDraw)">Draw {{ cardsToDraw > 1 ? cardsToDraw + ' Cards' : 'a Card' }}</button></p>
 	</div>
-	<div *ngIf="gameService.turnStep === 4">
-		<div *ngIf="gameService.midTurn && tiles.length" class="currentTile selected"><span [ngStyle]="{'backgroundImage': tiles[0].img, 'transform': 'rotate(' + tiles[0].rotation + 'turn)'}" (click)="rotateTile(tiles[0])"></span></div>
+	<div *ngIf="gameService.turnStep === turnStepType.postCombat">
+		<div *ngIf="gameService.midTurn && tiles.length"><div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div></div>
 		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="dieValue = dieRoll()">Roll a Die</button></p>
 		<div *ngIf="gameService.midTurn && needToRoll && dieValue">
 			<h1>{{ dieValue }}</h1>
@@ -39,7 +43,7 @@
 			<hotm-card [card]="card"></hotm-card>
 		</div>
 	</div>
-	<div *ngIf="gameService.turnStep === 5">
+	<div *ngIf="gameService.turnStep === turnStepType.xpEnd">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
 		<p *ngIf="!player.campLocation"><button (click)="moveCamp.emit()">Place Forward Camp</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>

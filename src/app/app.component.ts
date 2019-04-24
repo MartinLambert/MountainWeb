@@ -1,14 +1,13 @@
-import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
-import {Tile} from './game/board/tile';
-import {Card, CardType} from './game/cards/card';
-import {Player} from './game/player/player';
-import {GameService} from './game/game.service';
-import {BoardComponent} from './game/board/board.component';
-import {CardsComponent} from './game/cards/cards.component';
-import {PlayerComponent} from './game/player/player.component';
-import {blankCard} from './game/cards/blankCard';
-import {ActionComponent} from './game/action/action.component';
+import { Tile            } from './game/board/tile';
+import { Card, CardType  } from './game/cards/card';
+import { Player          } from './game/player/player';
+import { GameService, TurnStepType } from './game/game.service';
+import { BoardComponent  } from './game/board/board.component';
+import { CardsComponent  } from './game/cards/cards.component';
+import { PlayerComponent } from './game/player/player.component';
+import { ActionComponent } from './game/action/action.component';
 
 @Component({
 	selector: 'hotm-root',
@@ -32,12 +31,13 @@ export class AppComponent implements OnInit {
 	tempMoveBonus = 0;
 	tempXPBonus = 0;
 	xpMinOnly = false;
-	numToDraw = 1;
+	tilesToDraw = 1;
+	cardsToDraw = 1;
 
 	constructor(public gameService: GameService) {}
 
 	ngOnInit(): void {
-		this.gameService.getCharacters().subscribe(players => this.characters = players);
+		this.characters = this.gameService.getCharacters();
 	}
 
 	drawCard(numCards: number): void {
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 		if (this.gameService.round > 0) {
 			this.activeCard = this.currentCards[0];
 			this.players.find(player => player.playerNum === this.gameService.currPlayer).expireNextTurnItems();
-			this.gameService.turnStep = 3;
+			this.gameService.turnStep = TurnStepType.preCombat;
 		}
 	}
 	useCard(card: Card): void {
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
 		} else {
 			this.activeCard = null;
 			this.gameService.currentCard = null;
-			this.gameService.turnStep = 5;
+			this.gameService.turnStep = TurnStepType.xpEnd;
 		}
 	}
 	discardCard(card: Card): void {
@@ -70,16 +70,17 @@ export class AppComponent implements OnInit {
 	}
 
 	drawTile(numTiles: number): void {
-		if (numTiles === 3 && this.gameService.round === 0) this.characters[this.gameService.currPlayer].avatarStyle = this.board.avatarLocation(this.characters[this.gameService.currPlayer]);
+		if (this.gameService.round === 0) this.characters[this.gameService.currPlayer].avatarStyle = this.board.avatarLocation(this.characters[this.gameService.currPlayer]);
 		for (let i = 0; i < numTiles; i++) {
 			this.board.drawTile();
 			this.currentTiles.push(this.gameService.currentTile);
 		}
-		if (numTiles === 1) this.validateTile(this.gameService.currentTile);
+		this.validateTile(this.gameService.currentTile);
 	}
 	validateTile(tile): void {
 		this.board.validateTilePlacement(tile);
 		this.gameService.currentTile = tile;
+		this.gameService.turnStep = TurnStepType.placeTile;
 	}
 	tilePlaced(): void {
 		if (!this.gameService.currentTile) return;
@@ -100,7 +101,7 @@ export class AppComponent implements OnInit {
 				} else if (this.gameService.round === 0)
 					this.endTurn(); // Round 0 is just setting up the board
 				else {
-					this.gameService.turnStep = 1;
+					this.gameService.turnStep = TurnStepType.move;
 					this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
 				}
 			} else {
@@ -145,10 +146,10 @@ export class AppComponent implements OnInit {
 					playerComp.healWound();
 				break;
 			case 2: // draw an extra card
-				this.numToDraw += cardPower.value;
+				this.cardsToDraw += cardPower.value;
 				break;
 			case 3: // add an extra tile
-				this.drawTile(cardPower.value);
+				this.gameService.turnStep === TurnStepType.drawTile ? this.tilesToDraw += cardPower.value : this.drawTile(cardPower.value);
 				break;
 			case 4: // move an extra space
 				this.tempMoveBonus += cardPower.value;
@@ -247,7 +248,7 @@ export class AppComponent implements OnInit {
 		this.needToHeal = false;
 		for (let i = 0; i < player.wounds.length; i++) {
 			this.discardCard(player.wounds[i]);
-			player.wounds[i] = blankCard;
+			player.wounds[i] = new Card();
 		}
 		player.location = player.campLocation ? player.campLocation : player.startLocation;
 		this.board.moveAvatar();
@@ -299,9 +300,10 @@ export class AppComponent implements OnInit {
 	endTurn(): void {
 		this.usingXP = false;
 		this.xpMinOnly = false;
-		this.numToDraw = 1;
+		this.cardsToDraw = 1;
+		this.tilesToDraw = 1;
 		this.players.find(player => player.playerNum === this.gameService.currPlayer).expireThisTurnItems();
-		this.gameService.turnStep = 0;
+		this.gameService.turnStep = TurnStepType.drawTile;
 		this.gameService.currPlayer++;
 	}
 }

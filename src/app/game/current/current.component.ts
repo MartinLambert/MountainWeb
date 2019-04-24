@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Player      } from '../player/player';
-import { Card        } from '../cards/card';
-import { Tile        } from '../board/tile';
-import { GameService } from '../game.service';
+import { Player } from '../player/player';
+import { Card } from '../cards/card';
+import { Tile } from '../board/tile';
+import { GameService, TurnStepType } from '../game.service';
 
 @Component({
 	selector: 'hotm-current',
@@ -15,7 +15,8 @@ export class CurrentComponent implements OnInit {
 	@Input() player: Player;
 	@Input() card: Card;
 	@Input() tiles: Tile[];
-	@Input() numToDraw: number;
+	@Input() tilesToDraw: number;
+	@Input() cardsToDraw: number;
 	@Input() needToRoll: boolean;
 	@Input() needToHeal: boolean;
 	@Output() drawTile  = new EventEmitter<number>();
@@ -27,6 +28,7 @@ export class CurrentComponent implements OnInit {
 	@Output() moveCamp  = new EventEmitter();
 	@Output() endTurn   = new EventEmitter();
 	dieValue: number;
+	turnStepType = TurnStepType;
 
 	constructor(public gameService: GameService) {
 	}
@@ -37,7 +39,7 @@ export class CurrentComponent implements OnInit {
 	draw3Tiles(): void {
 		this.player.location = this.player.startLocation;
 		this.drawTile.emit(3);
-		this.checkTile.emit(this.tiles[0]);
+		// this.checkTile.emit(this.tiles[0]);
 	}
 
 	clickTile(tileNum: number): void {

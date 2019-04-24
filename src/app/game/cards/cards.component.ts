@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+
 import { GameService } from '../game.service';
 import { Card        } from './card';
 
@@ -16,9 +17,9 @@ export class CardsComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-		this.gameService.getCards().subscribe(cards => this.decks = cards);
-		for (let i = 0; i < this.decks.length; i++)
-			this.decks[i] = this.shuffle(this.decks[i]);
+		this.decks = this.gameService.getCards();
+		// for (let i = 0; i < this.decks.length; i++)
+		// 	this.decks[i] = this.shuffle(this.decks[i]);
 	}
 
 	ngAfterViewInit(): void {

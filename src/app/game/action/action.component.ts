@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Card, CardType, GemType, ItemType} from '../cards/card';
-import {Player} from '../player/player';
-import {PlayerComponent} from '../player/player.component';
-import {GameService} from '../game.service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+
+import { Player } from '../player/player';
+import { PlayerComponent } from '../player/player.component';
+import { Card, CardType, GemType, ItemType } from '../cards/card';
+import { GameService, TurnStepType } from '../game.service';
 
 @Component({
 	selector: 'hotm-action',
@@ -133,7 +134,7 @@ export class ActionComponent implements OnInit {
 	}
 
 	useItemPower(itemPower: {power: number, value: number}): void {
-		if (this.gameService.turnStep === 2 && itemPower.power === 2) {
+		if (this.gameService.turnStep === TurnStepType.drawCard && itemPower.power === 2) {
 			this.drawCard.emit(itemPower.value);
 		}
 	}
@@ -177,7 +178,7 @@ export class ActionComponent implements OnInit {
 		if (this.playerRollModifier > 0) this.playerRollString += ' + ' + this.playerRollModifier;
 		else if (this.playerRollModifier < 0) this.playerRollString += ' − ' + Math.abs(this.playerRollModifier);
 		this.playerWin = (this.playerTotal + this.playerRoll + this.playerRollModifier) >= (this.cardTotal + this.cardRoll + this.cardRollModifier);
-		this.gameService.turnStep = 4;
+		this.gameService.turnStep = TurnStepType.postCombat;
 	}
 
 	dieRoll(): number {

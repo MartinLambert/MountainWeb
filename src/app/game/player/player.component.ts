@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import {GameService} from '../game.service';
-import {Player} from './player';
-import {Card, CardType, GemType, ItemType} from '../cards/card';
-import {blankCard} from '../cards/blankCard';
+import {GameService, TurnStepType} from '../game.service';
+import { Player } from './player';
+import { Card, CardType, GemType, ItemType } from '../cards/card';
 
 @Component({
 	selector: 'hotm-player',
@@ -21,8 +20,8 @@ export class PlayerComponent implements OnInit {
 	@Output() cardPower = new EventEmitter<{power: number, value: number}>();
 	@Output() wounded = new EventEmitter();
 	@Output() useCard = new EventEmitter<Card>();
-	blank = blankCard;
-	gemType = GemType;
+	cardType = CardType;
+	gemType  = GemType;
 	itemType = ItemType;
 
 	constructor(private gameService: GameService) {
@@ -30,19 +29,19 @@ export class PlayerComponent implements OnInit {
 
 	ngOnInit() {
 		if (!this.player.wounds.length)
-			this.player.wounds = [blankCard, blankCard, blankCard];
+			this.player.wounds = [new Card(), new Card(), new Card()];
 		if (!this.player.items.length)
-			this.player.items = [blankCard, blankCard, blankCard, blankCard];
+			this.player.items = [new Card(), new Card(), new Card(), new Card()];
 
-		if (this.player.playerPower === 1 && this.player.items.length < 5) this.player.items.push(blankCard); // playerPower 1 grants an extra item slot
-		if (this.player.playerPower === 2 && this.player.wounds.length < 4) this.player.wounds.push(blankCard); // playerPower 2 grants an extra wound slot
+		if (this.player.playerPower === 1 && this.player.items.length < 5) this.player.items.push(new Card()); // playerPower 1 grants an extra item slot
+		if (this.player.playerPower === 2 && this.player.wounds.length < 4) this.player.wounds.push(new Card()); // playerPower 2 grants an extra wound slot
 	}
 
 	gainWound(): void {
 		const card = this.gameService.currentCard;
 		let numWounds = 0;
 		for (let i = 0; i < this.player.wounds.length; i++) {
-			if (this.player.wounds[i] === this.blank) {
+			if (this.player.wounds[i].cardType === CardType.blank) {
 				this.player.wounds[i] = card;
 				break;
 			} else numWounds++;
@@ -55,9 +54,9 @@ export class PlayerComponent implements OnInit {
 
 	healWound(): void {
 		for (let i = this.player.wounds.length - 1; i >= 0; i--) {
-			if (this.player.wounds[i] !== this.blank) {
+			if (this.player.wounds[i].cardType !== CardType.blank) {
 				this.discardCard.emit(this.player.wounds[i]);
-				this.player.wounds[i] = this.blank;
+				this.player.wounds[i].cardType = CardType.blank;
 				break;
 			}
 		}
@@ -70,13 +69,14 @@ export class PlayerComponent implements OnInit {
 		if (this.gameService.round <= 0) return false;
 
 		let clickable = true;
-		if (item.itemType % ItemType.tile       === 0 && this.gameService.turnStep !== 0) clickable = false;
-		if (item.itemType % ItemType.move       === 0 && this.gameService.turnStep !== 1) clickable = false;
-		if (item.itemType % ItemType.draw       === 0 && this.gameService.turnStep !== 2) clickable = false;
-		if (item.itemType % ItemType.beforeRoll === 0 && this.gameService.turnStep !== 3) clickable = false;
-		if (item.itemType % ItemType.afterRoll  === 0 && this.gameService.turnStep !== 4) clickable = false;
-		if (item.itemType % ItemType.xp         === 0 && this.gameService.turnStep !== 5) clickable = false;
-		if (item.itemPower === 1 && this.player.wounds[0] === this.blank) clickable = false;
+		if (item.itemType % ItemType.tile       === 0 && this.gameService.turnStep !== TurnStepType.drawTile
+																									&& this.gameService.turnStep !== TurnStepType.placeTile)  clickable = false;
+		if (item.itemType % ItemType.move       === 0 && this.gameService.turnStep !== TurnStepType.move)       clickable = false;
+		if (item.itemType % ItemType.draw       === 0 && this.gameService.turnStep !== TurnStepType.drawCard)   clickable = false;
+		if (item.itemType % ItemType.preCombat  === 0 && this.gameService.turnStep !== TurnStepType.preCombat)  clickable = false;
+		if (item.itemType % ItemType.postCombat === 0 && this.gameService.turnStep !== TurnStepType.postCombat) clickable = false;
+		if (item.itemType % ItemType.xp         === 0 && this.gameService.turnStep !== TurnStepType.xpEnd)      clickable = false;
+		if (item.itemPower === 1 && this.player.wounds[0].cardType === CardType.blank) clickable = false;
 		if (item.itemPower === 5 && this.player.XP.length === 0) clickable = false;
 		if (item.itemPower > 7 && item.itemPower < 12) clickable = true;
 		if ([12, 13, 15, 17, 20, 21, 22, 23].includes(item.itemPower) && this.opposingCard !== CardType.enemy) clickable = false;
@@ -87,10 +87,10 @@ export class PlayerComponent implements OnInit {
 	}
 	clickItem(slot: number): void {
 		const item = this.player.items[slot];
-		if (this.gameService.round < 0 && item !== this.blank) return;
+		if (this.gameService.round < 0 && item.cardType !== CardType.blank) return;
 		if (this.gameService.round < 0 || this.gainingItem) { // Clicking to add an item to inventory
 			if (this.gameService.currentCard === null) return;
-			if (item !== this.blank) {
+			if (item.cardType !== CardType.blank) {
 				if (item.itemType % ItemType.permanent === 0 && item.itemPower === 4) this.player.movement -= item.itemValue;
 				if (item.cardType !== CardType.starter)
 					this.discardCard.emit(item);
@@ -108,7 +108,7 @@ export class PlayerComponent implements OnInit {
 			if (itemUsed)
 				if (item.itemType % ItemType.useOnce === 0) {
 					this.discardCard.emit(item);
-					this.player.items[slot] = this.blank;
+					this.player.items[slot] = new Card();
 					this.calculateDisplayStats();
 					this.useCard.emit();
 				} else

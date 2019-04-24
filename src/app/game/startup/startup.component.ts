@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import {GameService} from '../game.service';
-import {Card} from '../cards/card';
+import {GameService, TurnStepType} from '../game.service';
+import {Card, CardType} from '../cards/card';
 import {Player} from '../player/player';
-import {blankCard} from '../cards/blankCard';
 
 @Component({
 	selector: 'hotm-startup',
@@ -17,20 +16,20 @@ export class StartupComponent implements OnInit {
 	@Output() drawCards = new EventEmitter<number>();
 	@Output() endTurn = new EventEmitter();
 	selectedCards = [false, false, true];
-	blankCard = blankCard;
+	cardType = CardType;
+	turnStepType = TurnStepType;
 
 	constructor(public gameService: GameService) {
 	}
 
 	ngOnInit() {
-		// this.gameService.currentCard = this.cards[0];
 	}
 
 	draw3Cards(): void {
 		this.drawCards.emit(3);
 		this.selectedCards = [true, false, false];
 		this.gameService.currentCard = this.cards[0];
-		this.gameService.turnStep = 1;
+		this.gameService.turnStep = TurnStepType.preCombat;
 	}
 
 	selectCard(whichCard: number): void {
@@ -51,6 +50,6 @@ export class StartupComponent implements OnInit {
 				break;
 			}
 		}
-		if (!this.cards.length) this.gameService.turnStep = 2;
+		if (!this.cards.length) this.gameService.turnStep = TurnStepType.xpEnd;
 	}
 }

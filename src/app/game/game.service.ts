@@ -1,5 +1,4 @@
-import { Injectable     } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Tile       } from './board/tile';
 import { SPACES     } from './board/spaces';
 import { TILES      } from './board/tiles';
@@ -8,6 +7,16 @@ import { CARDS      } from './cards/cards';
 import { Player     } from './player/player';
 import { CHARACTERS } from './player/characters';
 
+export enum TurnStepType {
+	drawTile   = 0,
+	placeTile  = 1,
+	move       = 2,
+	drawCard   = 3,
+	preCombat  = 4,
+	postCombat = 5,
+	xpEnd      = 6
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -15,11 +24,14 @@ export class GameService {
 
 	private _numPlayers = 4;
 	private _currPlayer = 0;
-	private _turnStep = 0;
-	private _round = -1; // should start at -1
+	private _turnStep: TurnStepType = TurnStepType.drawTile;
+	private _round = -1; // should start at -1: draw Starter cards, draw and place initial tiles, then game begins with Round 1
 	private _currentTile: Tile;
 	private _currentCard: Card;
-	private _midTurn = false; // rotating through characters during a turn instead of between turns, e.g. with an event
+	private _midTurn = false;
+	// public flags = {
+	// 	midTurn: false // rotating through characters during a turn instead of between turns, e.g. with an event
+	// };
 
 	constructor() {}
 
@@ -83,19 +95,19 @@ export class GameService {
 		this._midTurn = value;
 	}
 
-	getBoard(): Observable<Tile[]> {
-		return of(SPACES);
+	getBoard(): Tile[] {
+		return SPACES;
 	}
 
-	getTiles(): Observable<Tile[]> {
-		return of(TILES);
+	getTiles(): Tile[] {
+		return TILES;
 	}
 
-	getCards(): Observable<Card[][]> {
-		return of(CARDS);
+	getCards(): Card[][] {
+		return CARDS;
 	}
 
-	getCharacters(): Observable<Player[]> {
-		return of(CHARACTERS);
+	getCharacters(): Player[] {
+		return CHARACTERS;
 	}
 }

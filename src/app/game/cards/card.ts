@@ -22,8 +22,8 @@ export enum ItemType {
 	tile       = 17,
 	move       = 19,
 	draw       = 23,
-	beforeRoll = 29,
-	afterRoll  = 31,
+	preCombat  = 29,
+	postCombat = 31,
 	xp         = 37,
 	anytime    = 41
 }
@@ -61,4 +61,25 @@ export class Card {
 	itemUsed:  boolean;
 	leftGem:   number;
 	rightGem:  number;
+
+	constructor() {
+		this.id        = 0;
+		this.level     = 0;
+		this.cardType  = CardType.blank;
+		this.cardName  = 'Blank Card';
+		this.cardImg   = '';
+		this.cardText  = '';
+		this.cardStats = null;
+		this.cardPower = 0;
+		this.itemType  = ItemType.permanent;
+		this.itemName  = '';
+		this.itemImg   = '';
+		this.itemText  = 'Placeholder';
+		this.itemStats = null;
+		this.itemPower = 0;
+		this.itemValue = 0;
+		this.itemUsed  = false;
+		this.leftGem   = GemType.none;
+		this.rightGem  = 0;
+	}
 }

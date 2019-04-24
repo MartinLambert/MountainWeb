@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { GameService } from '../game.service';
-import { Tile        } from './tile';
-import { Player      } from '../player/player';
-import { blankTile   } from './blankTile';
+import { GameService, TurnStepType } from '../game.service';
+import { Tile } from './tile';
+import { Player } from '../player/player';
 
 @Component({
 	selector: 'hotm-board',
@@ -37,17 +36,15 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
-		this.gameService.getBoard().subscribe(board => this.spaces = board);
-		this.gameService.getTiles().subscribe(tiles => this.tiles = tiles);
+		this.spaces = this.gameService.getBoard();
+		this.tiles = this.gameService.getTiles();
 		this.tiles = this.shuffle(this.tiles);
 		for (let i = 0; i < this.players.length; i++) {
 			this.players[i].startLocation = this.startLocations[i];
-			// this.players[i].location = this.startLocations[i];
 		}
 	}
 
 	ngAfterViewInit(): void {
-		// this.players.forEach(player => player.avatarStyle = this.avatarLocation(player));
 		this.tileStyle.width = document.getElementsByTagName('hotm-cards')[0].clientWidth + 'px';
 		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight / 2 + 'px';
 	}
@@ -138,23 +135,21 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
 	selectSpace(space: Tile, currIndex: number): void {
 		if (!space.valid) return;
+		const currLevel = space.level;
 		if (this.gameService.currentTile) {
-			const currLevel = space.level;
 			this.spaces[currIndex] = this.gameService.currentTile;
 			this.spaces[currIndex].level = currLevel;
 			this.clearValidity();
 			this.tilePlaced.emit();
-		} else if (this.gameService.turnStep === 1) {
+		} else if (this.gameService.turnStep === TurnStepType.move) {
 			this.players[this.gameService.currPlayer].location = currIndex;
 			this.moveAvatar();
 			this.clearValidity();
-			this.gameService.turnStep = (space.level === 0 ? 5 : 2);
-		} else if (this.gameService.turnStep === 3) {
+			this.gameService.turnStep = (space.level === 0 ? TurnStepType.xpEnd : TurnStepType.drawCard);
+		} else if (this.gameService.turnStep === TurnStepType.preCombat) {
 			this.clearValidity();
 			this.discard.unshift(space);
-			const level = this.spaces[currIndex].level;
-			this.spaces[currIndex] = blankTile;
-			this.spaces[currIndex].level = level;
+			this.spaces[currIndex] = new Tile(currLevel);
 			for (let i = 0; i < this.players.length; i++) {
 				if (this.players[i].campLocation === currIndex) {
 					this.players[i].campLocation = 0;
@@ -169,7 +164,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		this.players[this.gameService.currPlayer].avatarStyle = this.avatarLocation(this.players[this.gameService.currPlayer]);
 	}
 	avatarLocation(player: Player) {
-		// if (player.location === 0) return { top: '-100px', left: '50%' };
 		const space = document.getElementById('s' + ('000' + player.location).slice(-3));
 		const avatar = document.getElementsByClassName('avatar')[0];
 		return {

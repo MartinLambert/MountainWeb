@@ -1,6 +1,6 @@
 <div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed, 'newItem': gainingItem}">
 	<div class="wounds">
-		<div *ngFor="let wound of player.wounds" class="{{ wound === blank ? 'nocard' : 'card' }}">
+		<div *ngFor="let wound of player.wounds" class="{{ wound.cardType === cardType.blank ? 'nocard' : 'card' }}">
 			<p>{{ wound.cardName }}</p><p>Wound</p>
 		</div>
 	</div>
@@ -22,9 +22,9 @@
 		<div *ngIf="player.XP.length" class="XP" hotmCardRatio>XP</div>
 	</div>
 	<div class="items">
-		<div *ngFor="let item of player.items; let num = index" class="{{ item === blank ? 'nocard' : 'card' }}" (click)="clickItem(num)">
+		<div *ngFor="let item of player.items; let num = index" class="{{ item.cardType === cardType.blank ? 'nocard' : 'card' }}" (click)="clickItem(num)">
 			<p>Item</p>
-			<div *ngIf="item !== blank" class="itemCard" [class.clickable]="itemClickable(item)">
+			<div *ngIf="item.cardType !== cardType.blank" class="itemCard" [class.clickable]="itemClickable(item)">
 				<h1 [innerHTML]="item.itemName"></h1>
 				<div>
 					<h2 class="itemText" [innerHTML]="item.itemText"></h2>
