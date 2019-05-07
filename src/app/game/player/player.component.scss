@@ -1,6 +1,7 @@
 @import "../../../variables";
 
 :host {
+	align-self: center;
 	margin: 1.5em;
 	opacity: 0.6;
 	//transform: scale(0.9);
@@ -49,8 +50,8 @@
 	.avatar {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		img {
+			margin-left: 3em;
 			width: 3em;
 			height: 3em;
 		}

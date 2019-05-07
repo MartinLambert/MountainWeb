@@ -16,17 +16,21 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	currentTile: Tile;
 	discard: Tile[] = [];
 	boardConstants = {
-		minSpace:  17,
-		maxSpace:  238,
-		rowWidth:  16,
-		colHeight: 16
+		minSpace:   12,
+		maxSpace:  185,
+		rowWidth:   11,
+		colHeight:  17,
+		heartStart:  1,
+		heartEnd:    9,
+		homeStart: 177,
+		homeEnd:   185
 	};
-	startLocations = [238, 225, 17, 30];
+	startLocations = [178, 180, 182, 184];
 	campStarts = [
-		{ top: '86%', left: '53%' },
-		{ top: '86%', left: '2.25%' },
-		{ top: '6%', left: '2.5%' },
-		{ top: '6%', left: '52.25%' }
+		{ top: '11.4%', left: '52.25%' },
+		{ top: '36.4%', left: '52.25%' },
+		{ top: '61.4%', left: '52.5%' },
+		{ top: '86.4%', left: '52.25%' }
 	];
 	tileStyle = {width: '0', height: '0'};
 	@Input() players: Player[];

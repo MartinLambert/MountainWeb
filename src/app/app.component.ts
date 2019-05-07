@@ -102,7 +102,8 @@ export class AppComponent implements OnInit {
 					this.endTurn(); // Round 0 is just setting up the board
 				else {
 					this.gameService.turnStep = TurnStepType.move;
-					this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
+					// this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
+					this.movePlayer();
 				}
 			} else {
 				this.validateTile(this.currentTiles[0]);
@@ -153,13 +154,15 @@ export class AppComponent implements OnInit {
 				break;
 			case 4: // move an extra space
 				this.tempMoveBonus += cardPower.value;
-				this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
+				// this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
+				this.movePlayer();
 				break;
 			case 5: // gain extra XP
 				this.gainXPBonus(cardPower.value);
 				break;
 			case 6: // move to any adjacent or diagonal tile
-				this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
+				// this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
+				this.movePlayer();
 				this.board.validateAdjacentMovement(this.characters[this.gameService.currPlayer].location, cardPower.value > 0);
 				break;
 			case 7: // unassigned
@@ -240,6 +243,14 @@ export class AppComponent implements OnInit {
 		}
 	}
 
+	movePlayer(): void {
+		const player = this.characters[this.gameService.currPlayer];
+		if (this.board.spaces[player.location].level)
+			this.board.validatePlayerMovement(player.movement + this.tempMoveBonus, player.location);
+		else
+			for (let space = this.board.boardConstants.homeStart; space <= this.board.boardConstants.homeEnd; space++)
+				this.board.validatePlayerMovement(player.movement + this.tempMoveBonus, space);
+	}
 	moveCamp(): void {
 		this.board.moveCamp();
 	}

@@ -1,11 +1,11 @@
 :host {
   display: grid;
-  grid-template-rows: 0 repeat(14, 1fr) 0;
-  grid-template-columns: 0 repeat(14, 1fr) 0;
+  grid-template-rows: repeat(17, 1fr);
+  grid-template-columns: 0 repeat(9, 1fr) 0;
   grid-gap: 1px;
   background-color: darkolivegreen;
-  width: 60vmin;
-  height: 60vmin;
+  width: 37vmin;
+  height: 70vmin;
   border: 3px ridge beige;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   grid-area: board;
@@ -101,7 +101,7 @@ div.tile {
   position: absolute;
   top: 60%;
   right: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center; }
   .tilePiles .emptyTiles {

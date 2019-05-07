@@ -13,10 +13,10 @@
 </div>
 <div *ngIf="gameService.round > 0">
 	<h1>Round {{ gameService.round }}: {{ player.shortName }}’s Turn</h1>
-	<div *ngIf="needToHeal">
+	<div *ngIf="needToHeal"><div>
 		<h3>{{ player.shortName }} is wounded and must return to camp.</h3>
 		<p><button (click)="healing.emit()">Continue</button></p>
-	</div>
+	</div></div>
 	<div *ngIf="gameService.turnStep === turnStepType.drawTile">
 		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(tilesToDraw)">Draw {{ tilesToDraw > 1 ? tilesToDraw + ' Tiles' : 'a Tile' }}</button></p>
 	</div>
@@ -45,9 +45,9 @@
 			<hotm-card [card]="card"></hotm-card>
 		</div>
 	</div>
-	<div *ngIf="gameService.turnStep === turnStepType.xpEnd">
+	<div *ngIf="gameService.turnStep === turnStepType.xpEnd && !needToHeal">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
-		<p *ngIf="!player.campLocation"><button (click)="moveCamp.emit()">Place Forward Camp</button></p>
+		<p *ngIf="!player.campLocation && player.location !== player.startLocation"><button (click)="moveCamp.emit()">Place Forward Camp</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>
 </div>

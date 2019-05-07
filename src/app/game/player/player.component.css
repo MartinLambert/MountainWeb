@@ -1,4 +1,5 @@
 :host {
+  align-self: center;
   margin: 1.5em;
   opacity: 0.6;
   transition: all 0.65s ease-in-out; }
@@ -107,9 +108,9 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); }
   .charSheet .avatar {
     display: flex;
-    align-items: center;
-    justify-content: center; }
+    align-items: center; }
     .charSheet .avatar img {
+      margin-left: 3em;
       width: 3em;
       height: 3em; }
     .charSheet .avatar h3 {

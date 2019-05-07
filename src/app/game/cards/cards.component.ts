@@ -18,8 +18,8 @@ export class CardsComponent implements OnInit, AfterViewInit {
 
 	ngOnInit() {
 		this.decks = this.gameService.getCards();
-		// for (let i = 0; i < this.decks.length; i++)
-		// 	this.decks[i] = this.shuffle(this.decks[i]);
+		for (let i = 0; i < this.decks.length; i++)
+			this.decks[i] = this.shuffle(this.decks[i]);
 	}
 
 	ngAfterViewInit(): void {
