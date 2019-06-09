@@ -11,7 +11,7 @@
 			.charSheet {
 				border: 1px solid nth($players, $playerNum);
 				background-color: lighten(nth($players, $playerNum), 50%);
-				.avatar img, .XP { border: 1px solid nth($players, $playerNum) }
+				.XP { border: 1px solid nth($players, $playerNum) }
 				.wounds p, .items>div>p {
 					border: 1px solid nth($players, $playerNum);
 					background-color: lighten(nth($players, $playerNum), 42%);
@@ -35,10 +35,16 @@
 		opacity: 1;
 		transform: scale(1);
 	}
-	.charSheet.zoomed .itemCard {
-		h1 { font-size: 1.25em }
-		h2 { font-size: 1.1em }
-		h3 { font-size: 1em }
+	.charSheet.zoomed {
+		.avatar {
+			justify-content: center;
+			h1 { font-size: 2em }
+		}
+		.itemCard {
+			h1 { font-size: 1.25em }
+			h2 { font-size: 1.1em }
+			h3 { font-size: 1em }
+		}
 	}
 }
 .charSheet {
@@ -49,15 +55,13 @@
 
 	.avatar {
 		display: flex;
+		padding: 0 1em 0 0;
 		align-items: center;
-		img {
-			margin-left: 3em;
-			width: 3em;
-			height: 3em;
-		}
-		h3 {
-			padding-left: 0.5em;
-		}
+		justify-content: flex-end;
+		background-repeat: no-repeat;
+		background-position: 2em;
+		background-size: contain;
+		h1 { font-size: 1.35em }
 	}
 
 	.XP {

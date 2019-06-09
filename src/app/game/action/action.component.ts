@@ -20,7 +20,7 @@ export class ActionComponent implements OnInit {
 	@Output() discardCard = new EventEmitter<Card>();
 	@Output() doEvent = new EventEmitter();
 	@Output() wounded = new EventEmitter();
-	@ViewChild(PlayerComponent) playerComp;
+	@ViewChild(PlayerComponent, { static: true }) playerComp;
 	cardType = CardType;
 	selectedCard: number;
 	cardStatsString: string;

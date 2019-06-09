@@ -16,10 +16,10 @@ import { ActionComponent } from './game/action/action.component';
 })
 export class AppComponent implements OnInit {
 
-	@ViewChild(BoardComponent) board: BoardComponent;
-	@ViewChild(CardsComponent) cards: CardsComponent;
+	@ViewChild(BoardComponent, { static: true }) board: BoardComponent;
+	@ViewChild(CardsComponent, { static: true }) cards: CardsComponent;
 	@ViewChildren(PlayerComponent) players: QueryList<PlayerComponent>;
-	@ViewChild(ActionComponent) action: ActionComponent;
+	@ViewChild(ActionComponent, { static: false }) action: ActionComponent;
 	currentTiles: Tile[] = [];
 	currentCards: Card[] = [];
 	currentPlayer: number;

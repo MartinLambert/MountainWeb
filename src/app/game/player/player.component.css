@@ -6,7 +6,7 @@
   :host.player0 .charSheet {
     border: 1px solid darkviolet;
     background-color: #f2d3ff; }
-    :host.player0 .charSheet .avatar img, :host.player0 .charSheet .XP {
+    :host.player0 .charSheet .XP {
       border: 1px solid darkviolet; }
     :host.player0 .charSheet .wounds p, :host.player0 .charSheet .items > div > p {
       border: 1px solid darkviolet;
@@ -28,7 +28,7 @@
   :host.player1 .charSheet {
     border: 1px solid darkgoldenrod;
     background-color: #fcecc6; }
-    :host.player1 .charSheet .avatar img, :host.player1 .charSheet .XP {
+    :host.player1 .charSheet .XP {
       border: 1px solid darkgoldenrod; }
     :host.player1 .charSheet .wounds p, :host.player1 .charSheet .items > div > p {
       border: 1px solid darkgoldenrod;
@@ -50,7 +50,7 @@
   :host.player2 .charSheet {
     border: 1px solid #15C;
     background-color: #e0eafc; }
-    :host.player2 .charSheet .avatar img, :host.player2 .charSheet .XP {
+    :host.player2 .charSheet .XP {
       border: 1px solid #15C; }
     :host.player2 .charSheet .wounds p, :host.player2 .charSheet .items > div > p {
       border: 1px solid #15C;
@@ -72,7 +72,7 @@
   :host.player3 .charSheet {
     border: 1px solid firebrick;
     background-color: #f8dbdb; }
-    :host.player3 .charSheet .avatar img, :host.player3 .charSheet .XP {
+    :host.player3 .charSheet .XP {
       border: 1px solid firebrick; }
     :host.player3 .charSheet .wounds p, :host.player3 .charSheet .items > div > p {
       border: 1px solid firebrick;
@@ -94,6 +94,10 @@
   :host.myTurn {
     opacity: 1;
     transform: scale(1); }
+  :host .charSheet.zoomed .avatar {
+    justify-content: center; }
+    :host .charSheet.zoomed .avatar h1 {
+      font-size: 2em; }
   :host .charSheet.zoomed .itemCard h1 {
     font-size: 1.25em; }
   :host .charSheet.zoomed .itemCard h2 {
@@ -108,13 +112,14 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); }
   .charSheet .avatar {
     display: flex;
-    align-items: center; }
-    .charSheet .avatar img {
-      margin-left: 3em;
-      width: 3em;
-      height: 3em; }
-    .charSheet .avatar h3 {
-      padding-left: 0.5em; }
+    padding: 0 1em 0 0;
+    align-items: center;
+    justify-content: flex-end;
+    background-repeat: no-repeat;
+    background-position: 2em;
+    background-size: contain; }
+    .charSheet .avatar h1 {
+      font-size: 1.35em; }
   .charSheet .XP {
     display: grid;
     place-content: center;

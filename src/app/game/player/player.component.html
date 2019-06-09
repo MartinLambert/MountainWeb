@@ -4,9 +4,9 @@
 			<p>{{ wound.cardName }}</p><p>Wound</p>
 		</div>
 	</div>
-	<div class="avatar">
-		<img src="assets/characters/{{ player.headshot }}">
-		<h3>{{ player.name }}</h3>
+	<div class="avatar" [ngStyle]="{'background-image': 'url(assets/characters/headshots/' + player.headshot + ')'}">
+<!--		<img src="assets/characters/headshots/{{ player.headshot }}">-->
+		<h1>{{ player.name }}</h1>
 	</div>
 	<div class="charText">
 		<p>{{ player.description }}</p>
@@ -29,8 +29,8 @@
 				<div>
 					<h2 class="itemText" [innerHTML]="item.itemText"></h2>
 					<p *ngIf="item.itemType % itemType.useOnce === 0">Discard after use</p>
-					<p *ngIf="item.itemType % itemType.useNow  === 0">Use immediately or not at all</p>
-					<p *ngIf="item.itemType % itemType.useNext === 0">Use next turn or not at all</p>
+					<p *ngIf="item.itemType % itemType.useNow  === 0">Use immediately</p>
+					<p *ngIf="item.itemType % itemType.useNext === 0">Use next turn</p>
 					<p *ngIf="item.itemType % itemType.discAny === 0">Discard any item to use</p>
 					<p *ngIf="item.itemType % itemType.discTwo === 0">Discard two items to use</p>
 					<h3 *ngIf="item.itemStats && item.itemStats.Brains "><span *ngIf="item.itemStats.Brains  > 0">+</span>{{ item.itemStats.Brains  }} Brains</h3>

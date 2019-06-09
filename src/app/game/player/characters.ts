@@ -35,7 +35,7 @@ export const CHARACTERS: Player[] = [
 		powerName: '',
 		powerDescription: '',
 		portrait: '',
-		headshot: 'blank.gif',
+		headshot: 'Kiki.png',
 		avatar: '',
 		avatarStyle: { top: '36.4%', left: '54.75%' },
 		forwardCamp: '',
