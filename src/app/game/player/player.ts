@@ -13,15 +13,12 @@ export class Player {
 	headshot:         string;
 	avatar:           string;
 	avatarStyle:      { top: string, left: string };
-	forwardCamp:      string;
-	campStyle:        { top: string, left: string };
 	nativeStats:      Stats;
 	calculatedStats:  Stats;
 	displayStats:     DisplayStats;
 	movement:         number;
 	location:         number;
 	startLocation:    number;
-	campLocation:     number;
 	wounds:           Card[];
 	items:            Card[];
 	XP:               Card[];

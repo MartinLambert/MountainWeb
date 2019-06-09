@@ -69,34 +69,6 @@ div.tile {
   .avatar:nth-of-type(4) {
     background-color: firebrick; }
 
-.forwardCamp {
-  position: absolute;
-  z-index: 9;
-  width: 1.5rem;
-  height: 2rem;
-  margin: 0;
-  padding: 0;
-  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.7));
-  transition: all 0.7s ease-in-out;
-  opacity: 0.6;
-  transform: scale(0.9); }
-  .forwardCamp:nth-of-type(5) > span {
-    background-color: #c43aff; }
-  .forwardCamp:nth-of-type(6) > span {
-    background-color: #f3bc36; }
-  .forwardCamp:nth-of-type(7) > span {
-    background-color: #528cf1; }
-  .forwardCamp:nth-of-type(8) > span {
-    background-color: #e05a5a; }
-  .forwardCamp.active {
-    opacity: 1;
-    transform: scale(1); }
-  .forwardCamp span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(0 100%, 50% 0, 100% 100%); }
-
 .tilePiles {
   position: absolute;
   top: 60%;

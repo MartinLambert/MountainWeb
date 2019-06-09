@@ -25,7 +25,6 @@ export class CurrentComponent implements OnInit {
 	@Output() useXP     = new EventEmitter();
 	@Output() rolledDie = new EventEmitter<number>();
 	@Output() healing   = new EventEmitter();
-	@Output() moveCamp  = new EventEmitter();
 	@Output() endTurn   = new EventEmitter();
 	dieValue: number;
 	turnStepType = TurnStepType;

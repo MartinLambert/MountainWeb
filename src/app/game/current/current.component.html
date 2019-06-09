@@ -47,7 +47,6 @@
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.xpEnd && !needToHeal">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
-		<p *ngIf="!player.campLocation && player.location !== player.startLocation"><button (click)="moveCamp.emit()">Place Forward Camp</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>
 </div>

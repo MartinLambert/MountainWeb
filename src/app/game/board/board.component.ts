@@ -26,12 +26,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		homeEnd:   185
 	};
 	startLocations = [178, 180, 182, 184];
-	campStarts = [
-		{ top: '11.4%', left: '52.25%' },
-		{ top: '36.4%', left: '52.25%' },
-		{ top: '61.4%', left: '52.5%' },
-		{ top: '86.4%', left: '52.25%' }
-	];
 	tileStyle = {width: '0', height: '0'};
 	@Input() players: Player[];
 	@Output() tilePlaced = new EventEmitter();
@@ -154,12 +148,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.clearValidity();
 			this.discard.unshift(space);
 			this.spaces[currIndex] = new Tile(currLevel);
-			for (let i = 0; i < this.players.length; i++) {
-				if (this.players[i].campLocation === currIndex) {
-					this.players[i].campLocation = 0;
-					this.players[i].campStyle = this.campStarts[i];
-				}
-			}
 			this.tileRemoved.emit();
 		}
 	}
@@ -176,17 +164,4 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		};
 	}
 
-	moveCamp(): void {
-		const currPlayer = this.players[this.gameService.currPlayer];
-		currPlayer.campLocation = currPlayer.location;
-		currPlayer.campStyle = this.campLocation(currPlayer);
-	}
-	campLocation(player: Player) {
-		const space = document.getElementById('s' + ('000' + player.campLocation).slice(-3));
-		const camp = document.getElementsByClassName('forwardCamp')[0];
-		return {
-			top:  (space.offsetTop  + (space.clientHeight - camp.clientHeight - 1)) + 'px',
-			left: (space.offsetLeft + (space.clientWidth  - camp.clientWidth  - 1)) + 'px'
-		};
-	}
 }

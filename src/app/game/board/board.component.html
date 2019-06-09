@@ -3,7 +3,6 @@
 	<p>{{ (space.level > 0 && space.level < 4) ? space.level : '' }}</p>
 </div>
 <p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [ngClass]="{'pulse': num === gameService.currPlayer}"></p>
-<p *ngFor="let player of players; let num = index" class="forwardCamp" [ngStyle]="player.campStyle" [ngClass]="{'active': num === gameService.currPlayer}"><span></span></p>
 <div class="tilePiles" [ngStyle]="tileStyle">
 	<div class="emptyTiles">
 		<div *ngIf="tiles.length" class="tiles" title="{{ tiles.length }} tile{{ tiles.length === 1 ? '' : 's' }}"><h6>Tiles</h6></div>

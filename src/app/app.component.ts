@@ -251,9 +251,6 @@ export class AppComponent implements OnInit {
 			for (let space = this.board.boardConstants.homeStart; space <= this.board.boardConstants.homeEnd; space++)
 				this.board.validatePlayerMovement(player.movement + this.tempMoveBonus, space);
 	}
-	moveCamp(): void {
-		this.board.moveCamp();
-	}
 	returnToCamp(): void {
 		const player = this.characters[this.gameService.currPlayer];
 		this.needToHeal = false;
@@ -261,7 +258,7 @@ export class AppComponent implements OnInit {
 			this.discardCard(player.wounds[i]);
 			player.wounds[i] = new Card();
 		}
-		player.location = player.campLocation ? player.campLocation : player.startLocation;
+		player.location = player.startLocation;
 		this.board.moveAvatar();
 	}
 
