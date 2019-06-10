@@ -1,5 +1,5 @@
-<div *ngFor="let space of spaces; let num = index" id="s{{ ('000' + num).slice(-3) }}" class="level{{ space.level }}" [ngClass]="{'tile': space.visible, 'valid': space.valid}" (click)="selectSpace(space, num)" title="{{ num }}">
-	<div class="bg" [ngStyle]="{'background-image': space.img, 'transform': 'rotate(' + space.rotation + 'turn)'}"></div>
+<div *ngFor="let space of spaces; let num = index" id="s{{ ('000' + num).slice(-3) }}" class="level{{ space.level }}" [ngClass]="{'tile': space.hasTile, 'valid': space.valid}" (click)="selectSpace(num)" title="{{ num }}">
+	<div class="bg" [ngStyle]="{'background-image': space.tile.img, 'transform': 'rotate(' + space.tile.rotation + 'turn)'}"></div>
 	<p>{{ (space.level > 0 && space.level < 4) ? space.level : '' }}</p>
 </div>
 <p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [ngClass]="{'pulse': num === gameService.currPlayer}"></p>

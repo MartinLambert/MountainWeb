@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import { GameService, TurnStepType } from '../game.service';
-import { Tile } from './tile';
-import { Player } from '../player/player';
+import {GameService, TurnStepType} from '../game.service';
+import {Tile, TilePower} from './tile';
+import {Player} from '../player/player';
+import {Space} from './space';
 
 @Component({
 	selector: 'hotm-board',
@@ -11,7 +12,7 @@ import { Player } from '../player/player';
 })
 export class BoardComponent implements OnInit, AfterViewInit {
 
-	spaces: Tile[];
+	spaces: Space[];
 	tiles: Tile[];
 	currentTile: Tile;
 	discard: Tile[] = [];
@@ -56,34 +57,33 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
 	drawTile(): void {
 		if (!this.tiles.length) return;
-		const tile = this.tiles[0];
-		this.gameService.currentTile = tile;
+		this.gameService.currentTile = this.tiles[0];
 		this.tiles.shift();
 		// TODO: when there are no tiles left to draw
 	}
 
 	validateTilePlacement(tile: Tile): void {
-		if (!tile.visible) return;
+		if (tile.power !== TilePower.none) return;
 		for (let i = this.boardConstants.minSpace; i < this.boardConstants.maxSpace; i++) {
 			this.spaces[i].valid = false;
-			if (this.spaces[i].visible || this.spaces[i].locked) continue;
+			if (this.spaces[i].hasTile || this.spaces[i].locked) continue;
 			let hasDoor = false;
 			if (tile.doors.north) {
-				if (this.spaces[i - this.boardConstants.rowWidth].doors.south) hasDoor = true;
-				else if (this.spaces[i - this.boardConstants.rowWidth].visible) continue;
-			} else if (this.spaces[i - this.boardConstants.rowWidth].doors.south) continue;
+				if (this.spaces[i - this.boardConstants.rowWidth].tile.doors.south) hasDoor = true;
+				else if (this.spaces[i - this.boardConstants.rowWidth].hasTile || this.spaces[i - this.boardConstants.rowWidth].level === -1) continue;
+			} else if (this.spaces[i - this.boardConstants.rowWidth].tile.doors.south) continue;
 			if (tile.doors.east) {
-				if (this.spaces[i + 1].doors.west) hasDoor = true;
-				else if (this.spaces[i + 1].visible) continue;
-			} else if (this.spaces[i + 1].doors.west) continue;
+				if (this.spaces[i + 1].tile.doors.west) hasDoor = true;
+				else if (this.spaces[i + 1].hasTile || this.spaces[i + 1].level === -1) continue;
+			} else if (this.spaces[i + 1].tile.doors.west) continue;
 			if (tile.doors.south) {
-				if (this.spaces[i + this.boardConstants.rowWidth].doors.north) hasDoor = true;
-				else if (this.spaces[i + this.boardConstants.rowWidth].visible) continue;
-			} else if (this.spaces[i + this.boardConstants.rowWidth].doors.north) continue;
+				if (this.spaces[i + this.boardConstants.rowWidth].tile.doors.north) hasDoor = true;
+				else if (this.spaces[i + this.boardConstants.rowWidth].hasTile || this.spaces[i + this.boardConstants.rowWidth].level === -1) continue;
+			} else if (this.spaces[i + this.boardConstants.rowWidth].tile.doors.north) continue;
 			if (tile.doors.west) {
-				if (this.spaces[i - 1].doors.east) hasDoor = true;
-				else if (this.spaces[i - 1].visible) continue;
-			} else if (this.spaces[i - 1].doors.east) continue;
+				if (this.spaces[i - 1].tile.doors.east) hasDoor = true;
+				else if (this.spaces[i - 1].hasTile || this.spaces[i - 1].level === -1) continue;
+			} else if (this.spaces[i - 1].tile.doors.east) continue;
 			this.spaces[i].valid = hasDoor;
 		}
 		// TODO: when there are no valid places to put this tile
@@ -91,11 +91,11 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
 	validatePlayerMovement(distance: number, location: number): void {
 		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
-		if (distance && this.spaces[location].visible) {
-			this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location].doors.north && this.spaces[location - this.boardConstants.rowWidth].doors.south;
-			this.spaces[location + 1].valid = this.spaces[location].doors.east  && this.spaces[location + 1].doors.west;
-			this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location].doors.south && this.spaces[location + this.boardConstants.rowWidth].doors.north;
-			this.spaces[location - 1].valid = this.spaces[location].doors.west  && this.spaces[location - 1].doors.east;
+		if (distance && this.spaces[location].hasTile) {
+			this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location].tile.doors.north && this.spaces[location - this.boardConstants.rowWidth].tile.doors.south;
+			this.spaces[location + 1].valid = this.spaces[location].tile.doors.east  && this.spaces[location + 1].tile.doors.west;
+			this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location].tile.doors.south && this.spaces[location + this.boardConstants.rowWidth].tile.doors.north;
+			this.spaces[location - 1].valid = this.spaces[location].tile.doors.west  && this.spaces[location - 1].tile.doors.east;
 			this.validatePlayerMovement(distance - 1, location - this.boardConstants.rowWidth);
 			this.validatePlayerMovement(distance - 1, location +  1);
 			this.validatePlayerMovement(distance - 1, location + this.boardConstants.rowWidth);
@@ -106,15 +106,15 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	}
 	validateAdjacentMovement(location: number, diagonal: boolean): void {
 		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
-		this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location - this.boardConstants.rowWidth].visible;
-		this.spaces[location + 1].valid = this.spaces[location + 1].visible;
-		this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location + this.boardConstants.rowWidth].visible;
-		this.spaces[location - 1].valid = this.spaces[location - 1].visible;
+		this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location - this.boardConstants.rowWidth].hasTile;
+		this.spaces[location + 1].valid = this.spaces[location + 1].hasTile;
+		this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location + this.boardConstants.rowWidth].hasTile;
+		this.spaces[location - 1].valid = this.spaces[location - 1].hasTile;
 		if (diagonal) {
-			this.spaces[location - this.boardConstants.rowWidth - 1].valid = this.spaces[location - this.boardConstants.rowWidth - 1].visible;
-			this.spaces[location - this.boardConstants.rowWidth + 1].valid = this.spaces[location - this.boardConstants.rowWidth + 1].visible;
-			this.spaces[location + this.boardConstants.rowWidth - 1].valid = this.spaces[location + this.boardConstants.rowWidth - 1].visible;
-			this.spaces[location + this.boardConstants.rowWidth + 1].valid = this.spaces[location + this.boardConstants.rowWidth + 1].visible;
+			this.spaces[location - this.boardConstants.rowWidth - 1].valid = this.spaces[location - this.boardConstants.rowWidth - 1].hasTile;
+			this.spaces[location - this.boardConstants.rowWidth + 1].valid = this.spaces[location - this.boardConstants.rowWidth + 1].hasTile;
+			this.spaces[location + this.boardConstants.rowWidth - 1].valid = this.spaces[location + this.boardConstants.rowWidth - 1].hasTile;
+			this.spaces[location + this.boardConstants.rowWidth + 1].valid = this.spaces[location + this.boardConstants.rowWidth + 1].hasTile;
 		}
 	}
 
@@ -122,7 +122,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		for (let i = this.boardConstants.minSpace; i < this.boardConstants.maxSpace; i++) {
 			if (this.spaces[i].locked) continue;
 			if (this.players.filter(player => player.location === i).length) continue;
-			if (this.spaces[i].visible) this.spaces[i].valid = true;
+			if (this.spaces[i].hasTile) this.spaces[i].valid = true;
 		}
 		// TODO: when there are no valid tiles to remove
 	}
@@ -131,23 +131,23 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		this.spaces.forEach(space => space.valid = false);
 	}
 
-	selectSpace(space: Tile, currIndex: number): void {
-		if (!space.valid) return;
-		const currLevel = space.level;
+	selectSpace(currIndex: number): void {
+		if (!this.spaces[currIndex].valid) return;
 		if (this.gameService.currentTile) {
-			this.spaces[currIndex] = this.gameService.currentTile;
-			this.spaces[currIndex].level = currLevel;
+			this.spaces[currIndex].tile = this.gameService.currentTile;
+			this.spaces[currIndex].hasTile = true;
 			this.clearValidity();
 			this.tilePlaced.emit();
 		} else if (this.gameService.turnStep === TurnStepType.move) {
 			this.players[this.gameService.currPlayer].location = currIndex;
 			this.moveAvatar();
 			this.clearValidity();
-			this.gameService.turnStep = (space.level === 0 ? TurnStepType.xpEnd : TurnStepType.drawCard);
+			this.gameService.turnStep = (this.spaces[currIndex].level === 0 ? TurnStepType.xpEnd : TurnStepType.drawCard);
 		} else if (this.gameService.turnStep === TurnStepType.preCombat) {
+			this.discard.unshift(this.spaces[currIndex].tile);
 			this.clearValidity();
-			this.discard.unshift(space);
-			this.spaces[currIndex] = new Tile(currLevel);
+			this.spaces[currIndex].tile = new Tile();
+			this.spaces[currIndex].hasTile = false;
 			this.tileRemoved.emit();
 		}
 	}

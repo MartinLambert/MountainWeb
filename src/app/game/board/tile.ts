@@ -1,29 +1,35 @@
+export enum TilePower {
+	none = 0,
+	addBrains = 1,
+	addBrawn = 2,
+	addBravado = 3,
+	drawTwo = 4,
+	removeTile = 5,
+	moveTile = 6
+}
+
 export class Tile {
-	visible:  boolean;
-	locked:   boolean;
-	valid:    boolean;
 	doors: {
 		north:  boolean;
 		east:   boolean;
 		south:  boolean;
 		west:   boolean;
 	};
-	level:    number;
 	img:      string;
 	rotation: number;
+	isPortal: boolean;
+	power:    TilePower;
 
-	constructor(lvl?: number) {
-		this.visible =  false;
-		this.locked =   false;
-		this.valid =    false;
+	constructor() { // builds a blank tile for empty spaces
 		this.doors = {
-			north:        false,
-			east:         false,
-			south:        false,
-			west:         false
+			north: false,
+			east:  false,
+			south: false,
+			west:  false
 		};
-		this.level =    lvl || 0;
-		this.img =      '';
+		this.img      = '';
 		this.rotation = 0;
+		this.isPortal = false;
+		this.power    = TilePower.none;
 	}
 }

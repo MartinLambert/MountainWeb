@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Tile       } from './board/tile';
-import { SPACES     } from './board/spaces';
 import { TILES      } from './board/tiles';
+import { Space      } from './board/space';
+import { SPACES     } from './board/spaces';
 import { Card       } from './cards/card';
 import { CARDS      } from './cards/cards';
 import { Player     } from './player/player';
@@ -95,7 +96,7 @@ export class GameService {
 		this._midTurn = value;
 	}
 
-	getBoard(): Tile[] {
+	getBoard(): Space[] {
 		return SPACES;
 	}
 
