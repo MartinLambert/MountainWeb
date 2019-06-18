@@ -75,6 +75,7 @@ body {
 			justify-content: center;
 			margin: 0;
 			padding: 0 0.5em;
+			border: 0;
 			background-color: ghostwhite;
 			font-size: 1.2rem;
 			line-height: 1.4;
@@ -82,11 +83,95 @@ body {
 		}
 		dt {
 			font-family: Luminari, fantasy;
+			&.modified { font-style: italic }
 		}
-		dt, dt + dd { background-color: lightblue; }
-		dt:nth-of-type(2), dt:nth-of-type(2) + dd { background-color: yellow; }
-		dt:nth-of-type(3), dt:nth-of-type(3) + dd { background-color: lightpink; }
 		.unused { background-color: ghostwhite; color: #666 }
+	}
+}
+
+section {
+	.leftGem, .rightGem {
+		position: absolute;
+		left: 0;
+		top: 32.5%;
+		width: 20%;
+		height: 35%;
+		filter: drop-shadow(1px 0 0 #333);
+		&>div {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			background-color: #E3E3E9;
+			border-width: 1px 0;
+			border-style: solid;
+			border-color: #333;
+			clip-path: polygon(0 0, 50% 0, 90% 50%, 50% 100%, 0 100%);
+			&>div:not(.leftGemAttr) {
+				width: 85%;
+				padding-left: 7px;
+				font-size: 20px;
+				text-align: left;
+			}
+		}
+	}
+	.leftGemAttr {
+		display: grid;
+		grid-template-rows: repeat(3, 1fr);
+		grid-gap: 1px;
+		width: 100%;
+		height: 100%;
+		background-color: #999;
+		&>div {
+			width: 100%;
+			height: 100%;
+			background-color: ghostwhite;
+			border: 0;
+		}
+	}
+	.rightGem {
+		left: auto;
+		right: 0;
+		filter: drop-shadow(-1px 0 0 #333);
+		&>div {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			clip-path: polygon(100% 0, 50% 0, 10% 50%, 50% 100%, 100% 100%);
+			h1 {
+				margin: 0;
+				padding: 0 0.15em;
+				font-size: 2.75em;
+				font-family: Luminari, fantasy;
+			}
+		}
+	}
+	&.equippedItem {
+		h2.itemText, p {
+			margin: 0;
+			font-size: 0.8em;
+			text-align: center;
+		}
+		.leftGem, .rightGem {
+			top: 0;
+			bottom: 0;
+			width: 2.5em;
+			height: auto;
+			padding: 0.5em 0;
+			z-index: -10;
+			&>div>div:not(.leftGemAttr) {
+				padding-left: 1px;
+				font-size: 10px;
+			}
+		}
+		.rightGem>div h1 {
+			margin: 0;
+			font-size: 1.25em;
+		}
+		.brains, .brawn, .bravado {
+			padding: 0 0.5em;
+			font-size: 1em;
+		}
 	}
 }
 
@@ -99,6 +184,15 @@ body {
 
 .visible { visibility: visible }
 .hidden { visibility: hidden }
+.brains { background-color: $brains !important }
+.brawn { background-color: $brawn !important }
+.bravado { background-color: $bravado !important }
+.brains, .brawn, .bravado {
+	margin: 0;
+	padding: 0 1em;
+	border: 1px solid darkgray;
+	border-bottom: 0;
+}
 
 @media all and (max-width: 1500px) {
 	html, body {

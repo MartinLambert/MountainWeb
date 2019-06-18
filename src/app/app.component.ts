@@ -1,13 +1,14 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { Tile            } from './game/board/tile';
-import { Card, CardType  } from './game/cards/card';
+import { Card, CardType  } from './game/card/card';
 import { Player          } from './game/player/player';
-import { GameService, TurnStepType } from './game/game.service';
+import { GameService} from './game/game.service';
 import { BoardComponent  } from './game/board/board.component';
 import { CardsComponent  } from './game/cards/cards.component';
 import { PlayerComponent } from './game/player/player.component';
 import { ActionComponent } from './game/action/action.component';
+import {TurnStepType} from './game/card/item';
 
 @Component({
 	selector: 'hotm-root',
@@ -146,10 +147,12 @@ export class AppComponent implements OnInit {
 				for (let i = 0; i < cardPower.value; i++)
 					playerComp.healWound();
 				break;
-			case 2: // draw an extra card
-				this.cardsToDraw += cardPower.value;
+			// case 2: // draw an extra card  EDIT June 2019: this power will no longer exist
+			// 	this.cardsToDraw += cardPower.value;
+			// 	break;
+			case 2: // TODO: move to any portal
 				break;
-			case 3: // add an extra tile
+			case 3: // draw an extra tile
 				this.gameService.turnStep === TurnStepType.drawTile ? this.tilesToDraw += cardPower.value : this.drawTile(cardPower.value);
 				break;
 			case 4: // move an extra space
@@ -165,7 +168,7 @@ export class AppComponent implements OnInit {
 				this.movePlayer();
 				this.board.validateAdjacentMovement(this.characters[this.gameService.currPlayer].location, cardPower.value > 0);
 				break;
-			case 7: // unassigned
+			case 7: // TODO: move to any occupied space
 				break;
 			case 8: // increase Brains
 				playerObj.nativeStats.Brains += cardPower.value;
@@ -193,17 +196,19 @@ export class AppComponent implements OnInit {
 				}
 				playerComp.calculateDisplayStats();
 				break;
-			case 12: // force Enemy to reroll
-				this.action.cardRoll = this.action.dieRoll();
-				this.action.calcStats(this.activeCard);
+			// case 12: // force Enemy to reroll  EDIT June 2019: this power will no longer exist
+			// 	this.action.cardRoll = this.action.dieRoll();
+			// 	this.action.calcStats(this.activeCard);
+			// 	break;
+			case 12: // TODO: move to any space in this row
 				break;
 			case 13: // discard an Enemy without fighting it
 			case 14: // discard a Trap without fighting it
 				this.discardCard(this.activeCard);
 				this.useCard(this.activeCard);
 				break;
-			case 15: // defeat an Enemy before you roll
-			case 16: // defeat a Trap before you roll
+			case 15: // defeat an Enemy
+			case 16: // defeat a Trap
 				this.action.playerWin = true;
 				break;
 			case 17: // increase your attack vs Enemies
@@ -230,13 +235,17 @@ export class AppComponent implements OnInit {
 				this.action.modifiers.enBravado += cardPower.value;
 				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
 				break;
-			case 23: // reduce an Enemy's die roll
-				this.action.modifiers.enemyRoll += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+			// case 23: // reduce an Enemy's die roll  EDIT June 2019: this power will no longer exist
+			// 	this.action.modifiers.enemyRoll += cardPower.value;
+			// 	if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+			// 	break;
+			// case 24: // reduce a Trap's die roll  EDIT June 2019: this power will no longer exist
+			// 	this.action.modifiers.trapRoll += cardPower.value;
+			// 	if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+			// 	break;
+			case 23: // TODO: move a tile
 				break;
-			case 24: // reduce a Trap's die roll
-				this.action.modifiers.trapRoll += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+			case 24: // TODO: move to any portal or occupied space
 				break;
 			default:
 				console.warn(`cardPower ${cardPower.power} not implemented`);
@@ -277,8 +286,8 @@ export class AppComponent implements OnInit {
 
 	doEvent(): void {
 		if (this.activeCard.cardType !== CardType.event) return;
-		if (!this.activeCard.cardPower) {
-			console.log(`Event "${this.activeCard.cardName}" hasn't been implemented yet`);
+		if (!this.activeCard.cardTop.power) {
+			console.log(`Event "${this.activeCard.cardTop.name}" hasn't been implemented yet`);
 			this.discardCard(this.activeCard);
 			this.useCard(this.activeCard);
 			return;
@@ -286,21 +295,25 @@ export class AppComponent implements OnInit {
 		this.currentPlayer = this.gameService.currPlayer;
 		this.gameService.midTurn = true;
 
-		switch (this.activeCard.cardPower) {
-			case 1: // Brief Reprieve: Heal a wound
+		switch (this.activeCard.cardTop.power) {
+			case 1: // Brief Reprieve: heal a wound
 				this.players.forEach(player => player.healWound());
 				this.gameService.midTurn = false;
 				this.discardCard(this.activeCard);
 				this.useCard(this.activeCard);
 				break;
-			case 2: // Cave-In: Remove a tile
+			case 2: // Cave-In: remove a tile
 				this.board.validateTileRemoval();
 				break;
-			case 3: // The Path Grows Clearer: Add a tile
+			case 3: // The Path Grows Clearer: draw a tile
 				this.drawTile(1);
 				break;
 			case 4: // Power Surge: gain or heal a wound
 				this.needToRoll = true;
+				break;
+			case 5: // TODO: Flash Flood: disable an item
+				break;
+			case 6: // TODO: Phase Shift: move to any space in your row
 				break;
 		}
 	}

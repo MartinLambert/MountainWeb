@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import {GameService, TurnStepType} from '../game.service';
-import { Player } from './player';
-import { Card, CardType, GemType, ItemType } from '../cards/card';
+import {GameService} from '../game.service';
+import {Player} from './player';
+import {Card, CardType} from '../card/card';
+import {GemType, Item, ItemType} from '../card/item';
 
 @Component({
 	selector: 'hotm-player',
@@ -21,8 +22,6 @@ export class PlayerComponent implements OnInit {
 	@Output() wounded = new EventEmitter();
 	@Output() useCard = new EventEmitter<Card>();
 	cardType = CardType;
-	gemType  = GemType;
-	itemType = ItemType;
 
 	constructor(private gameService: GameService) {
 	}
@@ -62,57 +61,50 @@ export class PlayerComponent implements OnInit {
 		}
 	}
 
-	itemClickable(item: Card): boolean {
+	itemClickable(item: Item): boolean {
 		if (this.playerNum !== this.gameService.currPlayer) return false;
-		if (item.itemType % ItemType.permanent === 0) return false;
-		if (item.itemUsed) return false;
+		if (item.type === ItemType.permanent) return false;
+		if (item.disabled) return false;
 		if (this.gameService.round <= 0) return false;
 
 		let clickable = true;
-		if (item.itemType % ItemType.tile       === 0 && this.gameService.turnStep !== TurnStepType.drawTile
-																									&& this.gameService.turnStep !== TurnStepType.placeTile)  clickable = false;
-		if (item.itemType % ItemType.move       === 0 && this.gameService.turnStep !== TurnStepType.move)       clickable = false;
-		if (item.itemType % ItemType.draw       === 0 && this.gameService.turnStep !== TurnStepType.drawCard)   clickable = false;
-		if (item.itemType % ItemType.preCombat  === 0 && this.gameService.turnStep !== TurnStepType.preCombat)  clickable = false;
-		if (item.itemType % ItemType.postCombat === 0 && this.gameService.turnStep !== TurnStepType.postCombat) clickable = false;
-		if (item.itemType % ItemType.xp         === 0 && this.gameService.turnStep !== TurnStepType.xpEnd)      clickable = false;
-		if (item.itemPower === 1 && this.player.wounds[0].cardType === CardType.blank) clickable = false;
-		if (item.itemPower === 5 && this.player.XP.length === 0) clickable = false;
-		if (item.itemPower > 7 && item.itemPower < 12) clickable = true;
-		if ([12, 13, 15, 17, 20, 21, 22, 23].includes(item.itemPower) && this.opposingCard !== CardType.enemy) clickable = false;
-		if ([14, 16, 18, 24].includes(item.itemPower) && this.opposingCard !== CardType.trap) clickable = false;
-		if (item.itemPower === 19 && (this.opposingCard !== CardType.enemy && this.opposingCard !== CardType.trap)) clickable = false;
+		if (!item.usable.includes(this.gameService.turnStep)) clickable = false;
+		if (item.power === 1 && this.player.wounds[0].cardType === CardType.blank) clickable = false;
+		if (item.power === 5 && this.player.XP.length === 0) clickable = false;
+		if ([13, 15, 17, 20, 21, 22].includes(item.power) && this.opposingCard !== CardType.enemy) clickable = false;
+		if ([14, 16, 18].includes(item.power) && this.opposingCard !== CardType.trap) clickable = false;
 
 		return clickable;
 	}
 	clickItem(slot: number): void {
-		const item = this.player.items[slot];
-		if (this.gameService.round < 0 && item.cardType !== CardType.blank) return;
+		const card = this.player.items[slot];
+		if (this.gameService.round < 0 && card.cardType !== CardType.blank) return;
+		const item = card.item;
 		if (this.gameService.round < 0 || this.gainingItem) { // Clicking to add an item to inventory
 			if (this.gameService.currentCard === null) return;
-			if (item.cardType !== CardType.blank) {
-				if (item.itemType % ItemType.permanent === 0 && item.itemPower === 4) this.player.movement -= item.itemValue;
-				if (item.cardType !== CardType.starter)
-					this.discardCard.emit(item);
+			if (card.cardType !== CardType.blank) {
+				if (item.type % ItemType.permanent === 0 && item.power === 4) this.player.movement -= item.value;
+				if (card.cardType !== CardType.starter)
+					this.discardCard.emit(card);
 			}
 			this.player.items[slot] = this.gameService.currentCard;
-			if (this.gameService.currentCard.itemType % ItemType.permanent === 0 && this.gameService.currentCard.itemPower === 4) this.player.movement += this.gameService.currentCard.itemValue;
+			if (this.gameService.currentCard.item.type % ItemType.permanent === 0 && this.gameService.currentCard.item.power === 4) this.player.movement += this.gameService.currentCard.item.value;
 			this.calculateDisplayStats();
 			this.useCard.emit(this.gameService.currentCard);
-		} else if (item.itemType % ItemType.permanent !== 0 && !item.itemUsed) { // Clicking to use an item in inventory
+		} else if (item.type % ItemType.permanent !== 0 && !item.disabled) { // Clicking to use an item in inventory
 			let itemUsed = false;
 			if (this.itemClickable(item)) {
-				this.cardPower.emit({power: item.itemPower, value: item.itemValue});
+				this.cardPower.emit({power: item.power, value: item.value});
 				itemUsed = true;
 			}
 			if (itemUsed)
-				if (item.itemType % ItemType.useOnce === 0) {
-					this.discardCard.emit(item);
+				if (item.type % ItemType.useOnce === 0) {
+					this.discardCard.emit(card);
 					this.player.items[slot] = new Card();
 					this.calculateDisplayStats();
 					this.useCard.emit();
 				} else
-					item.itemUsed = true;
+					item.disabled = true;
 		}
 	}
 
@@ -121,14 +113,14 @@ export class PlayerComponent implements OnInit {
 	}
 
 	expireThisTurnItems(): void {
-		for (const item of this.player.items)
-			if (item.itemType === ItemType.useNow)
-				item.itemUsed = true;
+		for (const card of this.player.items)
+			if (card.item && card.item.type === ItemType.useNow)
+				card.item.disabled = true;
 	}
 	expireNextTurnItems(): void {
-		for (const item of this.player.items)
-			if (item.itemType === ItemType.useNext)
-				item.itemUsed = true;
+		for (const card of this.player.items)
+			if (card.item && card.item.type === ItemType.useNext)
+				card.item.disabled = true;
 	}
 
 	calculateDisplayStats(): void {
@@ -136,15 +128,16 @@ export class PlayerComponent implements OnInit {
 		let brains  = this.player.nativeStats.Brains;
 		let brawn   = this.player.nativeStats.Brawn;
 		let bravado = this.player.nativeStats.Bravado;
-		for (const item of this.player.items) {
-			brains  += (item.itemStats ? item.itemStats.Brains  : 0) + (item.leftGem % GemType.Brains  ? 0 : previousGem);
-			brawn   += (item.itemStats ? item.itemStats.Brawn   : 0) + (item.leftGem % GemType.Brawn   ? 0 : previousGem);
-			bravado += (item.itemStats ? item.itemStats.Bravado : 0) + (item.leftGem % GemType.Bravado ? 0 : previousGem);
-			previousGem = item.rightGem;
+		for (const card of this.player.items) {
+			if (card.cardType === CardType.blank || !card.item) {
+				previousGem = 0;
+				continue;
+			}
+			brains  += (card.item.stats ? card.item.stats.Brains  : 0) + (card.item.leftGem.includes(GemType.Brains)  ? previousGem : 0);
+			brawn   += (card.item.stats ? card.item.stats.Brawn   : 0) + (card.item.leftGem.includes(GemType.Brawn)   ? previousGem : 0);
+			bravado += (card.item.stats ? card.item.stats.Bravado : 0) + (card.item.leftGem.includes(GemType.Bravado) ? previousGem : 0);
+			previousGem = card.item.rightGem;
 		}
-		this.player.displayStats.Brains  = (brains  === this.player.nativeStats.Brains  ? '' : '<i>') + (brains  > 0 ? brains  : 0)  + (brains  === this.player.nativeStats.Brains  ? '' : '</i>');
-		this.player.displayStats.Brawn   = (brawn   === this.player.nativeStats.Brawn   ? '' : '<i>') + (brawn   > 0 ? brawn   : 0)  + (brawn   === this.player.nativeStats.Brawn   ? '' : '</i>');
-		this.player.displayStats.Bravado = (bravado === this.player.nativeStats.Bravado ? '' : '<i>') + (bravado > 0 ? bravado : 0)  + (bravado === this.player.nativeStats.Bravado ? '' : '</i>');
 		this.player.calculatedStats.Brains  = brains;
 		this.player.calculatedStats.Brawn   = brawn;
 		this.player.calculatedStats.Bravado = bravado;

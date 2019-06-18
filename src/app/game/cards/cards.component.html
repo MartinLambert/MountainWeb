@@ -1,8 +1,0 @@
-<div *ngFor="let deck of decks; let num = index" id="deck{{ num }}">
-	<div *ngIf="num > 0 && num < 4" class="emptyCards" hotmCardRatio>
-		<div *ngIf="deck.length" class="deck" title="{{ deck.length }} card{{ deck.length === 1 ? '' : 's' }}">{{ num }}</div>
-	</div>
-	<div *ngIf="num > 0 && num < 4" class="emptyCards" hotmCardRatio>
-		<div class="discard"><hotm-card *ngIf="discards[num].length" [card]="discards[num][0]" [selected]="true"></hotm-card></div>
-	</div>
-</div>

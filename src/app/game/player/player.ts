@@ -1,5 +1,5 @@
-import { DisplayStats, Stats } from '../stats';
-import { Card  } from '../cards/card';
+import { Stats } from '../stats';
+import { Card  } from '../card/card';
 
 export class Player {
 	id:               number;
@@ -15,7 +15,6 @@ export class Player {
 	avatarStyle:      { top: string, left: string };
 	nativeStats:      Stats;
 	calculatedStats:  Stats;
-	displayStats:     DisplayStats;
 	movement:         number;
 	location:         number;
 	startLocation:    number;

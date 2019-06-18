@@ -1,58 +1,32 @@
 <div *ngIf="card.cardType !== cardType.blank" class="card {{ card.cardType }}" [ngClass]="{'selected': selected, 'rotated': rotated}" (click)="clickCard()" hotmCardRatio>
 	<section class="cardTop" *ngIf="card.cardType === cardType.event">
-		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
-		<h2 *ngIf="card.cardType === cardType.event" [innerHTML]="'All Players:<br>' + card.cardText"></h2>
+		<h1 class="cardName" [innerHTML]="card.cardTop.name"></h1>
+		<h2 *ngIf="card.cardType === cardType.event" [innerHTML]="'All Players:<br>' + card.cardTop.text"></h2>
 	</section>
 	<section class="cardTop" *ngIf="card.cardType !== cardType.event && card.cardType !== cardType.starter">
-		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
-		<p class="cardText" [innerHTML]="card.cardText"></p>
+		<h1 class="cardName" [innerHTML]="card.cardTop.name"></h1>
+		<p class="cardText" [innerHTML]="card.cardTop.text"></p>
 		<div class="attributes">
 			<p>{{ card.cardType }}</p>
 			<dl>
-				<dt [ngClass]="{'unused': card.cardStats.Brains  === null}">{{ card.cardStats.Brains  }}</dt><dd [ngClass]="{'unused': card.cardStats.Brains  === null}">Brains</dd>
-				<dt [ngClass]="{'unused': card.cardStats.Brawn   === null}">{{ card.cardStats.Brawn   }}</dt><dd [ngClass]="{'unused': card.cardStats.Brawn   === null}">Brawn</dd>
-				<dt [ngClass]="{'unused': card.cardStats.Bravado === null}">{{ card.cardStats.Bravado }}</dt><dd [ngClass]="{'unused': card.cardStats.Bravado === null}">Bravado</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >{{ card.cardTop.stats.Brains  }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >Brains</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >{{ card.cardTop.stats.Brawn   }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >Brawn</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">{{ card.cardTop.stats.Bravado }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">Bravado</dd>
 			</dl>
 		</div>
 	</section>
 	<section class="cardTop" *ngIf="card.cardType === cardType.starter">
-		<h1 class="cardName" [innerHTML]="card.cardName"></h1>
-		<h3 *ngIf="card.cardStats.Brains ">+1 Brains</h3>
-		<h3 *ngIf="card.cardStats.Brawn  ">+1 Brawn</h3>
-		<h3 *ngIf="card.cardStats.Bravado">+1 Bravado</h3>
+		<h1 class="cardName" [innerHTML]="card.item2.name"></h1>
+		<h3 *ngIf="card.item2.stats.Brains " class="brains" >+1 Brains</h3>
+		<h3 *ngIf="card.item2.stats.Brawn  " class="brawn"  >+1 Brawn</h3>
+		<h3 *ngIf="card.item2.stats.Bravado" class="bravado">+1 Bravado</h3>
 		<div class="leftGem"><div></div></div>
-		<div class="rightGem"><div><h1>0</h1></div></div>
+		<div class="rightGem"><div></div></div>
 	</section>
-	<section class="cardBottom" *ngIf="card.itemType">
-		<h1 class="itemName" [innerHTML]="card.itemName"></h1>
-		<div>
-			<h2 class="itemText" [innerHTML]="card.itemText"></h2>
-			<p *ngIf="card.itemType % itemType.useOnce === 0">Discard after use</p>
-			<p *ngIf="card.itemType % itemType.useNow  === 0">Use immediately or not at all</p>
-			<p *ngIf="card.itemType % itemType.useNext === 0">Use next turn or not at all</p>
-			<p *ngIf="card.itemType % itemType.discAny === 0">Discard any item after use</p>
-			<p *ngIf="card.itemType % itemType.discTwo === 0">Discard two items after use</p>
-			<h3 *ngIf="card.itemStats.Brains "><span *ngIf="card.itemStats.Brains  > 0">+</span>{{ card.itemStats.Brains  }} Brains</h3>
-			<h3 *ngIf="card.itemStats.Brawn  "><span *ngIf="card.itemStats.Brawn   > 0">+</span>{{ card.itemStats.Brawn   }} Brawn</h3>
-			<h3 *ngIf="card.itemStats.Bravado"><span *ngIf="card.itemStats.Bravado > 0">+</span>{{ card.itemStats.Bravado }} Bravado</h3>
-		</div>
-		<div *ngIf="card.leftGem != null" class="leftGem"><div>
-			<div class="leftGemAttr" *ngIf="(card.leftGem % gemType.Brains === 0) || (card.leftGem % gemType.Brawn === 0) || (card.leftGem % gemType.Bravado === 0)">
-				<div [class.leftGemBrains]="card.leftGem % gemType.Brains  === 0"></div>
-				<div [class.leftGemBrawn]="card.leftGem % gemType.Brawn   === 0"></div>
-				<div [class.leftGemBravado]="card.leftGem % gemType.Bravado === 0"></div>
-			</div>
-			<div *ngIf="card.leftGem % gemType.vsEnemies === 0">vs Enemies</div>
-			<div *ngIf="card.leftGem % gemType.vsTraps   === 0">vs Traps</div>
-			<div *ngIf="card.leftGem % gemType.allRolls  === 0">All Rolls</div>
-			<div *ngIf="card.leftGem % gemType.enBrains  === 0">Enemy Brains</div>
-			<div *ngIf="card.leftGem % gemType.enBrawn   === 0">Enemy Brawn</div>
-			<div *ngIf="card.leftGem % gemType.enBravado === 0">Enemy Bravado</div>
-			<div *ngIf="card.leftGem % gemType.enemyRoll === 0">Enemy Rolls Against You</div>
-			<div *ngIf="card.leftGem % gemType.trapRoll  === 0">Trap Rolls Against You</div>
-		</div></div>
-		<div *ngIf="card.rightGem != null" class="rightGem"><div>
-			<h1><span *ngIf="card.rightGem > 0">+</span>{{ card.rightGem }}</h1>
-		</div></div>
+	<section class="cardBottom">
+		<h1 class="itemName" [innerHTML]="card.item.name"></h1>
+		<div [innerHTML]="gameService.cardTextDisplay(card.item)"></div>
+		<div class="leftGem"><div [innerHTML]="gameService.leftGemDisplay(card.item.leftGem)"></div></div>
+		<div class="rightGem"><div><h1>{{ gameService.attrDisplay(card.item.rightGem) }}</h1></div></div>
 	</section>
 </div>

@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import {GameService, TurnStepType} from '../game.service';
+import {GameService} from '../game.service';
 import {Tile, TilePower} from './tile';
 import {Player} from '../player/player';
 import {Space} from './space';
+import {TurnStepType} from '../card/item';
 
 @Component({
 	selector: 'hotm-board',
@@ -37,7 +38,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		this.spaces = this.gameService.getBoard();
 		this.tiles = this.gameService.getTiles();
-		this.tiles = this.shuffle(this.tiles);
+		this.tiles = this.gameService.shuffle(this.tiles);
 		for (let i = 0; i < this.players.length; i++) {
 			this.players[i].startLocation = this.startLocations[i];
 		}
@@ -46,13 +47,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 		this.tileStyle.width = document.getElementsByTagName('hotm-cards')[0].clientWidth + 'px';
 		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight / 2 + 'px';
-	}
-
-	private shuffle(pile: Tile[]): Tile[] {
-		const newPile: Tile[] = [];
-		while (pile.length)
-			newPile.push(pile.splice(Math.floor(Math.random() * pile.length), 1)[0]);
-		return newPile;
 	}
 
 	drawTile(): void {

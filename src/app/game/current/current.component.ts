@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Player } from '../player/player';
-import { Card } from '../cards/card';
+import { Card } from '../card/card';
 import { Tile } from '../board/tile';
-import { GameService, TurnStepType } from '../game.service';
+import { GameService} from '../game.service';
+import {TurnStepType} from '../card/item';
 
 @Component({
 	selector: 'hotm-current',

@@ -138,21 +138,87 @@ body {
       justify-content: center;
       margin: 0;
       padding: 0 0.5em;
+      border: 0;
       background-color: ghostwhite;
       font-size: 1.2rem;
       line-height: 1.4;
       font-weight: bold; }
     .attributes dl dt {
       font-family: Luminari, fantasy; }
-    .attributes dl dt, .attributes dl dt + dd {
-      background-color: lightblue; }
-    .attributes dl dt:nth-of-type(2), .attributes dl dt:nth-of-type(2) + dd {
-      background-color: yellow; }
-    .attributes dl dt:nth-of-type(3), .attributes dl dt:nth-of-type(3) + dd {
-      background-color: lightpink; }
+      .attributes dl dt.modified {
+        font-style: italic; }
     .attributes dl .unused {
       background-color: ghostwhite;
       color: #666; }
+
+section .leftGem, section .rightGem {
+  position: absolute;
+  left: 0;
+  top: 32.5%;
+  width: 20%;
+  height: 35%;
+  filter: drop-shadow(1px 0 0 #333); }
+  section .leftGem > div, section .rightGem > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #E3E3E9;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #333;
+    clip-path: polygon(0 0, 50% 0, 90% 50%, 50% 100%, 0 100%); }
+    section .leftGem > div > div:not(.leftGemAttr), section .rightGem > div > div:not(.leftGemAttr) {
+      width: 85%;
+      padding-left: 7px;
+      font-size: 20px;
+      text-align: left; }
+section .leftGemAttr {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 1px;
+  width: 100%;
+  height: 100%;
+  background-color: #999; }
+  section .leftGemAttr > div {
+    width: 100%;
+    height: 100%;
+    background-color: ghostwhite;
+    border: 0; }
+section .rightGem {
+  left: auto;
+  right: 0;
+  filter: drop-shadow(-1px 0 0 #333); }
+  section .rightGem > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    clip-path: polygon(100% 0, 50% 0, 10% 50%, 50% 100%, 100% 100%); }
+    section .rightGem > div h1 {
+      margin: 0;
+      padding: 0 0.15em;
+      font-size: 2.75em;
+      font-family: Luminari, fantasy; }
+section.equippedItem h2.itemText, section.equippedItem p {
+  margin: 0;
+  font-size: 0.8em;
+  text-align: center; }
+section.equippedItem .leftGem, section.equippedItem .rightGem {
+  top: 0;
+  bottom: 0;
+  width: 2.5em;
+  height: auto;
+  padding: 0.5em 0;
+  z-index: -10; }
+  section.equippedItem .leftGem > div > div:not(.leftGemAttr), section.equippedItem .rightGem > div > div:not(.leftGemAttr) {
+    padding-left: 1px;
+    font-size: 10px; }
+section.equippedItem .rightGem > div h1 {
+  margin: 0;
+  font-size: 1.25em; }
+section.equippedItem .brains, section.equippedItem .brawn, section.equippedItem .bravado {
+  padding: 0 0.5em;
+  font-size: 1em; }
 
 .pulse {
   animation-name: pulse_animation;
@@ -165,6 +231,21 @@ body {
 
 .hidden {
   visibility: hidden; }
+
+.brains {
+  background-color: lightblue !important; }
+
+.brawn {
+  background-color: yellow !important; }
+
+.bravado {
+  background-color: lightpink !important; }
+
+.brains, .brawn, .bravado {
+  margin: 0;
+  padding: 0 1em;
+  border: 1px solid darkgray;
+  border-bottom: 0; }
 
 @media all and (max-width: 1500px) {
   html, body {

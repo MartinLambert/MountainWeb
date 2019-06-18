@@ -98,11 +98,11 @@
     justify-content: center; }
     :host .charSheet.zoomed .avatar h1 {
       font-size: 2em; }
-  :host .charSheet.zoomed .itemCard h1 {
+  :host .charSheet.zoomed .equippedItem h1 {
     font-size: 1.25em; }
-  :host .charSheet.zoomed .itemCard h2 {
+  :host .charSheet.zoomed .equippedItem h2 {
     font-size: 1.1em; }
-  :host .charSheet.zoomed .itemCard h3 {
+  :host .charSheet.zoomed .equippedItem h3 {
     font-size: 1em; }
 
 .charSheet {
@@ -156,7 +156,7 @@
       border-radius: 10px 10px 0 0; }
     .charSheet .items .card > p:first-child {
       color: ghostwhite; }
-  .charSheet .itemCard {
+  .charSheet .equippedItem {
     position: absolute;
     left: 0;
     right: 0;
@@ -169,69 +169,20 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     border-radius: 0 0 10px 10px;
     z-index: 0; }
-    .charSheet .itemCard h1, .charSheet .itemCard h2, .charSheet .itemCard h3, .charSheet .itemCard p {
+    .charSheet .equippedItem h1, .charSheet .equippedItem h2, .charSheet .equippedItem h3, .charSheet .equippedItem p {
       margin: 0 2.5em;
       text-align: center;
       font-size: 1em;
       text-shadow: 1px 0 0 ghostwhite, -1px 0 0 ghostwhite, 0 1px 0 ghostwhite, -1px 0 0 ghostwhite; }
-    .charSheet .itemCard h1 {
+    .charSheet .equippedItem h1 {
       white-space: nowrap; }
-    .charSheet .itemCard h2, .charSheet .itemCard p {
+    .charSheet .equippedItem h2, .charSheet .equippedItem p {
+      margin: 0;
       font-size: 0.8em; }
-    .charSheet .itemCard h2 span {
+    .charSheet .equippedItem h2 span {
       display: none; }
-  .charSheet .leftGem, .charSheet .rightGem {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2.5em;
-    padding: 0.5em 0;
-    filter: drop-shadow(1px 0 0 #333);
-    z-index: -1; }
-    .charSheet .leftGem > div, .charSheet .rightGem > div {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      background-color: #E3E3E9;
-      border: 1px solid #333;
-      border-width: 1px 0;
-      clip-path: polygon(0 0, 50% 0, 90% 50%, 50% 100%, 0 100%); }
-      .charSheet .leftGem > div > div:not(.leftGemAttr), .charSheet .rightGem > div > div:not(.leftGemAttr) {
-        width: 85%;
-        padding-left: 2px;
-        font-size: 14px; }
-  .charSheet .leftGemAttr {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 1px;
-    width: 100%;
-    height: 100%;
-    background-color: #999; }
-    .charSheet .leftGemAttr > div {
-      width: 100%;
-      height: 100%;
-      background-color: ghostwhite; }
-    .charSheet .leftGemAttr .leftGemBrains {
-      background-color: lightblue; }
-    .charSheet .leftGemAttr .leftGemBrawn {
-      background-color: yellow; }
-    .charSheet .leftGemAttr .leftGemBravado {
-      background-color: lightpink; }
-  .charSheet .rightGem {
-    left: auto;
-    right: 0;
-    filter: drop-shadow(-1px 0 0 #333); }
-    .charSheet .rightGem > div {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      clip-path: polygon(100% 0, 50% 0, 10% 50%, 50% 100%, 100% 100%); }
-      .charSheet .rightGem > div h1 {
-        margin: 0;
-        padding: 0 0.15em;
-        font-size: 1.25em;
-        font-family: Luminari, fantasy; }
+    .charSheet .equippedItem .rightGem h1 {
+      margin: 0;
+      font-size: 1.5em; }
 
 /*# sourceMappingURL=player.component.css.map */

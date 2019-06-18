@@ -1,22 +1,14 @@
 import { Injectable } from '@angular/core';
+
 import { Tile       } from './board/tile';
 import { TILES      } from './board/tiles';
 import { Space      } from './board/space';
 import { SPACES     } from './board/spaces';
-import { Card       } from './cards/card';
+import { Card       } from './card/card';
 import { CARDS      } from './cards/cards';
 import { Player     } from './player/player';
 import { CHARACTERS } from './player/characters';
-
-export enum TurnStepType {
-	drawTile   = 0,
-	placeTile  = 1,
-	move       = 2,
-	drawCard   = 3,
-	preCombat  = 4,
-	postCombat = 5,
-	xpEnd      = 6
-}
+import {GemType, ItemType, TurnStepType} from './card/item';
 
 @Injectable({
 	providedIn: 'root'
@@ -111,4 +103,58 @@ export class GameService {
 	getCharacters(): Player[] {
 		return CHARACTERS;
 	}
+
+	cardTextDisplay(item): string {
+		let textDisplay = '';
+		if (item && item.type) {
+			textDisplay = `<h2 class="itemText">${ item.text }</h2>`;
+			if (item.type === ItemType.useOnce) textDisplay += '<p>Use Once</p>';
+			if (item.type === ItemType.useNow ) textDisplay += '<p>Use Immediately</p>';
+			if (item.type === ItemType.useNext) textDisplay += '<p>Use Next Turn</p>';
+			if (item.type === ItemType.disAny ) textDisplay += '<p>Disable Any Item</p>';
+			if (item.stats.Brains)  textDisplay += `<h3 class="brains">${  this.attrDisplay(item.stats.Brains)  } Brains</h3>`;
+			if (item.stats.Brawn)   textDisplay += `<h3 class="brawn">${   this.attrDisplay(item.stats.Brawn)   } Brawn</h3>`;
+			if (item.stats.Bravado) textDisplay += `<h3 class="bravado">${ this.attrDisplay(item.stats.Bravado) } Bravado</h3>`;
+		}
+
+		return textDisplay;
+	}
+
+	leftGemDisplay(gem: GemType[]): string {
+		let gemDisplay = '';
+		if (gem.includes(GemType.Brains) || gem.includes(GemType.Brawn) || gem.includes(GemType.Bravado)) {
+			gemDisplay = '<div class="leftGemAttr">';
+			gemDisplay += '<div'; if (gem.includes(GemType.Brains) ) gemDisplay += ' class="brains"';  gemDisplay += '></div>';
+			gemDisplay += '<div'; if (gem.includes(GemType.Brawn)  ) gemDisplay += ' class="brawn"';   gemDisplay += '></div>';
+			gemDisplay += '<div'; if (gem.includes(GemType.Bravado)) gemDisplay += ' class="bravado"'; gemDisplay += '></div>';
+			gemDisplay += '</div>';
+		}
+		if (gem.includes(GemType.vsEnemies)) gemDisplay += '<div>vs Enemies</div>';
+		if (gem.includes(GemType.vsTraps)  ) gemDisplay += '<div>vs Traps</div>';
+		if (gem.includes(GemType.allRolls) ) gemDisplay += '<div>All Rolls</div>';
+		if (gem.includes(GemType.enBrains) ) gemDisplay += '<div>Enemy Brains</div>';
+		if (gem.includes(GemType.enBrawn)  ) gemDisplay += '<div>Enemy Brawn</div>';
+		if (gem.includes(GemType.enBravado)) gemDisplay += '<div>Enemy Bravado</div>';
+		if (gem.includes(GemType.enBonus)  ) gemDisplay += '<div>Enemy Bonus</div>';
+		if (gem.includes(GemType.trapBonus)) gemDisplay += '<div>Trap Bonus</div>';
+
+		return gemDisplay;
+	}
+
+	attrDisplay(attr: number): string {
+		let display = '';
+		if (attr < 0) display = '−';
+		if (attr > 0) display = '+';
+		if (attr !== 0) display += Math.abs(attr);
+
+		return display;
+	}
+
+	shuffle(deck: any[]): any[] {
+		const newDeck = [];
+		while (deck.length)
+			newDeck.push(deck.splice(Math.floor(Math.random() * deck.length), 1)[0]);
+		return newDeck;
+	}
+
 }

@@ -13,6 +13,7 @@
   background: #EEE;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   opacity: 0.6;
+  overflow: hidden;
   transform: scale(0.9);
   transition: 0.6s ease; }
   .card.selected {
@@ -29,9 +30,11 @@
 .Starter.rotated:not(.selected) {
   transform: scale(0.9) rotate(180deg); }
 .Starter .cardTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   transform: rotate(180deg); }
-  .Starter .cardTop h3 {
-    align-self: end; }
 
 .Heart {
   grid-template-rows: 1fr;
@@ -46,8 +49,9 @@
   .Heart section.cardTop .attributes {
     align-self: center;
     justify-self: center;
-    border: 1px solid #333;
-    border-width: 0 1px 1px 0; }
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #333; }
     .Heart section.cardTop .attributes p {
       display: none; }
     .Heart section.cardTop .attributes dl dt, .Heart section.cardTop .attributes dl dd {
@@ -55,7 +59,8 @@
 
 section {
   display: grid;
-  line-height: 0; }
+  line-height: 0;
+  text-align: center; }
   section > * {
     line-height: normal; }
   section.cardTop {
@@ -81,69 +86,17 @@ section {
       list-style-type: none; }
   section.cardBottom {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     border-top: 1px solid #333; }
-    section.cardBottom > div {
-      align-self: end;
-      padding-bottom: 0.5em; }
-      section.cardBottom > div > p {
-        margin: 0.25em 0 0;
-        text-align: center; }
+    section.cardBottom > div > p {
+      margin: 0.25em 0 0;
+      text-align: center; }
     section.cardBottom h2 {
       margin: 0 0.5em;
       font-size: 1.25em; }
-  section .leftGem, section .rightGem {
-    position: absolute;
-    left: 0;
-    top: 32.5%;
-    width: 20%;
-    height: 35%;
-    filter: drop-shadow(1px 0 0 #333); }
-    section .leftGem > div, section .rightGem > div {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      background-color: #E3E3E9;
-      border: 1px solid #333;
-      border-width: 1px 0;
-      clip-path: polygon(0 0, 50% 0, 90% 50%, 50% 100%, 0 100%); }
-      section .leftGem > div > div:not(.leftGemAttr), section .rightGem > div > div:not(.leftGemAttr) {
-        width: 85%;
-        padding-left: 2px;
-        font-size: 14px; }
-  section .leftGemAttr {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 1px;
-    width: 100%;
-    height: 100%;
-    background-color: #999; }
-    section .leftGemAttr > div {
-      width: 100%;
-      height: 100%;
-      background-color: ghostwhite; }
-    section .leftGemAttr .leftGemBrains {
-      background-color: lightblue; }
-    section .leftGemAttr .leftGemBrawn {
-      background-color: yellow; }
-    section .leftGemAttr .leftGemBravado {
-      background-color: lightpink; }
-  section .rightGem {
-    left: auto;
-    right: 0;
-    filter: drop-shadow(-1px 0 0 #333); }
-    section .rightGem > div {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      clip-path: polygon(100% 0, 50% 0, 10% 50%, 50% 100%, 100% 100%); }
-      section .rightGem > div h1 {
-        margin: 0;
-        padding: 0 0.15em;
-        font-size: 2.75em;
-        font-family: Luminari, fantasy; }
-  section h1, section h2, section h3 {
-    text-align: center; }
   section h3 {
     margin: 0;
     line-height: 1.2; }

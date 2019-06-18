@@ -7,7 +7,7 @@
 	<div *ngIf="cards.length > 1">
 		<p>
 			<strong>Select a card to use; the other{{ cards.length > 2 ? 's' : '' }} will be discarded</strong>
-			<button [disabled]="selectedCard == null" (click)="proceedWithCard()">Proceed with {{ selectedCard == null ? 'This Card' : cards[selectedCard].cardName }}</button>
+			<button [disabled]="selectedCard == null" (click)="proceedWithCard()">Proceed with {{ selectedCard == null ? 'This Card' : cards[selectedCard].cardTop.name }}</button>
 		</p>
 	</div>
 	<div *ngIf="cards.length === 1">
@@ -19,7 +19,7 @@
 		<div *ngIf="cards[0].cardType !== cardType.event">
 			<p *ngIf="!playerRoll">
 				<button *ngIf="cards[0].cardType === cardType.enemy" (click)="fightCard()">Fight Enemy</button>
-				<button *ngIf="cards[0].cardType === cardType.trap" (click)="fightCard()">Disarm Trap</button>
+				<button *ngIf="cards[0].cardType === cardType.trap"  (click)="fightCard()">Disarm Trap</button>
 				<button *ngIf="cards[0].cardType === cardType.heart" (click)="fightCard()">Battle Dragon</button>
 			</p>
 			<p *ngIf="playerRoll && !playerWin">
