@@ -1,6 +1,7 @@
 @import "../../../variables";
 
 :host {
+	position: relative;
 	display: grid;
 	grid-template-rows: repeat(17, 1fr);
 	grid-template-columns: repeat(11, 1fr);
@@ -10,10 +11,33 @@
 	height: 70vh;
 	border: 3px ridge beige;
 	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+	overflow: hidden;
 	grid-area: board;
 	align-self: center;
 	justify-self: center;
 
+	&>h2 {
+		position: absolute;
+		margin: 0;
+		width: 100%;
+		text-align: center;
+		white-space: nowrap;
+		color: darken(darkolivegreen, 10%);
+		font-size: 2rem;
+		z-index: 10;
+		pointer-events: none;
+	}
+	&>h3 {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		font-size: 4rem;
+		color: darkolivegreen;
+		opacity: 0.7;
+		margin: 0;
+		line-height: 20.5882353vh;
+		pointer-events: none;
+	}
 	&>div {
 		&.level1 { background-color: #E0FFE0 }
 		&.level2 { background-color: #C0DDC0 }
@@ -29,9 +53,9 @@ div.tile {
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	background-color: transparent;
 	transform: scale(1.025);
+	&:nth-of-type(11n + 1) { justify-content: flex-end }
 	.bg {
 		position: absolute;
 		z-index: -1;
@@ -41,10 +65,11 @@ div.tile {
 	}
 	p {
 		margin: 0;
-		font: 2em/0.9 Consolas;
-		background: rgba(252,252,252,0.25);
-		border-radius: 0.5em;
-		text-shadow: -0.5px -0.5px 0.5px white, -0.5px 0.5px 0.5px white, 0.5px -0.5px 0.5px white, 0.5px 0.5px 0.5px white;
+		padding: 0 0.4rem;
+		font-size: 1.75em;
+		font-weight: bold;
+		color: darken(darkolivegreen, 15%);
+		text-shadow: -0.5px -0.5px 0.5px papayawhip, -0.5px 0.5px 0.5px papayawhip, 0.5px -0.5px 0.5px papayawhip, 0.5px 0.5px 0.5px papayawhip;
 		cursor: default;
 	}
 }

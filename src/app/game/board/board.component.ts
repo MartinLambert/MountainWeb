@@ -28,7 +28,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		homeEnd:   185
 	};
 	startLocations = [178, 180, 182, 184];
-	tileStyle = {width: '0', height: '0'};
 	@Input() players: Player[];
 	@Output() tilePlaced = new EventEmitter();
 	@Output() tileRemoved = new EventEmitter();
@@ -39,14 +38,13 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		this.spaces = this.gameService.getBoard();
 		this.tiles = this.gameService.getTiles();
 		this.tiles = this.gameService.shuffle(this.tiles);
-		for (let i = 0; i < this.players.length; i++) {
-			this.players[i].startLocation = this.startLocations[i];
-		}
 	}
 
 	ngAfterViewInit(): void {
-		this.tileStyle.width = document.getElementsByTagName('hotm-cards')[0].clientWidth + 'px';
-		this.tileStyle.height = document.getElementsByTagName('hotm-cards')[0].clientHeight / 2 + 'px';
+		for (let i = 0; i < this.players.length; i++) {
+			this.players[i].startLocation = this.startLocations[i];
+			this.players[i].avatarStyle = { top: '110%', left: '50%' };
+		}
 	}
 
 	drawTile(): void {
