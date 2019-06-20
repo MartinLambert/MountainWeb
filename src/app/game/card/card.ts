@@ -1,16 +1,5 @@
-import {Stats} from '../stats';
+import {CardType, Stats} from '../types';
 import {Item} from './item';
-
-// Each card has one CardType
-export enum CardType {
-	blank   = 'Blank',
-	wound   = 'Wound',
-	starter = 'Starter',
-	enemy   = 'Enemy',
-	trap    = 'Trap',
-	event   = 'Event',
-	heart   = 'Heart'
-}
 
 export class Card {
 	id:       number;

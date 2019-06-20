@@ -23,7 +23,7 @@
 		<div class="leftGem"><div></div></div>
 		<div class="rightGem"><div></div></div>
 	</section>
-	<section class="cardBottom">
+	<section class="cardBottom" *ngIf="card.cardType !== cardType.event">
 		<h1 class="itemName" [innerHTML]="card.item.name"></h1>
 		<div [innerHTML]="gameService.cardTextDisplay(card.item)"></div>
 		<div class="leftGem"><div [innerHTML]="gameService.leftGemDisplay(card.item.leftGem)"></div></div>

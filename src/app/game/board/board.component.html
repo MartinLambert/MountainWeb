@@ -1,13 +1,5 @@
 <div *ngFor="let space of spaces; let num = index" id="s{{ ('000' + num).slice(-3) }}" class="level{{ space.level }}" [ngClass]="{'tile': space.hasTile, 'valid': space.valid}" (click)="selectSpace(num)" title="{{ num }}">
-	<div class="bg" [ngStyle]="{'background-image': space.tile.img, 'transform': 'rotate(' + space.tile.rotation + 'turn)'}"></div>
+	<div class="bg" [ngStyle]="{'background-image': 'url(/assets/tiles/' + space.tile.img + ')', 'transform': 'rotate(' + space.tile.rotation + 'turn)'}"></div>
 	<p>{{ (space.level > 0 && space.level < 4) ? space.level : '' }}</p>
 </div>
 <p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [ngClass]="{'pulse': num === gameService.currPlayer}"></p>
-<div class="tilePiles" [ngStyle]="tileStyle">
-	<div class="emptyTiles">
-		<div *ngIf="tiles.length" class="tiles" title="{{ tiles.length }} tile{{ tiles.length === 1 ? '' : 's' }}"><h6>Tiles</h6></div>
-	</div>
-	<div class="emptyTiles">
-		<div *ngIf="discard.length" class="discard" [ngClass]="{'one': discard.length === 1, 'some': (discard.length > 1 && discard.length < 5), 'many': discard.length > 4}"><span [ngStyle]="{'backgroundImage': discard[0].img}"></span></div>
-	</div>
-</div>

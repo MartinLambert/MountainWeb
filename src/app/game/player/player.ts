@@ -1,4 +1,4 @@
-import { Stats } from '../stats';
+import { Stats } from '../types';
 import { Card  } from '../card/card';
 
 export class Player {
@@ -17,6 +17,7 @@ export class Player {
 	calculatedStats:  Stats;
 	movement:         number;
 	location:         number;
+	currRowBonus:     number;
 	startLocation:    number;
 	wounds:           Card[];
 	items:            Card[];

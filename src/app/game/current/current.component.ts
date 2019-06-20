@@ -4,7 +4,7 @@ import { Player } from '../player/player';
 import { Card } from '../card/card';
 import { Tile } from '../board/tile';
 import { GameService} from '../game.service';
-import {TurnStepType} from '../card/item';
+import {TurnStepType} from '../types';
 
 @Component({
 	selector: 'hotm-current',

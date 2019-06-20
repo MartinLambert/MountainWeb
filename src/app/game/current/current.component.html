@@ -8,7 +8,7 @@
 		<button *ngIf="!tiles.length" (click)="draw3Tiles()">Draw 3 Tiles</button>
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.placeTile">
-		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
+		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': 'url(/assets/tiles/' + tile.img + ')', 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
 	</div>
 </div>
 <div *ngIf="gameService.round > 0">
@@ -21,7 +21,7 @@
 		<p><button *ngIf="!tiles.length" (click)="drawTile.emit(tilesToDraw)">Draw {{ tilesToDraw > 1 ? tilesToDraw + ' Tiles' : 'a Tile' }}</button></p>
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.placeTile">
-		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
+		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': 'url(/assets/tiles/' + tile.img + ')', 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.move">
 		<h2>Move</h2>
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.postCombat">
-		<div *ngIf="gameService.midTurn && tiles.length"><div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': tile.img, 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div></div>
+		<div *ngIf="gameService.midTurn && tiles.length"><div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile}"><span [ngStyle]="{'backgroundImage': 'url(/assets/tiles/' + tile.img + ')', 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div></div>
 		<div *ngIf="card" class="currentCard">
 			<hotm-card [card]="card"></hotm-card>
 		</div>

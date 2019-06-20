@@ -1,5 +1,5 @@
-import {Card, CardType} from '../card/card';
-import {GemType, ItemType, TurnStepType} from '../card/item';
+import {Card} from '../card/card';
+import {CardType, GemType, ItemType, TurnStepType} from '../types';
 
 export const CARDS: Card[][] = [[
 	{
@@ -1041,8 +1041,8 @@ export const CARDS: Card[][] = [[
 			value:    1,
 			usable:   [],
 			disabled: false,
-			leftGem:  [GemType.enBonus],
-			rightGem: 2
+			leftGem:  [],
+			rightGem: 0
 		},
 		item2: {
 			type:     ItemType.permanent,

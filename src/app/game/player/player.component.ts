@@ -2,8 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {GameService} from '../game.service';
 import {Player} from './player';
-import {Card, CardType} from '../card/card';
-import {GemType, Item, ItemType} from '../card/item';
+import {Card} from '../card/card';
+import {Item} from '../card/item';
+import {CardType, GemType, ItemType} from '../types';
 
 @Component({
 	selector: 'hotm-player',

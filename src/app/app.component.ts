@@ -1,14 +1,14 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { Tile            } from './game/board/tile';
-import { Card, CardType  } from './game/card/card';
+import { Card            } from './game/card/card';
 import { Player          } from './game/player/player';
-import { GameService} from './game/game.service';
+import { GameService     } from './game/game.service';
 import { BoardComponent  } from './game/board/board.component';
 import { CardsComponent  } from './game/cards/cards.component';
 import { PlayerComponent } from './game/player/player.component';
 import { ActionComponent } from './game/action/action.component';
-import {TurnStepType} from './game/card/item';
+import { CardType, TurnStepType } from './game/types';
 
 @Component({
 	selector: 'hotm-root',
@@ -213,27 +213,27 @@ export class AppComponent implements OnInit {
 				break;
 			case 17: // increase your attack vs Enemies
 				this.action.modifiers.vsEnemies += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				this.action.calcStats();
 				break;
 			case 18: // increase your attack vs Traps
 				this.action.modifiers.vsTraps += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				this.action.calcStats();
 				break;
 			case 19: // increase your attack roll
 				this.action.modifiers.allRolls += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				this.action.calcStats();
 				break;
 			case 20: // reduce an Enemy's Brains
 				this.action.modifiers.enBrains += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				this.action.calcStats();
 				break;
 			case 21: // reduce an Enemy's Brawn
 				this.action.modifiers.enBrawn += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				this.action.calcStats();
 				break;
 			case 22: // reduce an Enemy's Bravado
 				this.action.modifiers.enBravado += cardPower.value;
-				if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
+				this.action.calcStats();
 				break;
 			// case 23: // reduce an Enemy's die roll  EDIT June 2019: this power will no longer exist
 			// 	this.action.modifiers.enemyRoll += cardPower.value;

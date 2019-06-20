@@ -1,12 +1,4 @@
-export enum TilePower {
-	none = 0,
-	addBrains = 1,
-	addBrawn = 2,
-	addBravado = 3,
-	drawTwo = 4,
-	removeTile = 5,
-	moveTile = 6
-}
+import {TilePower} from '../types';
 
 export class Tile {
 	doors: {
@@ -27,7 +19,7 @@ export class Tile {
 			south: false,
 			west:  false
 		};
-		this.img      = '';
+		this.img      = 'blank.png';
 		this.rotation = 0;
 		this.isPortal = false;
 		this.power    = TilePower.none;

@@ -187,6 +187,7 @@ section {
 .brains { background-color: $brains !important }
 .brawn { background-color: $brawn !important }
 .bravado { background-color: $bravado !important }
+.brains.unused, .brawn.unused, .bravado.unused { background-color: ghostwhite !important }
 .brains, .brawn, .bravado {
 	margin: 0;
 	padding: 0 1em;

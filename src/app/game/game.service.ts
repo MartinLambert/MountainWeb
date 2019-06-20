@@ -8,7 +8,7 @@ import { Card       } from './card/card';
 import { CARDS      } from './cards/cards';
 import { Player     } from './player/player';
 import { CHARACTERS } from './player/characters';
-import {GemType, ItemType, TurnStepType} from './card/item';
+import { GemType, ItemType, TurnStepType } from './types';
 
 @Injectable({
 	providedIn: 'root'
@@ -155,6 +155,9 @@ export class GameService {
 		while (deck.length)
 			newDeck.push(deck.splice(Math.floor(Math.random() * deck.length), 1)[0]);
 		return newDeck;
+	}
+	dieRoll(): number {
+		return Math.floor(Math.random() * 6) + 1;
 	}
 
 }
