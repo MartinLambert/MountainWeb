@@ -148,9 +148,6 @@ export class AppComponent implements OnInit {
 				for (let i = 0; i < cardPower.value; i++)
 					playerComp.healWound();
 				break;
-			// case 2: // draw an extra card  EDIT June 2019: this power will no longer exist
-			// 	this.cardsToDraw += cardPower.value;
-			// 	break;
 			case 2: // TODO: move to any portal
 				break;
 			case 3: // draw an extra tile
@@ -315,6 +312,9 @@ export class AppComponent implements OnInit {
 			case 5: // TODO: Flash Flood: disable an item
 				break;
 			case 6: // TODO: Phase Shift: move to any space in your row
+				break;
+			case 7: // Earthquake: -1 to your next die roll
+				this.characters.forEach(character => character.reduceNextRoll = true);
 				break;
 		}
 	}

@@ -19,6 +19,7 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		currRowBonus: 0,
 		startLocation: 0,
+		reduceNextRoll: false,
 		wounds: [],
 		items: [],
 		XP: []
@@ -41,6 +42,7 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		currRowBonus: 0,
 		startLocation: 0,
+		reduceNextRoll: false,
 		wounds: [],
 		items: [],
 		XP: []
@@ -63,6 +65,7 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		currRowBonus: 0,
 		startLocation: 0,
+		reduceNextRoll: false,
 		wounds: [],
 		items: [],
 		XP: []
@@ -85,6 +88,7 @@ export const CHARACTERS: Player[] = [
 		location: 0,
 		currRowBonus: 0,
 		startLocation: 0,
+		reduceNextRoll: false,
 		wounds: [],
 		items: [],
 		XP: []

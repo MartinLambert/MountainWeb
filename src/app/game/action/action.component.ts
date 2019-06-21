@@ -140,6 +140,10 @@ export class ActionComponent implements OnInit {
 
 	fightCard(): void {
 		this.playerRoll = this.gameService.dieRoll();
+		if (this.player.reduceNextRoll) {
+			this.playerRollModifier--;
+			this.player.reduceNextRoll = false;
+		}
 		this.playerRollString += this.playerRoll;
 		if (this.playerRollModifier > 0) this.playerRollString += ' + ' + this.playerRollModifier;
 		else if (this.playerRollModifier < 0) this.playerRollString += ' − ' + Math.abs(this.playerRollModifier);

@@ -19,6 +19,7 @@ export class Player {
 	location:         number;
 	currRowBonus:     number;
 	startLocation:    number;
+	reduceNextRoll:   boolean;
 	wounds:           Card[];
 	items:            Card[];
 	XP:               Card[];

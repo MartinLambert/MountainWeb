@@ -2984,20 +2984,20 @@ export const CARDS: Card[][] = [[
 		item:  null,
 		item2: null
 	},
-	// { TODO: -1 to your next roll
-	// 	id:    2003,
-	// 	level:    2,
-	// 	cardType: CardType.event,
-	// 	cardTop: {
-	// 		name: 'Earthquake',
-	// 		img:  '',
-	// 		text: '−1 to your next die roll',
-	// 		stats: { Brains: null, Brawn: null, Bravado: null },
-	// 		power: 0,
-	// 	},
-	// 	item:  null,
-	// 	item2: null
-	// },
+	{
+		id:    2003,
+		level:    2,
+		cardType: CardType.event,
+		cardTop: {
+			name: 'Earthquake',
+			img:  '',
+			text: '−1 to your next die roll',
+			stats: { Brains: null, Brawn: null, Bravado: null },
+			power: 7,
+		},
+		item:  null,
+		item2: null
+	},
 	{
 		id:    2004,
 		level:    2,
