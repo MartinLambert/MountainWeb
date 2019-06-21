@@ -4,7 +4,7 @@ import {Player} from '../player/player';
 import {PlayerComponent} from '../player/player.component';
 import {Card} from '../card/card';
 import {GameService} from '../game.service';
-import {CardType, GemType, ItemType, TurnStepType} from '../types';
+import {CardType, GemType, ItemType, Stats, TurnStepType} from '../types';
 
 @Component({
 	selector: 'hotm-action',
@@ -16,6 +16,7 @@ export class ActionComponent implements OnInit {
 	@Input() card: Card;
 	@Input() player: Player;
 	@Input() playerNum: number;
+	@Input() neighborStats: Stats;
 	@Output() drawCard = new EventEmitter<number>();
 	@Output() useCard = new EventEmitter<Card>();
 	@Output() discardCard = new EventEmitter<Card>();
@@ -93,7 +94,7 @@ export class ActionComponent implements OnInit {
 			}
 			this.cardStatsString += 'Brains';
 			this.playerStatsString += 'Brains';
-			this.cardTotal += this.card.cardTop.stats.Brains;
+			this.cardTotal += (this.card.cardTop.stats.Brains === -1 ? (this.card.level === 1 ? this.player.calculatedStats.Brains : this.neighborStats.Brains) : this.card.cardTop.stats.Brains);
 			this.playerTotal += this.player.calculatedStats.Brains;
 			if (!(this.card.cardTop.stats.Brawn === null && this.card.cardTop.stats.Bravado === null)) {
 				this.cardStatsString += ' + ';
@@ -107,7 +108,7 @@ export class ActionComponent implements OnInit {
 			}
 			this.cardStatsString += 'Brawn';
 			this.playerStatsString += 'Brawn';
-			this.cardTotal += this.card.cardTop.stats.Brawn;
+			this.cardTotal += (this.card.cardTop.stats.Brawn === -1 ? (this.card.level === 1 ? this.player.calculatedStats.Brawn : this.neighborStats.Brawn) : this.card.cardTop.stats.Brawn);
 			this.playerTotal += this.player.calculatedStats.Brawn;
 			if (this.card.cardTop.stats.Bravado !== null) {
 				this.cardStatsString += ' + ';
@@ -121,7 +122,7 @@ export class ActionComponent implements OnInit {
 			}
 			this.cardStatsString += 'Bravado';
 			this.playerStatsString += 'Bravado';
-			this.cardTotal += this.card.cardTop.stats.Bravado;
+			this.cardTotal += (this.card.cardTop.stats.Bravado === -1 ? (this.card.level === 1 ? this.player.calculatedStats.Bravado : this.neighborStats.Bravado) : this.card.cardTop.stats.Bravado);
 			this.playerTotal += this.player.calculatedStats.Bravado;
 		}
 		this.cardStatsString += ':';

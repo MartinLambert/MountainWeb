@@ -8,7 +8,7 @@ import { BoardComponent  } from './game/board/board.component';
 import { CardsComponent  } from './game/cards/cards.component';
 import { PlayerComponent } from './game/player/player.component';
 import { ActionComponent } from './game/action/action.component';
-import { CardType, TurnStepType } from './game/types';
+import { CardType, Stats, TurnStepType } from './game/types';
 
 @Component({
 	selector: 'hotm-root',
@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
 	xpMinOnly = false;
 	tilesToDraw = 1;
 	cardsToDraw = 1;
+	neighborStats: Stats;
 
 	constructor(public gameService: GameService) {}
 
@@ -325,6 +326,7 @@ export class AppComponent implements OnInit {
 		this.tilesToDraw = 1;
 		this.players.find(player => player.playerNum === this.gameService.currPlayer).expireThisTurnItems();
 		this.gameService.turnStep = TurnStepType.drawTile;
+		this.neighborStats = this.characters[this.gameService.currPlayer].calculatedStats;
 		this.gameService.currPlayer++;
 	}
 }

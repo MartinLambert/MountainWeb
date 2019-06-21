@@ -9,9 +9,9 @@
 		<div class="attributes">
 			<p>{{ card.cardType }}</p>
 			<dl>
-				<dt [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >{{ card.cardTop.stats.Brains  }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >Brains</dd>
-				<dt [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >{{ card.cardTop.stats.Brawn   }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >Brawn</dd>
-				<dt [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">{{ card.cardTop.stats.Bravado }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">Bravado</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >{{ card.cardTop.stats.Brains  === -1 ? '✕' : card.cardTop.stats.Brains  }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >Brains</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >{{ card.cardTop.stats.Brawn   === -1 ? '✕' : card.cardTop.stats.Brawn   }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >Brawn</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">{{ card.cardTop.stats.Bravado === -1 ? '✕' : card.cardTop.stats.Bravado }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">Bravado</dd>
 			</dl>
 		</div>
 	</section>

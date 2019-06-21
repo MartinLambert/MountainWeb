@@ -1236,32 +1236,32 @@ export const CARDS: Card[][] = [[
 		},
 		item2: null
 	},
-	// { TODO: Brains = your Brains
-	// 	id:    1105,
-	// 	level:    1,
-	// 	cardType: CardType.trap,
-	// 	cardTop: {
-	// 		name: 'Deafening Echoes',
-	// 		img:  '',
-	// 		text: '',
-	// 		stats: { Brains: -1, Brawn: null, Bravado: null },
-	// 		power: 0
-	// 	},
-	// 	item: {
-	// 		type:     ItemType.permanent,
-	// 		name:    'TBD',
-	// 		img:     '',
-	// 		text:    '',
-	// 		stats:    { Brains: 1, Brawn: 0, Bravado: 0 },
-	// 		power:    0,
-	// 		value:    0,
-	// 		usable:   [],
-	// 		disabled: false,
-	// 		leftGem:  [GemType.Brawn, GemType.Bravado],
-	// 		rightGem: -1
-	// 	},
-	// 	item2: null
-	// },
+	{
+		id:    1105,
+		level:    1,
+		cardType: CardType.trap,
+		cardTop: {
+			name: 'Deafening Echoes',
+			img:  '',
+			text: '✕ = your Brains',
+			stats: { Brains: -1, Brawn: null, Bravado: null },
+			power: 0
+		},
+		item: {
+			type:     ItemType.permanent,
+			name:    'TBD',
+			img:     '',
+			text:    '',
+			stats:    { Brains: 1, Brawn: 0, Bravado: 0 },
+			power:    0,
+			value:    0,
+			usable:   [],
+			disabled: false,
+			leftGem:  [GemType.Brawn, GemType.Bravado],
+			rightGem: -1
+		},
+		item2: null
+	},
 	{
 		id:    1106,
 		level:    1,
@@ -1444,32 +1444,32 @@ export const CARDS: Card[][] = [[
 		},
 		item2: null
 	},
-	// { TODO: Bravado = your Bravado
-	// 	id:    1113,
-	// 	level:    1,
-	// 	cardType: CardType.trap,
-	// 	cardTop: {
-	// 		name: 'Reflective Haze',
-	// 		img:  '',
-	// 		text: '',
-	// 		stats: { Brains: null, Brawn: null, Bravado: -1 },
-	// 		power: 0
-	// 	},
-	// 	item: {
-	// 		type:     ItemType.permanent,
-	// 		name:    'TBD',
-	// 		img:     '',
-	// 		text:    '',
-	// 		stats:    { Brains: 1, Brawn: 1, Bravado: 1 },
-	// 		power:    0,
-	// 		value:    0,
-	// 		usable:   [],
-	// 		disabled: false,
-	// 		leftGem:  [],
-	// 		rightGem: 0
-	// 	},
-	// 	item2: null
-	// },
+	{
+		id:    1113,
+		level:    1,
+		cardType: CardType.trap,
+		cardTop: {
+			name: 'Reflective Haze',
+			img:  '',
+			text: '✕ = your Bravado',
+			stats: { Brains: null, Brawn: null, Bravado: -1 },
+			power: 0
+		},
+		item: {
+			type:     ItemType.permanent,
+			name:    'TBD',
+			img:     '',
+			text:    '',
+			stats:    { Brains: 1, Brawn: 1, Bravado: 1 },
+			power:    0,
+			value:    0,
+			usable:   [],
+			disabled: false,
+			leftGem:  [],
+			rightGem: 0
+		},
+		item2: null
+	},
 	{
 		id:    1114,
 		level:    1,
@@ -1600,32 +1600,32 @@ export const CARDS: Card[][] = [[
 		},
 		item2: null
 	},
-	// { TODO: Brawn = your Brawn
-	// 	id:    1119,
-	// 	level:    1,
-	// 	cardType: CardType.trap,
-	// 	cardTop: {
-	// 		name: 'Wall of Force',
-	// 		img: '',
-	// 		text: '',
-	// 		stats: {Brains: null, Brawn: -1, Bravado: null},
-	// 		power: 0,
-	// 	},
-	// 	item: {
-	// 		type:     ItemType.permanent,
-	// 		name:    'TBD',
-	// 		img:     '',
-	// 		text:    '',
-	// 		stats:    { Brains: 0, Brawn: 1, Bravado: 0 },
-	// 		power:    0,
-	// 		value:    0,
-	// 		usable:   [],
-	// 		disabled: false,
-	// 		leftGem:  [GemType.trapBonus],
-	// 		rightGem: 2
-	// 	},
-	// 	item2: null
-	// },
+	{
+		id:    1119,
+		level:    1,
+		cardType: CardType.trap,
+		cardTop: {
+			name: 'Wall of Force',
+			img: '',
+			text: '✕ = your Brawn',
+			stats: {Brains: null, Brawn: -1, Bravado: null},
+			power: 0,
+		},
+		item: {
+			type:     ItemType.permanent,
+			name:    'TBD',
+			img:     '',
+			text:    '',
+			stats:    { Brains: 0, Brawn: 1, Bravado: 0 },
+			power:    0,
+			value:    0,
+			usable:   [],
+			disabled: false,
+			leftGem:  [GemType.trapBonus],
+			rightGem: 2
+		},
+		item2: null
+	},
 	{
 		id:    1120,
 		level:    1,
@@ -5365,32 +5365,32 @@ export const CARDS: Card[][] = [[
 		},
 		item2: null
 	},
-	// { TODO: Bravado = neighbor's Bravado
-	// 	id:    3310,
-	// 	level:    3,
-	// 	cardType: CardType.enemy,
-	// 	cardTop: {
-	// 		name: 'Doppelgänger',
-	// 		img:  '',
-	// 		text: 'Uses the current <b>Bravado</b> of the player to your right',
-	// 		stats: { Brains: null, Brawn: null, Bravado: -1 },
-	// 		power: 0,
-	// 	},
-	// 	item: {
-	// 		type:     ItemType.permanent,
-	// 		name:    'TBD',
-	// 		img:     '',
-	// 		text:    '',
-	// 		stats:    { Brains: 0, Brawn: 0, Bravado: 4 },
-	// 		power:    0,
-	// 		value:    0,
-	// 		usable:   [],
-	// 		disabled: false,
-	// 		leftGem:  [GemType.Bravado],
-	// 		rightGem: 3
-	// 	},
-	// 	item2: null
-	// },
+	{
+		id:    3310,
+		level:    3,
+		cardType: CardType.enemy,
+		cardTop: {
+			name: 'Doppelgänger',
+			img:  '',
+			text: '✕ = current <b>Bravado</b> of player to your right',
+			stats: { Brains: null, Brawn: null, Bravado: -1 },
+			power: 0,
+		},
+		item: {
+			type:     ItemType.permanent,
+			name:    'TBD',
+			img:     '',
+			text:    '',
+			stats:    { Brains: 0, Brawn: 0, Bravado: 4 },
+			power:    0,
+			value:    0,
+			usable:   [],
+			disabled: false,
+			leftGem:  [GemType.Bravado],
+			rightGem: 3
+		},
+		item2: null
+	},
 	{
 		id:    3311,
 		level:    3,
@@ -5625,32 +5625,32 @@ export const CARDS: Card[][] = [[
 		},
 		item2: null
 	},
-	// { TODO: Brawn = neighbor's brawn
-	// 	id:    3320,
-	// 	level:    3,
-	// 	cardType: CardType.enemy,
-	// 	cardTop: {
-	// 		name: 'Mimic',
-	// 		img:  '',
-	// 		text: 'Uses the current <b>Brawn</b> of the player to your right',
-	// 		stats: { Brains: null, Brawn: -1, Bravado: null },
-	// 		power: 0,
-	// 	},
-	// 	item: {
-	// 		type:     ItemType.permanent,
-	// 		name:    'TBD',
-	// 		img:     '',
-	// 		text:    '',
-	// 		stats:    { Brains: 0, Brawn: 4, Bravado: 0 },
-	// 		power:    0,
-	// 		value:    0,
-	// 		usable:   [],
-	// 		disabled: false,
-	// 		leftGem:  [GemType.Brawn],
-	// 		rightGem: 3
-	// 	},
-	// 	item2: null
-	// },
+	{
+		id:    3320,
+		level:    3,
+		cardType: CardType.enemy,
+		cardTop: {
+			name: 'Mimic',
+			img:  '',
+			text: '✕ = current <b>Brawn</b> of player to your right',
+			stats: { Brains: null, Brawn: -1, Bravado: null },
+			power: 0,
+		},
+		item: {
+			type:     ItemType.permanent,
+			name:    'TBD',
+			img:     '',
+			text:    '',
+			stats:    { Brains: 0, Brawn: 4, Bravado: 0 },
+			power:    0,
+			value:    0,
+			usable:   [],
+			disabled: false,
+			leftGem:  [GemType.Brawn],
+			rightGem: 3
+		},
+		item2: null
+	},
 	{
 		id:    3321,
 		level:    3,
@@ -5963,32 +5963,32 @@ export const CARDS: Card[][] = [[
 		},
 		item2: null
 	},
-	// { TODO: Brains = neighbor's Brains
-	// 	id:    3333,
-	// 	level:    3,
-	// 	cardType: CardType.enemy,
-	// 	cardTop: {
-	// 		name: 'Satori',
-	// 		img:  '',
-	// 		text: 'Uses the current <b>Brains</b> of the player to your right',
-	// 		stats: { Brains: -1, Brawn: null, Bravado: null },
-	// 		power: 0,
-	// 	},
-	// 	item: {
-	// 		type:     ItemType.permanent,
-	// 		name:    'TBD',
-	// 		img:     '',
-	// 		text:    '',
-	// 		stats:    {Brains: 4, Brawn: 0, Bravado: 0},
-	// 		power:    0,
-	// 		value:    0,
-	// 		usable:   [],
-	// 		disabled: false,
-	// 		leftGem:  [GemType.Brains],
-	// 		rightGem: 3
-	// 	},
-	// 	item2: null
-	// },
+	{
+		id:    3333,
+		level:    3,
+		cardType: CardType.enemy,
+		cardTop: {
+			name: 'Satori',
+			img:  '',
+			text: '✕ = current <b>Brains</b> of player to your right',
+			stats: { Brains: -1, Brawn: null, Bravado: null },
+			power: 0,
+		},
+		item: {
+			type:     ItemType.permanent,
+			name:    'TBD',
+			img:     '',
+			text:    '',
+			stats:    {Brains: 4, Brawn: 0, Bravado: 0},
+			power:    0,
+			value:    0,
+			usable:   [],
+			disabled: false,
+			leftGem:  [GemType.Brains],
+			rightGem: 3
+		},
+		item2: null
+	},
 	{
 		id:    3334,
 		level:    3,
