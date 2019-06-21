@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 	activeCard: Card;
 	characters: Player[];
 	usingXP = false;
-	needToRoll = false;
+	needToRoll = 0;
 	needToHeal = false;
 	tempMoveBonus = 0;
 	tempXPBonus = 0;
@@ -271,11 +271,11 @@ export class AppComponent implements OnInit {
 
 	powerSurge(value: number): void {
 		if (!this.gameService.midTurn) return;
-		if (value < 3) this.players.find(player => player.playerNum === this.gameService.currPlayer).gainWound();
-		if (value > 4) this.players.find(player => player.playerNum === this.gameService.currPlayer).healWound();
+		if (value < 2 || (this.needToRoll > 1 && value === 2) || (this.needToRoll === 3 && value === 3)) this.players.find(player => player.playerNum === this.gameService.currPlayer).gainWound();
+		if (value > 5 || (this.needToRoll < 3 && value === 5) || (this.needToRoll === 1 && value === 4)) this.players.find(player => player.playerNum === this.gameService.currPlayer).healWound();
 		this.gameService.currPlayer++;
 		if (this.currentPlayer === this.gameService.currPlayer) {
-			this.needToRoll = false;
+			this.needToRoll = 0;
 			this.gameService.midTurn = false;
 			this.discardCard(this.activeCard);
 			this.useCard(this.activeCard);
@@ -307,7 +307,7 @@ export class AppComponent implements OnInit {
 				this.drawTile(1);
 				break;
 			case 4: // Power Surge: gain or heal a wound
-				this.needToRoll = true;
+				this.needToRoll = this.activeCard.level;
 				break;
 			case 5: // TODO: Flash Flood: disable an item
 				break;

@@ -30,12 +30,12 @@
 		<p *ngIf="!card"><button (click)="drawCard.emit(cardsToDraw)">Draw {{ cardsToDraw > 1 ? cardsToDraw + ' Cards' : 'a Card' }}</button></p>
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.preCombat">
-		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="dieValue = dieRoll()">Roll a Die</button></p>
+		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="dieValue = gameService.dieRoll()">Roll a Die</button></p>
 		<div *ngIf="gameService.midTurn && needToRoll && dieValue">
-			<h1>{{ dieValue }}</h1>
-			<h2 *ngIf="dieValue === 1 || dieValue === 2">Gain a Wound</h2>
-			<h2 *ngIf="dieValue === 3 || dieValue === 4">Nothing Happens</h2>
-			<h2 *ngIf="dieValue === 5 || dieValue === 6">Heal a Wound</h2>
+			<h1>{{ dieValue + modifyDieRoll }}</h1>
+			<h2 *ngIf="dieValue < 2 || (needToRoll > 1 && dieValue === 2) || (needToRoll === 3 && dieValue === 3)">Gain a Wound</h2>
+			<h2 *ngIf="(needToRoll === 1 && dieValue > 1 && dieValue < 4) || (needToRoll === 2 && dieValue > 2 && dieValue < 5) || (needToRoll === 3 && dieValue > 3 && dieValue < 6)">Nothing Happens</h2>
+			<h2 *ngIf="dieValue > 5 || (needToRoll < 3 && dieValue === 5) || (needToRoll === 1 && dieValue === 4)">Heal a Wound</h2>
 			<p><button (click)="rolledDie.emit(dieValue); dieValue = 0">Continue</button></p>
 		</div>
 	</div>
