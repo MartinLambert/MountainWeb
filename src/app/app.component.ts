@@ -155,14 +155,12 @@ export class AppComponent implements OnInit {
 				break;
 			case 4: // move an extra space
 				this.tempMoveBonus += cardPower.value;
-				// this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
 				this.movePlayer();
 				break;
 			case 5: // gain extra XP
 				this.gainXPBonus(cardPower.value);
 				break;
 			case 6: // move to any adjacent or diagonal tile
-				// this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement + this.tempMoveBonus, this.characters[this.gameService.currPlayer].location);
 				this.movePlayer();
 				this.board.validateAdjacentMovement(this.characters[this.gameService.currPlayer].location, cardPower.value > 0);
 				break;
@@ -194,11 +192,8 @@ export class AppComponent implements OnInit {
 				}
 				playerComp.calculateDisplayStats();
 				break;
-			// case 12: // force Enemy to reroll  EDIT June 2019: this power will no longer exist
-			// 	this.action.cardRoll = this.action.dieRoll();
-			// 	this.action.calcStats(this.activeCard);
-			// 	break;
-			case 12: // TODO: move to any space in this row
+			case 12: // move to any space in this row
+				this.board.validateRowMovement(this.characters[this.gameService.currPlayer].location);
 				break;
 			case 13: // discard an Enemy without fighting it
 			case 14: // discard a Trap without fighting it
@@ -311,10 +306,14 @@ export class AppComponent implements OnInit {
 				break;
 			case 5: // TODO: Flash Flood: disable an item
 				break;
-			case 6: // TODO: Phase Shift: move to any space in your row
+			case 6: // Phase Shift: move to any space in your row
+				this.board.validateRowMovement(this.characters[this.gameService.currPlayer].location);
 				break;
 			case 7: // Earthquake: -1 to your next die roll
 				this.characters.forEach(character => character.reduceNextRoll = true);
+				this.gameService.midTurn = false;
+				this.discardCard(this.activeCard);
+				this.useCard(this.activeCard);
 				break;
 		}
 	}

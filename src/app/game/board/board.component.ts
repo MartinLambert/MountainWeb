@@ -109,6 +109,19 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.spaces[location + this.boardConstants.rowWidth + 1].valid = this.spaces[location + this.boardConstants.rowWidth + 1].hasTile;
 		}
 	}
+	validateRowMovement(location: number): void {
+		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
+		let currLocation = location - 1;
+		while (this.spaces[currLocation].bonus === this.spaces[location].bonus) {
+			this.spaces[currLocation].valid = this.spaces[currLocation].hasTile;
+			currLocation--;
+		}
+		currLocation = location + 1;
+		while (this.spaces[currLocation].bonus === this.spaces[location].bonus) {
+			this.spaces[currLocation].valid = this.spaces[currLocation].hasTile;
+			currLocation++;
+		}
+	}
 
 	validateTileRemoval(): void {
 		for (let i = this.boardConstants.minSpace; i < this.boardConstants.maxSpace; i++) {

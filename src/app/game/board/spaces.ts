@@ -236,27 +236,27 @@ export const SPACES: Space[] = [
 	{ hasTile: true, locked:  true, valid: false, level: -1, bonus: 1, tile:
 			{ doors: {north: false, east: false, south: false, west: false}, img: 'blank', rotation: 0, isPortal: false, power: TilePower.none } },
 
-	{ hasTile: true, locked:  true, valid: false, level: -1, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level: -1, bonus: 0, tile:
 			{ doors: {north: false, east: false, south: false, west: false}, img: 'blank', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base1', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base2', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base3', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base4', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base5', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base6', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base7', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base8', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked: false, valid: false, level:  0, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level:  0, bonus: 0, tile:
 			{ doors: {north: true, east: false, south: false, west: false}, img: 'base9', rotation: 0, isPortal: false, power: TilePower.none } },
-	{ hasTile: true, locked:  true, valid: false, level: -1, bonus: 0, tile:
+	{ hasTile: true, locked: true, valid: false, level: -1, bonus: 0, tile:
 			{ doors: {north: false, east: false, south: false, west: false}, img: 'blank', rotation: 0, isPortal: false, power: TilePower.none } },
 
 	{ hasTile: false, locked: true, valid: false, level: -1, bonus: 0, tile:
