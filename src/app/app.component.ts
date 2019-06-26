@@ -148,7 +148,8 @@ export class AppComponent implements OnInit {
 				for (let i = 0; i < cardPower.value; i++)
 					playerComp.healWound();
 				break;
-			case 2: // TODO: move to any portal
+			case 2: // move to any portal
+				this.board.validatePortalMovement(this.characters[this.gameService.currPlayer].location);
 				break;
 			case 3: // draw an extra tile
 				this.gameService.turnStep === TurnStepType.drawTile ? this.tilesToDraw += cardPower.value : this.drawTile(cardPower.value);
@@ -164,7 +165,10 @@ export class AppComponent implements OnInit {
 				this.movePlayer();
 				this.board.validateAdjacentMovement(this.characters[this.gameService.currPlayer].location, cardPower.value > 0);
 				break;
-			case 7: // TODO: move to any occupied space
+			case 7: // move to any occupied space
+				for (let i = 0; i < this.characters.length; i++)
+					if (i !== this.gameService.currPlayer)
+						this.board.spaces[this.characters[i].location].valid = true;
 				break;
 			case 8: // increase Brains
 				playerObj.nativeStats.Brains += cardPower.value;
@@ -239,6 +243,10 @@ export class AppComponent implements OnInit {
 			case 23: // TODO: move a tile
 				break;
 			case 24: // TODO: move to any portal or occupied space
+				this.board.validatePortalMovement(this.characters[this.gameService.currPlayer].location);
+				for (let i = 0; i < this.characters.length; i++)
+					if (i !== this.gameService.currPlayer)
+						this.board.spaces[this.characters[i].location].valid = true;
 				break;
 			default:
 				console.warn(`cardPower ${cardPower.power} not implemented`);
@@ -305,6 +313,7 @@ export class AppComponent implements OnInit {
 				this.needToRoll = this.activeCard.level;
 				break;
 			case 5: // TODO: Flash Flood: disable an item
+				this.board.validateRowMovement(this.characters[this.gameService.currPlayer].location);
 				break;
 			case 6: // Phase Shift: move to any space in your row
 				this.board.validateRowMovement(this.characters[this.gameService.currPlayer].location);

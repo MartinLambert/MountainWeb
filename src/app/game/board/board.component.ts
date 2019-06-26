@@ -13,8 +13,13 @@ import {TilePower, TurnStepType} from '../types';
 })
 export class BoardComponent implements OnInit, AfterViewInit {
 
+	@Input() players: Player[];
+	@Output() tilePlaced = new EventEmitter();
+	@Output() tileRemoved = new EventEmitter();
 	spaces: Space[];
 	tiles: Tile[];
+	portals: number[] = [];
+	startLocations = [178, 180, 182, 184];
 	currentTile: Tile;
 	discard: Tile[] = [];
 	boardConstants = {
@@ -27,10 +32,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		homeStart: 177,
 		homeEnd:   185
 	};
-	startLocations = [178, 180, 182, 184];
-	@Input() players: Player[];
-	@Output() tilePlaced = new EventEmitter();
-	@Output() tileRemoved = new EventEmitter();
 
 	constructor(private gameService: GameService) {}
 
@@ -88,6 +89,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.spaces[location + 1].valid = this.spaces[location].tile.doors.east  && this.spaces[location + 1].tile.doors.west;
 			this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location].tile.doors.south && this.spaces[location + this.boardConstants.rowWidth].tile.doors.north;
 			this.spaces[location - 1].valid = this.spaces[location].tile.doors.west  && this.spaces[location - 1].tile.doors.east;
+			if (this.spaces[location].tile.isPortal) this.validatePortalMovement(location);
 			this.validatePlayerMovement(distance - 1, location - this.boardConstants.rowWidth);
 			this.validatePlayerMovement(distance - 1, location +  1);
 			this.validatePlayerMovement(distance - 1, location + this.boardConstants.rowWidth);
@@ -97,7 +99,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		// TODO: when there are no valid moves to make
 	}
 	validateAdjacentMovement(location: number, diagonal: boolean): void {
-		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
+		// if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
 		this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location - this.boardConstants.rowWidth].hasTile;
 		this.spaces[location + 1].valid = this.spaces[location + 1].hasTile;
 		this.spaces[location + this.boardConstants.rowWidth].valid = this.spaces[location + this.boardConstants.rowWidth].hasTile;
@@ -110,7 +112,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		}
 	}
 	validateRowMovement(location: number): void {
-		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
+		// if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
 		let currLocation = location - 1;
 		while (this.spaces[currLocation].bonus === this.spaces[location].bonus) {
 			this.spaces[currLocation].valid = this.spaces[currLocation].hasTile;
@@ -122,12 +124,16 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			currLocation++;
 		}
 	}
+	validatePortalMovement(location: number): void {
+		// if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
+		this.portals.forEach(loc => { if (loc !== location) this.spaces[loc].valid = true; });
+	}
 
 	validateTileRemoval(): void {
 		for (let i = this.boardConstants.minSpace; i < this.boardConstants.maxSpace; i++) {
 			if (this.spaces[i].locked) continue;
 			if (this.players.filter(player => player.location === i).length) continue;
-			if (this.spaces[i].hasTile) this.spaces[i].valid = true;
+			this.spaces[i].valid = this.spaces[i].hasTile;
 		}
 		// TODO: when there are no valid tiles to remove
 	}
@@ -141,6 +147,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 		if (this.gameService.currentTile) {
 			this.spaces[currIndex].tile = this.gameService.currentTile;
 			this.spaces[currIndex].hasTile = true;
+			if (this.gameService.currentTile.isPortal) this.portals.push(currIndex);
 			this.clearValidity();
 			this.tilePlaced.emit();
 		} else if (this.gameService.turnStep === TurnStepType.move) {
@@ -154,6 +161,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.clearValidity();
 			this.spaces[currIndex].tile = new Tile();
 			this.spaces[currIndex].hasTile = false;
+			this.portals = this.portals.filter(loc => loc !== currIndex);
 			this.tileRemoved.emit();
 		}
 	}

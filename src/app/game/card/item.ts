@@ -1,4 +1,4 @@
-import {GemType, ItemType, Stats, TurnStepType} from '../types';
+import { GemType, ItemType, Stats, TurnStepType } from '../types';
 
 export class Item {
 	type:     ItemType;

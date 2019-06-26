@@ -84,7 +84,7 @@ export class PlayerComponent implements OnInit {
 		if (this.gameService.round < 0 || this.gainingItem) { // Clicking to add an item to inventory
 			if (this.gameService.currentCard === null) return;
 			if (card.cardType !== CardType.blank) {
-				if (item.type % ItemType.permanent === 0 && item.power === 4) this.player.movement -= item.value;
+				if (item.type === ItemType.permanent && item.power === 4) this.player.movement -= item.value;
 				if (card.cardType !== CardType.starter)
 					this.discardCard.emit(card);
 			}
@@ -92,20 +92,18 @@ export class PlayerComponent implements OnInit {
 			if (this.gameService.currentCard.item.type % ItemType.permanent === 0 && this.gameService.currentCard.item.power === 4) this.player.movement += this.gameService.currentCard.item.value;
 			this.calculateDisplayStats();
 			this.useCard.emit(this.gameService.currentCard);
-		} else if (item.type % ItemType.permanent !== 0 && !item.disabled) { // Clicking to use an item in inventory
+		} else if (item.type !== ItemType.permanent && !item.disabled) { // Clicking to use an item in inventory
 			let itemUsed = false;
 			if (this.itemClickable(item)) {
 				this.cardPower.emit({power: item.power, value: item.value});
 				itemUsed = true;
 			}
 			if (itemUsed)
-				if (item.type % ItemType.useOnce === 0) {
-					this.discardCard.emit(card);
-					this.player.items[slot] = new Card();
-					this.calculateDisplayStats();
-					this.useCard.emit();
-				} else
+				if ([ItemType.useOnce, ItemType.useNow, ItemType.useNext].includes(item.type)) {
 					item.disabled = true;
+				} else {
+					// TODO: ItemType.disAny
+				}
 		}
 	}
 

@@ -59,6 +59,16 @@ div.tile {
   transform: scale(1.025); }
   div.tile:nth-of-type(11n + 1) {
     justify-content: flex-end; }
+  div.tile.portal:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    opacity: 0.85;
+    background-image: url(/assets/tiles/vortex.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center; }
   div.tile .bg {
     position: absolute;
     z-index: -1;
