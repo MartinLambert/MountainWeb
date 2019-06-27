@@ -1,5 +1,5 @@
-import {Card} from '../card/card';
-import {CardType, GemType, ItemType, TurnStepType} from '../types';
+import { Card } from '../card/card';
+import { CardType, GemType, ItemType, TurnStepType } from '../types';
 
 export const CARDS: Card[][] = [[
 	{

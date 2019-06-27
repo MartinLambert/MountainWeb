@@ -18,16 +18,17 @@
 				}
 				.wounds .card>p+p, .items .card>p:first-child { background-color: nth($players, $playerNum) }
 				.wounds .card>p:first-child { background-color: ghostwhite }
-				&.newItem .items>div>p:first-child {
+				&.flashItem .items>div>p:first-child {
 					animation-name: player#{$playerNum - 1}_animation;
 					animation-duration: 1s;
 					animation-iteration-count: infinite;
 					animation-timing-function: linear;
 				}
-				&.newItem .items>div.nocard>p:first-child {
+				&.flashItem .items>div.nocard>p:first-child {
 					animation-name: player#{$playerNum - 1}_nocard_animation;
 				}
 				.clickable { border: 6px solid nth($players, $playerNum); border-top: none }
+				.disabled:after { color: nth($players, $playerNum) }
 			}
 		}
 	}
@@ -132,6 +133,14 @@
 		.rightGem h1 {
 			margin: 0;
 			font-size: 1.5em;
+		}
+		&.disabled:after {
+			content: '✘';
+			position: absolute;
+			font-size: 6em;
+			line-height: 0;
+			top: 2rem;
+			opacity: 0.85;
 		}
 	}
 }

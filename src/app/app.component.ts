@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
 	usingXP = false;
 	needToRoll = 0;
 	needToHeal = false;
+	disablingItem = false;
 	tempMoveBonus = 0;
 	tempXPBonus = 0;
 	xpMinOnly = false;
@@ -232,17 +233,9 @@ export class AppComponent implements OnInit {
 				this.action.modifiers.enBravado += cardPower.value;
 				this.action.calcStats();
 				break;
-			// case 23: // reduce an Enemy's die roll  EDIT June 2019: this power will no longer exist
-			// 	this.action.modifiers.enemyRoll += cardPower.value;
-			// 	if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
-			// 	break;
-			// case 24: // reduce a Trap's die roll  EDIT June 2019: this power will no longer exist
-			// 	this.action.modifiers.trapRoll += cardPower.value;
-			// 	if (this.action.selectedCard !== null) this.action.calcStats(this.action.cards[this.action.selectedCard]);
-			// 	break;
 			case 23: // TODO: move a tile
 				break;
-			case 24: // TODO: move to any portal or occupied space
+			case 24: // move to any portal or occupied space
 				this.board.validatePortalMovement(this.characters[this.gameService.currPlayer].location);
 				for (let i = 0; i < this.characters.length; i++)
 					if (i !== this.gameService.currPlayer)
@@ -313,7 +306,7 @@ export class AppComponent implements OnInit {
 				this.needToRoll = this.activeCard.level;
 				break;
 			case 5: // TODO: Flash Flood: disable an item
-				this.board.validateRowMovement(this.characters[this.gameService.currPlayer].location);
+				this.disablingItem = true;
 				break;
 			case 6: // Phase Shift: move to any space in your row
 				this.board.validateRowMovement(this.characters[this.gameService.currPlayer].location);

@@ -3,8 +3,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Player } from '../player/player';
 import { Card } from '../card/card';
 import { Tile } from '../board/tile';
-import { GameService} from '../game.service';
-import {GemType, ItemType, TurnStepType} from '../types';
+import { GameService } from '../game.service';
+import { GemType, ItemType, TurnStepType } from '../types';
 
 @Component({
 	selector: 'hotm-current',
@@ -28,6 +28,8 @@ export class CurrentComponent implements OnInit {
 	@Output() healing   = new EventEmitter();
 	@Output() endTurn   = new EventEmitter();
 	dieValue: number;
+	totalRoll: number;
+	dieString: string;
 	turnStepType = TurnStepType;
 
 	constructor(public gameService: GameService) {
@@ -61,9 +63,10 @@ export class CurrentComponent implements OnInit {
 		this.checkTile.emit(tile);
 	}
 
-	get modifyDieRoll(): string {
+	rollADie(): void {
 		let dieRollModifier = 0;
 		let previousGem = 0;
+		this.dieValue = this.gameService.dieRoll();
 		if (this.player.reduceNextRoll) {
 			dieRollModifier--;
 			this.player.reduceNextRoll = false;
@@ -73,6 +76,7 @@ export class CurrentComponent implements OnInit {
 			if (thisCard.item.type === ItemType.permanent && thisCard.item.power === 19) dieRollModifier += thisCard.item.value;
 			previousGem = thisCard.item.rightGem;
 		});
-		return (dieRollModifier === 0 ? '' : (dieRollModifier > 0 ? ' + ' : ' − ') + Math.abs(dieRollModifier));
+		this.totalRoll = this.dieValue + dieRollModifier;
+		this.dieString = this.dieValue + (dieRollModifier === 0 ? '' : (dieRollModifier > 0 ? ' + ' : ' − ') + Math.abs(dieRollModifier));
 	}
 }

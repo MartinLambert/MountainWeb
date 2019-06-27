@@ -17,9 +17,9 @@ export class ActionComponent implements OnInit {
 	@Input() player: Player;
 	@Input() playerNum: number;
 	@Input() neighborStats: Stats;
-	@Output() drawCard = new EventEmitter<number>();
 	@Output() useCard = new EventEmitter<Card>();
 	@Output() discardCard = new EventEmitter<Card>();
+	@Output() useItemPower = new EventEmitter<{power: number, value: number}>();
 	@Output() doEvent = new EventEmitter();
 	@Output() wounded = new EventEmitter();
 	@ViewChild(PlayerComponent, { static: true }) playerComp;
@@ -132,11 +132,8 @@ export class ActionComponent implements OnInit {
 			this.cardBonusString += (this.rowBonusModifier > 0 ? ' + ' : ' − ') + Math.abs(this.rowBonusModifier);
 	}
 
-	useItemPower(itemPower: {power: number, value: number}): void {
-		if (this.gameService.turnStep === TurnStepType.drawCard && itemPower.power === 2) {
-			this.drawCard.emit(itemPower.value);
-		}
-	}
+	// useItemPower(itemPower: {power: number, value: number}): void {
+	// }
 
 	fightCard(): void {
 		this.playerRoll = this.gameService.dieRoll();

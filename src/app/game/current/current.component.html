@@ -13,7 +13,7 @@
 </div>
 <div *ngIf="gameService.round > 0">
 	<h1>Round {{ gameService.round }}: {{ player.shortName }}’s Turn</h1>
-	<div *ngIf="needToHeal"><div>
+	<div *ngIf="needToHeal" class="info"><div>
 		<h3>{{ player.shortName }} is wounded and must return to camp.</h3>
 		<p><button (click)="healing.emit()">Continue</button></p>
 	</div></div>
@@ -29,14 +29,14 @@
 	<div *ngIf="gameService.turnStep === turnStepType.drawCard">
 		<p *ngIf="!card"><button (click)="drawCard.emit(cardsToDraw)">Draw {{ cardsToDraw > 1 ? cardsToDraw + ' Cards' : 'a Card' }}</button></p>
 	</div>
-	<div *ngIf="gameService.turnStep === turnStepType.preCombat">
-		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="dieValue = gameService.dieRoll()">Roll a Die</button></p>
+	<div *ngIf="gameService.turnStep === turnStepType.preCombat" class="info">
+		<p *ngIf="gameService.midTurn && needToRoll && !dieValue"><button (click)="rollADie()">Roll a Die</button></p>
 		<div *ngIf="gameService.midTurn && needToRoll && dieValue">
-			<h1>{{ dieValue + modifyDieRoll }}</h1>
-			<h2 *ngIf="dieValue < 2 || (needToRoll > 1 && dieValue === 2) || (needToRoll === 3 && dieValue === 3)">Gain a Wound</h2>
-			<h2 *ngIf="(needToRoll === 1 && dieValue > 1 && dieValue < 4) || (needToRoll === 2 && dieValue > 2 && dieValue < 5) || (needToRoll === 3 && dieValue > 3 && dieValue < 6)">Nothing Happens</h2>
-			<h2 *ngIf="dieValue > 5 || (needToRoll < 3 && dieValue === 5) || (needToRoll === 1 && dieValue === 4)">Heal a Wound</h2>
-			<p><button (click)="rolledDie.emit(dieValue); dieValue = 0">Continue</button></p>
+			<h1>{{ dieString }}</h1>
+			<h2 *ngIf="totalRoll < 2 || (needToRoll > 1 && totalRoll === 2) || (needToRoll === 3 && totalRoll === 3)">Gain a Wound</h2>
+			<h2 *ngIf="(needToRoll === 1 && totalRoll > 1 && totalRoll < 4) || (needToRoll === 2 && totalRoll > 2 && totalRoll < 5) || (needToRoll === 3 && totalRoll > 3 && totalRoll < 6)">Nothing Happens</h2>
+			<h2 *ngIf="totalRoll > 5 || (needToRoll < 3 && totalRoll === 5) || (needToRoll === 1 && totalRoll === 4)">Heal a Wound</h2>
+			<p><button (click)="rolledDie.emit(totalRoll); dieValue = 0">Continue</button></p>
 		</div>
 	</div>
 	<div *ngIf="gameService.turnStep === turnStepType.postCombat">

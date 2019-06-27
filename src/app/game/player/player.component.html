@@ -1,4 +1,4 @@
-<div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed, 'newItem': gainingItem}">
+<div class="charSheet" *ngIf="player" [ngClass]="{'zoomed': zoomed, 'flashItem': gainingItem || disablingItem}">
 	<div class="wounds">
 		<div *ngFor="let wound of player.wounds" class="{{ wound.cardType === cardType.blank ? 'nocard' : 'card' }}">
 			<p>{{ wound.cardTop.name }}</p><p>Wound</p>
@@ -14,16 +14,16 @@
 	</div>
 	<div class="attributes">
 		<dl>
-			<dt class="brains"  [ngClass]="{'modified': player.calculatedStats.Brains  !== player.nativeStats.Brains }" [innerHTML]="player.calculatedStats.Brains" ></dt><dd class="brains" >Brains</dd>
-			<dt class="brawn"   [ngClass]="{'modified': player.calculatedStats.Brawn   !== player.nativeStats.Brawn  }" [innerHTML]="player.calculatedStats.Brawn"  ></dt><dd class="brawn"  >Brawn</dd>
-			<dt class="bravado" [ngClass]="{'modified': player.calculatedStats.Bravado !== player.nativeStats.Bravado}" [innerHTML]="player.calculatedStats.Bravado"></dt><dd class="bravado">Bravado</dd>
+			<dt class="brains"  [class.modified]="player.calculatedStats.Brains  !== player.nativeStats.Brains"  [innerHTML]="player.calculatedStats.Brains" ></dt><dd class="brains" >Brains</dd>
+			<dt class="brawn"   [class.modified]="player.calculatedStats.Brawn   !== player.nativeStats.Brawn"   [innerHTML]="player.calculatedStats.Brawn"  ></dt><dd class="brawn"  >Brawn</dd>
+			<dt class="bravado" [class.modified]="player.calculatedStats.Bravado !== player.nativeStats.Bravado" [innerHTML]="player.calculatedStats.Bravado"></dt><dd class="bravado">Bravado</dd>
 		</dl>
 		<div *ngIf="player.XP.length" class="XP" hotmCardRatio>XP</div>
 	</div>
 	<div class="items">
 		<div *ngFor="let card of player.items; let num = index" class="{{ card.cardType === cardType.blank ? 'nocard' : 'card' }}" (click)="clickItem(num)">
 			<p>Item</p>
-			<section *ngIf="card.cardType !== cardType.blank" class="equippedItem" [class.clickable]="itemClickable(card.item)">
+			<section *ngIf="card.cardType !== cardType.blank" class="equippedItem" [ngClass]="{'clickable': itemClickable(card.item), 'disabled': card.item.disabled}">
 				<h1 [innerHTML]="card.item.name"></h1>
 				<div [innerHTML]="gameService.cardTextDisplay(card.item)"></div>
 				<div class="leftGem"><div [innerHTML]="gameService.leftGemDisplay(card.item.leftGem)"></div></div>

@@ -7,4 +7,4 @@
 	<div class="bg" [ngStyle]="{'background-image': 'url(/assets/tiles/' + space.tile.img + '.png)', 'transform': 'rotate(' + space.tile.rotation + 'turn)'}"></div>
 	<p *ngIf="space.level === -1 && space.bonus">+{{ space.bonus }}</p>
 </div>
-<p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [ngClass]="{'pulse': num === gameService.currPlayer}"></p>
+<p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [class.pulse]="num === gameService.currPlayer"></p>

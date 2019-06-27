@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import {GameService} from '../game.service';
-import {Player} from './player';
-import {Card} from '../card/card';
-import {Item} from '../card/item';
-import {CardType, GemType, ItemType} from '../types';
+import { GameService } from '../game.service';
+import { Player } from './player';
+import { Card } from '../card/card';
+import { Item } from '../card/item';
+import { CardType, GemType, ItemType } from '../types';
 
 @Component({
 	selector: 'hotm-player',
@@ -17,7 +17,8 @@ export class PlayerComponent implements OnInit {
 	@Input() playerNum: number;
 	@Input() zoomed: boolean;
 	@Input() gainingItem: boolean;
-	@Input() opposingCard: string;
+	@Input() disablingItem: boolean;
+	@Input() opposingCard: CardType;
 	@Output() discardCard = new EventEmitter<Card>();
 	@Output() cardPower = new EventEmitter<{power: number, value: number}>();
 	@Output() wounded = new EventEmitter();
@@ -92,6 +93,8 @@ export class PlayerComponent implements OnInit {
 			if (this.gameService.currentCard.item.type % ItemType.permanent === 0 && this.gameService.currentCard.item.power === 4) this.player.movement += this.gameService.currentCard.item.value;
 			this.calculateDisplayStats();
 			this.useCard.emit(this.gameService.currentCard);
+		} else if (this.disablingItem && item.type !== ItemType.none && !item.disabled) { // Clicking to disable an item
+			item.disabled = true;
 		} else if (item.type !== ItemType.permanent && !item.disabled) { // Clicking to use an item in inventory
 			let itemUsed = false;
 			if (this.itemClickable(item)) {
@@ -101,8 +104,8 @@ export class PlayerComponent implements OnInit {
 			if (itemUsed)
 				if ([ItemType.useOnce, ItemType.useNow, ItemType.useNext].includes(item.type)) {
 					item.disabled = true;
-				} else {
-					// TODO: ItemType.disAny
+				} else { // ItemType.disAny
+					this.disablingItem = true;
 				}
 		}
 	}
