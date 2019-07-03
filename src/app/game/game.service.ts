@@ -14,7 +14,6 @@ import { GemType, ItemType, TurnStepType } from './types';
 	providedIn: 'root'
 })
 export class GameService {
-
 	private _numPlayers = 4;
 	private _currPlayer = 0;
 	private _turnStep: TurnStepType = TurnStepType.drawTile;
@@ -22,6 +21,7 @@ export class GameService {
 	private _currentTile: Tile;
 	private _currentCard: Card;
 	private _midTurn = false;
+	private _movingTile = false;
 	// public flags = {
 	// 	midTurn: false // rotating through characters during a turn instead of between turns, e.g. with an event
 	// };
@@ -86,6 +86,14 @@ export class GameService {
 
 	set midTurn(value: boolean) {
 		this._midTurn = value;
+	}
+
+	get movingTile(): boolean {
+		return this._movingTile;
+	}
+
+	set movingTile(value: boolean) {
+		this._movingTile = value;
 	}
 
 	getBoard(): Space[] {

@@ -16,16 +16,13 @@ hotm-player {
 
 button, h2 {
   grid-area: text;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   width: max-content; }
 
-h2 {
-  height: 2em;
-  align-self: start; }
-
 button {
   display: block;
+  margin: auto;
   font-size: 1.25rem;
   border-radius: 0.25em;
   background-color: #E3E3E9;

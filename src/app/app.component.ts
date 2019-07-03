@@ -87,6 +87,12 @@ export class AppComponent implements OnInit {
 	}
 	tilePlaced(): void {
 		if (!this.gameService.currentTile) return;
+		if (this.gameService.movingTile) {
+			this.currentTiles.pop();
+			this.gameService.currentTile = null;
+			this.gameService.movingTile = false;
+			return;
+		}
 		const index = this.currentTiles.indexOf(this.gameService.currentTile);
 		if (index >= 0) {
 			this.currentTiles.splice(index, 1);
@@ -105,7 +111,6 @@ export class AppComponent implements OnInit {
 					this.endTurn(); // Round 0 is just setting up the board
 				else {
 					this.gameService.turnStep = TurnStepType.move;
-					// this.board.validatePlayerMovement(this.characters[this.gameService.currPlayer].movement, this.characters[this.gameService.currPlayer].location);
 					this.movePlayer();
 				}
 			} else {
@@ -114,18 +119,20 @@ export class AppComponent implements OnInit {
 		}
 	}
 	tileRemoved(): void {
-		if (!this.gameService.midTurn) return;
-		if (!document.getElementsByClassName('valid').length)
-			this.gameService.currPlayer = this.currentPlayer;
-		else
-			this.gameService.currPlayer++;
-		if (this.currentPlayer === this.gameService.currPlayer) {
-			this.gameService.midTurn = false;
-			this.discardCard(this.activeCard);
-			this.useCard(this.activeCard);
-		} else {
-			this.board.validateTileRemoval();
-		}
+		if (this.gameService.midTurn) {
+			if (!document.getElementsByClassName('valid').length)
+				this.gameService.currPlayer = this.currentPlayer;
+			else
+				this.gameService.currPlayer++;
+			if (this.currentPlayer === this.gameService.currPlayer) {
+				this.gameService.midTurn = false;
+				this.discardCard(this.activeCard);
+				this.useCard(this.activeCard);
+			} else {
+				this.board.validateTileRemoval();
+			}
+		} else if (this.gameService.movingTile)
+			this.currentTiles.push(this.gameService.currentTile);
 	}
 
 	gainXPBonus(amount: number): void {
@@ -233,7 +240,9 @@ export class AppComponent implements OnInit {
 				this.action.modifiers.enBravado += cardPower.value;
 				this.action.calcStats();
 				break;
-			case 23: // TODO: move a tile
+			case 23: // move a tile
+				this.gameService.movingTile = true;
+				this.board.validateTileRemoval();
 				break;
 			case 24: // move to any portal or occupied space
 				this.board.validatePortalMovement(this.characters[this.gameService.currPlayer].location);

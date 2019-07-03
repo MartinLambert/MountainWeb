@@ -1,7 +1,3 @@
-<div *ngIf="gameService.round === -1">
-	<h1>Card Setup: {{ player.shortName }}’s Turn</h1>
-	<div id="cardRef"></div>
-</div>
 <div *ngIf="gameService.round === 0">
 	<h1>Board Setup: {{ player.shortName }}’s Turn</h1>
 	<div *ngIf="gameService.turnStep === turnStepType.drawTile">
@@ -45,7 +41,10 @@
 			<hotm-card [card]="card"></hotm-card>
 		</div>
 	</div>
-	<div *ngIf="gameService.turnStep === turnStepType.xpEnd && !needToHeal">
+	<div *ngIf="gameService.turnStep === turnStepType.xpEnd && gameService.movingTile">
+		<div *ngFor="let tile of tiles; let num = index" class="currentTile" [ngClass]="{'selected': tile === gameService.currentTile, 'portal': tile.isPortal}"><span [ngStyle]="{'backgroundImage': 'url(/assets/tiles/' + tile.img + '.png)', 'transform': 'rotate(' + tile.rotation + 'turn)'}" (click)="clickTile(num)"></span></div>
+	</div>
+	<div *ngIf="gameService.turnStep === turnStepType.xpEnd && !gameService.movingTile">
 		<p *ngIf="player.XP.length"><button (click)="useXP.emit()">Use XP</button></p>
 		<p><button (click)="endTurn.emit()">End Turn</button></p>
 	</div>

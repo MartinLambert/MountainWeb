@@ -50,8 +50,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
 	drawTile(): void {
 		if (!this.tiles.length) return;
-		this.gameService.currentTile = this.tiles[0];
-		this.tiles.shift();
+		this.gameService.currentTile = this.tiles.shift();
 		// TODO: when there are no tiles left to draw
 	}
 
@@ -162,6 +161,14 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.spaces[currIndex].tile = new Tile();
 			this.spaces[currIndex].hasTile = false;
 			this.portals = this.portals.filter(loc => loc !== currIndex);
+			this.tileRemoved.emit();
+		} else if (this.gameService.movingTile) {
+			this.gameService.currentTile = this.spaces[currIndex].tile;
+			this.clearValidity();
+			this.spaces[currIndex].tile = new Tile();
+			this.spaces[currIndex].hasTile = false;
+			this.portals = this.portals.filter(loc => loc !== currIndex);
+			this.validateTilePlacement(this.gameService.currentTile);
 			this.tileRemoved.emit();
 		}
 	}
