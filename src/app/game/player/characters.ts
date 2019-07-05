@@ -10,7 +10,7 @@ export const CHARACTERS: Player[] = [
 		powerName: 'Speed',
 		powerDescription: 'You may move an extra space each turn',
 		portrait: '',
-		headshot: 'blank.gif',
+		headshot: 'Eva.png',
 		avatar: '',
 		avatarStyle: { top: '11.4%', left: '54.75%' },
 		nativeStats: { Brains: 1, Brawn: 1, Bravado: 1 },
