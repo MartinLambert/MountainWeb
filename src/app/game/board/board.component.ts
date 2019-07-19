@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import {GameService} from '../game.service';
-import {Tile} from './tile';
-import {Player} from '../player/player';
-import {Space} from './space';
-import {TilePower, TurnStepType} from '../types';
+import { GameService } from '../game.service';
+import { Tile } from './tile';
+import { Player } from '../player/player';
+import { Space } from './space';
+import { TilePower, TurnStepType } from '../types';
 
 @Component({
 	selector: 'hotm-board',
@@ -155,7 +155,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 			this.moveAvatar();
 			this.clearValidity();
 			this.gameService.turnStep = (this.spaces[currIndex].level === 0 ? TurnStepType.xpEnd : TurnStepType.drawCard);
-		} else if (this.gameService.turnStep === TurnStepType.preCombat) {
+		} else if (this.gameService.removeTile) {
 			this.discard.unshift(this.spaces[currIndex].tile);
 			this.clearValidity();
 			this.spaces[currIndex].tile = new Tile();

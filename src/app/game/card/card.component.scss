@@ -72,6 +72,8 @@ section {
 	}
 	&.cardTop {
 		position: relative;
+		background-position: center center;
+		background-size: contain;
 		p.cardText {
 			margin: 0;
 			padding: 0 0.5em;
@@ -103,6 +105,8 @@ section {
 		align-items: center;
 		justify-content: space-between;
 		border-top: 1px solid #333;
+		background-position: center center;
+		background-size: contain;
 		&>div {
 			&>p {
 				margin: 0.25em 0 0;

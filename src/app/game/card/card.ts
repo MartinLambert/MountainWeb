@@ -1,5 +1,5 @@
-import {CardType, Stats} from '../types';
-import {Item} from './item';
+import { CardType, Stats } from '../types';
+import { Item } from './item';
 
 export class Card {
 	id:       number;

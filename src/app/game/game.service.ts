@@ -22,6 +22,7 @@ export class GameService {
 	private _currentCard: Card;
 	private _midTurn = false;
 	private _movingTile = false;
+	private _removeTile = false;
 	// public flags = {
 	// 	midTurn: false // rotating through characters during a turn instead of between turns, e.g. with an event
 	// };
@@ -94,6 +95,14 @@ export class GameService {
 
 	set movingTile(value: boolean) {
 		this._movingTile = value;
+	}
+
+	get removeTile(): boolean {
+		return this._removeTile;
+	}
+
+	set removeTile(value: boolean) {
+		this._removeTile = value;
 	}
 
 	getBoard(): Space[] {

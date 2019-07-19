@@ -10,7 +10,7 @@ export const CARDS: Card[][] = [[
 		item: {
 			type:     ItemType.useOnce,
 			name:    'Metal Detector',
-			img:     '',
+			img:     '101.png',
 			text:    '+1 XP when<br>trading in cards',
 			stats:    { Brains: null, Brawn: null, Bravado: null },
 			power:    5,

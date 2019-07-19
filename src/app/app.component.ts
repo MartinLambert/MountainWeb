@@ -8,7 +8,7 @@ import { BoardComponent  } from './game/board/board.component';
 import { CardsComponent  } from './game/cards/cards.component';
 import { PlayerComponent } from './game/player/player.component';
 import { ActionComponent } from './game/action/action.component';
-import { CardType, Stats, TurnStepType } from './game/types';
+import { CardType, Stats, TilePower, TurnStepType } from './game/types';
 
 @Component({
 	selector: 'hotm-root',
@@ -80,10 +80,59 @@ export class AppComponent implements OnInit {
 		}
 		this.validateTile(this.gameService.currentTile);
 	}
-	validateTile(tile): void {
+	validateTile(tile: Tile): void {
 		this.board.validateTilePlacement(tile);
 		this.gameService.currentTile = tile;
 		this.gameService.turnStep = TurnStepType.placeTile;
+	}
+	useTile(power: number): void {
+		const character = this.characters[this.gameService.currPlayer];
+		const player = this.players.find(plyr => plyr.playerNum === this.gameService.currPlayer);
+		this.discardTile();
+		this.gameService.currentTile = null;
+		switch (power) {
+			case TilePower.addBrains:
+				character.nativeStats.Brains++;
+				player.calculateDisplayStats();
+				break;
+			case TilePower.addBrawn:
+				character.nativeStats.Brawn++;
+				player.calculateDisplayStats();
+				break;
+			case TilePower.addBravado:
+				character.nativeStats.Bravado++;
+				player.calculateDisplayStats();
+				break;
+			case TilePower.drawTwo:
+				this.drawTile(2);
+				break;
+			case TilePower.removeTile:
+				this.gameService.removeTile = true;
+				this.board.validateTileRemoval();
+				break;
+			case TilePower.moveTile:
+				this.gameService.movingTile = true;
+				this.board.validateTileRemoval();
+				break;
+		}
+	}
+	discardTile(): void {
+		if (!this.gameService.currentTile) return;
+		const index = this.currentTiles.indexOf(this.gameService.currentTile);
+		if (index >= 0) {
+			this.currentTiles.splice(index, 1);
+			if (this.currentTiles.length)
+				this.gameService.currentTile = this.currentTiles[this.currentTiles.length - 1];
+			else {
+				this.gameService.currentTile = null;
+				if (this.gameService.round === 0)
+					this.endTurn();
+				else {
+					this.gameService.turnStep = TurnStepType.move;
+					this.movePlayer();
+				}
+			}
+		}
 	}
 	tilePlaced(): void {
 		if (!this.gameService.currentTile) return;
@@ -96,7 +145,7 @@ export class AppComponent implements OnInit {
 		const index = this.currentTiles.indexOf(this.gameService.currentTile);
 		if (index >= 0) {
 			this.currentTiles.splice(index, 1);
-			this.gameService.currentTile = (this.currentTiles.length ? this.currentTiles[0] : null);
+			this.gameService.currentTile = (this.currentTiles.length ? this.currentTiles[this.currentTiles.length - 1] : null);
 			if (this.currentTiles.length === 0) {
 				this.gameService.currentTile = null;
 				if (this.gameService.midTurn) { // Path grows clearer event
@@ -126,6 +175,7 @@ export class AppComponent implements OnInit {
 				this.gameService.currPlayer++;
 			if (this.currentPlayer === this.gameService.currPlayer) {
 				this.gameService.midTurn = false;
+				this.gameService.removeTile = false;
 				this.discardCard(this.activeCard);
 				this.useCard(this.activeCard);
 			} else {
@@ -306,6 +356,7 @@ export class AppComponent implements OnInit {
 				this.useCard(this.activeCard);
 				break;
 			case 2: // Cave-In: remove a tile
+				this.gameService.removeTile = true;
 				this.board.validateTileRemoval();
 				break;
 			case 3: // The Path Grows Clearer: draw a tile

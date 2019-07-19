@@ -3,12 +3,27 @@ import { TilePower } from '../types';
 
 export const TILES: Tile[] = [
 
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'addBrains',  rotation: 0, isPortal: false, power: TilePower.addBrains  },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'addBrains',  rotation: 0, isPortal: false, power: TilePower.addBrains  },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'addBrawn',   rotation: 0, isPortal: false, power: TilePower.addBrawn   },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'addBrawn',   rotation: 0, isPortal: false, power: TilePower.addBrawn   },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'addBravado', rotation: 0, isPortal: false, power: TilePower.addBravado },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'addBravado', rotation: 0, isPortal: false, power: TilePower.addBravado },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'drawTwo',    rotation: 0, isPortal: false, power: TilePower.drawTwo    },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'drawTwo',    rotation: 0, isPortal: false, power: TilePower.drawTwo    },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'drawTwo',    rotation: 0, isPortal: false, power: TilePower.drawTwo    },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'drawTwo',    rotation: 0, isPortal: false, power: TilePower.drawTwo    },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'moveTile',   rotation: 0, isPortal: false, power: TilePower.moveTile   },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'moveTile',   rotation: 0, isPortal: false, power: TilePower.moveTile   },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'removeTile', rotation: 0, isPortal: false, power: TilePower.removeTile },
+	{ doors: { north: false, east: false, south: false, west: false }, img: 'removeTile', rotation: 0, isPortal: false, power: TilePower.removeTile },
+
 	{ doors: { north: false, east: false, south: true, west: false }, img: 'portal1', rotation: 0, isPortal: true, power: TilePower.none },
 	{ doors: { north: false, east: true, south: false, west: false }, img: 'portal2', rotation: 0, isPortal: true, power: TilePower.none },
 	{ doors: { north: true, east: false, south: false, west: false }, img: 'portal3', rotation: 0, isPortal: true, power: TilePower.none },
 	{ doors: { north: false, east: false, south: false, west: true }, img: 'portal4', rotation: 0, isPortal: true, power: TilePower.none },
-	{ doors: { north: false, east: false, south: true, west: false }, img: 'portal5', rotation: 0, isPortal: true, power: TilePower.none },
-	{ doors: { north: true, east: false, south: false, west: false }, img: 'portal6', rotation: 0, isPortal: true, power: TilePower.none },
+	// { doors: { north: false, east: false, south: true, west: false }, img: 'portal5', rotation: 0, isPortal: true, power: TilePower.none },
+	// { doors: { north: true, east: false, south: false, west: false }, img: 'portal6', rotation: 0, isPortal: true, power: TilePower.none },
 
 	{ doors: { north: true, east: true, south: true, west: false }, img: 'c07101', rotation: 0, isPortal: false, power: TilePower.none },
 	{ doors: { north: true, east: true, south: true, west: false }, img: 'c07102', rotation: 0, isPortal: false, power: TilePower.none },

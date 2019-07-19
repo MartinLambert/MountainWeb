@@ -4,7 +4,7 @@ import { Player } from '../player/player';
 import { Card } from '../card/card';
 import { Tile } from '../board/tile';
 import { GameService } from '../game.service';
-import { GemType, ItemType, TurnStepType } from '../types';
+import { GemType, ItemType, TilePower, TurnStepType } from '../types';
 
 @Component({
 	selector: 'hotm-current',
@@ -22,6 +22,7 @@ export class CurrentComponent implements OnInit {
 	@Input() needToHeal: boolean;
 	@Output() drawTile  = new EventEmitter<number>();
 	@Output() checkTile = new EventEmitter<Tile>();
+	@Output() useTile   = new EventEmitter<number>();
 	@Output() drawCard  = new EventEmitter<number>();
 	@Output() useXP     = new EventEmitter();
 	@Output() rolledDie = new EventEmitter<number>();
@@ -45,7 +46,12 @@ export class CurrentComponent implements OnInit {
 
 	clickTile(tileNum: number): void {
 		if (this.tiles[tileNum] === this.gameService.currentTile) {
-			this.rotateTile(this.tiles[tileNum]);
+			if (this.tiles[tileNum].power === TilePower.none)
+				this.rotateTile(this.tiles[tileNum]);
+			else {
+				this.useTile.emit(this.tiles[tileNum].power);
+				return;
+			}
 		} else {
 			this.gameService.currentTile = this.tiles[tileNum];
 		}

@@ -1,4 +1,4 @@
-import {TilePower} from '../types';
+import { TilePower } from '../types';
 
 export class Tile {
 	doors: {

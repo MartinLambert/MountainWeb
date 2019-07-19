@@ -9,13 +9,16 @@
 		<div class="attributes">
 			<p>{{ card.cardType }}</p>
 			<dl>
-				<dt [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >{{ card.cardTop.stats.Brains  === -1 ? '✕' : card.cardTop.stats.Brains  }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >Brains</dd>
-				<dt [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >{{ card.cardTop.stats.Brawn   === -1 ? '✕' : card.cardTop.stats.Brawn   }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >Brawn</dd>
-				<dt [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">{{ card.cardTop.stats.Bravado === -1 ? '✕' : card.cardTop.stats.Bravado }}</dt><dd [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">Bravado</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >{{ card.cardTop.stats.Brains  === -1 ? '✕' : card.cardTop.stats.Brains  }}</dt>
+				<dd [ngClass]="{'unused': card.cardTop.stats.Brains  === null}" class="brains" >Brains</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >{{ card.cardTop.stats.Brawn   === -1 ? '✕' : card.cardTop.stats.Brawn   }}</dt>
+				<dd [ngClass]="{'unused': card.cardTop.stats.Brawn   === null}" class="brawn"  >Brawn</dd>
+				<dt [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">{{ card.cardTop.stats.Bravado === -1 ? '✕' : card.cardTop.stats.Bravado }}</dt>
+				<dd [ngClass]="{'unused': card.cardTop.stats.Bravado === null}" class="bravado">Bravado</dd>
 			</dl>
 		</div>
 	</section>
-	<section class="cardTop" *ngIf="card.cardType === cardType.starter">
+	<section class="cardTop" *ngIf="card.cardType === cardType.starter" [ngStyle]="{'background-image': 'url(assets/cards/Starter/' + card.id + 'b.png)'}">
 		<h1 class="cardName" [innerHTML]="card.item2.name"></h1>
 		<h3 *ngIf="card.item2.stats.Brains " class="brains" >+1 Brains</h3>
 		<h3 *ngIf="card.item2.stats.Brawn  " class="brawn"  >+1 Brawn</h3>
@@ -23,7 +26,7 @@
 		<div class="leftGem"><div></div></div>
 		<div class="rightGem"><div></div></div>
 	</section>
-	<section class="cardBottom" *ngIf="card.cardType !== cardType.event">
+	<section class="cardBottom" *ngIf="card.cardType !== cardType.event" [ngStyle]="{'background-image': 'url(assets/cards/' + card.cardType + '/' + card.id + '.png)'}">
 		<h1 class="itemName" [innerHTML]="card.item.name"></h1>
 		<div [innerHTML]="gameService.cardTextDisplay(card.item)"></div>
 		<div class="leftGem"><div [innerHTML]="gameService.leftGemDisplay(card.item.leftGem)"></div></div>
