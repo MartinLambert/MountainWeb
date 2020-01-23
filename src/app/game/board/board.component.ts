@@ -19,7 +19,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	spaces: Space[];
 	tiles: Tile[];
 	portals: number[] = [];
-	startLocations = [178, 180, 182, 184];
+	startLocations = [2, 4, 6, 8];
 	currentTile: Tile;
 	discard: Tile[] = [];
 	boardConstants = {

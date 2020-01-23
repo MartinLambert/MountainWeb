@@ -9,6 +9,9 @@
   height: 70vh;
   border: 3px ridge beige;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  background-image: url(/assets/tiles/stone.svg);
+  background-position: center center;
+  background-size: contain;
   overflow: hidden;
   grid-area: board;
   align-self: center;
@@ -21,6 +24,7 @@
     white-space: nowrap;
     color: #39481f;
     font-size: 2rem;
+    text-shadow: -0.5px -0.5px 0.5px papayawhip, -0.5px 0.5px 0.5px papayawhip, 0.5px -0.5px 0.5px papayawhip, 0.5px 0.5px 0.5px papayawhip;
     z-index: 10;
     pointer-events: none; }
   :host > h3 {
@@ -33,11 +37,11 @@
     margin: 0;
     line-height: 20.5882353vh;
     pointer-events: none; }
-  :host > div.level1 {
+  :host > div:not(.tile).level1 {
     background-color: #E0FFE0; }
-  :host > div.level2 {
+  :host > div:not(.tile).level2 {
     background-color: #C0DDC0; }
-  :host > div.level3 {
+  :host > div:not(.tile).level3 {
     background-color: #A0BBA0; }
   :host > div:not(.tile) p {
     display: none; }

@@ -19,7 +19,7 @@ export class Tile {
 			south: false,
 			west:  false
 		};
-		this.img      = 'blank';
+		this.img      = 'blank.png';
 		this.rotation = 0;
 		this.isPortal = false;
 		this.power    = TilePower.none;

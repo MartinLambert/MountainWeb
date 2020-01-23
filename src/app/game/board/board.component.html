@@ -1,10 +1,10 @@
-<h2>Heart of the Mountain</h2>
-<h2 style="bottom: 0">Base Camp</h2>
-<h3 style="top: 4.11764706vh">Level 3</h3>
+<h2 style="bottom: 0">Heart of the Mountain</h2>
+<h2>Base Camp</h2>
+<h3 style="top: 4.11764706vh">Level 1</h3>
 <h3 style="top: 24.7058824vh">Level 2</h3>
-<h3 style="top: 45.2941176vh">Level 1</h3>
+<h3 style="top: 45.2941176vh">Level 3</h3>
 <div *ngFor="let space of spaces; let num = index" id="s{{ ('000' + num).slice(-3) }}" class="level{{ space.level }}" [ngClass]="{'tile': space.hasTile, 'portal': (space.tile && space.tile.isPortal), 'valid': space.valid}" (click)="selectSpace(num)" title="{{ num }}">
-	<div class="bg" [ngStyle]="{'background-image': 'url(/assets/tiles/' + space.tile.img + '.png)', 'transform': 'rotate(' + space.tile.rotation + 'turn)'}"></div>
+	<div class="bg" [ngStyle]="{'background-image': 'url(/assets/tiles/' + space.tile.img + ')', 'transform': 'rotate(' + space.tile.rotation + 'turn)'}"></div>
 	<p *ngIf="space.level === -1 && space.bonus">+{{ space.bonus }}</p>
 </div>
 <p *ngFor="let player of players; let num = index" class="avatar" [ngStyle]="player.avatarStyle" [class.pulse]="num === gameService.currPlayer"></p>

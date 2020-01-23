@@ -11,6 +11,9 @@
 	height: 70vh;
 	border: 3px ridge beige;
 	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+	background-image: url(/assets/tiles/stone.svg);
+	background-position: center center;
+	background-size: contain;
 	overflow: hidden;
 	grid-area: board;
 	align-self: center;
@@ -24,6 +27,7 @@
 		white-space: nowrap;
 		color: darken(darkolivegreen, 10%);
 		font-size: 2rem;
+		text-shadow: -0.5px -0.5px 0.5px papayawhip, -0.5px 0.5px 0.5px papayawhip, 0.5px -0.5px 0.5px papayawhip, 0.5px 0.5px 0.5px papayawhip;
 		z-index: 10;
 		pointer-events: none;
 	}
@@ -38,11 +42,11 @@
 		line-height: 20.5882353vh;
 		pointer-events: none;
 	}
-	&>div {
+	&>div:not(.tile) {
 		&.level1 { background-color: #E0FFE0 }
 		&.level2 { background-color: #C0DDC0 }
 		&.level3 { background-color: #A0BBA0 }
-		&:not(.tile) p { display: none }
+		p { display: none }
 	}
 	@for $playerNum from 1 through length($players) {
 		&.player#{$playerNum - 1}>div.valid { border: 6px solid #{nth($players, $playerNum)}; }
