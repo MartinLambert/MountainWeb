@@ -20,17 +20,16 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	tiles: Tile[];
 	portals: number[] = [];
 	startLocations = [2, 4, 6, 8];
-	currentTile: Tile;
 	discard: Tile[] = [];
 	boardConstants = {
-		minSpace:   12,
-		maxSpace:  185,
-		rowWidth:   11,
-		colHeight:  17,
-		heartStart:  1,
-		heartEnd:    9,
-		homeStart: 177,
-		homeEnd:   185
+		minSpace:     1,
+		maxSpace:   185,
+		rowWidth:    11,
+		colHeight:   17,
+		heartStart: 177,
+		heartEnd:   185,
+		homeStart:    1,
+		homeEnd:      9
 	};
 
 	constructor(private gameService: GameService) {}
@@ -82,6 +81,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 	}
 
 	validatePlayerMovement(distance: number, location: number): void {
+		console.log(distance + ', ' + location);
 		if (location < this.boardConstants.minSpace || location > this.boardConstants.maxSpace) return;
 		if (distance && this.spaces[location].hasTile) {
 			this.spaces[location - this.boardConstants.rowWidth].valid = this.spaces[location].tile.doors.north && this.spaces[location - this.boardConstants.rowWidth].tile.doors.south;

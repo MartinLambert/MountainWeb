@@ -1,14 +1,14 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 
-import { Tile            } from './game/board/tile';
-import { Card            } from './game/card/card';
-import { Player          } from './game/player/player';
-import { GameService     } from './game/game.service';
-import { BoardComponent  } from './game/board/board.component';
-import { CardsComponent  } from './game/cards/cards.component';
-import { PlayerComponent } from './game/player/player.component';
-import { ActionComponent } from './game/action/action.component';
-import { CardType, Stats, TilePower, TurnStepType } from './game/types';
+import {Tile} from './game/board/tile';
+import {Card} from './game/card/card';
+import {Player} from './game/player/player';
+import {GameService} from './game/game.service';
+import {BoardComponent} from './game/board/board.component';
+import {CardsComponent} from './game/cards/cards.component';
+import {PlayerComponent} from './game/player/player.component';
+import {ActionComponent} from './game/action/action.component';
+import {CardType, Stats, TilePower, TurnStepType} from './game/types';
 
 @Component({
 	selector: 'hotm-root',
@@ -74,9 +74,10 @@ export class AppComponent implements OnInit {
 
 	drawTile(numTiles: number): void {
 		if (this.gameService.round === 0) this.characters[this.gameService.currPlayer].avatarStyle = this.board.avatarLocation(this.characters[this.gameService.currPlayer]);
-		for (let i = 0; i < numTiles; i++) {
+		while (this.currentTiles.length < numTiles) {
 			this.board.drawTile();
-			this.currentTiles.push(this.gameService.currentTile);
+			if (this.gameService.currentTile.power === TilePower.none || this.gameService.round > 0)
+				this.currentTiles.push(this.gameService.currentTile);
 		}
 		this.validateTile(this.gameService.currentTile);
 	}
