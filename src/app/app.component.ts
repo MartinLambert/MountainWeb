@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 	@ViewChild(BoardComponent, { static: true }) board: BoardComponent;
 	@ViewChild(CardsComponent, { static: true }) cards: CardsComponent;
 	@ViewChildren(PlayerComponent) players: QueryList<PlayerComponent>;
-	@ViewChild(ActionComponent, { static: false }) action: ActionComponent;
+	@ViewChild(ActionComponent) action: ActionComponent;
 	currentTiles: Tile[] = [];
 	currentCards: Card[] = [];
 	currentPlayer: number;
